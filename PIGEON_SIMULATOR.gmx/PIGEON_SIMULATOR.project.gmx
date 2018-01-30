@@ -7,12 +7,30 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_pigeon</sprite>
+    <sprite>sprites\spr_obstacle</sprite>
+    <sprite>sprites\spr_arme</sprite>
+    <sprite>sprites\sprite_obj</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <scripts name="SCRIPT IA">
+      <script>scripts\IA_repos.gml</script>
+      <script>scripts\IA_attaque.gml</script>
+      <script>scripts\IA_deplacement.gml</script>
+      <script>scripts\IA_perception.gml</script>
+    </scripts>
+  </scripts>
   <objects name="objects">
+    <object>objects\obj_debuggage</object>
+    <object>objects\obj_globVar</object>
     <object>objects\obj_agent</object>
+    <object>objects\obj_arme</object>
+    <object>objects\obj_obstacle</object>
   </objects>
+  <rooms name="rooms">
+    <room>rooms\room0</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
