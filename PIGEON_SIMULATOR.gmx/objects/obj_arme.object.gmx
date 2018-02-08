@@ -101,6 +101,10 @@ if Precision &gt; other.Chance
     {
     with(other)
         {
+        /*if ds_exists(Regiment,ds_type_list)
+            {
+            ds_list_destroy(Regiment);
+            }*/
         instance_destroy()//La fonction destruction n'est appelable que depuis l'agent
         }
     instance_destroy()//La balle se détruit.

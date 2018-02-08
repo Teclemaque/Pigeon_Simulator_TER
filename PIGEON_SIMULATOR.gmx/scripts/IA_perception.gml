@@ -4,7 +4,8 @@
 xx = x;//Pour éviter que l'agent puis se lister lui même, 
 x = -50000;//eloignement de sa coordoné originelle
 
-//Reinitialisation des percepts des percepts
+//Reinitialisation des percepts
+//Percept Ennemi
 PerceptAgent[0] = noone;
 PerceptAgent[1] = noone;
 PerceptAgent[2] = noone;
@@ -12,12 +13,49 @@ PerceptAgent[3] = noone;
 PerceptAgent[4] = noone;
 PerceptAgent[5] = noone;
 PerceptAgent[6] = noone;
+//Percept Allie
+PerceptAgent[7] = noone;
+PerceptAgent[8] = noone;
+PerceptAgent[9] = noone;
 
+MA = instance_nearest(xx,y,obj_meta_agent)
+
+if MA != noone
+&& distance_to_object(MA) < 50
+    {
+    Camp = MA.Camp
+    if ds_list_size(Regiment) >= ds_list_size(MA.Regiment)
+        {
+        if ds_list_size(Regiment) == ds_list_size(MA.Regiment)
+            {
+            if id > MA.id
+                {
+                with(instance_create(x,y,obj_meta_agent_0))
+                    {
+                    Camp = other.Camp;
+                    }
+                instance_destroy();
+                }
+            }
+        else
+            {
+            with(MA)
+                {
+                with(instance_create(x,y,obj_meta_agent_0))
+                    {
+                    Camp = other.Camp;
+                    }
+                instance_destroy();
+                }
+            }
+        }
+    }
+    
 for (n = 0; n < 7; n++)//Pour etre sur que la liste sera remplie au maximum
     {
     A = instance_nearest(xx,y,obj_agent);//Recherche de l'agent le plus proche
      
-    if A.id != id//Et que ce n'est pas lui
+    if A.id != id //Et que ce n'est pas lui
         {
         if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone //Si presence d'un obstacle entre eux
         or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90 //Si agent n'est pas dans son champ de perception
@@ -150,6 +188,7 @@ for (n = 0; n < 7; n++)//Pour etre sur que la liste sera remplie au maximum
         }
         
     A = instance_nearest(xx,y,obj_agent)
+    
     if A.id != id
         {
         if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone

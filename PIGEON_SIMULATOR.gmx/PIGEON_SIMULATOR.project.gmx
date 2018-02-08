@@ -18,13 +18,44 @@
       <script>scripts\IA_repos.gml</script>
       <script>scripts\IA_attaque.gml</script>
       <script>scripts\IA_deplacement.gml</script>
+      <script>scripts\IA_perception1.gml</script>
       <script>scripts\IA_perception.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_debuggage</object>
     <object>objects\obj_globVar</object>
-    <object>objects\obj_agent</object>
+    <objects name="AGENTS">
+      <objects name="AGENTS SIMPLES">
+        <objects name="Camp 1">
+          <object>objects\obj_agent_C1</object>
+        </objects>
+        <objects name="Camp 2">
+          <object>objects\obj_agent_C2</object>
+        </objects>
+      </objects>
+      <objects name="AGENT SUPERIEUR">
+        <objects name="Camp 1">
+          <object>objects\obj_meta_agent_C1</object>
+          <object>objects\obj_agent_officier0_C1</object>
+          <object>objects\obj_agent_officier1_C1</object>
+        </objects>
+        <objects name="Camp 2">
+          <object>objects\obj_meta_agent_C2</object>
+          <object>objects\obj_agent_officier0_C2</object>
+          <object>objects\obj_agent_officier1_C2</object>
+        </objects>
+      </objects>
+      <objects name="AGENT TEST">
+        <object>objects\obj_agent</object>
+        <object>objects\obj_agent_1</object>
+        <object>objects\obj_meta_agent</object>
+        <object>objects\obj_meta_agent_1</object>
+        <object>objects\obj_meta_agent_0</object>
+      </objects>
+      <object>objects\obj_souris</object>
+      <object>objects\obj_joueur</object>
+    </objects>
     <object>objects\obj_arme</object>
     <object>objects\obj_obstacle</object>
   </objects>

@@ -7,12 +7,22 @@ if t < R_fusil // Variable actuellement globale de temps de recharge, on pourrai
     } 
 else
     {
-    direction = point_direction(xx,y,PerceptAgent[0].xx,PerceptAgent[0].y)
-    with(instance_create(x,y,obj_arme))
+    if Ordre = 0
         {
-        direction = other.direction;//On fait partir la balle dans sa direction
-        ID = other.id;//On s'assure que la balle va pas nous considérer comme la cible
+        if Ordre = 0
+            {
+            direction = point_direction(x,y,P.x,P.y)
+            }
+        
+        if collision_line(x,y,P.x,P.y,Allie,1,1) == noone
+            {
+            with(instance_create(x,y,obj_arme))
+                {
+                direction = other.direction;//On fait partir la balle dans sa direction
+                ID = other.id;//On s'assure que la balle va pas nous considérer comme la cible
+                }
+            t = 0;
+            }
         }
-    t = 0;
     }
 }
