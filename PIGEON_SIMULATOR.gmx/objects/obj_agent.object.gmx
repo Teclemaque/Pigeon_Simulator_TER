@@ -51,45 +51,6 @@ t = 0;//timer
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/*
-if path_index != -1 {
-    if(path_endaction != path_action_stop){
-        show_debug_message("pas stop");
-    }else {
-    show_debug_message("endaction : stop");
-    }
-    if path_position &gt; 0.99
-        show_debug_message("FIN DU CHEMIN");
-    if path_position &gt; 0.90
-        show_debug_message("FIN DU CHEMIN BIS");
-    /*if(path_position &gt;= 0.9 &amp;&amp; path_endaction == path_action_stop){
-        path_end();
-    }
- 
-}
-*/
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="1">
       <action>
         <libid>1</libid>
@@ -178,7 +139,7 @@ if A != noone
  * Les messages entrants et les perceptions sont normalement déjà traités dans le begin step
  */
 
-image_angle = direction;//Le sprite est affiché selon la direction de l'agent
+//image_angle = direction;//Le sprite est affiché selon la direction de l'agent
 
 // TODO :  traiter les reflexes
 
@@ -202,11 +163,11 @@ else {
      */
      
      var orderName = current_task[? "name"];
-     show_debug_message("Ordre : " + string(orderName));
+     //show_debug_message("Ordre : " + string(orderName));
      
      
      if(orderName == "move"){
-        show_debug_message("Move en cours ...");
+        //show_debug_message("Move en cours ...");
         
         //var path =  path_duplicate(current_task[? "path"]);
         //path_delete(current_task[? "path"]);
@@ -219,18 +180,18 @@ else {
             path_insert_point(path, 0, x, y, 20); // départ
             path_set_closed(path, 0);
             path_start(path, 20, path_action_stop, 0);
-            show_debug_message("Chemin créé");
+            //show_debug_message("Chemin créé");
         }
         
         if path_position == 1 {// chemin fini
-            show_debug_message("Suppression du chemin");
+            //show_debug_message("Suppression du chemin");
             //path_end();
             if path_exists(path)
                 path_delete(path); // libérer la mémoire
             ds_list_delete(Ordres, 0);
         }
         
-        show_debug_message("Position : " + string(path_position));    
+        //show_debug_message("Position : " + string(path_position));    
         
         
      }
@@ -306,7 +267,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>image_angle = direction;//Le sprite est affiché selon la direction de l'agent
+draw_self()
 
 if Camp &lt; 0
     draw_sprite_ext( spr_pigeon, 0, x, y, 1, 1, direction, c_red, 1);

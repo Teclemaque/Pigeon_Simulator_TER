@@ -12,6 +12,7 @@
     <sprite>sprites\sprite_obj</sprite>
     <sprite>sprites\spr_general_1</sprite>
     <sprite>sprites\spr_general_2</sprite>
+    <sprite>sprites\spr_messager</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths">
@@ -28,7 +29,23 @@
     <scripts name="ORDRES">
       <script>scripts\ordre_agent_patrouille.gml</script>
     </scripts>
+    <scripts name="utils">
+      <script>scripts\wiggle.gml</script>
+      <script>scripts\send_message_to_agents.gml</script>
+      <script>scripts\get_selectable_agent.gml</script>
+    </scripts>
+    <scripts name="toolbox">
+      <script>scripts\collision_rectangle_list.gml</script>
+      <script>scripts\get_targets_names.gml</script>
+      <script>scripts\add_command_to_historic.gml</script>
+      <script>scripts\find_general.gml</script>
+      <script>scripts\get_action_from_text.gml</script>
+      <script>scripts\send_ordre_to_agent.gml</script>
+    </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_toolbox</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_debuggage</object>
     <object>objects\obj_globVar</object>
@@ -36,6 +53,8 @@
     <object>objects\obj_general</object>
     <object>objects\obj_arme</object>
     <object>objects\obj_obstacle</object>
+    <object>objects\obj_messager</object>
+    <object>objects\obj_toolbox</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
