@@ -63,7 +63,7 @@ for (n = 0; n < 7; n++)//Pour etre sur que la liste sera remplie au maximum
     A = instance_nearest(xx,y,obj_agent)
     if A.id != id
         {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
+        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone 
         or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
             {
             instance_deactivate_object(A);

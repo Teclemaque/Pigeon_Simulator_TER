@@ -10,6 +10,7 @@
     <sprite>sprites\spr_obstacle</sprite>
     <sprite>sprites\spr_arme</sprite>
     <sprite>sprites\sprite_obj</sprite>
+    <sprite>sprites\terrain_0</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -19,7 +20,34 @@
       <script>scripts\IA_attaque.gml</script>
       <script>scripts\IA_deplacement.gml</script>
       <script>scripts\IA_perception.gml</script>
-      <script>scripts\IA_PasGrandChose.gml</script>
+    </scripts>
+    <scripts name="MAP">
+      <script>scripts\MAP_Create.gml</script>
+      <script>scripts\MAP_Draw.gml</script>
+      <script>scripts\MAP_Create2.gml</script>
+      <script>scripts\MAP_Draw2.gml</script>
+      <script>scripts\TERRAIN_Draw.gml</script>
+      <scripts name="generation">
+        <script>scripts\generate.gml</script>
+        <script>scripts\PerlinNoise.gml</script>
+        <script>scripts\randomSeed.gml</script>
+        <script>scripts\getColorZ.gml</script>
+        <script>scripts\dillatation_erosion.gml</script>
+        <script>scripts\error_check.gml</script>
+        <scripts name="crête">
+          <script>scripts\crete_finder.gml</script>
+          <script>scripts\mountain_list.gml</script>
+        </scripts>
+      </scripts>
+      <scripts name="forest">
+        <script>scripts\create_forest.gml</script>
+        <script>scripts\expend_forest.gml</script>
+        <script>scripts\map_get_terrain_type.gml</script>
+      </scripts>
+      <scripts name="AGENT_MAP">
+        <script>scripts\map_get_xy.gml</script>
+        <script>scripts\map_neighbors_H.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -28,6 +56,17 @@
     <object>objects\obj_agent</object>
     <object>objects\obj_arme</object>
     <object>objects\obj_obstacle</object>
+    <object>objects\obj_MAP_controller</object>
+    <objects name="TERRAIN">
+      <object>objects\Obj_Terrain_montagne</object>
+      <object>objects\Obj_Terrain_Eau</object>
+      <object>objects\Obj_Terrain</object>
+      <object>objects\Obj_Terrain_sol</object>
+      <object>objects\Obj_Terrain_Forest</object>
+      <object>objects\Obj_Terrain_Crete</object>
+      <object>objects\Obj_Terrain_Obstacle</object>
+    </objects>
+    <object>objects\obj_VIEW_controller</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

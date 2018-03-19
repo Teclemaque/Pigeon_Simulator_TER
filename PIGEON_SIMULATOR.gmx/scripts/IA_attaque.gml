@@ -12,6 +12,8 @@ else
         {
         direction = other.direction;//On fait partir la balle dans sa direction
         ID = other.id;//On s'assure que la balle va pas nous considérer comme la cible
+        image_xscale = image_xscale * 0.5 // reduction de la taille des balles pour qu'elle ne despawn pas si le cul de l'agent touche un obstacle
+        image_yscale = image_yscale * 0.5
         }
     t = 0;
     }
