@@ -3,6 +3,7 @@
 var ds_list_agents = argument0;
 var ds_map_message = argument1;
 
+
 for(i = 0; i < ds_list_size(ds_list_agents); i++){
     var newMsg = ds_map_create();
     var exemplaire = ds_map_copy(newMsg, ds_map_message);
