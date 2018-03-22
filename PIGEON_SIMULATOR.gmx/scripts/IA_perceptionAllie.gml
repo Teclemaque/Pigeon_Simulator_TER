@@ -2,12 +2,13 @@
 MA = instance_nearest(xx,y,Off)
 
 if instance_exists(MA)
-&& sqrt(sqr(MA.xx-xx)+sqr(MA.y-y)) < 150
+&& sqrt(sqr(MA.xx-xx)+sqr(MA.y-y)) < 500
 && MA.id != id
+&& MA.Officiel == 0
     {
-    if Rang >= MA.Rang
+    if Grade >= MA.Grade
         {
-        if Rang == MA.Rang
+        if Grade == MA.Grade
             {
             if id < MA.id
                 {
@@ -16,6 +17,7 @@ if instance_exists(MA)
                     with(MA)
                         {
                         ID = other.id
+                        
                         with(instance_create(xx,y,Allie))
                             {
                             Camp = other.Camp;

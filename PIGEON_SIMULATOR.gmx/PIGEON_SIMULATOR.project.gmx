@@ -15,11 +15,12 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="SCRIPT IA">
-      <script>scripts\IA_repos.gml</script>
-      <script>scripts\IA_attaque.gml</script>
-      <script>scripts\IA_deplacement.gml</script>
-      <script>scripts\IA_perceptionAllie.gml</script>
-      <script>scripts\IA_perception.gml</script>
+      <script>scripts\IA_Deplacement.gml</script>
+      <script>scripts\IA_Attaque.gml</script>
+      <script>scripts\IA_Repos.gml</script>
+      <script>scripts\IA_PerceptionAllie.gml</script>
+      <script>scripts\IA_Perception.gml</script>
+      <script>scripts\IA_Groupe.gml</script>
       <script>scripts\IA_Formation.gml</script>
     </scripts>
   </scripts>
@@ -49,9 +50,6 @@
       </objects>
       <objects name="AGENT TEST">
         <object>objects\obj_agent</object>
-        <object>objects\obj_meta_agent</object>
-        <object>objects\obj_meta_agent_1</object>
-        <object>objects\obj_meta_agent_0</object>
       </objects>
       <object>objects\obj_formation</object>
       <object>objects\obj_souris</object>

@@ -53,7 +53,42 @@ ExecuteOrdre = noone
     {
     with(ExecuteOrdre)
         {
-        Ordre = -1
+        Execute = IA_Repos;
+        Argument[0] = 1;
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="10" enumb="51">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if instance_exists(ExecuteOrdre)
+    {
+    with(ExecuteOrdre)
+        {
+        Ordre = 2
+        Execute = IA_Groupe//(id,0,1/2,1)
+        Argument[0] = id;
+        Argument[1] = 0;
+        Argument[2] = 1/2;
+        Argument[3] = 1;
         }
     }
 </string>
@@ -83,7 +118,7 @@ ExecuteOrdre = noone
     with(ExecuteOrdre)
         {
         Ordre = 2
-        IA_attaque()
+        Execute = IA_Attaque
         }
     }
 </string>
@@ -112,8 +147,17 @@ ExecuteOrdre = noone
     {
     with(ExecuteOrdre)
         {
-        Ordre = 1
-        IA_deplacement()
+        //Ordre = 1
+        Execute = IA_Deplacement;
+        Argument[0] = noone;
+        Argument[1] = noone;
+        Argument[2] = noone;
+        Argument[3] = point_direction(x,y,mouse_x,mouse_y);
+        Argument[4] = -1;
+        Argument[5] = 2;
+        Argument[6] = 0;
+        Argument[7] = 0;
+        Argument[8] = 1;
         }
     }
 </string>
@@ -142,7 +186,8 @@ ExecuteOrdre = noone
     {
     with(ExecuteOrdre)
         {
-        Ordre = 0
+        Execute = IA_Repos;
+        Argument[0] = 0;
         }
     }
 </string>

@@ -30,15 +30,11 @@
 Rang = 0;
 
 Formation = noone;
-Officiel = 1;
+Officiel = 0;
 
 Officier = id;
 Regiment = ds_list_create();
 
-/*
-PerceptAgentEnnemi[] = noone;
-PerceptAgentAllie[] = noone;
-*/
 PerceptAgentEnnemi = ds_list_create();
 PerceptAgentAllie = ds_list_create();
 
@@ -112,8 +108,8 @@ x = -50000;//eloignement de sa coordoné originelle
 I = 0;
 II = 0;
 
-IA_perceptionAllie();
-IA_perception();
+IA_PerceptionAllie();
+IA_Perception();
 
 instance_activate_all();
 
@@ -140,68 +136,17 @@ x = xx;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = direction;//Le sprite est affiché selon la direction de l'agent
-Chance = random(100);
-
-/*if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
-    {
-    if array_length_1d(PerceptAgentEnnemi) != 0 &amp;&amp; instance_exists(PerceptAgentEnnemi[0])//normalement c'est l'agent le plus proche
-        {
-        Cible = PerceptAgentEnnemi[0];
-        
-        if distance_to_object(PerceptAgentEnnemi[0])&lt; 300
-            {
-            IA_attaque()
-            }
-        else
-            {
-            IA_deplacement();
-            }
-        }
-    else
-        {
-        if array_length_1d(PerceptAgentAllie) != 0 &amp;&amp; instance_exists(PerceptAgentAllie[0])
-            {
-            Cible = PerceptAgentAllie[0];
-            
-            if object_get_parent(Cible) == object_get_parent(Off)//"obj_meta_agent_C1"
-                {
-                if ds_list_size(Regiment) &lt;= ds_list_size(PerceptAgentAllie[0].Regiment)
-                    {
-                    IA_deplacement()
-                    }
-                else
-                    {
-                    IA_repos();
-                    }
-                }
-            else
-                {
-                IA_repos();
-                }
-            }
-        }
-    }
-else
-    {
-    //Agebt entrain d'obeir à un ordre ou de fuir ou de désobeir ....
-    
-    }
-*/    
-if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
+            <string>/*if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
     {
     if ds_list_size(PerceptAgentEnnemi) != 0 &amp;&amp; instance_exists(ds_list_find_value(PerceptAgentEnnemi,0))
         {
         Cible = ds_list_find_value(PerceptAgentEnnemi,0);
+        
         CibleRegiment = ds_list_find_value(PerceptAgentEnnemi,0);
         
         if distance_to_object(Cible)&lt; 300
             {
-            IA_attaque()
-            }
-        else
-            {
-            IA_deplacement();
+            Execute = IA_Attaque()
             }
         }
     else
@@ -212,18 +157,18 @@ if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
             
             if object_get_parent(Cible) == object_get_parent(Off)//"obj_meta_agent_C1"
                 {
-                if ds_list_size(Regiment) &lt;= ds_list_size(Cible.Regiment)
-                    {
-                    IA_deplacement()
-                    }
-                else
-                    {
-                    IA_repos();
-                    }
+                //if ds_list_size(Regiment) &lt;= ds_list_size(Cible.Regiment)
+                //    {
+                //   IA_deplacement()
+                //    }
+                //else
+                //    {
+                //    IA_repos();
+                //    }
                 }
             else
                 {
-                IA_repos();
+                Execute = IA_Repos(0);
                 }
             }
         }
@@ -231,7 +176,7 @@ if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
 else
     {
     
-    }
+    }*/
     
 if instance_exists(Formation) == false
     {
@@ -249,13 +194,15 @@ else
 
     with(Formation)
         {
-        image_xscale = 1.5*sqrt(ds_list_size(other.Regiment));
-        image_yscale = 1.5*sqrt(ds_list_size(other.Regiment)); 
-        x = other.x+20;
-        y = other.y+20;
+        image_xscale = round(sqrt(ds_list_size(other.Regiment)));
+        image_yscale = round(sqrt(ds_list_size(other.Regiment)));
+        ID = other.id;
+        x = other.x+50;
+        y = other.y+50;
         }
     }
 event_inherited()
+
 </string>
           </argument>
         </arguments>
@@ -279,6 +226,17 @@ event_inherited()
           <argument>
             <kind>1</kind>
             <string>draw_self();
+draw_text(x,y-10,script_get_name(Execute));
+draw_text(x,y-20,Argument[0]);
+draw_text(x,y-30,Argument[1]);
+draw_text(x,y-40,Argument[2]);
+draw_text(x,y-50,Argument[3]);
+draw_text(x,y-60,Argument[4]);
+draw_text(x,y-70,Argument[5]);
+draw_text(x,y-80,Argument[6]);
+draw_text(x,y-90,Argument[7]);
+draw_text(x,y-100,Argument[8]);
+
 /*draw_text(x,y,id)
 draw_text(x,y-10,"TAILLE LISTE : "+string(ds_list_size(Regiment)));
 draw_text(x,y-20,String);

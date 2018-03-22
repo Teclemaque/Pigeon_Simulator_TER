@@ -26,6 +26,11 @@
           <argument>
             <kind>1</kind>
             <string>image_alpha = 0.2;
+ID = noone;
+
+
+
+
 </string>
           </argument>
         </arguments>

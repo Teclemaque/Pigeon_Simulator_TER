@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar R_fusil;
-R_fusil = 90;
+            <string>R_fusil = 90;
 I1 = round(random(500))
 I2 = round(random(500))
 /*for (i = 0; i &lt; 25; i++)

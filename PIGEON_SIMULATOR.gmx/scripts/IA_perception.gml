@@ -69,7 +69,7 @@ or instance_exists(Ennemi)
         if A.id != id
             {
             if I <= 30
-                {IA_perception();}
+                {IA_Perception();}
             }
         }
     else
