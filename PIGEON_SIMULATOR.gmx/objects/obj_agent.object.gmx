@@ -134,11 +134,20 @@ Execute = noone//IA_Deplacement(noone,noone,noone,point_direction(x,y,mouse_x,mo
             <string>image_angle = direction;//Le sprite est affiché selon la direction de l'agent
 Chance = random(100);
 
-if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
+if instance_exists(Officier) 
+&amp;&amp; Officier.id != id
+    {
+    Cible = Officier.CibleRegiment;
+    Execute = Officier.ExecuteRegiment;
+    Argument = Officier.ArgumentRegiment;
+    }
+/*if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
     {
     if instance_exists(Officier)
         {
         Cible = Officier.CibleRegiment;
+        //Execute = Officier.Execute;
+        //Argument = Officier.Argument;
         
         if instance_exists(Cible) == false
             {
@@ -149,11 +158,8 @@ if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
             if object_get_name(Cible.object_index) == "obj_formation"
                 {
                 IA_Formation();
-                //Argument[0] = 1;
                 }
-            }
-            
-        //IA_deplacement(noone,Cible,noone,-1,-1,0,0,0,0);   
+            } 
         }
     else
         {
@@ -164,13 +170,13 @@ if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
         instance_destroy();
         }
     }
-/*else
+*/
+if instance_exists(Officier)
     {
-    IA_deplacement(noone,noone,noone,-1,-1,0,0,0,1);
-    }*/
-if Execute != noone
-    {
-    script_execute(Execute,Argument);
+    if Execute != noone
+        {
+        script_execute(Execute,Argument);
+        }
     }
 /////////////////////////////// REFLEXE ////////////////////////////
 xx = x;
@@ -340,8 +346,8 @@ else
           <argument>
             <kind>1</kind>
             <string>draw_self()
-
-if instance_exists(Officier)
+draw_text(x,y-10,script_get_name(Execute));
+/*if instance_exists(Officier)
     {
     draw_text(x,y-5,Officier.id)
     }
@@ -353,7 +359,7 @@ if instance_exists(Cible)
 draw_text(x,y-35,PousseToi)
 draw_text(x,y-45,Enervement)
 draw_text(x,y-55,speed)
-draw_text(x,y-75,string(P)+" "+string(J)+" "+string(I))
+draw_text(x,y-75,string(P)+" "+string(J)+" "+string(I))*/
 
 
 

@@ -27,6 +27,13 @@
             <kind>1</kind>
             <string>event_inherited();
 
+for (i = 0; i &lt; 15;i++)
+    {
+    ArgumentRegiment[i] = 0;
+    }
+ExecuteRegiment = noone;
+CibleAttaque[0] = noone;
+
 Formation = noone;
 Officiel = choose(0,1);
 
@@ -100,7 +107,7 @@ if instance_exists(Formation)
             <kind>1</kind>
             <string>//IA_perception1();
 
-xx = x;//Pour éviter que l'agent puis se lister lui même, 
+/*xx = x;//Pour éviter que l'agent puis se lister lui même, 
 x = -50000;//eloignement de sa coordoné originelle
 
 I = 0;
@@ -193,7 +200,7 @@ if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
         
         if distance_to_object(Cible)&lt; 300
             {
-            Execute = IA_Attaque()
+            //Execute = IA_Attaque()
             }
         /*else
             {

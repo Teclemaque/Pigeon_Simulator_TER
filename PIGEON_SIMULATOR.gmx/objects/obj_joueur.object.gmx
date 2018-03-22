@@ -84,8 +84,10 @@ ExecuteOrdre = noone
     with(ExecuteOrdre)
         {
         Ordre = 2
+        //L = ds_list_create()
         Execute = IA_Groupe//(id,0,1/2,1)
-        Argument[0] = id;
+        List[0] = id;
+        Argument[0] = List;
         Argument[1] = 0;
         Argument[2] = 1/2;
         Argument[3] = 1;

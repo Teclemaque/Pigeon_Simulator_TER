@@ -1,14 +1,17 @@
 ///IA_Groupe(ListGroup, NbGroupe, NbAgent, Separation)
 {
 ListOfficier = Argument[0];
+NbGroupe = Argument[1]
+Nbr = Argument[2];
 
 if Argument[3] == 1
     {
+    show_debug_message("coucou")
     for (i = 0; i < array_length_1d(ListOfficier); i++)
         {
         O = ListOfficier[i];
         O.Officiel = 1;
-        
+        show_debug_message("fait 1")
         if Argument[2] > 1
             {
             if ds_list_size(Regiment) > Argument1*Argument2
@@ -17,50 +20,57 @@ if Argument[3] == 1
                 }
             else
                 {
-                if Argument[1] == 0
+                if NbGroupe == 0
                     {
-                    Argument[1] = 2;
+                    NbGroupe = 2;
                     }
-                Nbr = floor(ds_list_size(Regiment)/Argument[1]);
+                Nbr = floor(ds_list_size(Regiment)/NbGroupe);
                 }
             }
         else
             {
+            show_debug_message("fait 2")
             if Argument[2] != 0
                 {
-                Argument[1] = floor(1/Argument[2]);
-                Nbr = floor(ds_list_size(Regiment)/Argument[2])
+                NbGroupe = floor(1/Argument[2]);
+                Nbr = floor(ds_list_size(Regiment)*Argument[2])
                 }
             else
                 {
-                if Argument[1] != 0
+                if NbGroupe != 0
                     {
-                    Nbr = floor(ds_list_size(Regiment)/Argument[1])
+                    Nbr = floor(ds_list_size(Regiment)/NbGroupe)
                     }
                 else
                     {
-                    Argument[1] = 2;
-                    Nbr = floor(ds_list_size(Regiment)/Argument[1]);
+                    NbGroupe = 2;
+                    Nbr = floor(ds_list_size(Regiment)/NbGroupe);
                     }
                 }
             }
 ////////////////////////////////////////////////////////////////////////////////////////
-        for (j = 0; j < Argument[1]; j++)
+        for (j = 0; j < NbGroupe-1; j++)
             {
+            show_debug_message(NbGroupe)
+            show_debug_message(Nbr)
+             
             with(ds_list_find_value(O.Regiment,0))
                 {
-                ID = other.id;
-                Groupe = instance_create(x,y,other.O.Off_inf);
-                ds_list_delete(other.Regiment,0);
+                ID = other.O.id;
+                Groupe = instance_create(x,y,other.O.Off_sup);
+                ds_list_delete(other.O.Regiment,0);
                 
                 with(Groupe)
                     {
                     Officiel = 1;
+                    Execute = IA_Repos;
                     
-                    for (k = 0; k < other.Nbr; k++)
+                    for (k = 0; k < other.ID.Nbr; k++)
                         {
-                        ds_list_add(Regiment,ds_list_find_value(other.id.Regiment,0));
-                        ds_list_delete(other.id.Regiment,0);
+                        ds_list_add(Regiment,ds_list_find_value(other.ID.Regiment,0));
+                        A = ds_list_find_value(other.ID.Regiment,0);
+                        A.Officier = id;
+                        ds_list_delete(other.ID.Regiment,0);
                         }
                     }
                 instance_destroy();
@@ -68,4 +78,26 @@ if Argument[3] == 1
             }
         }
     }
+else
+    {
+        ListOfficier[0].Officiel = 1;
+        
+        for (i = 1; i < array_length_1d(ListOfficier); i++)
+            {
+            for (j = 0; j < ds_list_size(ListOfficier[i].Regiment);j++)
+                {
+                a = ds_list_find_value(ListOfficier[i].Regiment,j);
+                ds_list_add(ListOfficier[0].Regiment, a)
+                a.Officier = ListOfficier[0]
+                }
+            with(instance_create(x,y,ListOfficier[i].Allie))
+                {
+                ds_list_add(other.ListOfficier[0].Regiment,id);
+                Officier = other.ListOfficier[0]
+                }
+            instance_destroy();
+            }
+    }
+Execute = IA_Repos;
+Argument[0] = 0;
 }

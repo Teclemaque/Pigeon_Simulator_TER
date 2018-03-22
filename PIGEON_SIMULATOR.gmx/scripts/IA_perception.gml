@@ -1,12 +1,14 @@
 ///IA_perception()
 {
 A = noone;
+
 if instance_exists(Allie)
 or instance_exists(Ennemi)
     {
     if instance_exists(Allie)
         {
         A = instance_nearest(xx,y,Allie);
+
         
         if A.id != id //Et que ce n'est pas lui
             {
@@ -19,16 +21,41 @@ or instance_exists(Ennemi)
                 {
                 if ds_exists(PerceptAgentAllie, ds_type_list)
                     {
-                    if is_undefined(ds_list_find_value(PerceptAgentAllie,I)) == false 
+                    if instance_exists(A.Officier)
                         {
-                        ds_list_replace(PerceptAgentAllie,I,A.id);//On place son id dans la liste
+                        if is_undefined(ds_list_find_value(PerceptAgentAllie,I)) == false//Si l'agent existe deja dans la liste 
+                            {
+                            ds_list_replace(PerceptAgentAllie,I,A.Officier.id);//On replace son id dans la liste
+                            }
+                        else
+                            {
+                            ds_list_add(PerceptAgentAllie,A.Officier.id);//si on l'ajoute a la liste
+                            }
+                        if A.Officier.id == id
+                            {
+                            for (i = 0; i < ds_list_size(Regiment); i++)
+                                {
+                                instance_deactivate_object(ds_list_find_value(Regiment,i));
+                                }
+                            }
+                        else
+                            {
+                            if ds_exists(A.Officier.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plis pris en compte
+                                {
+                                for (i = 0; i < ds_list_size(A.Officier.Regiment); i++)
+                                    {
+                                    instance_deactivate_object(ds_list_find_value(A.Officier.Regiment,i));
+                                    }
+                                }
+                            instance_deactivate_object(A.Officier)
+                            }
                         }
                     else
                         {
-                        ds_list_add(PerceptAgentAllie,A.id);
+                        instance_deactivate_object(A);
                         }
-                    instance_deactivate_object(A);//et on le desactive pour qu'il ne soit plis pris en compte
                     }
+                
                 }
             }
         }
@@ -45,17 +72,31 @@ or instance_exists(Ennemi)
                 }
             else
                 {
-                if ds_exists(PerceptAgentEnnemi, ds_type_list)
+                if instance_exists(A.Officier)
                     {
-                    if ds_list_empty(PerceptAgentEnnemi) && is_undefined(ds_list_find_value(PerceptAgentAllie,I)) == false 
+                    if ds_exists(PerceptAgentEnnemi, ds_type_list)
+                        {
+                        if ds_list_empty(PerceptAgentEnnemi) && is_undefined(ds_list_find_value(PerceptAgentEnnemi,I)) == false 
+                                {
+                                ds_list_replace(PerceptAgentEnnemi,I,A.Officier.id);//On place son id dans la liste
+                                }
+                            else
+                                {
+                                ds_list_add(PerceptAgentEnnemi,A.Officier.id);
+                                }
+                        if ds_exists(A.Officier.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plis pris en compte
                             {
-                            ds_list_replace(PerceptAgentEnnemi,I,A.id);//On place son id dans la liste
+                            for (i = 0; i < ds_list_size(A.Officier.Regiment); i++)
+                                {
+                                instance_deactivate_object(ds_list_find_value(A.Officier.Regiment,i));
+                                }
                             }
-                        else
-                            {
-                            ds_list_add(PerceptAgentEnnemi,A.id);
-                            }
-                    instance_deactivate_object(A);//et on le desactive pour qu'il ne soit plis pris en compte   
+                        instance_deactivate_object(A.Officier)
+                    }
+                    else
+                        {
+                        instance_deactivate_object(A);
+                        }//et on le desactive pour qu'il ne soit plis pris en compte   
                     I++;
                     }
                 }
@@ -63,7 +104,7 @@ or instance_exists(Ennemi)
         }
     II++;
     
-    if II < 100
+    if II < 20
     or (ds_exists(PerceptAgentEnnemi, ds_type_list) && ds_list_size(PerceptAgentEnnemi) <= 7)
         {
         if A.id != id

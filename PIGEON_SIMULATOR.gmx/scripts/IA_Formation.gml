@@ -1,9 +1,15 @@
 ///IA_Formation(Formation)
 {
 P = ds_list_find_index(Officier.Regiment,id);
-J = P div Officier.Formation.image_yscale;
-I = (P mod  Officier.Formation.image_xscale) //div Officier.Formation.image_xscale;
-
+if Officier.Formation.image_yscale != 0
+    {J = P div Officier.Formation.image_yscale;}
+else
+    {J = 1;}
+if Officier.Formation.image_xscale != 0
+    {I = (P mod  Officier.Formation.image_xscale)} //div Officier.Formation.image_xscale;
+else
+    {I = 1;}
+    
 Dir1 = point_direction(x,y,Officier.Formation.x+I*40,Officier.Formation.y+J*64)
 
 if distance_to_point(Officier.Formation.x+I*40,Officier.Formation.y+J*64) != 0
