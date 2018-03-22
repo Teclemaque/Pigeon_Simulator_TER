@@ -48,6 +48,7 @@
         <script>scripts\map_get_xy.gml</script>
         <script>scripts\map_neighbors_H.gml</script>
       </scripts>
+      <script>scripts\MAP_FOG.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -57,6 +58,8 @@
     <object>objects\obj_arme</object>
     <object>objects\obj_obstacle</object>
     <object>objects\obj_MAP_controller</object>
+    <object>objects\obj_VIEW_controller</object>
+    <object>objects\obj_FOG_controller</object>
     <objects name="TERRAIN">
       <object>objects\Obj_Terrain_montagne</object>
       <object>objects\Obj_Terrain_Eau</object>
@@ -66,7 +69,6 @@
       <object>objects\Obj_Terrain_Crete</object>
       <object>objects\Obj_Terrain_Obstacle</object>
     </objects>
-    <object>objects\obj_VIEW_controller</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

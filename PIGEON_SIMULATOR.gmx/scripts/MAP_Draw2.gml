@@ -12,21 +12,21 @@ for(var i=0;i < width; i++){
          var c = getColorZ(ds_grid_get(grid,i,j),i,j)
          var inst
         if (h == -1){
-            inst = instance_create(j*width,i*height,Obj_Terrain_Eau)
+            inst = instance_create(i*blockSize,j*blockSize,Obj_Terrain_Eau)
         } else if (h == 1) {
-            inst = instance_create(j*width,i*height,Obj_Terrain_montagne)  
+            inst = instance_create(i*blockSize,j*blockSize,Obj_Terrain_montagne)  
         } else if(h == 3){
-            inst = instance_create(j*width,i*height,Obj_Terrain_Crete)
+            inst = instance_create(i*blockSize,j*blockSize,Obj_Terrain_Crete)
         } else if(h == 2){
-            inst = instance_create(j*width,i*height,Obj_Terrain_Forest)
+            inst = instance_create(i*blockSize,j*blockSize,Obj_Terrain_Forest)
         } else {
-            inst = instance_create(j*width,i*height,Obj_Terrain_sol)   
+            inst = instance_create(i*blockSize,j*blockSize,Obj_Terrain_sol)   
         }
         
         
         with(inst){
-            image_xscale = other.width
-            image_yscale = other.height
+            image_xscale = other.blockSize
+            image_yscale = other.blockSize
             image_speed = 0
             couleur = c
             grid_x = i
