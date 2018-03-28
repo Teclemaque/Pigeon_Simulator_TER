@@ -27,6 +27,10 @@
             <kind>1</kind>
             <string>globalvar R_fusil;
 R_fusil = 90;
+
+global.MAP_Height = 32
+global.MAP_Width = 32
+
 </string>
           </argument>
         </arguments>
