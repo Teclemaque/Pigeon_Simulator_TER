@@ -47,6 +47,7 @@
       <scripts name="AGENT_MAP">
         <script>scripts\map_get_xy.gml</script>
         <script>scripts\map_neighbors_H.gml</script>
+        <script>scripts\map_visible.gml</script>
       </scripts>
       <script>scripts\MAP_FOG.gml</script>
     </scripts>

@@ -34,7 +34,7 @@ for(var i=0;i < width; i++){
         }
         if(h == 3){
             with(inst){
-                crete = 0
+                crete = choose(0,1,2,3,4,5)
             }
         }
 

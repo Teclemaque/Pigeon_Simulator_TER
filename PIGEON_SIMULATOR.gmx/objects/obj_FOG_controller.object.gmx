@@ -32,6 +32,7 @@ image_alpha = 0.0
 
 fog = ds_grid_create(obj_MAP_controller.width,obj_MAP_controller.height)
 
+toggle_fog = 1
 </string>
           </argument>
         </arguments>
@@ -96,8 +97,7 @@ fog = ds_grid_create(obj_MAP_controller.width,obj_MAP_controller.height)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    draw_text(xx,yy,"What?")
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
