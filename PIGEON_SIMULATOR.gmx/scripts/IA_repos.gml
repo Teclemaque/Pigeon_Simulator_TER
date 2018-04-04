@@ -1,5 +1,16 @@
-///IA_repos()_
+///IA_Repos(Repos)
 {
-speed = random(1.5)+1
-direction = direction + random(40)-20
+if Argument[0] == 1
+    {
+    Dir1 = direction + random(40)-20
+    speed = 1;
+    }
+else
+    {
+    if Argument[0] == 0
+        {
+         speed = 0;
+        }
+    }
+exit;
 }
