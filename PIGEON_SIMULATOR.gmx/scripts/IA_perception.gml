@@ -120,6 +120,3 @@ or instance_exists(Ennemi)
     }
 exit;
 }
-
-        
-    
