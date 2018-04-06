@@ -10,24 +10,97 @@
     <sprite>sprites\spr_obstacle</sprite>
     <sprite>sprites\spr_arme</sprite>
     <sprite>sprites\sprite_obj</sprite>
+    <sprite>sprites\terrain_0</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="SCRIPT IA">
-      <script>scripts\IA_repos.gml</script>
-      <script>scripts\IA_attaque.gml</script>
-      <script>scripts\IA_deplacement.gml</script>
-      <script>scripts\IA_perception.gml</script>
-      <script>scripts\IA_PasGrandChose.gml</script>
+            <script>scripts\IA_Deplacement.gml</script>
+      <script>scripts\IA_Attaque.gml</script>
+      <script>scripts\IA_Repos.gml</script>
+      <script>scripts\IA_PerceptionAllie.gml</script>
+      <script>scripts\IA_Perception.gml</script>
+      <script>scripts\IA_Groupe.gml</script>
+      <script>scripts\IA_Formation.gml</script>
+
+    </scripts>
+    <scripts name="MAP">
+      <script>scripts\MAP_Create.gml</script>
+      <script>scripts\MAP_Draw.gml</script>
+      <script>scripts\MAP_Create2.gml</script>
+      <script>scripts\MAP_Draw2.gml</script>
+      <script>scripts\TERRAIN_Draw.gml</script>
+      <scripts name="generation">
+        <script>scripts\generate.gml</script>
+        <script>scripts\PerlinNoise.gml</script>
+        <script>scripts\randomSeed.gml</script>
+        <script>scripts\getColorZ.gml</script>
+        <script>scripts\dillatation_erosion.gml</script>
+        <script>scripts\error_check.gml</script>
+        <scripts name="crête">
+          <script>scripts\crete_finder.gml</script>
+          <script>scripts\mountain_list.gml</script>
+        </scripts>
+      </scripts>
+      <scripts name="forest">
+        <script>scripts\create_forest.gml</script>
+        <script>scripts\expend_forest.gml</script>
+        <script>scripts\map_get_terrain_type.gml</script>
+      </scripts>
+      <scripts name="AGENT_MAP">
+        <script>scripts\map_get_xy.gml</script>
+        <script>scripts\map_neighbors_H.gml</script>
+        <script>scripts\map_visible.gml</script>
+      </scripts>
+      <script>scripts\MAP_FOG.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_debuggage</object>
     <object>objects\obj_globVar</object>
-    <object>objects\obj_agent</object>
+    <objects name="AGENTS">
+      <objects name="AGENTS SIMPLES">
+        <objects name="Camp 1">
+          <object>objects\obj_agent_C1</object>
+        </objects>
+        <objects name="Camp 2">
+          <object>objects\obj_agent_C2</object>
+        </objects>
+      </objects>
+      <objects name="AGENT SUPERIEUR">
+        <objects name="Camp 1">
+          <object>objects\obj_meta_agent_C1</object>
+          <object>objects\obj_agent_officier0_C1</object>
+          <object>objects\obj_agent_officier1_C1</object>
+        </objects>
+        <objects name="Camp 2">
+          <object>objects\obj_meta_agent_C2</object>
+          <object>objects\obj_agent_officier0_C2</object>
+          <object>objects\obj_agent_officier1_C2</object>
+        </objects>
+      </objects>
+      <objects name="AGENT TEST">
+        <object>objects\obj_agent</object>
+      </objects>
+      <object>objects\obj_formation</object>
+      <object>objects\obj_souris</object>
+      <object>objects\obj_joueur</object>
+    </objects>
     <object>objects\obj_arme</object>
     <object>objects\obj_obstacle</object>
+    <object>objects\obj_MAP_controller</object>
+    <object>objects\obj_VIEW_controller</object>
+    <object>objects\obj_FOG_controller</object>
+    <objects name="TERRAIN">
+      <object>objects\Obj_Terrain_montagne</object>
+      <object>objects\Obj_Terrain_Eau</object>
+      <object>objects\Obj_Terrain</object>
+      <object>objects\Obj_Terrain_sol</object>
+      <object>objects\Obj_Terrain_Forest</object>
+      <object>objects\Obj_Terrain_Crete</object>
+      <object>objects\Obj_Terrain_Obstacle</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

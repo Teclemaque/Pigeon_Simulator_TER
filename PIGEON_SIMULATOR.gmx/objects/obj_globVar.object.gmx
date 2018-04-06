@@ -27,6 +27,24 @@
             <kind>1</kind>
             <string>globalvar R_fusil;
 R_fusil = 90;
+
+global.MAP_Height = 32
+global.MAP_Width = 32
+
+I1 = round(random(500))
+I2 = round(random(500))
+/*for (i = 0; i &lt; 25; i++)
+    {
+    instance_create(random(1024),random(768),obj_meta_agent_1);
+    }*/
+for (i = 0; i &lt; 30; i++)
+    {
+    instance_create(random(512)+512,random(768),obj_agent_officier0_C1);
+    }
+for (i = 0; i &lt; 25; i++)
+    {
+    instance_create(random(512),random(768),obj_agent_officier0_C2);
+    }
 </string>
           </argument>
         </arguments>
