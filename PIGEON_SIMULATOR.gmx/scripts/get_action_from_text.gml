@@ -10,10 +10,10 @@ var agentX = instance_find(obj_agent, 0).id;
 // action "agentX vas vers 1024:2048 " 
 action[? "Erreur"] = noone;
 action[? "Context"] = argument0;
-action[? "Type"] = "go";
+action[? "Type"] = "ordre";
+action[? "Action"] = "move";
 action[? "Target"] = agentX;
-action[? "coords_x"] = 1024;
-action[? "coords_y"] = 2048;
+action[? "coords_x"] = random(room_width);
+action[? "coords_y"] = random(room_height);
 
 return action;
-

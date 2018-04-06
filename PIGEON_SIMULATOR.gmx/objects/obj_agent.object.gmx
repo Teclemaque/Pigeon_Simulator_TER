@@ -30,7 +30,7 @@
 Groupe = noone;
 Messages = ds_list_create();
 Ordres = ds_list_create();
-
+MSpeed = 25;
 Ordre = 0;//0 pas d'ordre en cours, 1 ordre en cours d'execution, sinon ne respecte pas l'ordre ou vient de prendre une décision par lui même
 Type = 0;// 0 = Unité combattante, 1 messager
 Etat = 1;// 1 Valide, 0 invalide, -1 mort
@@ -76,7 +76,7 @@ while ( ! ds_list_empty(Messages) ) {
     show_debug_message("Message recu");
     
     // TODO : liste d'ordres dans un message
-    if msg[? "type"] == "order"{
+    if msg[? "Type"] == "ordre"{
         show_debug_message("Ordre recu");
         ds_list_add(Ordres, msg);
     }
@@ -162,13 +162,22 @@ else {
      * current_task[&lt;...&gt;] = ...
      */
      
-     var orderName = current_task[? "name"];
-     //show_debug_message("Ordre : " + string(orderName));
+     var orderName = current_task[? "Action"];
+     show_debug_message("Ordre : " + string(orderName));
      
      
      if(orderName == "move"){
-        //show_debug_message("Move en cours ...");
+        show_debug_message("Move en cours ...");
+        var distance = distance_to_point( current_task[? "coords_x"], current_task[? "coords_y"] );
+        var spd = MSpeed;
+        if(spd &gt; distance) spd = distance;
+        move_towards_point( current_task[? "coords_x"], current_task[? "coords_y"], spd );
         
+        if( distance &lt; 10 ){
+            ds_list_delete(Ordres, 0);
+        }
+        
+        /*
         //var path =  path_duplicate(current_task[? "path"]);
         //path_delete(current_task[? "path"]);
         var path = current_task[? "path"];
@@ -193,7 +202,7 @@ else {
         
         //show_debug_message("Position : " + string(path_position));    
         
-        
+     */   
      }
      
      if(orderName == "patrol"){
