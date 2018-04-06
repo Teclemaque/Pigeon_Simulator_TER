@@ -6,12 +6,10 @@ Nbr = Argument[2];
 
 if Argument[3] == 1
     {
-    show_debug_message("coucou")
     for (i = 0; i < array_length_1d(ListOfficier); i++)
         {
         O = ListOfficier[i];
         O.Officiel = 1;
-        show_debug_message("fait 1")
         if Argument[2] > 1
             {
             if ds_list_size(Regiment) > Argument1*Argument2
@@ -29,7 +27,6 @@ if Argument[3] == 1
             }
         else
             {
-            show_debug_message("fait 2")
             if Argument[2] != 0
                 {
                 NbGroupe = floor(1/Argument[2]);
@@ -51,14 +48,12 @@ if Argument[3] == 1
 ////////////////////////////////////////////////////////////////////////////////////////
         for (j = 0; j < NbGroupe-1; j++)
             {
-            show_debug_message(NbGroupe)
-            show_debug_message(Nbr)
              
-            with(ds_list_find_value(O.Regiment,0))
+            with(ds_list_find_value(O.Regiment,1))
                 {
                 ID = other.O.id;
                 Groupe = instance_create(x,y,other.O.Off_sup);
-                ds_list_delete(other.O.Regiment,0);
+                ds_list_delete(other.O.Regiment,1);
                 
                 with(Groupe)
                     {
@@ -67,10 +62,10 @@ if Argument[3] == 1
                     
                     for (k = 0; k < other.ID.Nbr; k++)
                         {
-                        ds_list_add(Regiment,ds_list_find_value(other.ID.Regiment,0));
-                        A = ds_list_find_value(other.ID.Regiment,0);
+                        ds_list_add(Regiment,ds_list_find_value(other.ID.Regiment,1));
+                        A = ds_list_find_value(other.ID.Regiment,1);
                         A.Officier = id;
-                        ds_list_delete(other.ID.Regiment,0);
+                        ds_list_delete(other.ID.Regiment,1);
                         }
                     }
                 instance_destroy();

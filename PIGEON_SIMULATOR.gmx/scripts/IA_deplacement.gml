@@ -3,6 +3,8 @@
 Cadence = Argument[5];
 Ordre = Argument[8];
 Alpha = Argument[7];
+sprite_index = spr_soldat_marche;
+image_speed = 0.3;
 
 if Ordre == 0
     {
@@ -13,22 +15,12 @@ if Ordre == 0
             speed = 5
             Dir1 = point_direction(x,y,Cible.x,Cible.y)+random(10)-5
             }
-        /*if place_meeting(x,y,Cible)
-            {
-            if object_get_name(Cible.object_index) == "obj_formation"
-                {
-                //Execute = IA_Formation();
-                }
-            else
-                {
-                speed = 0;
-                Dir1 = random(10)-5
-                }
-            }*/
         }
     else
         {
+        Argument[0] = 0;
         Execute = IA_Repos;
+        return 0
         }
     }
 else
@@ -100,7 +92,9 @@ else
                     }
                 else
                     {
+                    Argument[0] = 0;
                     Execute = IA_Repos;
+                    return 0
                     }
                 }
             }
@@ -108,4 +102,3 @@ else
     }
 exit;
 }
-==== BASE ====

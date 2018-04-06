@@ -1,3 +1,4 @@
+///map_neighbors_H()
 //retourne les voisons sous la forme d'un tableau 2d equivalent à la grille alentour
 var t = map_get_xy()
 var xx = ds_list_find_value(t,0)

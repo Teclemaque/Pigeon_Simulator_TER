@@ -2,9 +2,8 @@
 {
 if Argument[0] == 1
     {
-   
     Dir1 = direction + random(40)-20
-    //Execute = IA_Repos;
+    speed = 1;
     }
 else
     {

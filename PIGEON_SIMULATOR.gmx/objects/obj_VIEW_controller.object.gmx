@@ -131,7 +131,7 @@ draw_text(d_x,d_y,view_xport[0])
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(view_hview[0] &gt; 300){
+            <string>if(view_hview[0] &gt; 100){
     view_hview[0] = view_hview[0] - 20;
     view_wview[0] = view_wview[0] - 20;
 }

@@ -22,8 +22,7 @@ for(var i=0;i < width; i++){
         } else {
             inst = instance_create(i*blockSize,j*blockSize,Obj_Terrain_sol)   
         }
-        
-        
+       
         with(inst){
             image_xscale = other.blockSize
             image_yscale = other.blockSize

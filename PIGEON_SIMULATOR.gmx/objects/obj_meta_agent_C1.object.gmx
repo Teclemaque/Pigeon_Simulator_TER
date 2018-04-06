@@ -33,13 +33,14 @@ for (i = 0; i &lt; 15;i++)
     }
 ExecuteRegiment = noone;
 
-//Rang = 0;
+t = random(20);
 
 Formation = noone;
 Officiel = 0;
 
 Officier = id;
 Regiment = ds_list_create();
+ds_list_add(Regiment,id);
 
 PerceptAgentEnnemi = ds_list_create();
 PerceptAgentAllie = ds_list_create();
@@ -74,7 +75,13 @@ String = ""
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ds_list_destroy(Regiment);
+            <string>if Moral &gt; 25
+&amp;&amp; ds_list_size(Regiment) &gt; 2
+    {
+    transfertNouvelOfficier();
+    }
+    
+ds_list_destroy(Regiment);
 ds_list_destroy(PerceptAgentEnnemi);
 ds_list_destroy(PerceptAgentAllie);
 ds_list_destroy(CibleAttaque);
@@ -108,19 +115,26 @@ if instance_exists(Formation)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//IA_perception1();
-ds_list_clear(PerceptAgentAllie);
-ds_list_clear(PerceptAgentEnnemi);
+            <string>
+t++;
+//ds_list_clear(PerceptAgentAllie);
+//ds_list_clear(PerceptAgentEnnemi);
 xx = x;//Pour éviter que l'agent puis se lister lui même, 
 x = -50000;//eloignement de sa coordoné originelle
 
 I = 0;
 II = 0;
 
-IA_PerceptionAllie();
-IA_Perception();
-
-instance_activate_all();
+if t &gt; 20
+    {
+    ds_list_clear(PerceptAgentAllie);
+    ds_list_clear(PerceptAgentEnnemi);
+    
+    IA_Perception();
+    instance_activate_all();
+    IA_PerceptionAllie();
+    t = 0;
+    }
 
 x = xx;
 </string>
@@ -149,30 +163,37 @@ x = xx;
     {
     Cible = ds_list_find_value(PerceptAgentEnnemi,0);
     
-    //CibleRegiment = ds_list_find_value(PerceptAgentEnnemi,0);
-    
-    if distance_to_object(Cible)&lt; 400
+    if distance_to_object(Cible) &lt; 400
         {
-        ds_list_add(CibleAttaque,Cible);
-        Execute = IA_Attaque;
-        ExecuteRegiment = Execute;
         for (i = 0; i &lt; ds_list_size(Cible.Regiment); i++)
             {
             ds_list_add(CibleAttaque,ds_list_find_value(Cible.Regiment,i))
+            }
+        ds_list_add(CibleAttaque,Cible);
+        
+        if Officiel == 0
+            {
+            Execute = IA_Attaque;
+            ExecuteRegiment = Execute;
+            }
+        else
+            {
+            Execute = IA_Regiment_Attaque;
+            ExecuteRegiment = Execute;
             }
         Argument[0] = 1;
         Argument[1] = 0;
         ArgumentRegiment = Argument;
         }
     }
-else
+/*else
     {
     if Officiel == 1
         {
         ExecuteRegiment = IA_Formation;
         ArgumentRegiment[0] = 0; 
         } 
-    }
+    }*/
 
 ////////////////////////////////////////////////////////////////////////    
 if instance_exists(Formation) == false
@@ -184,18 +205,20 @@ if instance_exists(Formation) == false
     }
 else
     {
-    if ds_list_size(Regiment) &gt; 1
+    /*if ds_list_size(Regiment) &gt; 1
         {
         CibleRegiment = Formation;
-        }
+        }*/
 
     with(Formation)
         {
+        direction = other.Dir1 mod 180;
+        
         image_xscale = round(sqrt(ds_list_size(other.Regiment)));
         image_yscale = round(sqrt(ds_list_size(other.Regiment)));
         ID = other.id;
-        x = other.x+50+random(10)-5;
-        y = other.y+50+random(10)-5;
+        x = other.x+50//*(cos(degtorad(direction)))//+random(10)-5;
+        y = other.y-50//*(sin(degtorad(direction)))//+random(10)-5;
         }
     }
 event_inherited()
@@ -224,8 +247,8 @@ event_inherited()
             <kind>1</kind>
             <string>draw_self();
 
-/*draw_text(x,y-20,Argument[0]);
-draw_text(x,y-30,Argument[1]);
+draw_text(x,y-10,direction);
+/*draw_text(x,y-30,Argument[1]);
 draw_text(x,y-40,Argument[2]);
 draw_text(x,y-50,Argument[3]);
 draw_text(x,y-60,Argument[4]);
@@ -233,13 +256,22 @@ draw_text(x,y-70,Argument[5]);
 draw_text(x,y-80,Argument[6]);
 draw_text(x,y-90,Argument[7]);
 draw_text(x,y-100,Argument[8]);*/
-if ds_exists(PerceptAgentEnnemi,ds_type_list)
+/*if ds_exists(PerceptAgentAllie,ds_type_list)
 &amp;&amp; ds_list_size(PerceptAgentAllie)&gt;0
+    {
+    for (i = 0; i &lt; ds_list_size(PerceptAgentAllie);i++)
+        {
+        //draw_line(x,y,ds_list_find_value(PerceptAgentAllie,i).x,ds_list_find_value(PerceptAgentAllie,i).y)
+        draw_text(x,y-i*10,ds_list_find_value(PerceptAgentAllie,i));
+        }
+    }
+if ds_exists(PerceptAgentEnnemi,ds_type_list)
+&amp;&amp; ds_list_size(PerceptAgentEnnemi)&gt;0
     {
     for (i = 0; i &lt; ds_list_size(PerceptAgentEnnemi);i++)
         {
         //draw_line(x,y,ds_list_find_value(PerceptAgentAllie,i).x,ds_list_find_value(PerceptAgentAllie,i).y)
-        draw_text(x,y-i*10,ds_list_find_value(PerceptAgentEnnemi,i));
+        draw_text(x-20,y+i*10,ds_list_find_value(PerceptAgentEnnemi,i));
         }
     }
 

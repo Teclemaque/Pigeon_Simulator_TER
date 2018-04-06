@@ -12,8 +12,8 @@ or instance_exists(Ennemi)
         
         if A.id != id //Et que ce n'est pas lui
             {
-            if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone //Si presence d'un obstacle entre eux
-            or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90 //Si agent n'est pas dans son champ de perception
+            if map_visible(A.id) == false//collision_line(xx,y,A.x,A.y,Obj_Terrain_Crete,1,1) != noone //Si presence d'un obstacle entre eux
+            or (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)  //Si agent n'est pas dans son champ de perception
                 {
                 instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
                 }
@@ -59,14 +59,15 @@ or instance_exists(Ennemi)
                 }
             }
         }
+        
     if instance_exists(Ennemi)
         { 
         A = instance_nearest(xx,y,Ennemi);//Recherche de l'agent le plus proche
         
         if A.id != id //Et que ce n'est pas lui
             {
-            if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone //Si presence d'un obstacle entre eux
-            or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90 //Si agent n'est pas dans son champ de perception
+            if map_visible(A.id) == false//collision_line(xx,y,A.xx,A.y,Obj_Terrain_Crete,1,1) != noone //Si presence d'un obstacle entre eux
+            or (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)//Si agent n'est pas dans son champ de perception
                 {
                 instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
                 }
@@ -109,7 +110,7 @@ or instance_exists(Ennemi)
         {
         if A.id != id
             {
-            if I <= 30
+            if I <= 10
                 {IA_Perception();}
             }
         }

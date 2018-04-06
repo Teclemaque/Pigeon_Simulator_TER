@@ -5,10 +5,10 @@
   <visible>-1</visible>
   <depth>1</depth>
   <persistent>0</persistent>
-  <parentName>Obj_Terrain_montagne</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="8" enumb="0">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -26,8 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited()
-draw_set_colour(c_white)
-draw_text(x,y,string(crete))
+image_blend = c_red;
 </string>
           </argument>
         </arguments>

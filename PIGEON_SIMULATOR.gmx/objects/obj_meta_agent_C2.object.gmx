@@ -37,8 +37,9 @@ CibleAttaque[0] = noone;
 Formation = noone;
 Officiel = choose(0,1);
 
-Rang = 0;
+t  = random(10);
 Regiment = ds_list_create();
+ds_list_add(Regiment,id);
 
 CibleRegiment = noone;
 
@@ -105,16 +106,20 @@ if instance_exists(Formation)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//IA_perception1();
+            <string>/*t++;
 
-/*xx = x;//Pour éviter que l'agent puis se lister lui même, 
+xx = x;//Pour éviter que l'agent puis se lister lui même, 
 x = -50000;//eloignement de sa coordoné originelle
 
 I = 0;
 II = 0;
 
 IA_PerceptionAllie();
-IA_Perception();
+if t &gt; 10
+    {
+    IA_Perception();
+    t = 0;
+    }
 
 instance_activate_all();
 

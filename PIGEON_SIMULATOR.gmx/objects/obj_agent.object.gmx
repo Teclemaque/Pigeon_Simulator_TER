@@ -6,7 +6,7 @@
   <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>spr_soldat</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_blend = c_yellow
+            <string>//image_blend = c_yellow
+image_xscale = 0.5+random(0.1)-0.05;
+image_yscale = 0.5+random(0.1)-0.05;
 /////////////////////Propriété de l'agent///////////////////////////
 P = 0;
 J = 0;
@@ -52,7 +54,7 @@ Officiel = 0;
 Grade = 1;//Rang de l'officier
 Cible = noone;
 
-Obj_inf = noone;
+Off_inf = noone;
 PousseToi = 0;
 Enervement = 0;
 /////////////////////Gestion environnement//////////////////////////
@@ -81,7 +83,8 @@ A = noone;//Autre Agent sélectionné pour d'eventuelle action
 xx = x;//Pour eviter que l'agent se prenne en compte, lors des perceptions il sera deplacé loin et les calculs seront fait a partir de ses anciennes coordonnés
 t = 0;//timer
 
-Execute = noone//IA_Deplacement(noone,noone,noone,point_direction(x,y,mouse_x,mouse_y),-1,0,0,0,1)//IA_Repos(0);//Le script a executer
+Execute = IA_Repos//IA_Deplacement(noone,noone,noone,point_direction(x,y,mouse_x,mouse_y),-1,0,0,0,1)//IA_Repos(0);//Le script a executer
+Argument[0] = 0;
 </string>
           </argument>
         </arguments>
@@ -135,90 +138,68 @@ Execute = noone//IA_Deplacement(noone,noone,noone,point_direction(x,y,mouse_x,mo
 Chance = random(100);
 
 if instance_exists(Officier) 
+&amp;&amp; instance_exists(Officier.Formation)
 &amp;&amp; Officier.id != id
     {
-    Cible = Officier.CibleRegiment;
     Execute = Officier.ExecuteRegiment;
-    Argument = Officier.ArgumentRegiment;
-    }
-/*if Ordre == 0 //Quand l'agent est livré a lui même mais toujours receptifs
-    {
-    if instance_exists(Officier)
+    
+    if Execute != IA_Attaque &amp;&amp; Execute != IA_Regiment_Attaque
         {
         Cible = Officier.CibleRegiment;
-        //Execute = Officier.Execute;
-        //Argument = Officier.Argument;
-        
-        if instance_exists(Cible) == false
-            {
-            Cible = Officier;
-            }
-        else
-            {
-            if object_get_name(Cible.object_index) == "obj_formation"
-                {
-                IA_Formation();
-                }
-            } 
         }
-    else
-        {
-        with(instance_create(x,y,Off_inf))
-            {
-            Camp = other.Camp;
-            }
-        instance_destroy();
-        }
+    Argument = Officier.ArgumentRegiment;
+    
     }
-*/
-if instance_exists(Officier)
-    {
-    if Execute != noone
-        {
-        script_execute(Execute,Argument);
-        }
-    }
-/////////////////////////////// REFLEXE ////////////////////////////
-xx = x;
-x = - 5000
-A = instance_nearest(xx+lengthdir_x(10, direction),y+lengthdir_y(10, direction),obj_agent);
-x = xx;
 
-if PousseToi &gt; 0
+
+if Execute != noone
+    {
+    script_execute(Execute,Argument);
+    }
+    
+/////////////////////////////// REFLEXE ////////////////////////////
+/*xx = x;
+x = - 5000
+A = instance_nearest(xx+lengthdir_x(bbox_right+speed+1, direction),y+lengthdir_y(bbox_right+speed+1, direction),obj_agent);
+x = xx;*/
+
+/*if PousseToi &gt; 0
     {
     speed = PousseToi  
     PousseToi -= 0.1;
     }
+*/
+direction = Dir1;
 
 if instance_exists(A)
-&amp;&amp; distance_to_object(A) &lt; 20
+&amp;&amp; distance_to_object(A) &lt; speed+1
 &amp;&amp; A.id != id
     {
-    if collision_circle(x,y,17,obj_agent,1,1) == noone
+    /*if collision_circle(x,y,17,obj_agent,1,1) == noone
         {
         Contact = 0;
-        }
-    if collision_point(x,y,obj_agent,1,1) != noone
+        }*/
+    /*if collision_point(x,y,obj_agent,1,1) != noone
         {
-        //speed = 0
-        x += random(4)-2;
-        y += random(4)-2;
-        }
-    
-    Agent = collision_circle(x+lengthdir_x(16, direction),y+lengthdir_y(16, direction),4,obj_agent,0,1)
+        x += random(1)-0.5;
+        y += random(1)-0.5;
+        }*/
+
+    Agent = collision_circle(x+lengthdir_x(bbox_right+speed+1, direction),y+lengthdir_y(bbox_right+speed+1, direction),1,obj_agent,0,1)
     
     
     if instance_exists(Agent)
         {
-        Agent.Contact = 1
-         
-        if abs(Agent.direction mod 270 -direction) &lt; 90
+        //Agent.Contact = 1
+        
+        if abs((Agent.direction mod 180)-direction mod 180) &gt; 90
             {
-            
-            Dir2 = Dir1-Enervement//90+(Agent.direction-direction)//random(Enervement)-Enervement/2
+            PousseToi = 1;
+            //Dir2 = Dir1+90/(distance_to_object(Agent)+1)
+            //Dir2 = Dir1-Enervement//90+(Agent.direction-direction)//random(Enervement)-Enervement/2
             if Grade &lt; Agent.Grade
                 {
-                PousseToi += 1+ Agent.PousseToi;
+                //PousseToi += 1+ Agent.PousseToi;
                 Enervement += 0.5;
                 }
             else
@@ -227,7 +208,7 @@ if instance_exists(A)
                     {
                     if Ordre &lt; Agent.Ordre
                         {
-                        PousseToi += 1+Agent.PousseToi;
+                        //PousseToi += 1+Agent.PousseToi;
                         Enervement += 0.5;
                         }
                     else
@@ -236,7 +217,7 @@ if instance_exists(A)
                             {
                             if id &gt; Agent.id
                                 {
-                                PousseToi += 1+Agent.PousseToi;
+                                //PousseToi += 1+Agent.PousseToi;
                                 Enervement += 0.5;
                                 }
                             }
@@ -246,13 +227,15 @@ if instance_exists(A)
             }
         else
             {
-            if abs(Agent.direction-direction)&gt;180
+            PousseToi = 1;
+            //Dir2 = Dir1+90/(distance_to_object(Agent)+1)
+            /*if abs(Agent.direction-direction)&gt;180
                 {Dir2 = Dir1-90+Enervement;}
             else
-                {Dir2 = Dir1+90-Enervement;}
+                {Dir2 = Dir1+90-Enervement;}*/
             if Grade &lt; Agent.Grade
                 {
-                PousseToi += 1+Agent.PousseToi;
+                //PousseToi += 1+Agent.PousseToi;
                 Enervement += 0.5;
                 }
             else
@@ -261,7 +244,7 @@ if instance_exists(A)
                     {
                     if Ordre &lt; Agent.Ordre
                         {
-                        PousseToi += 1+Agent.PousseToi;
+                        //PousseToi += 1+Agent.PousseToi;
                         Enervement += 0.5;
                         }
                     else
@@ -270,7 +253,7 @@ if instance_exists(A)
                             {
                             if id &gt; Agent.id
                                 {
-                                PousseToi += 1+Agent.PousseToi;
+                                //PousseToi += 1+Agent.PousseToi;
                                 Enervement += 0.5;
                                 }
                             }
@@ -279,8 +262,16 @@ if instance_exists(A)
                 }
             }
         }
+    else
+        {
+        PousseToi = 0;
+        }
     }
 else
+    {
+    PousseToi = 0;
+    }
+/*else
     {
     if PousseToi &gt; 0
         {
@@ -291,16 +282,16 @@ else
         Enervement --;
         }
     }
-
-if PousseToi &gt; 0
+*/
+/*if PousseToi &gt; 0
     {
     direction = Dir2//+random(Enervement)-Enervement/2
     }
-else
+else*/
     {
     direction = Dir1//+random(Enervement)-Enervement/2;
     }
-if PousseToi &lt; 0
+/*if PousseToi &lt; 0
     {
     PousseToi = 0;
     }
@@ -323,6 +314,7 @@ else
         Enervement = 45;
         }
     }
+
 </string>
           </argument>
         </arguments>
@@ -346,7 +338,7 @@ else
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_text(x,y-10,script_get_name(Execute));
+//draw_text(x,y-10,script_get_name(Execute));
 /*if instance_exists(Officier)
     {
     draw_text(x,y-5,Officier.id)
@@ -355,11 +347,11 @@ draw_text(x,y-15,id)
 if instance_exists(Cible)
     {
     draw_text(x,y-25,object_get_name(Cible.object_index))
-    }
-draw_text(x,y-35,PousseToi)
-draw_text(x,y-45,Enervement)
-draw_text(x,y-55,speed)
-draw_text(x,y-75,string(P)+" "+string(J)+" "+string(I))*/
+    }*/
+
+draw_text(x,y-25,direction)
+draw_text(x,y-15,speed)
+/*draw_text(x,y-75,string(P)+" "+string(J)+" "+string(I))*/
 
 
 
