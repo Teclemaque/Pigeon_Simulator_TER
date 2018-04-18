@@ -1,8 +1,10 @@
+toggle_papper = 0
+
 randomize()
 seed = round(random_range(1000000,1000000));
 
-water_level = 25 //25
-mountain_level = 60  //60
+water_level = 27 //25
+mountain_level = 61  //60
 
 blockSize = 16
 
@@ -44,4 +46,6 @@ dillatation_erosion();
 create_forest();
 error_check();
 crete_finder();
+create_river();
+crest_level();
 ds_grid_destroy(done);

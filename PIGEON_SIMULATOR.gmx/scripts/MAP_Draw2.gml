@@ -32,9 +32,9 @@ for(var i=0;i < width; i++){
             grid_x = i
             grid_y = j
         }
-        if(h == 3){
+        if(h == 3 or h==1){
             with(inst){
-                crete = choose(0,1,2,3,4,5)
+                crete = ds_grid_get(other.crest,grid_x,grid_y)
             }
         }
 

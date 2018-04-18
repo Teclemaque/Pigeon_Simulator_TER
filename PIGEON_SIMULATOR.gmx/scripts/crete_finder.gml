@@ -13,7 +13,7 @@ for(var i = 0; i < width;i++){
             cr = mountain_list(i,j)
             
             //Nouveau code
-           
+            var crate = ds_list_create()
              var continu = true
             while(continu){
                 continu = false
@@ -88,6 +88,7 @@ for(var i = 0; i < width;i++){
                         if(count >= seuil){
                             ds_grid_set(terrain_map,xx,yy,3)
                             continu = true  
+                            ds_list_add(crate,ds_list_find_value(cr,k))
                         }
                         
                         
@@ -95,8 +96,38 @@ for(var i = 0; i < width;i++){
                 
                     
                 } // for list
+                
             } // while continu
-            
+            if(ds_list_size(crate) > 0){
+                var mini = ds_list_find_value((ds_list_find_value(crate,0)),0)
+                var maxi = ds_list_find_value((ds_list_find_value(crate,0)),0)
+                for(var k=1; k < ds_list_size(crate);k++){
+                    var testMi = ds_list_find_value((ds_list_find_value(crate,k)),0)
+                    var testMa = ds_list_find_value((ds_list_find_value(crate,k)),0)
+                    if(testMi < mini){
+                        mini = testMi
+                    }
+                    if(testMa > maxi){
+                        maxi = testMa
+                    }
+                } // for list MinMax
+                var range = (maxi - mini) * 0.65
+                range = maxi - range
+                
+                for(var k=1;k < ds_list_size(crate);k++){
+                    if(ds_list_find_value((ds_list_find_value(crate,k)),0)>=range){
+                        ds_grid_set(terrain_map,
+                        ds_list_find_value(ds_list_find_value(crate,k),1),
+                        ds_list_find_value(ds_list_find_value(crate,k),2),
+                        3)
+                    } else {
+                        ds_grid_set(terrain_map,
+                        ds_list_find_value(ds_list_find_value(crate,k),1),
+                        ds_list_find_value(ds_list_find_value(crate,k),2),
+                        1)
+                    }
+                }
+            }
             //Ancien code
             /*
             var mini = ds_list_find_value((ds_list_find_value(cr,0)),0)
