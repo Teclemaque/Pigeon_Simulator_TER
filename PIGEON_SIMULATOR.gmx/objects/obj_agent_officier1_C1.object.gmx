@@ -35,8 +35,10 @@ Officiel = choose(0,0,0,1);
 image_blend = c_red;
 Camp = -1;
 
+Officier = id;
 Off_sup = obj_agent_officier1_C1 //Vers quoi on est gradé
 Off_inf = obj_agent_officier0_C1//Vers quoi on est dégradé
+Off = obj_agent_officier1_C1
 //Off = obj_agent_officier1_C1;
 </string>
           </argument>

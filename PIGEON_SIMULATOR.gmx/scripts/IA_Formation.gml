@@ -1,54 +1,48 @@
 ///IA_Formation(Formation)
 {
-P = ds_list_find_index(Officier.Regiment,id);
-if Officier.Formation.image_yscale != 0
-    {J = (P-1) div Officier.Formation.image_yscale;}
-else
-    {J = 1;}
-if Officier.Formation.image_xscale != 0
-    {I = (P-1) mod  Officier.Formation.image_xscale} //div Officier.Formation.image_xscale;
-else
-    {I = 1;}
-
-D = sqrt(sqr(32*I)+sqr(32*J));
-
-Angle = point_direction(Officier.Formation.x,Officier.Formation.y,Officier.Formation.x+32*I,Officier.Formation.y+32*J)
-
-Dir1 = point_direction(x,y,Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction)),Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction)))
-
-//speed = 2;
-Dist = distance_to_point(Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction)),Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction)))
-if Dist != 0
+if instance_exists(Officier.Formation)
     {
-    speed = 2;
-    //IA_Deplacement(noone,noone,noone,Dir1,-1,Dist/2+1,0,0,1);
-    /*Execute = IA_Deplacement;
-    Argument[0] = noone;
-    Argument[1] = noone;
-    Argument[2] = noone;
-    Argument[3] = Dir1;
-    Argument[4] = -1;
-    Argument[5] = Dist/2+1;
-    Argument[6] = 0;
-    Argument[7] = 0;
-    Argument[8] = 1;
-    exit;*/
-    //speed = 0
-    //x = Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction));
-    //y = Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction));  
+    P = ds_list_find_index(Officier.Regiment,id);
+    if Officier.Formation.image_yscale != 0
+        {J = (P-1) div Officier.Formation.image_yscale;}
+    else
+        {J = 1;}
+    if Officier.Formation.image_xscale != 0
+        {I = (P-1) mod  Officier.Formation.image_xscale} //div Officier.Formation.image_xscale;
+    else
+        {I = 1;}
+    
+    D = sqrt(sqr(5*I)+sqr(7*J));
+    
+    Angle = point_direction(Officier.Formation.x,Officier.Formation.y,Officier.Formation.x+5*I,Officier.Formation.y+7*J)
+    
+    Dir1 = point_direction(x,y,Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction)),Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction)))
 
-    //Dir1 = Officier.Dir1;
-    }
-else
-    {
+    Dist = distance_to_point(Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction)),Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction)))
+    
+    if Dist > 0
         {
-        speed = 0
-        x = Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction));
-        y = Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction));
+        Execute = IA_Deplacement_Soldat;
+        Argument[0] = noone;
+        Argument[1] = noone;
+        Argument[2] = noone;
+        Argument[3] = Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction));
+        Argument[4] = Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction));
+        Argument[5] = Dir1;
+        Argument[6] = -1;
+        Argument[7] = Dist/MSpeed+1;
+        Argument[8] = 0;
+        Argument[9] = 0;
+        Argument[10] = 1;
+        exit;
         }
-
-    Dir1 = Officier.Dir1;
-
+    else
+        {
+        Dir1 = Officier.Dir1;
+        Argument[0] = 0;
+        Argument[1] = -1;
+        Execute = IA_Repos_Soldat;
+        }
     }
 exit;
 }

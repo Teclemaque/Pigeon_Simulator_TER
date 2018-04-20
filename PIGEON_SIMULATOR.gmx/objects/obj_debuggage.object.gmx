@@ -91,6 +91,18 @@
           <argument>
             <kind>1</kind>
             <string>instance_create(mouse_x+random(100)-50,mouse_y+random(100)-50,obj_agent_officier0_C1);
+
+/*with(instance_create(mouse_x,mouse_y,obj_agent_officier1_C1))
+    {
+    repeat(round(random(50))+10)
+        {
+        with(instance_create(x,y,obj_agent_C1))
+            {
+            Officier = other.id;
+            ds_list_add(other.Regiment,id);
+            }
+        }
+    }*/
 </string>
           </argument>
         </arguments>

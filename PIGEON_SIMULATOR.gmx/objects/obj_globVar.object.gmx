@@ -2,7 +2,7 @@
 <object>
   <spriteName>sprite_obj</spriteName>
   <solid>0</solid>
-  <visible>0</visible>
+  <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
@@ -25,15 +25,22 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>R_fusil = 90;
+            <string>R_fusil = 60;
+
+//HORLOGE
+H = round(random(6))+6;
+M = round(random(60));
+S = round(random(6));
+J = 0;
+Temps = 0;
 
 global.MAP_Height = 32
 global.MAP_Width = 32
 
-I1 = round(random(500))
+I1 = round(random(50))
 //I2 = round(random(500))
 
-/*for (i = 0; i &lt; I1; i++)
+for (i = 0; i &lt; I1; i++)
     {
     instance_create(random(512)+512,random(768),obj_agent_officier0_C1);
     }
@@ -41,6 +48,73 @@ I1 = round(random(500))
     {
     instance_create(random(512),random(768),obj_agent_officier0_C2);
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// GESTION de L'HORLOGE
+Temps ++;
+if (Temps mod 30) == 0{
+    S += 1;
+}
+
+if S &gt;= 60
+    {
+    M++;
+    S = 0;
+    }
+if M &gt;= 60
+    {
+    H++
+    M = 0;
+    }
+if H &gt;= 24
+    {
+    J++;
+    H = 0;
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(view_xview[0]+50,view_yview[0]+50,Temps);
+draw_text(view_xview[0]+50,view_yview[0]+60,"Jour : "+string(J)+" heure : "+string(H)+" min : "+string(M)+" sec : "+string(S));
 </string>
           </argument>
         </arguments>

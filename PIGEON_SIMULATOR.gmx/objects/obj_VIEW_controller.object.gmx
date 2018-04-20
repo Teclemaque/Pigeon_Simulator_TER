@@ -131,9 +131,9 @@ draw_text(d_x,d_y,view_xport[0])
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(view_hview[0] &gt; 100){
+            <string>if(view_hview[0] &gt; 58){
     view_hview[0] = view_hview[0] - 20;
-    view_wview[0] = view_wview[0] - 20;
+    view_wview[0] = view_wview[0] - 20*4/3;
 }
 draw_text(mouse_x,mouse_y,"Max Zoom")
 </string>

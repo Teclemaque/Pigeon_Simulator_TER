@@ -1,33 +1,23 @@
-#define transfertDonneesOfficier
 ///transfertDonneesOfficier(ID)
 {
+/*
+Lorsqu'un officier doit recuperer le régiment d'un autre officier
+*/
 ID = argument0;
 //Fonction donnant toutes les infos transférées quand un agent est remplacé par un autre
-Officiel = ID.Officiel;
+//Officiel = ID.Officiel;
 
+//Regiment = ds_list_create();
 
 if ds_exists(ID.Regiment, ds_type_list)
     {
     for (i = 1; i < ds_list_size(ID.Regiment); i++)
         {
-        ds_list_add(Regiment,ds_list_find_value(ID.Regiment,i));
-        A = ds_list_find_value(ID.Regiment,i);
+        ds_list_add(Regiment,ds_list_find_value(ID.Regiment,1));
+        A = ds_list_find_value(ID.Regiment,1);
         A.Officier = Officier.id;
         ds_list_delete(ID.Regiment,1);
         }
     }
 exit;
-}
-
-#define transfertDonneesAgent
-///transfertDonneesAgent(ID)
-{
-ID = argument0;
-
-Camp = ID.Camp;
-image_xscale = ID.image_xscale;
-image_yscale = ID.image_yscale;
-Moral = ID.Moral;
-Execute = ID.Execute;
-Argument = ID.Argument;
 }

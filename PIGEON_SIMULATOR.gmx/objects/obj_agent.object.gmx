@@ -26,33 +26,36 @@
           <argument>
             <kind>1</kind>
             <string>//image_blend = c_yellow
-image_xscale = 0.5+random(0.1)-0.05;
-image_yscale = 0.5+random(0.1)-0.05;
+image_xscale = 0.1+random(0.05)-0.025;
+image_yscale = 0.1+random(0.05)-0.025;
 /////////////////////Propriété de l'agent///////////////////////////
-P = 0;
+/*P = 0;
 J = 0;
-I = 0;
-MSpeed = 10+random(5);//Vitesse maximale de deplacmement de l'agent
+I = 0;*/
+MSpeed = 5+random(2.5);//Vitesse maximale de deplacmement de l'agent
 for (i = 0; i &lt; 15; i++)
     {
     Argument[i] = 0;
+    ArgumentAttaque[i] = 0;
     }
 
 Etat = 1;// 1 Vivant, 0 blesser, -1 mort
 
 Fonction = 0;
-Classe = 0;
+Classe = 1;//0 simple soldat, 1 officier, 2 messager,....
 Camp = 1;//Allié ou ennemi
 
 Moral = random(200)-100;//Valeur moral &gt; 0 mec bien, &lt; 0 mec pas bien, = 0 deserteur
 
-Combat = 0;//Type de combat
+Combat = round(random(2));//Type de combat
 
 Cadence = 0;//Vitesse de déplacement souhaitée
 Officier = id;// officier référent
 Officiel = 0;
 Grade = 1;//Rang de l'officier
 Cible = noone;
+CIBLE = noone;//La cible humaine a attaquer
+MODE = "REPOS";
 
 Off_inf = noone;
 PousseToi = 0;
@@ -83,8 +86,8 @@ A = noone;//Autre Agent sélectionné pour d'eventuelle action
 xx = x;//Pour eviter que l'agent se prenne en compte, lors des perceptions il sera deplacé loin et les calculs seront fait a partir de ses anciennes coordonnés
 t = 0;//timer
 
+Argument[0] = 1;
 Execute = IA_Repos//IA_Deplacement(noone,noone,noone,point_direction(x,y,mouse_x,mouse_y),-1,0,0,0,1)//IA_Repos(0);//Le script a executer
-Argument[0] = 0;
 </string>
           </argument>
         </arguments>
@@ -107,9 +110,15 @@ Argument[0] = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(Officier)
+            <string>/* Si je suis un simple soldat et que je suis tué alors 
+je me désactive de la liste Regiment de mon officier
+*/ 
+if Classe == 0
     {
-    ds_list_delete(Officier.Regiment,ds_list_find_index(Officier.Regiment,id));
+    if instance_exists(Officier)
+        {
+        ds_list_delete(Officier.Regiment,ds_list_find_index(Officier.Regiment,id));
+        }
     }
 
 </string>
@@ -134,34 +143,28 @@ Argument[0] = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = direction;//Le sprite est affiché selon la direction de l'agent
-Chance = random(100);
-
-if instance_exists(Officier) 
-&amp;&amp; instance_exists(Officier.Formation)
-&amp;&amp; Officier.id != id
+            <string>if (x &lt; view_xview[0] || x &gt; view_xview[0]+view_wview[0] || y &lt; view_yview[0] || y &gt; view_yview[0]+view_hview[0])
     {
-    Execute = Officier.ExecuteRegiment;
-    
-    if Execute != IA_Attaque &amp;&amp; Execute != IA_Regiment_Attaque
-        {
-        Cible = Officier.CibleRegiment;
-        }
-    Argument = Officier.ArgumentRegiment;
-    
+    visible = false
     }
-
+else
+    {
+    visible = true
+    }
+image_angle = direction;//Le sprite est affiché selon la direction de l'agent
+Chance = random(100);
 
 if Execute != noone
     {
     script_execute(Execute,Argument);
     }
+
     
 /////////////////////////////// REFLEXE ////////////////////////////
-/*xx = x;
+xx = x;
 x = - 5000
-A = instance_nearest(xx+lengthdir_x(bbox_right+speed+1, direction),y+lengthdir_y(bbox_right+speed+1, direction),obj_agent);
-x = xx;*/
+A = instance_nearest(xx+lengthdir_x(bbox_right+1, direction),y+lengthdir_y(bbox_right+1, direction),obj_agent);
+x = xx;
 
 /*if PousseToi &gt; 0
     {
@@ -169,23 +172,13 @@ x = xx;*/
     PousseToi -= 0.1;
     }
 */
-direction = Dir1;
+//direction = Dir1;
 
 if instance_exists(A)
-&amp;&amp; distance_to_object(A) &lt; speed+1
+&amp;&amp; distance_to_object(A) &lt; 1
 &amp;&amp; A.id != id
     {
-    /*if collision_circle(x,y,17,obj_agent,1,1) == noone
-        {
-        Contact = 0;
-        }*/
-    /*if collision_point(x,y,obj_agent,1,1) != noone
-        {
-        x += random(1)-0.5;
-        y += random(1)-0.5;
-        }*/
-
-    Agent = collision_circle(x+lengthdir_x(bbox_right+speed+1, direction),y+lengthdir_y(bbox_right+speed+1, direction),1,obj_agent,0,1)
+    Agent = collision_circle(x+lengthdir_x(bbox_right+1, direction),y+lengthdir_y(bbox_right+1, direction),1,obj_agent,0,1)
     
     
     if instance_exists(Agent)
@@ -229,10 +222,7 @@ if instance_exists(A)
             {
             PousseToi = 1;
             //Dir2 = Dir1+90/(distance_to_object(Agent)+1)
-            /*if abs(Agent.direction-direction)&gt;180
-                {Dir2 = Dir1-90+Enervement;}
-            else
-                {Dir2 = Dir1+90-Enervement;}*/
+
             if Grade &lt; Agent.Grade
                 {
                 //PousseToi += 1+Agent.PousseToi;
@@ -283,14 +273,16 @@ else
         }
     }
 */
-/*if PousseToi &gt; 0
+
+if PousseToi &gt; 0
     {
     direction = Dir2//+random(Enervement)-Enervement/2
     }
-else*/
+else
     {
     direction = Dir1//+random(Enervement)-Enervement/2;
     }
+
 /*if PousseToi &lt; 0
     {
     PousseToi = 0;
@@ -349,8 +341,8 @@ if instance_exists(Cible)
     draw_text(x,y-25,object_get_name(Cible.object_index))
     }*/
 
-draw_text(x,y-25,direction)
-draw_text(x,y-15,speed)
+//draw_text(x,y-25,direction)
+//draw_text(x,y-15,speed)
 /*draw_text(x,y-75,string(P)+" "+string(J)+" "+string(I))*/
 
 

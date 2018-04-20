@@ -5,11 +5,10 @@ A = noone;
 if instance_exists(Allie)
 or instance_exists(Ennemi)
     {
-    if instance_exists(Allie)
+    if instance_exists(Allie)//Si il existe des agents alliés
         {
         A = instance_nearest(xx,y,Allie);
 
-        
         if A.id != id //Et que ce n'est pas lui
             {
             if map_visible(A.id) == false//collision_line(xx,y,A.x,A.y,Obj_Terrain_Crete,1,1) != noone //Si presence d'un obstacle entre eux
@@ -19,47 +18,35 @@ or instance_exists(Ennemi)
                 }
             else
                 {
-                if ds_exists(PerceptAgentAllie, ds_type_list)
+                if ds_exists(PerceptAgentAllie, ds_type_list)//On vérifie que la liste existe
                     {
-                    if instance_exists(A.Officier)
+                    //if A.Classe == 0 // Si A est un simple soldat
+                    
+                       
+                    if instance_exists(A.Officier)//On recherche l'officier
                         {
-                        if is_undefined(ds_list_find_value(PerceptAgentAllie,I)) == false//Si l'agent existe deja dans la liste 
+                        Agent = A.Officier;
+                        ds_list_add(PerceptAgentAllie,Agent);//on l'ajoute a la liste
+                        
+                        gestionRenseignement(Agent);
+                        // on désactive son régiment
+                        if ds_exists(Agent.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plus pris en compte
                             {
-                            ds_list_replace(PerceptAgentAllie,I,A.Officier.id);//On replace son id dans la liste
-                            }
-                        else
-                            {
-                            ds_list_add(PerceptAgentAllie,A.Officier.id);//si on l'ajoute a la liste
-                            }
-                        if A.Officier.id == id
-                            {
-                            for (i = 0; i < ds_list_size(Regiment); i++)
+                            for (i = 1; i < ds_list_size(Agent.Regiment); i++)
                                 {
-                                instance_deactivate_object(ds_list_find_value(Regiment,i));
+                                instance_deactivate_object(ds_list_find_value(Agent.Regiment,i));
                                 }
                             }
-                        else
-                            {
-                            if ds_exists(A.Officier.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plis pris en compte
-                                {
-                                for (i = 0; i < ds_list_size(A.Officier.Regiment); i++)
-                                    {
-                                    instance_deactivate_object(ds_list_find_value(A.Officier.Regiment,i));
-                                    }
-                                }
-                            instance_deactivate_object(A.Officier)
-                            }
+                        //Et on desactive l'officier
+                        instance_deactivate_object(Agent);  
+                        //instance_deactivate_object(A);
                         }
-                    else
-                        {
-                        instance_deactivate_object(A);
-                        }
+                    instance_deactivate_object(A);
                     }
-                
                 }
             }
         }
-        
+           
     if instance_exists(Ennemi)
         { 
         A = instance_nearest(xx,y,Ennemi);//Recherche de l'agent le plus proche
@@ -75,34 +62,37 @@ or instance_exists(Ennemi)
                 {
                 if instance_exists(A.Officier)
                     {
+                    Agent = A.Officier;
                     if ds_exists(PerceptAgentEnnemi, ds_type_list)
                         {
-                        if ds_list_empty(PerceptAgentEnnemi) && is_undefined(ds_list_find_value(PerceptAgentEnnemi,I)) == false 
+                        /*if ds_list_empty(PerceptAgentEnnemi) && is_undefined(ds_list_find_value(PerceptAgentEnnemi,I)) == false 
                                 {
-                                ds_list_replace(PerceptAgentEnnemi,I,A.Officier.id);//On place son id dans la liste
+                                ds_list_replace(PerceptAgentEnnemi,I,A.Officier);//On place son id dans la liste
                                 }
-                            else
+                            else*/
                                 {
-                                ds_list_add(PerceptAgentEnnemi,A.Officier.id);
+                                ds_list_add(PerceptAgentEnnemi,Agent);
+                                gestionRenseignement(Agent);
                                 }
-                        if ds_exists(A.Officier.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plis pris en compte
+                        if ds_exists(Agent.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plis pris en compte
                             {
-                            for (i = 0; i < ds_list_size(A.Officier.Regiment); i++)
+                            for (i = 1; i < ds_list_size(Agent.Regiment); i++)
                                 {
-                                instance_deactivate_object(ds_list_find_value(A.Officier.Regiment,i));
+                                instance_deactivate_object(ds_list_find_value(Agent.Regiment,i));
                                 }
                             }
-                        instance_deactivate_object(A.Officier)
+                        instance_deactivate_object(Agent)
                     }
-                    else
-                        {
-                        instance_deactivate_object(A);
-                        }//et on le desactive pour qu'il ne soit plis pris en compte   
-                    I++;
-                    }
+                instance_deactivate_object(A)
+                /*else
+                    {
+                    ;
+                    }//et on le desactive pour qu'il ne soit plis pris en compte   */
+                I++;
                 }
             }
         }
+    }
     II++;
     
     if II < 20
