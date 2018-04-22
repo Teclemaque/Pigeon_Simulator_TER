@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>event_inherited()
-/*draw_set_colour(c_white)
+draw_set_colour(c_white)
 draw_text(x,y,string(crete))
 </string>
           </argument>

@@ -60,6 +60,6 @@ if(x > view_xview[0]-16 and x < view_xview[0]+view_wport[0]+16
 
 /*
 draw_set_colour(c_black)
-var s = string(ds_list_find_value(ds_grid_get(obj_MAP_controller.papper_map,grid_x,grid_y),0))
-draw_text(x,y,s)
+var s = string(map_get_height(grid_x,grid_y)) //4 différence
+draw_text_transformed(x,y,s,0.35,0.35,0)
 

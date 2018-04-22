@@ -55,6 +55,8 @@
         <script>scripts\map_neighbors_H.gml</script>
         <script>scripts\map_visible.gml</script>
         <script>scripts\map_get_papper.gml</script>
+        <script>scripts\map_get_height.gml</script>
+        <script>scripts\map_A_star.gml</script>
       </scripts>
       <script>scripts\MAP_FOG.gml</script>
       <script>scripts\MAP_FOG_CREATE.gml</script>
@@ -69,6 +71,7 @@
     <object>objects\obj_obstacle</object>
     <object>objects\obj_MAP_controller</object>
     <object>objects\obj_VIEW_controller</object>
+    <object>objects\Obj_mini_map_controler</object>
     <object>objects\obj_FOG_controller</object>
     <objects name="TERRAIN">
       <object>objects\Obj_Terrain_montagne</object>
