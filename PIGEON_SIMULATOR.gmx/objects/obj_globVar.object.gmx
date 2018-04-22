@@ -34,9 +34,14 @@ S = round(random(6));
 J = 0;
 Temps = 0;
 
+//MAP
 global.MAP_Height = 32
 global.MAP_Width = 32
 
+// NOM
+Regiments = ds_map_create();
+
+//FANTASSIN
 I1 = round(random(50))
 //I2 = round(random(500))
 
@@ -48,6 +53,7 @@ for (i = 0; i &lt; I1; i++)
     {
     instance_create(random(512),random(768),obj_agent_officier0_C2);
     }
+
 </string>
           </argument>
         </arguments>
@@ -96,6 +102,34 @@ if H &gt;= 24
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Initialiser liste des regiments
+
+// Liste des Regiments : permet de trouver si un regiment existe selon son nom
+// permet aussi de trouver le premier nom dispo pour un groupe
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -115,6 +149,11 @@ if H &gt;= 24
             <kind>1</kind>
             <string>draw_text(view_xview[0]+50,view_yview[0]+50,Temps);
 draw_text(view_xview[0]+50,view_yview[0]+60,"Jour : "+string(J)+" heure : "+string(H)+" min : "+string(M)+" sec : "+string(S));
+
+//for (i = 0; i &lt; ds_map_size(Regiments);i++)
+    {
+    draw_text(mouse_x,mouse_y+10,ds_map_find_last(Regiments))
+    }
 </string>
           </argument>
         </arguments>

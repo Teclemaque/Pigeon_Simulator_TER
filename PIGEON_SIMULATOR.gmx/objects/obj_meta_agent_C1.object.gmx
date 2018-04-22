@@ -38,6 +38,8 @@ t = random(20);
 Formation = noone;
 Officiel = 0;
 
+Name = -1;
+Numero = -1;
 Officier = id;
 Regiment = ds_list_create();
 Renseignement = ds_list_create();
@@ -53,6 +55,7 @@ Off_sup = obj_agent_officier1_C1 //Vers quoi l'officier est gradé
 Off_inf = obj_agent_officier1_C1//Vers quoi l'officier est dégradé
 Off = obj_agent_officier1_C1//object_get_parent(object_index);//noone//Grade actuelle de l'officier
 
+nomGroupe(id)
 Classe = 1;
 
 </string>
@@ -92,7 +95,8 @@ if Etat != 1
         transfertNouvelOfficier(id);
         }
     }
-//Je supprime toute mes listes d'officier    
+//Je supprime toute mes listes d'officier 
+ds_map_delete(obj_globVar.Regiments, Name)   
 ds_list_destroy(Regiment);
 ds_list_destroy(PerceptAgentEnnemi);
 ds_list_destroy(PerceptAgentAllie);
@@ -306,6 +310,7 @@ if instance_exists(CIBLE)
     {
     draw_text(x,y-110,object_get_name(CIBLE.object_index));
     }
+draw_text(x,y-120,string(Name));
 /*draw_text(x,y-50,Argument[3]);
 draw_text(x,y-60,Argument[4]);
 draw_text(x,y-70,Argument[5]);

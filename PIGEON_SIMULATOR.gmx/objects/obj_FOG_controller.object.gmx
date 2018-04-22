@@ -25,19 +25,35 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>timer_max = 10
-timer = 10
-
-image_alpha = 0.0
-
-fog = ds_grid_create(obj_MAP_controller.width,obj_MAP_controller.height)
-
+            <string>MAP_FOG_CREATE();
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>cible_x = mouse_x
+cible_y = mouse_y
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>601</id>
@@ -96,8 +112,7 @@ fog = ds_grid_create(obj_MAP_controller.width,obj_MAP_controller.height)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    draw_text(xx,yy,"What?")
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>

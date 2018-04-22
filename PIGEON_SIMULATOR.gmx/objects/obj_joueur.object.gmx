@@ -122,6 +122,7 @@ ExecuteOrdre = noone
     {
     with(ExecuteOrdre)
         {
+        MODE = "GROUPE"
         Ordre = 2
         //L = ds_list_create()
         Execute = IA_Groupe//(id,0,1/2,1)

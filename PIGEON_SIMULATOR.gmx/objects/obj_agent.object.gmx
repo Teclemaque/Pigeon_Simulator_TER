@@ -178,8 +178,7 @@ if instance_exists(A)
 &amp;&amp; distance_to_object(A) &lt; 1
 &amp;&amp; A.id != id
     {
-    Agent = collision_circle(x+lengthdir_x(bbox_right+1, direction),y+lengthdir_y(bbox_right+1, direction),1,obj_agent,0,1)
-    
+    Agent = A //collision_circle(x+lengthdir_x(bbox_right+1, direction),y+lengthdir_y(bbox_right+1, direction),1,obj_agent,0,1)
     
     if instance_exists(Agent)
         {

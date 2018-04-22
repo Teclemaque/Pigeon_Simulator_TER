@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>view_wview[0] = 512;
 view_hview[0] = 384;
+
+view_object[0] = obj_VIEW_controller;
 </string>
           </argument>
         </arguments>
@@ -49,40 +51,30 @@ view_hview[0] = 384;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x= mouse_x
+            <string>
+x= mouse_x
 y= mouse_y
 
-image_alpha = 0;
+/*
+x = obj_General.x
+y = obj_General.y
+*/
 
-var d_x = window_view_mouse_get_x(0)
-var d_y = window_view_mouse_get_y(0)
+image_alpha = 0;
 
 var v_h = view_hview[0];
 var v_w = view_wview[0];
 
+view_hborder[0] = v_h / 2;
+view_vborder[0] = v_w / 2;
+
+
+/*
+var d_x = window_view_mouse_get_x(0)
+var d_y = window_view_mouse_get_y(0)
+
 view_hborder[0] = v_h / 10;
 view_vborder[0] = v_w / 10;
-
-/*
-if(d_x &lt; 10 ){//and view_xport[0] &gt; 1){
-    view_xport[0] = view_xport[0] + 1
-}
-if(d_y &lt;  10 and view_yport[0] &gt; 1){
-    view_yport[0] = view_yport[0] - 1   
-}
-
-
-if(d_x &gt; v_w - 20){
-    view_xport[0] = view_xport[0] - 1
-}
-
-/*
-if(d_y &gt;  v_h){
-    view_yport[0] = view_yport[0] + 1   
-}
-
-draw_set_color(c_black)
-draw_text(d_x,d_y,view_xport[0])
 </string>
           </argument>
         </arguments>
@@ -105,9 +97,12 @@ draw_text(d_x,d_y,view_xport[0])
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(view_hview[0] &lt; room_height-20){
-    view_hview[0] = view_hview[0] + 20;
-    view_wview[0] = view_wview[0] + 20;
+            <string>var s = 30
+if(view_hview[0] &lt; room_height-s){
+    view_hview[0] = view_hview[0] + s;
+    view_wview[0] = view_wview[0] + s;
+    view_xview[0] -= (s/2)
+    view_yview[0] -= (s/2)
 }
 </string>
           </argument>
@@ -131,11 +126,13 @@ draw_text(d_x,d_y,view_xport[0])
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(view_hview[0] &gt; 58){
-    view_hview[0] = view_hview[0] - 20;
-    view_wview[0] = view_wview[0] - 20*4/3;
+            <string>var s = 30
+if(view_hview[0] &gt; 300){
+    view_hview[0] = view_hview[0] - s;
+    view_wview[0] = view_wview[0] - s;
+    view_xview[0] += (s/2)
+    view_yview[0] += (s/2)
 }
-draw_text(mouse_x,mouse_y,"Max Zoom")
 </string>
           </argument>
         </arguments>

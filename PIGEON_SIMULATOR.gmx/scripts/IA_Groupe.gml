@@ -57,6 +57,7 @@ if Argument[3] == 1
                 
                 with(Groupe)
                     {
+                    nomGroupe(other.id)
                     Officiel = 1;
                     Execute = IA_Repos;
                     

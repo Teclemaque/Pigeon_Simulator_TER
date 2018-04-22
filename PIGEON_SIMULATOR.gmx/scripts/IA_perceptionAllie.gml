@@ -21,7 +21,7 @@ if Classe == 1//is_undefined(M) == false
                     if object_get_name(object_index) == object_get_name(Off_sup)
                         {
                         transfertDonneesOfficier(MA);
-                        
+                        nomGroupe(id);
                         with(MA)
                             {
                             ID = other.id
@@ -41,11 +41,12 @@ if Classe == 1//is_undefined(M) == false
                         
                         with(instance_create(xx,y,Off_sup))
                             {
+                            
                             transfertDonneesAgent(other);
                             transfertDonneesOfficier(other);
                             transfertDonneesOfficier(other.ID);
                             Officiel = other.Officiel;
-                            
+                            nomGroupe(id);
                             with(other.ID)
                                 {
                                 ID = other.id
@@ -99,7 +100,7 @@ if Classe == 1//is_undefined(M) == false
             else
                 {
                 //transfertDonneesOfficier(MA);
-                
+                nomGroupe(id);
                 with(MA)
                     {
                     ID = other.id;

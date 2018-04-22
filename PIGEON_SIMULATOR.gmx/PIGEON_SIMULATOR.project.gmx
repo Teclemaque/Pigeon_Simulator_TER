@@ -20,34 +20,6 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="SCRIPT TERRAIN">
-      <script>scripts\create_forest.gml</script>
-      <script>scripts\crete_finder.gml</script>
-      <script>scripts\dillatation_erosion.gml</script>
-      <script>scripts\error_check.gml</script>
-      <script>scripts\expend_forest.gml</script>
-      <script>scripts\generate.gml</script>
-      <script>scripts\generatePerlinNoise.gml</script>
-      <script>scripts\generateSmoothNoise.gml</script>
-      <script>scripts\GenerateWhiteNoise.gml</script>
-      <script>scripts\getColorZ.gml</script>
-      <script>scripts\interpolate.gml</script>
-      <script>scripts\MAP_Create.gml</script>
-      <script>scripts\MAP_Create2.gml</script>
-      <script>scripts\MAP_Draw.gml</script>
-      <script>scripts\MAP_Draw2.gml</script>
-      <script>scripts\MAP_FOG.gml</script>
-      <script>scripts\mountain_list.gml</script>
-      <script>scripts\PerlinNoise.gml</script>
-      <script>scripts\randomSeed.gml</script>
-      <script>scripts\TERRAIN_Draw.gml</script>
-      <scripts name="Script perception terrain agent">
-        <script>scripts\map_visible.gml</script>
-        <script>scripts\map_neighbors_H.gml</script>
-        <script>scripts\map_get_terrain_type.gml</script>
-        <script>scripts\map_get_xy.gml</script>
-      </scripts>
-    </scripts>
     <scripts name="SCRIPT IA">
       <script>scripts\IA_Attaque.gml</script>
       <script>scripts\IA_Deplacement.gml</script>
@@ -63,7 +35,40 @@
         <script>scripts\transfertDonneesAgent.gml</script>
         <script>scripts\transfertDonneesOfficier.gml</script>
         <script>scripts\gestionRenseignement.gml</script>
+        <script>scripts\nomGroupe.gml</script>
       </scripts>
+    </scripts>
+    <scripts name="SCRIPT TERRAIN">
+      <script>scripts\create_forest.gml</script>
+      <script>scripts\create_river.gml</script>
+      <script>scripts\crest_level.gml</script>
+      <script>scripts\crete_finder.gml</script>
+      <script>scripts\dillatation_erosion.gml</script>
+      <script>scripts\error_check.gml</script>
+      <script>scripts\expand_river.gml</script>
+      <script>scripts\expend_forest.gml</script>
+      <script>scripts\generate.gml</script>
+      <script>scripts\generatePerlinNoise.gml</script>
+      <script>scripts\generateSmoothNoise.gml</script>
+      <script>scripts\GenerateWhiteNoise.gml</script>
+      <script>scripts\getColorZ.gml</script>
+      <script>scripts\interpolate.gml</script>
+      <script>scripts\MAP_Create.gml</script>
+      <script>scripts\MAP_Create2.gml</script>
+      <script>scripts\MAP_Draw.gml</script>
+      <script>scripts\MAP_Draw2.gml</script>
+      <script>scripts\MAP_FOG.gml</script>
+      <script>scripts\MAP_FOG_CREATE.gml</script>
+      <script>scripts\map_get_height.gml</script>
+      <script>scripts\map_get_papper.gml</script>
+      <script>scripts\map_get_terrain_type.gml</script>
+      <script>scripts\map_get_xy.gml</script>
+      <script>scripts\map_neighbors_H.gml</script>
+      <script>scripts\map_visible.gml</script>
+      <script>scripts\mountain_list.gml</script>
+      <script>scripts\PerlinNoise.gml</script>
+      <script>scripts\randomSeed.gml</script>
+      <script>scripts\TERRAIN_Draw.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -100,10 +105,11 @@
     </objects>
     <object>objects\obj_arme_blanche</object>
     <object>objects\obj_arme</object>
-    <objects name="GESTION MAP">
-      <object>objects\obj_MAP_controller</object>
-      <object>objects\obj_VIEW_controller</object>
+    <objects name="OBJET MAP">
+      <object>objects\obj_agent_general</object>
       <object>objects\obj_FOG_controller</object>
+      <object>objects\obj_MAP_controller</object>
+      <object>objects\Obj_mini_map_controler</object>
       <object>objects\Obj_Terrain</object>
       <object>objects\Obj_Terrain_Crete</object>
       <object>objects\Obj_Terrain_Eau</object>
@@ -111,10 +117,12 @@
       <object>objects\Obj_Terrain_montagne</object>
       <object>objects\Obj_Terrain_Obstacle</object>
       <object>objects\Obj_Terrain_sol</object>
+      <object>objects\obj_VIEW_controller</object>
     </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
+    <room>rooms\room0_new</room>
     <room>rooms\room0</room>
   </rooms>
   <help>
