@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>view_wview[0] = 512;
 view_hview[0] = 384;
+
+view_object[0] = obj_VIEW_controller;
 </string>
           </argument>
         </arguments>
