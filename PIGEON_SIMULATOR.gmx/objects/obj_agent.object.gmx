@@ -272,7 +272,7 @@ else
         }
     }
 */
-angle = direction div 45;//Dans quel direction veut aller l'agent 
+/*angle = direction div 45;//Dans quel direction veut aller l'agent 
     
     Z0 = map_get_height(0);
     Z1 = map_get_height(1);
@@ -325,7 +325,7 @@ angle = direction div 45;//Dans quel direction veut aller l'agent
             }
         }
     
-
+*/
 if PousseToi &gt; 0
     {
     direction = Dir2//+random(Enervement)-Enervement/2

@@ -1,10 +1,9 @@
 ///IA_perceptionAllie()
 {
-MA = /*instance_nearest(xx,y,obj_meta_agent_C1);*/ds_list_find_value(PerceptAgentAllie,0);
+MA = ds_list_find_value(PerceptAgentAllie,0);
 
 if Classe == 1
-&& MA != undefined //instance_exists(MA)
-//&& ds_list_find_index(PerceptAgentAllie,MA) != -1
+&& MA != undefined
 && sqrt(sqr(MA.x-xx)+sqr(MA.y-y)) < 500
     {
     // On verifie qu'on mérite de devenir l'officier principal

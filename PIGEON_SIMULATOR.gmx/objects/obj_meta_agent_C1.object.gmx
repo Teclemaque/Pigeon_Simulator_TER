@@ -308,10 +308,7 @@ draw_text(x,y-30,id);
 draw_text(x,y-40,Grade);
 draw_text(x,y-50,"ENNEMI : "+string(ds_list_size(PerceptAgentEnnemi)));
 draw_text(x,y-60,"ALLIE : "+string(ds_list_size(PerceptAgentAllie)));
-if ds_list_size(PerceptAgentAllie) &gt; 0
-    {
-    draw_text(x,y-110,ds_list_find_index(PerceptAgentAllie,0).id);
-    }
+
 /*draw_text(x,y-70,Recharge);
 draw_text(x,y-80,MODE);
 draw_text(x,y-90,string(ds_list_size(Renseignement)));
@@ -319,8 +316,8 @@ draw_text(x,y-100,CIBLE);
 if instance_exists(CIBLE)
     {
     draw_text(x,y-110,object_get_name(CIBLE.object_index));
-    }
-draw_text(x,y-120,string(Name));*/
+    }*/
+draw_text(x,y-70,string(Name));
 /*draw_text(x,y-50,Argument[3]);
 draw_text(x,y-60,Argument[4]);
 draw_text(x,y-70,Argument[5]);
