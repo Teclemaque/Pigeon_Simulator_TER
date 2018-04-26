@@ -38,9 +38,11 @@ t = random(20);
 Formation = noone;
 Officiel = 0;
 
-Name = -1;
-Numero = -1;
+Troupe = "";
+Name = "";
+Numero = "";
 Officier = id;
+
 Regiment = ds_list_create();
 Renseignement = ds_list_create();
 ds_list_add(Regiment,id);
@@ -55,8 +57,12 @@ Off_sup = obj_agent_officier1_C1 //Vers quoi l'officier est gradé
 Off_inf = obj_agent_officier1_C1//Vers quoi l'officier est dégradé
 Off = obj_agent_officier1_C1//object_get_parent(object_index);//noone//Grade actuelle de l'officier
 
-nomGroupe(id)
 Classe = 1;
+
+nomGroupe(id);
+
+Argument[0] = 1;
+Execute = IA_Repos
 
 </string>
           </argument>
@@ -142,7 +148,7 @@ x = -50000;//eloignement de sa coordoné originelle
 I = 0;
 II = 0;
 
-if t &gt; 20
+if t &gt; 10
     {
     ds_list_clear(PerceptAgentAllie);
     ds_list_clear(PerceptAgentEnnemi);
@@ -150,7 +156,7 @@ if t &gt; 20
     for (i = 1; i &lt; ds_list_size(Regiment); i++)
         {
         instance_deactivate_object(ds_list_find_value(Regiment,i));
-        }                   
+        }                 
     IA_Perception();
 
     instance_activate_all();
@@ -298,11 +304,15 @@ event_inherited()
             <string>draw_self();
 
 draw_text(x,y-20,Officiel);
-draw_text(x,y-30,Argument[6]);
-draw_text(x,y-40,Ordre);
-draw_text(x,y-50,ds_list_size(PerceptAgentEnnemi));
-draw_text(x,y-60,ds_list_size(PerceptAgentAllie));
-draw_text(x,y-70,Recharge);
+draw_text(x,y-30,id);
+draw_text(x,y-40,Grade);
+draw_text(x,y-50,"ENNEMI : "+string(ds_list_size(PerceptAgentEnnemi)));
+draw_text(x,y-60,"ALLIE : "+string(ds_list_size(PerceptAgentAllie)));
+if ds_list_size(PerceptAgentAllie) &gt; 0
+    {
+    draw_text(x,y-110,ds_list_find_index(PerceptAgentAllie,0).id);
+    }
+/*draw_text(x,y-70,Recharge);
 draw_text(x,y-80,MODE);
 draw_text(x,y-90,string(ds_list_size(Renseignement)));
 draw_text(x,y-100,CIBLE);
@@ -310,7 +320,7 @@ if instance_exists(CIBLE)
     {
     draw_text(x,y-110,object_get_name(CIBLE.object_index));
     }
-draw_text(x,y-120,string(Name));
+draw_text(x,y-120,string(Name));*/
 /*draw_text(x,y-50,Argument[3]);
 draw_text(x,y-60,Argument[4]);
 draw_text(x,y-70,Argument[5]);

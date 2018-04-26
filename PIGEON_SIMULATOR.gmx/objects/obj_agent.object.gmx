@@ -52,7 +52,7 @@ Combat = round(random(2));//Type de combat
 Cadence = 0;//Vitesse de déplacement souhaitée
 Officier = id;// officier référent
 Officiel = 0;
-Grade = 1;//Rang de l'officier
+Grade = 0;//Rang de l'officier
 Cible = noone;
 CIBLE = noone;//La cible humaine a attaquer
 MODE = "REPOS";
@@ -272,6 +272,59 @@ else
         }
     }
 */
+angle = direction div 45;//Dans quel direction veut aller l'agent 
+    
+    Z0 = map_get_height(0);
+    Z1 = map_get_height(1);
+    Z3 = map_get_height(3);
+    Z5 = map_get_height(5);
+    Z7 = map_get_height(7);
+    
+    if  Dir1 &gt;= 45 &amp;&amp; Dir1 &lt; 135
+        {
+        if abs(Z0-Z1) &lt; 10
+            {
+            Dir1 = 90;
+            }
+        else
+            {
+            Dir1 = 180;
+            }
+        }
+    if  Dir1 &gt;= 135 &amp;&amp; Dir1 &lt; 225
+        {
+        if abs(Z0-Z7) &lt; 10
+            {
+            Dir1 = 180;
+            }
+        else
+            {
+            Dir1 = 270;
+            }
+        }
+    if  Dir1 &gt;= 225 &amp;&amp; Dir1 &lt; 315
+        {
+        if abs(Z0-Z5) &lt; 10
+            {
+            Dir1 = 270;
+            }
+        else
+            {
+            Dir1 = 0;
+            }
+        }
+    if  Dir1 &gt;= 315 &amp;&amp; Dir1 &lt; 45
+        {
+        if abs(Z0-Z3) &lt; 10
+            {
+            Dir1 = 0;
+            }
+        else
+            {
+            Dir1 = 90;
+            }
+        }
+    
 
 if PousseToi &gt; 0
     {
@@ -281,7 +334,9 @@ else
     {
     direction = Dir1//+random(Enervement)-Enervement/2;
     }
-
+    
+    
+    
 /*if PousseToi &lt; 0
     {
     PousseToi = 0;

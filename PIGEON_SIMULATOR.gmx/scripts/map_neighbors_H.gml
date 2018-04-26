@@ -1,4 +1,4 @@
-//retourne les voisons sous la forme d'un tableau 2d equivalent à la grille alentour
+//retourne les voisins sous la forme d'un tableau 2d equivalent à la grille alentour
 var t = map_get_xy()
 var xx = ds_list_find_value(t,0)
 var yy = ds_list_find_value(t,1)

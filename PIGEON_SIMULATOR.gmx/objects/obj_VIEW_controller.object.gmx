@@ -29,6 +29,9 @@
 view_hview[0] = 384;
 
 view_object[0] = obj_VIEW_controller;
+view_vspeed[0] = 10;
+view_hborder[0] = 5;
+view_vborder[0] = 5;
 </string>
           </argument>
         </arguments>
@@ -62,11 +65,15 @@ y = obj_General.y
 
 image_alpha = 0;
 
-var v_h = view_hview[0];
+/*var v_h = view_hview[0];
 var v_w = view_wview[0];
 
 view_hborder[0] = v_h / 2;
-view_vborder[0] = v_w / 2;
+view_vborder[0] = v_w / 2;*/
+
+view_vspeed[0] = 10;
+view_hborder[0] = 10;
+view_vborder[0] = 10;
 
 
 /*

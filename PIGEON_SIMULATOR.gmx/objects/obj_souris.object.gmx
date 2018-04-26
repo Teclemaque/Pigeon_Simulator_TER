@@ -49,10 +49,11 @@ y = mouse_y;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if mouse_check_button_released(mb_left)
+            <string>/*if mouse_check_button_released(mb_left)
     {
     obj_joueur.ExecuteOrdre = other.Officier.id;
     }
+*/
 </string>
           </argument>
         </arguments>
@@ -76,8 +77,9 @@ y = mouse_y;
           <argument>
             <kind>1</kind>
             <string>A = instance_nearest(x,y,obj_agent)
-
-obj_joueur.ExecuteOrdre = A.Officier.id;
+if instance_exists(A.Officier){
+    obj_joueur.ExecuteOrdre = A.Officier.id;
+}
 </string>
           </argument>
         </arguments>

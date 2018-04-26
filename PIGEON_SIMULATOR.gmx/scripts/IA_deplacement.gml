@@ -17,6 +17,14 @@ image_speed = 0.3;
 //speed = 2
 //Dir1 = Argument[5];
 
+Z0 = map_get_height(0);
+Z1 = map_get_height(1);
+Z3 = map_get_height(3);
+Z5 = map_get_height(5);
+Z7 = map_get_height(7);
+
+//show_debug_message("Z "+string(z));
+
 if Cadence != 0 
      {
      if Cadence < MSpeed

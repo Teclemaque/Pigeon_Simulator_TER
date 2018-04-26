@@ -1,11 +1,10 @@
 ///IA_perceptionAllie()
 {
-MA = instance_nearest(xx,y,Off);
-//M = ds_list_find_index(PerceptAgentAllie,MA)
+MA = /*instance_nearest(xx,y,obj_meta_agent_C1);*/ds_list_find_value(PerceptAgentAllie,0);
 
-if Classe == 1//is_undefined(M) == false
-&& instance_exists(MA)
-&& ds_list_find_index(PerceptAgentAllie,MA) != undefined//collision_line(xx,y,MA.x,MA.y,Obj_Terrain_Crete,1,1) == noone//ds_list_find_index(PerceptAgentAllie,MA) != undefined//is_undefined(ds_list_find_index(PerceptAgentAllie,MA)) == false
+if Classe == 1
+&& MA != undefined //instance_exists(MA)
+//&& ds_list_find_index(PerceptAgentAllie,MA) != -1
 && sqrt(sqr(MA.x-xx)+sqr(MA.y-y)) < 500
     {
     // On verifie qu'on mérite de devenir l'officier principal
@@ -21,7 +20,6 @@ if Classe == 1//is_undefined(M) == false
                     if object_get_name(object_index) == object_get_name(Off_sup)
                         {
                         transfertDonneesOfficier(MA);
-                        nomGroupe(id);
                         with(MA)
                             {
                             ID = other.id
@@ -34,6 +32,7 @@ if Classe == 1//is_undefined(M) == false
                                 }
                             instance_destroy();
                             }
+                        nomGroupe(id);
                         }
                     else
                         {
@@ -41,12 +40,10 @@ if Classe == 1//is_undefined(M) == false
                         
                         with(instance_create(xx,y,Off_sup))
                             {
-                            
                             transfertDonneesAgent(other);
                             transfertDonneesOfficier(other);
                             transfertDonneesOfficier(other.ID);
                             Officiel = other.Officiel;
-                            nomGroupe(id);
                             with(other.ID)
                                 {
                                 ID = other.id
@@ -60,6 +57,7 @@ if Classe == 1//is_undefined(M) == false
                                     }
                                 instance_destroy();
                                 }
+                            nomGroupe(id);
                             }
                         instance_destroy();
                         /*with(MA)
@@ -100,11 +98,9 @@ if Classe == 1//is_undefined(M) == false
             else
                 {
                 //transfertDonneesOfficier(MA);
-                nomGroupe(id);
                 with(MA)
                     {
                     ID = other.id;
-                    
                     with(instance_create(xx,y,Allie))
                         {
                         transfertDonneesAgent(other);
@@ -120,6 +116,7 @@ if Classe == 1//is_undefined(M) == false
                             A.Officier = other.Officier;
                             }
                         }*/
+                    //nomGroupe(ID);
                     instance_destroy();
                     }
                 }

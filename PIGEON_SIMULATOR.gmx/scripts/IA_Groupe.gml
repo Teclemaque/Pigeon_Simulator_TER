@@ -48,7 +48,6 @@ if Argument[3] == 1
 ////////////////////////////////////////////////////////////////////////////////////////
         for (j = 0; j < NbGroupe-1; j++)
             {
-             
             with(ds_list_find_value(O.Regiment,1))
                 {
                 ID = other.O.id;
@@ -57,7 +56,7 @@ if Argument[3] == 1
                 
                 with(Groupe)
                     {
-                    nomGroupe(other.id)
+                    //nomGroupe(other.id)
                     Officiel = 1;
                     Execute = IA_Repos;
                     
@@ -68,6 +67,8 @@ if Argument[3] == 1
                         A.Officier = id;
                         ds_list_delete(other.ID.Regiment,1);
                         }
+                    Officier = other.ID;
+                    nomGroupe(id);
                     }
                 instance_destroy();
                 }
