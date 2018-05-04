@@ -256,7 +256,7 @@ game_load("savefile");
           <argument>
             <kind>1</kind>
             <string>/// Gerer la selection de plusieurs agents
-
+/*
 var exists = ds_exists(Selected_agents, ds_type_list);
 
 //show_debug_message("Left click release");
@@ -269,7 +269,7 @@ if(Selecting_units &amp;&amp; exists){
 }
 
 Selecting_units = false;
-
+*/
 </string>
           </argument>
         </arguments>

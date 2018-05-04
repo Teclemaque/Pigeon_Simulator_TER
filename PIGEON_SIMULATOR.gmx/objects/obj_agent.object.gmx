@@ -36,7 +36,7 @@ Type = 0;// 0 = Unité combattante, 1 messager
 Etat = 1;// 1 Valide, 0 invalide, -1 mort
 Camp = choose(-1,1);//indique dans quel camp on est si du meme signe alors sont alliés.
 Chance = random(100);//Variable qui indique si l'agent va mourir ou non
-
+Nom = "soldat1"
 for (i = 0; i &lt;= 7; i++)//Initialion liste percept 
     {
     PerceptAgent[i] = noone;

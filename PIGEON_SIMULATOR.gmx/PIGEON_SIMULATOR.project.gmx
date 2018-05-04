@@ -13,6 +13,8 @@
     <sprite>sprites\spr_general_1</sprite>
     <sprite>sprites\spr_general_2</sprite>
     <sprite>sprites\spr_messager</sprite>
+    <sprite>sprites\spr_icon_plus</sprite>
+    <sprite>sprites\spr_icon_minus</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths">
@@ -30,17 +32,27 @@
       <script>scripts\ordre_agent_patrouille.gml</script>
     </scripts>
     <scripts name="utils">
-      <script>scripts\wiggle.gml</script>
       <script>scripts\send_message_to_agents.gml</script>
       <script>scripts\get_selectable_agent.gml</script>
     </scripts>
-    <scripts name="toolbox">
-      <script>scripts\collision_rectangle_list.gml</script>
-      <script>scripts\get_targets_names.gml</script>
-      <script>scripts\add_command_to_historic.gml</script>
-      <script>scripts\find_general.gml</script>
-      <script>scripts\get_action_from_text.gml</script>
-      <script>scripts\send_ordre_to_agent.gml</script>
+    <scripts name="GUI">
+      <scripts name="toolbox">
+        <script>scripts\collision_rectangle_list.gml</script>
+        <script>scripts\get_targets_names.gml</script>
+        <script>scripts\add_command_to_historic.gml</script>
+        <script>scripts\find_general.gml</script>
+        <script>scripts\get_action_from_text.gml</script>
+        <script>scripts\send_ordre_to_agent.gml</script>
+      </scripts>
+      <script>scripts\get_ui_dimensions.gml</script>
+      <script>scripts\draw_agents_selection.gml</script>
+      <script>scripts\is_clicked.gml</script>
+      <scripts name="leftPanel">
+        <script>scripts\draw_group_rectangle.gml</script>
+        <script>scripts\add_group_to_leftPanel.gml</script>
+        <script>scripts\remove_group_from_leftPanel.gml</script>
+      </scripts>
+      <script>scripts\nomGroupe.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -54,7 +66,19 @@
     <object>objects\obj_arme</object>
     <object>objects\obj_obstacle</object>
     <object>objects\obj_messager</object>
-    <object>objects\obj_toolbox</object>
+    <objects name="GUI">
+      <object>objects\obj_toolbox</object>
+      <object>objects\obj_gui</object>
+      <object>objects\obj_rightPanel</object>
+      <object>objects\obj_settingsPanel</object>
+      <object>objects\obj_topPanel</object>
+      <objects name="leftPanel">
+        <object>objects\obj_leftPanel</object>
+        <object>objects\obj_btn_plus</object>
+        <object>objects\obj_group_rectangle</object>
+        <object>objects\obj_btn_minus</object>
+      </objects>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

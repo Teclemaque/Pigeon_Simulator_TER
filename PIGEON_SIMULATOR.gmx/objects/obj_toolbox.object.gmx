@@ -3,7 +3,7 @@
   <spriteName>sprite_obj</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>-9999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -38,6 +38,7 @@ historic_size = 10; // taille de sauvegarde de l'historique
 Cursor = "|";
 click_origin_x = noone;
 click_origin_y = noone;
+coordinates = "";
 
 alarm[0] =  room_speed;
 
@@ -55,11 +56,16 @@ alpha_out = 0.6;
 alpha = alpha_out;
 padding = 16;
 
-boxwidth = room_width * 0.8;    // 80% de l'écran
-boxheight = 100;                // 100 pixels de haut
-x = (room_width - boxwidth )/2;           // centré horizontalement
-y = room_height - boxheight - 2 * padding; // en bas + marge
-maxlength = boxwidth - 2 * padding;
+//boxwidth = room_width * 0.8;    // 80% de l'écran
+//boxheight = 100;                // 100 pixels de haut
+boxwidth = global.Dimensions[? "width"]
+roomheight = room_height
+boxheight = room_height - global.Dimensions[? "endy"]
+x = global.Dimensions[? "startx"]
+y = global.Dimensions[? "endy"]
+//x = (room_width - boxwidth )/2;           // centré horizontalement
+//y = room_height - boxheight - 2 * padding; // en bas + marge
+//maxlength = boxwidth - 2 * padding;
 image_xscale = boxwidth / sprite_width;
 image_yscale = boxheight / sprite_height;
 </string>
@@ -84,15 +90,14 @@ image_yscale = boxheight / sprite_height;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Changer le curseur texte
-
-if(Cursor == "|"){
-    Cursor = "";
-}else {
-    Cursor = "|";
+            <string>/// Changer le curseur texte si focus
+if(alpha == alpha_in){
+    if(Cursor == "|"){
+        Cursor = "";
+    }else {
+        Cursor = "|";
+    }    
 }
-
-//show_debug_message("Text : " + Text + Cursor);
 
 alarm[0] =  room_speed; // reprogrammer l'alarme
 </string>
@@ -133,75 +138,10 @@ if (keyboard_check_pressed(vk_enter)){
 }
 
 // Afficher les unités selectionnées dans le textField
+//if(ds_list_size(Targets) &gt; 0 ) show_message("Cibles en cours");
 Text += get_targets_names(Targets);
 
 keyboard_string = Text;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Extraire targets ou coordonnées
-
-    Targets = collision_rectangle_list(
-        click_origin_x, click_origin_y, 
-        mouse_x, mouse_y, 
-        obj_agent, 
-        false, true);    
-        
-        if( ds_list_empty(Targets) ){
-            if(mouse_x == click_origin_x &amp;&amp; mouse_y == click_origin_y){
-              var coordinates = string(mouse_x) + ":" + string(mouse_y) + " ";
-              keyboard_string += coordinates;
-            }
-        }
-
-    click_origin_x = noone;
-    click_origin_y = noone;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="53">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-//if( State == "selecting" ){
-    click_origin_x = mouse_x;
-    click_origin_y = mouse_y;
-//}
 </string>
           </argument>
         </arguments>
@@ -255,7 +195,7 @@ alpha = alpha_in;
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -275,26 +215,25 @@ alpha = alpha_in;
             <string>///Render textbox &amp; text
 draw_set_alpha(alpha);
 var savedColor = draw_get_colour();
-//if (alpha &lt; 1) alpha += spd/10; else alpha = 1; // animation fadeIn
 
-// Rectangle
-
+// Rectangle plein
 draw_set_font(font);
 draw_set_color(c_gray);
-draw_rectangle(x,y,x+boxwidth,y+boxheight,0);
+draw_rectangle(x, y, x + boxwidth , y + boxheight, 0);
 
 // Bordure externe
 draw_set_color(c_black);
-draw_rectangle(x,y,x+boxwidth,y+boxheight,1);
+draw_rectangle(x, y, x + boxwidth, y + boxheight, 1);
 
 // Bordure interne TextField
 var textfield_x = x + padding;
 var textfield_y = y + padding;
 
+var maxlength = boxwidth - 2 * padding
 text_width = string_width_ext(Text,font_size+(font_size/2), maxlength);
 text_height = max(row_height, string_height_ext(Text,font_size+(font_size/2), maxlength));
 
-//var textfield_height = row_height * 1 + ( round( text_length / maxlength ) );
+// Rectangle de la zone de saisie
 draw_rectangle( textfield_x,
                 textfield_y ,
                 textfield_x + boxwidth - 2 * padding,
@@ -314,38 +253,9 @@ draw_text_ext
     row_height, // distance entre chaque ligne de texte
     maxlength // taille avant retour à la ligne
 );
-
+/**/
 draw_set_alpha(1);
 draw_set_color(savedColor);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Render selection rectangle
-
-if( click_origin_x != noone ){
-    draw_set_color(c_blue);
-    draw_rectangle(click_origin_x, click_origin_y, mouse_x, mouse_y, 1);
-    draw_set_color(c_black);
-}
-
-
 </string>
           </argument>
         </arguments>
@@ -369,8 +279,18 @@ if( click_origin_x != noone ){
             <string>/// draw debug
 //draw_self()
 
+/* //boundings debug
+draw_set_color(c_red);
+draw_rectangle(x-5, y-5, x + 5 ,y + 5, 0);
+
+draw_set_color(c_blue);
+draw_rectangle(x + sprite_width -5, y + sprite_height - 5, x + sprite_width + 5, y + sprite_height + 5, 0);
+*/
+
+
 draw_text(x, y - 2 * font_get_size(fnt_toolbox), "histo index : " + string(historic_index))
 draw_text(x, y - 4 * font_get_size(fnt_toolbox), "State : " + State)
+draw_text(x, y - 6 * font_get_size(fnt_toolbox), "cibles : " + string( ds_list_size(Targets) ) );
 </string>
           </argument>
         </arguments>
@@ -496,37 +416,6 @@ switch(keyboard_key){
     default:
         ActionKey = noone;
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="10" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-// Todo : debugger
-/*
-if(State != "selecting" &amp;&amp; !keyboard_check_direct(vk_anykey)){
-    State = "selecting"
-    // Déclenché quand touche action relachée
-}
-*/
-
 </string>
           </argument>
         </arguments>
