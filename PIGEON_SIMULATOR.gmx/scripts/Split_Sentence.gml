@@ -1,4 +1,5 @@
 /// Split_Sentence(:string, delimiter:string):array<string>
+show_debug_message("########DEBUT")
 var s = argument[0], d = argument[1];
 var rl = ds_list_create();
 var p = string_pos(d, s);
@@ -20,5 +21,17 @@ if (os_browser != browser_not_a_browser) {
     p = rn; while (--p >= 0) rw[p] = rl[|p];
 }
 
-show_debug_message(rw);
+//Conversion de l'array en ds_list
+/*
+var sentence = ds_list_create();
+for(l=0;l<array_length_1d(rw);l++)
+{
+    show_debug_message("j'ajoute "+string(rw[l]))
+    ds_list_add(sentence,string(rw[l]));
+}
+//show_list(sentence);
+*/
+show_debug_message("########FIN");
+
 return rw;
+//return sentence;

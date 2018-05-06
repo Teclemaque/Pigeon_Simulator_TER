@@ -25,35 +25,34 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>globalvar dico;
+            <string>//Creation de l'instance TAL_Controller
+//Construction du dico en tant que Map(mot,Tag)
+globalvar dico;
 dico = ds_map_create();
 
+//Ouverture du fichier dico_name, le dictionnaire de mots
 if(file_exists("Parsing/dico_name.txt"))
 {
     show_debug_message("Fichier existant");
     file = file_text_open_read("Parsing/dico_name.txt")
     while(!file_text_eof(file))
     {
+        //Extraction des données de chaque phrases du fichier
         stringer = file_text_read_string(file);
         show_debug_message(stringer);
         spliter = Split_Sentence(stringer," ");
-        ds_map_add(dico,spliter[0],spliter[1]);
+        //ds_map_add(dico,spliter[0],spliter[1]);
+        ds_map_add(dico,ds_list_find_value(stringer,0),ds_list_find_value(stringer,1))
         file_text_readln(file);
     }
+    //Affichage du dico (en console)
     show_debug_message(json_encode(dico));
     
+    //Appel du script TAL_Grammaire
     instance_create(0,0,TAL_Grammaire);
 }
 else
 {show_debug_message("Erreur:Dictionnaire introuvable");}
-
-/*
-S = GV + GN
-GV = V
-GN = N
-
-Tue soldat1
-*/
 </string>
           </argument>
         </arguments>
