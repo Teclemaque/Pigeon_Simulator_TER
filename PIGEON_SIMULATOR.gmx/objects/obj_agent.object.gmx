@@ -360,7 +360,7 @@ else
         Enervement = 45;
         }
     }
-
+*/
 </string>
           </argument>
         </arguments>
@@ -411,6 +411,12 @@ draw_text(x,y-45,PerceptAgent[3])
 draw_text(x,y-55,PerceptAgent[4])
 draw_text(x,y-65,PerceptAgent[5])
 draw_text(x,y-75,PerceptAgent[6])
+draw_text(x,y-95, "Messages : " + string(ds_list_size(Messages)));
+draw_text(x,y-105, "Ordres : " + string(ds_list_size(Ordres)));
+
+
+
+
 
 if PerceptAgent[0] != noone &amp;&amp; instance_exists(PerceptAgent[0])
     draw_line(x,y,PerceptAgent[0].x,PerceptAgent[0].y);
@@ -426,6 +432,8 @@ if PerceptAgent[5] != noone &amp;&amp; instance_exists(PerceptAgent[5])
     draw_line(x,y,PerceptAgent[5].x,PerceptAgent[5].y);
 if PerceptAgent[6] != noone &amp;&amp; instance_exists(PerceptAgent[6])
     draw_line(x,y,PerceptAgent[6].x,PerceptAgent[6].y);
+    
+
 </string>
           </argument>
         </arguments>

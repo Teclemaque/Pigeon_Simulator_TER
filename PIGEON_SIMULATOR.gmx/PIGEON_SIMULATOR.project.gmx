@@ -18,7 +18,9 @@
     <sprite>sprites\spr_balle</sprite>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\path_test</path>
+  </paths>
   <scripts name="scripts">
     <scripts name="SCRIPT IA">
       <script>scripts\IA_Attaque.gml</script>
@@ -70,7 +72,36 @@
       <script>scripts\randomSeed.gml</script>
       <script>scripts\TERRAIN_Draw.gml</script>
     </scripts>
+    <scripts name="ORDRES">
+      <script>scripts\ordre_agent_patrouille.gml</script>
+    </scripts>
+    <scripts name="utils">
+      <script>scripts\send_message_to_agents.gml</script>
+      <script>scripts\get_selectable_agent.gml</script>
+    </scripts>
+    <scripts name="GUI">
+      <scripts name="toolbox">
+        <script>scripts\collision_rectangle_list.gml</script>
+        <script>scripts\get_targets_names.gml</script>
+        <script>scripts\add_command_to_historic.gml</script>
+        <script>scripts\find_general.gml</script>
+        <script>scripts\get_action_from_text.gml</script>
+        <script>scripts\send_ordre_to_agent.gml</script>
+      </scripts>
+      <script>scripts\get_ui_dimensions.gml</script>
+      <script>scripts\draw_agents_selection.gml</script>
+      <script>scripts\is_clicked.gml</script>
+      <scripts name="leftPanel">
+        <script>scripts\draw_group_rectangle.gml</script>
+        <script>scripts\add_group_to_leftPanel.gml</script>
+        <script>scripts\remove_group_from_leftPanel.gml</script>
+      </scripts>
+      <script>scripts\nomGroupe.gml</script>
+    </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_toolbox</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_debuggage</object>
     <object>objects\obj_globVar</object>
