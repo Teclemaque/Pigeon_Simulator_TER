@@ -12,7 +12,7 @@ if Argument[3] == 1
         O.Officiel = 1;
         if Argument[2] > 1
             {
-            if ds_list_size(Regiment) > Argument1*Argument2
+            if ds_list_size(Regiment) > Argument[1]*Argument[2]
                 {
                 Nbr = Argument[2];
                 }
@@ -51,7 +51,7 @@ if Argument[3] == 1
             with(ds_list_find_value(O.Regiment,1))
                 {
                 ID = other.O.id;
-                Groupe = instance_create(x,y,other.O.Off_sup);
+                Groupe = instance_create(x,y,other.O.Off);
                 ds_list_delete(other.O.Regiment,1);
                 
                 with(Groupe)
@@ -64,15 +64,16 @@ if Argument[3] == 1
                         {
                         ds_list_add(Regiment,ds_list_find_value(other.ID.Regiment,1));
                         A = ds_list_find_value(other.ID.Regiment,1);
-                        A.Officier = id;
+                        A.Commandant = id;
                         ds_list_delete(other.ID.Regiment,1);
                         }
-                    Officier = other.ID;
+                    Commandant_sup = other.ID;
                     nomGroupe(id);
                     }
                 instance_destroy();
                 }
             }
+        //ds_list_clear(Regiment)
         }
     }
 else
@@ -85,12 +86,12 @@ else
                 {
                 a = ds_list_find_value(ListOfficier[i].Regiment,j);
                 ds_list_add(ListOfficier[0].Regiment, a)
-                a.Officier = ListOfficier[0]
+                a.Commandant = ListOfficier[0]
                 }
             with(instance_create(x,y,ListOfficier[i].Allie))
                 {
                 ds_list_add(other.ListOfficier[0].Regiment,id);
-                Officier = other.ListOfficier[0]
+                Commandant = other.ListOfficier[0]
                 }
             instance_destroy();
             }

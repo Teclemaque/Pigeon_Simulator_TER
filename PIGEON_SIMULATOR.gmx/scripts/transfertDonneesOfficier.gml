@@ -15,7 +15,7 @@ if ds_exists(ID.Regiment, ds_type_list)
         {
         ds_list_add(Regiment,ds_list_find_value(ID.Regiment,1));
         A = ds_list_find_value(ID.Regiment,1);
-        A.Officier = Officier.id;
+        A.Commandant = Commandant.id;
         ds_list_delete(ID.Regiment,1);
         }
     }

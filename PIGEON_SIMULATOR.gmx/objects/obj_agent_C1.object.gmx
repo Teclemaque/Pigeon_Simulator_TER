@@ -3,7 +3,7 @@
   <spriteName>spr_soldat</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>obj_agent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -33,8 +33,7 @@ Execute = IA_Repos_Soldat;
 
 Ennemi = obj_agent_C2;
 Allie = obj_agent_C1;
-
-Off_inf = obj_agent_officier0_C1;
+Off = obj_agent_officier0_C1;
 
 image_alpha = 1;
 
@@ -96,69 +95,66 @@ Recharge = obj_globVar.R_fusil;
             <kind>1</kind>
             <string>if Classe == 0
     {
-    if instance_exists(Officier)
+    if instance_exists(Commandant)
         {
-        Agent = instance_nearest(x,y,Ennemi);
-        
-        if distance_to_object(Agent) &lt; MSpeed * 10
-        &amp;&amp; abs(Moral) &lt; 50
-        &amp;&amp; map_visible(Agent)
+        if instance_exists(Commandant.Officier)
             {
-            Officier.MODE = "ATTAQUE";
+            Officier = Commandant.Officier;
             }
-        if Officier.MODE == "REPOS"
+        else
             {
-            if Officier.Officiel == 1
+            Officier = Commandant;
+            }
+            
+        if instance_exists(Officier)
+            {
+            if ds_list_find_index(Officier.Regiment,id) == -1
                 {
-                if instance_exists(Officier.Formation)
+                ds_list_add(Officier.Regiment,id);
+                }
+            Agent = instance_nearest(x,y,Ennemi);
+            
+            if distance_to_object(Agent) &lt; MSpeed * 10
+            &amp;&amp; abs(Moral) &lt; 50
+            &amp;&amp; map_visible(Agent)
+                {
+                Officier.MODE = "ATTAQUE";
+                }
+            if Officier.MODE == "REPOS"
+                {
+                if Officier.Officiel == 1
                     {
-                    IA_Formation();
-                    Argument[0] = Officier.Argument[0];
+                    if instance_exists(Officier.Formation)
+                        {
+                        IA_Formation();
+                        Argument[0] = Officier.Argument[0];
+                        }
                     }
                 }
             else
                 {
-                /*if distance_to_object(Officier) &gt; 100
+                if Officier.MODE == "ATTAQUE"
                     {
-                    //Execute = IA_Deplacement_Soldat;
-                    Argument[0] = noone;
-                    Argument[1] = Officier;
-                    Argument[2] = noone;
-                    Argument[3] = -1;
-                    Argument[4] = -1;
-                    Argument[5] = -1;
-                    Argument[6] = Officier.speed+MSpeed/20;
-                    Argument[7] = -1;
-                    Argument[8] = -1;
-                    Argument[9] = -1;
-                    Argument[10] = 1;
-                    IA_Deplacement_Soldat();
-                    }*/
-                }
-            }
-        else
-            {
-            if Officier.MODE == "ATTAQUE"
-                {
-                if Officier.Officiel != 1
-                    {
-                    ArgumentAttaque[0] = noone;
-                    ArgumentAttaque[1] = Combat;
-                    ArgumentAttaque[3] = random(MSpeed);
-                    ArgumentAttaque[4] = -1;
+                    if Officier.Officiel != 1
+                        {
+                        ArgumentAttaque[0] = noone;
+                        ArgumentAttaque[1] = Combat;
+                        ArgumentAttaque[3] = random(MSpeed);
+                        ArgumentAttaque[4] = -1;
+                        }
+                    else
+                        {
+                        ArgumentAttaque = Officier.ArgumentRegiment
+                        }
+                    //Execute = IA_Attaque_Soldat;
+                    IA_Attaque_Soldat();
                     }
-                else
-                    {
-                    ArgumentAttaque = Officier.ArgumentRegiment
-                    }
-                //Execute = IA_Attaque_Soldat;
-                IA_Attaque_Soldat();
                 }
             }
         }
     else
         {
-        with(instance_create(x,y,Off_inf))
+        with(instance_create(x,y,Off))
             {
             transfertDonneesAgent(other);
             }

@@ -87,7 +87,7 @@ if MODE = "ATTAQUE"
                 Argument[6] = -1;
                 Argument[7] = Cadence;
                 Argument[8] = 0;
-                Argument[9] = 0;
+                Argument[9] = Alpha;
                 Argument[10] = Ordre;
                 //IA_Deplacement();
                 exit;
@@ -109,7 +109,7 @@ if MODE = "ATTAQUE"
                     Argument[6] = -1;
                     Argument[7] = Officier.speed+MSpeed/10;
                     Argument[8] = 0;
-                    Argument[9] = 0;
+                    Argument[9] = Alpha;
                     Argument[10] = Ordre;
                     //IA_Deplacement();
                     exit;
@@ -158,7 +158,7 @@ if MODE = "ATTAQUE"
                         Argument[6] = -1;
                         Argument[7] = Cadence;
                         Argument[8] = 0;
-                        Argument[9] = 0;
+                        Argument[9] = Alpha;
                         Argument[10] = Ordre;
                         //IA_Deplacement();
                         exit;
@@ -278,7 +278,7 @@ if instance_exists(Officier)
                     Argument[6] = -1;
                     Argument[7] = Officier.speed;
                     Argument[8] = 0;
-                    Argument[9] = 0;
+                    Argument[9] = Alpha;
                     Argument[10] = Ordre;
                     //IA_Deplacement();
                     exit;
@@ -326,7 +326,7 @@ if instance_exists(Officier)
                     Argument[6] = -1;
                     Argument[7] = Cadence;
                     Argument[8] = 0;
-                    Argument[9] = 0;
+                    Argument[9] = Alpha;
                     Argument[10] = Ordre;
                     //IA_Deplacement_Soldat();
                     exit;
@@ -376,7 +376,7 @@ if instance_exists(Officier)
                         Argument[6] = -1;
                         Argument[7] = Cadence;
                         Argument[8] = 0;
-                        Argument[9] = 0;
+                        Argument[9] = Alpha;
                         Argument[10] = Ordre;
                         //IA_Deplacement_Soldat();
                         exit;

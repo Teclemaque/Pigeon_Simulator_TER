@@ -8,9 +8,13 @@ if(x > view_xview[0]-16 and x < view_xview[0]+view_wport[0]+16
         } else  {
             var l = 50 - (point_distance(x,y,mouse_x,mouse_y)/10)
             if(l>0)
+                {
                 draw_set_color(make_colour_rgb(l,l,l))
+                }
             else
+                {
                 draw_set_color(make_colour_rgb(0,0,0))
+                }
             draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
             draw_set_color(c_black)
         }

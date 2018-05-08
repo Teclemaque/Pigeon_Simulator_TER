@@ -3,8 +3,8 @@
   <spriteName>sprite_obj</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
-  <persistent>0</persistent>
+  <depth>0</depth>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,11 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha = 0.2;
-ID = noone;
+            <string>//font = font_add_sprite_ext(sprite1, "1234567890abcdefghijklmnopqrstuvwxyz!)&lt;&gt;ABCDEFGHIJKLMNOPQRSTUVWXYZ:;,.",true, 1);
 
+fps_str = "";
+fps_old = fps_real;
+time = get_timer();
 
-
+draw_set_colour(c_white);
+draw_enable_alphablend(false);
+draw_set_alpha_test(true);
+draw_set_alpha_test_ref_value(128);
+application_surface_draw_enable(false);
 
 </string>
           </argument>
@@ -53,9 +59,44 @@ ID = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = direction;
-//x = x+random(5)-2.5;
-//y = y+random(5)-2.5;
+            <string>if get_timer() - time &gt; 500000
+    {
+    fps_str = mean(fps_old, fps_real);
+    fps_old = fps_real;
+    time = get_timer();
+    }
+    
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>texture_set_interpolation(false);
+draw_set_alpha_test(false);
+draw_surface_stretched(application_surface, view_xport[0], view_yport[0], view_wport[0], view_hport[0]);
+draw_set_alpha_test(true);
+texture_set_interpolation(true);
+
+draw_text(10,50, "FPS: " + string(fps));
+draw_text(10,60, "FPS Real: " + string_format(fps_str, 4, 0));
+//draw_text(10,110, "Objects: " + string(instance_number(object1)));
 </string>
           </argument>
         </arguments>

@@ -28,10 +28,10 @@
             <string>//image_blend = c_yellow
 image_xscale = 0.1+random(0.05)-0.025;
 image_yscale = 0.1+random(0.05)-0.025;
+
+ds_list_add(obj_globVar.grammaire,id);
 /////////////////////Propriété de l'agent///////////////////////////
-/*P = 0;
-J = 0;
-I = 0;*/
+
 MSpeed = 5+random(2.5);//Vitesse maximale de deplacmement de l'agent
 for (i = 0; i &lt; 15; i++)
     {
@@ -50,31 +50,30 @@ Moral = random(200)-100;//Valeur moral &gt; 0 mec bien, &lt; 0 mec pas bien, = 0
 Combat = round(random(2));//Type de combat
 
 Cadence = 0;//Vitesse de déplacement souhaitée
-Officier = id;// officier référent
+
+Commandant = id;//officier directe,
+Officier = id;//officier referant,
+
 Officiel = 0;
 Grade = 0;//Rang de l'officier
 Cible = noone;
 CIBLE = noone;//La cible humaine a attaquer
 MODE = "REPOS";
 
-Off_inf = noone;
 PousseToi = 0;
-Enervement = 0;
+Evitement = 0;
 /////////////////////Gestion environnement//////////////////////////
-Z = 0;
-Z1 = 0;
-Z2 = 0; 
-Z3 = 0;
-Z4 = 0;
-Z5 = 0; 
-Z6 = 0;
-Z7 = 0; 
-Z8 = 0;
+Z0 = 0;
+ZC1 = 0;
+ZC = 0; 
+ZC2 = 0;
 
-Alpha = 0;
+Alpha = 10;
+AlphaMax = 20;
 
 Dir1 = 0;
 Dir2 = 0;
+Dir = 0;
 
 ///////////////////////////////////////////////////////////////////
 Ordre = 0;
@@ -121,6 +120,7 @@ if Classe == 0
         }
     }
 
+ds_list_delete(obj_globVar.Gramaire,ds_list_find_index(obj_globVar.Gramaire,id))
 </string>
           </argument>
         </arguments>
@@ -151,7 +151,7 @@ else
     {
     visible = true
     }
-image_angle = direction;//Le sprite est affiché selon la direction de l'agent
+
 Chance = random(100);
 
 if Execute != noone
@@ -163,36 +163,32 @@ if Execute != noone
 /////////////////////////////// REFLEXE ////////////////////////////
 xx = x;
 x = - 5000
-A = instance_nearest(xx+lengthdir_x(bbox_right+1, direction),y+lengthdir_y(bbox_right+1, direction),obj_agent);
+A = instance_nearest(xx+lengthdir_x(1, direction),y+lengthdir_y(1, direction),obj_agent);
 x = xx;
 
-/*if PousseToi &gt; 0
-    {
-    speed = PousseToi  
-    PousseToi -= 0.1;
-    }
-*/
-//direction = Dir1;
+Agent = collision_circle(x+lengthdir_x(Cadence, direction),y+lengthdir_y(Cadence, direction),1,A,0,1)
 
-if instance_exists(A)
-&amp;&amp; distance_to_object(A) &lt; 1
-&amp;&amp; A.id != id
+if instance_exists(Agent)
+&amp;&amp; distance_to_object(Agent) &lt; Cadence///MSpeed
+&amp;&amp; Agent.id != id
     {
-    Agent = A //collision_circle(x+lengthdir_x(bbox_right+1, direction),y+lengthdir_y(bbox_right+1, direction),1,obj_agent,0,1)
+    //Agent = collision_circle(x+lengthdir_x(Cadence, direction),y+lengthdir_y(Cadence, direction),1,A,0,1)
     
+    if Cadence == 0
+        {
+        Cadence = MSpeed/100
+        }
     if instance_exists(Agent)
         {
         //Agent.Contact = 1
         
-        if abs((Agent.direction mod 180)-direction mod 180) &gt; 90
+        if abs((Agent.direction mod 180)- direction mod 180) &gt; 90
             {
-            PousseToi = 1;
-            //Dir2 = Dir1+90/(distance_to_object(Agent)+1)
+            Dir = Dir+20/(distance_to_object(Agent)+1)
             //Dir2 = Dir1-Enervement//90+(Agent.direction-direction)//random(Enervement)-Enervement/2
             if Grade &lt; Agent.Grade
                 {
-                //PousseToi += 1+ Agent.PousseToi;
-                Enervement += 0.5;
+                PousseToi = 1;
                 }
             else
                 {
@@ -200,8 +196,7 @@ if instance_exists(A)
                     {
                     if Ordre &lt; Agent.Ordre
                         {
-                        //PousseToi += 1+Agent.PousseToi;
-                        Enervement += 0.5;
+                        PousseToi = 1;
                         }
                     else
                         {
@@ -209,8 +204,7 @@ if instance_exists(A)
                             {
                             if id &gt; Agent.id
                                 {
-                                //PousseToi += 1+Agent.PousseToi;
-                                Enervement += 0.5;
+                                PousseToi = 1;
                                 }
                             }
                         }
@@ -219,13 +213,11 @@ if instance_exists(A)
             }
         else
             {
-            PousseToi = 1;
-            //Dir2 = Dir1+90/(distance_to_object(Agent)+1)
+            Dir = Dir+45/(distance_to_object(Agent)+1)
 
             if Grade &lt; Agent.Grade
                 {
-                //PousseToi += 1+Agent.PousseToi;
-                Enervement += 0.5;
+                PousseToi = 1;
                 }
             else
                 {
@@ -233,8 +225,7 @@ if instance_exists(A)
                     {
                     if Ordre &lt; Agent.Ordre
                         {
-                        //PousseToi += 1+Agent.PousseToi;
-                        Enervement += 0.5;
+                        PousseToi = 1;
                         }
                     else
                         {
@@ -242,8 +233,7 @@ if instance_exists(A)
                             {
                             if id &gt; Agent.id
                                 {
-                                //PousseToi += 1+Agent.PousseToi;
-                                Enervement += 0.5;
+                                PousseToi = 1;
                                 }
                             }
                         }
@@ -253,179 +243,311 @@ if instance_exists(A)
         }
     else
         {
+        if Evitement == 0
+            {
+            if abs(Dir-Dir1) &gt; 90/(Cadence+1)
+                {
+                if Dir-Dir1 &lt; 0
+                    {
+                    Dir += 90/(Cadence+1)
+                    }
+                else
+                    {
+                    Dir -= 90/(Cadence+1)
+                    }
+                }
+            else
+                {
+                Dir = Dir1;
+                }
+            }
         PousseToi = 0;
         }
     }
 else
     {
+    if Evitement == 0
+        {
+        if abs(Dir-Dir1) &gt; 90/(Cadence+1)
+            {
+            if Dir-Dir1 &lt; 0
+                {
+                Dir += 90/(Cadence+1)
+                }
+            else
+                {
+                Dir -= 90/(Cadence+1)
+                }
+            }
+        else
+            {
+            Dir = Dir1;
+            }
+        }
     PousseToi = 0;
     }
-/*else
+    
+/*if Dir &lt; 0
     {
-    if PousseToi &gt; 0
-        {
-        PousseToi --;
-        }
-    if Enervement &gt; 0
-        {
-        Enervement --;
-        }
+    Dir = 360-Dir;
     }
+Dir = Dir mod 360;*/
+
+///////////////////////////// Deplacement terrain ///////////////////////////////////////
+/*
+Determination en fonction du type de terrain la hauteur maximale que peut franchir l'agent
 */
-/*angle = direction div 45;//Dans quel direction veut aller l'agent 
-    
-    Z0 = map_get_height(0);
-    Z1 = map_get_height(1);
-    Z3 = map_get_height(3);
-    Z5 = map_get_height(5);
-    Z7 = map_get_height(7);
-    
-    if  Dir1 &gt;= 45 &amp;&amp; Dir1 &lt; 135
+terrain = map_get_terrain(0)
+if terrain != -4
+    {
+    if terrain == 0
         {
-        if abs(Z0-Z1) &lt; 10
+        AlphaMax = 20
+        }
+    else
+        {
+        if terrain == 1
             {
-            Dir1 = 90;
+            AlphaMax = 10
             }
         else
             {
-            Dir1 = 180;
+            AlphaMax = 5
             }
         }
-    if  Dir1 &gt;= 135 &amp;&amp; Dir1 &lt; 225
+    if Alpha != AlphaMax
         {
-        if abs(Z0-Z7) &lt; 10
-            {
-            Dir1 = 180;
-            }
-        else
-            {
-            Dir1 = 270;
-            }
-        }
-    if  Dir1 &gt;= 225 &amp;&amp; Dir1 &lt; 315
-        {
-        if abs(Z0-Z5) &lt; 10
-            {
-            Dir1 = 270;
-            }
-        else
-            {
-            Dir1 = 0;
-            }
-        }
-    if  Dir1 &gt;= 315 &amp;&amp; Dir1 &lt; 45
-        {
-        if abs(Z0-Z3) &lt; 10
-            {
-            Dir1 = 0;
-            }
-        else
-            {
-            Dir1 = 90;
-            }
-        }
-    
-*/
-if PousseToi &gt; 0
-    {
-    direction = Dir2//+random(Enervement)-Enervement/2
-    }
-else
-    {
-    direction = Dir1//+random(Enervement)-Enervement/2;
-    }
-    
-    
-    
-/*if PousseToi &lt; 0
-    {
-    PousseToi = 0;
-    }
-else
-    {
-    if PousseToi &gt; 3
-        {
-        PousseToi = 3;
-        }
-    }
-    
-if Enervement &lt; 0
-    {
-    Enervement = 0;
-    }
-else
-    {
-    if Enervement &gt; 45
-        {
-        Enervement = 45;
+        Alpha = AlphaMax
         }
     }
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self()
-//draw_text(x,y-10,script_get_name(Execute));
-/*if instance_exists(Officier)
+/*
+Determinatin de la possibilité de faire un déplacement en fonction des terrains voisins
+*/
+Z0 = 0;
+ZC1 = 0;
+ZC = 0;
+ZC2 = 0;
+
+if Cadence != 0
     {
-    draw_text(x,y-5,Officier.id)
+    if (Dir &lt; 90 &amp;&amp; Dir &gt;= 0)
+        {
+        map_get_height_cone(2);
+        
+        if (abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0)
+        &amp;&amp; (abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0)
+            {
+            Dir = Dir;
+            if abs(abs(Z0)-abs(ZC)) &lt; Alpha &amp;&amp; ZC &gt; 0 
+                {
+                Dir = Dir;
+                }
+            else
+                {
+                if Dir &gt;= 45
+                    {
+                    Dir += (90-Dir)/4
+                    }
+                else
+                    {
+                    Dir -= (Dir - 0)/4
+                    }
+                }
+            }
+        else
+            {
+            if abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0
+                {
+                Dir += (90-Dir)/2
+                }
+            else
+                {
+                if abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0
+                    {
+                    Dir -= (Dir - 0)/2
+                    }
+                else
+                    {
+                    Evitement = 10;
+                    Dir += 10;
+                    Cadence = MSpeed/40;
+                    }
+                }
+            }
+        }
+    else
+        {
+        if (Dir &lt; 180 &amp;&amp; Dir &gt;= 90)
+            {
+            map_get_height_cone(8);
+            
+            if (abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0)
+            &amp;&amp; (abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0)
+                {
+                if abs(abs(Z0)-abs(ZC)) &lt; Alpha &amp;&amp; ZC &gt; 0 
+                    {
+                    Dir = Dir;
+                    }
+                else
+                    {
+                    if Dir &gt;= 135
+                        {
+                        Dir += (180-Dir)/4
+                        }
+                    else
+                        {
+                        Dir -= (Dir - 90)/4
+                        }
+                    }
+                }
+            else
+                {
+                if abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0
+                    {
+                    Dir += (180-Dir)/2
+                    }
+                else
+                    {
+                    if abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0
+                        {
+                        Dir -= (Dir - 90)/2
+                        }
+                    else
+                        {
+                        Evitement = 10;
+                        Dir += 10;
+                        Cadence = MSpeed/40;
+                        }
+                    }
+                }
+            }
+        else
+            {
+            if (Dir &lt; 270 &amp;&amp; Dir &gt;= 180)
+                {
+                map_get_height_cone(6);
+                
+                if (abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0)
+                &amp;&amp; (abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0)
+                    {
+                    if abs(abs(Z0)-abs(ZC)) &lt; Alpha &amp;&amp; ZC &gt; 0 
+                        {
+                        Dir = Dir;
+                        }
+                    else
+                        {
+                        if Dir &gt;= 225
+                            {
+                            Dir += (270-Dir)/4
+                            }
+                        else
+                            {
+                            Dir -= (Dir - 180)/4
+                            }
+                        }
+                    }
+                else
+                    {
+                    if abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0
+                        {
+                        Dir += (270-Dir)/2
+                        }
+                    else
+                        {
+                        if abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0
+                            {
+                            Dir -= (Dir - 180)/2
+                            }
+                        else
+                            {
+                            Evitement = 10;
+                            Dir -= 10;
+                            Cadence = MSpeed/40;
+                            }
+                        }
+                    }
+                }
+            else
+                {
+                if (Dir &lt; 360 &amp;&amp; Dir &gt;= 270)
+                    {
+                    map_get_height_cone(4);
+                    
+                    if (abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0)
+                    &amp;&amp; (abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0)
+                        {
+                        if abs(abs(Z0)-abs(ZC)) &lt; Alpha &amp;&amp; ZC &gt; 0 
+                            {
+                            Dir = Dir;
+                            }
+                        else
+                            {
+                            if Dir &gt;= 315
+                                {
+                                Dir += (360-Dir)/4
+                                }
+                            else
+                                {
+                                Dir -= (Dir - 270)/4
+                                }
+                            }
+                        }
+                    else
+                        {
+                        if abs(abs(Z0)-abs(ZC1)) &lt; Alpha &amp;&amp; ZC1 &gt; 0
+                            {
+                            Dir += (360-Dir)/2
+                            }
+                        else
+                            {
+                            if abs(abs(Z0)-abs(ZC2)) &lt; Alpha &amp;&amp; ZC2 &gt; 0
+                                {
+                                Dir -= (Dir - 270)/2
+                                }
+                            else
+                                {
+                                Evitement = 10;
+                                Dir -= 10;
+                                Cadence = MSpeed/40;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-draw_text(x,y-15,id)
-if instance_exists(Cible)
+else
     {
-    draw_text(x,y-25,object_get_name(Cible.object_index))
+    Dir = Dir1
+    }
+    
+/*if Z0 &lt; 0
+    {
+    instance_destroy();
     }*/
+    
+if Evitement &gt; 0
+    {
+    Evitement--;
+    }
+else
+    {
+    Evitement = 0; 
+    }
 
-//draw_text(x,y-25,direction)
-//draw_text(x,y-15,speed)
-/*draw_text(x,y-75,string(P)+" "+string(J)+" "+string(I))*/
+if Dir &lt; 0
+    {
+    Dir = 360-Dir;
+    }
+    
+direction = Dir mod 360
+image_angle = direction;
 
+VTerrain = Z0*Cadence/100;
+speed = Cadence -VTerrain;//&lt;--Ralentissement du au terrain
 
-
-//draw_circle(x+lengthdir_x(16, direction),y+lengthdir_y(16, direction),4,false)
-/*if instance_exists(Officier)
-    {draw_text(x,y-15,Officier.id)}*/
-/*draw_text(x,y-15,PerceptAgent[0])
-draw_text(x,y-25,PerceptAgent[1])
-draw_text(x,y-35,PerceptAgent[2])
-draw_text(x,y-45,PerceptAgent[3])
-draw_text(x,y-55,PerceptAgent[4])
-draw_text(x,y-65,PerceptAgent[5])
-draw_text(x,y-75,PerceptAgent[6])
-
-if PerceptAgent[0] != noone &amp;&amp; instance_exists(PerceptAgent[0])
-    draw_line(x,y,PerceptAgent[0].x,PerceptAgent[0].y);
-if PerceptAgent[1] != noone &amp;&amp; instance_exists(PerceptAgent[1])
-    draw_line(x,y,PerceptAgent[1].x,PerceptAgent[1].y);
-if PerceptAgent[2] != noone &amp;&amp; instance_exists(PerceptAgent[2])
-    draw_line(x,y,PerceptAgent[2].x,PerceptAgent[2].y);
-if PerceptAgent[3] != noone &amp;&amp; instance_exists(PerceptAgent[3])
-    draw_line(x,y,PerceptAgent[3].x,PerceptAgent[3].y);
-if PerceptAgent[4] != noone &amp;&amp; instance_exists(PerceptAgent[4])
-    draw_line(x,y,PerceptAgent[4].x,PerceptAgent[4].y);
-if PerceptAgent[5] != noone &amp;&amp; instance_exists(PerceptAgent[5])
-    draw_line(x,y,PerceptAgent[5].x,PerceptAgent[5].y);
-if PerceptAgent[6] != noone &amp;&amp; instance_exists(PerceptAgent[6])
-    draw_line(x,y,PerceptAgent[6].x,PerceptAgent[6].y);
 </string>
           </argument>
         </arguments>
