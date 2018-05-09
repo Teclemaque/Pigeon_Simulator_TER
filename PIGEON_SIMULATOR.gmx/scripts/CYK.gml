@@ -38,18 +38,18 @@ for(i=1;i<array_length_1d(p);i++)
                 show_debug_message(tmp);
                 if(array_length_1d(tmp[1])==2)
                 {
-                    show_debug_message("    JE MARCHE")
+                    show_debug_message("    JE MARCHE");
                     t=tmp[1];
                     if((string(ds_grid_get(cyk,k,j))==string(t[0]))&&(string(ds_grid_get(cyk,i-k-1,j+k+1))==string(t[1])))
                     {
-                        ds_grid_add(cyk,i,j,tmp[0])
+                        ds_grid_add(cyk,i,j,tmp[0]);
                     }
                 }
             }
         }
     }
 }
-
+//BLOC CYK
 show_debug_message("AFFICHAGE DU CYK :")
 display="";
 for(i=0;i<array_length_1d(p);i++)
@@ -68,3 +68,19 @@ for(l=0;l<ds_grid_width(cyk);l++)
     }
     show_debug_message(display);
 }
+//FIN BLOC CYK
+
+//Creation de l'orderMap
+//Liste Keys : 0=sujet, 1=action, 2=cibles, 3=options
+
+var orderMap=ds_map_create();
+ds_map_add_list(orderMap, 0, ds_list_create());
+ds_map_add_list(orderMap, 1, ds_list_create());
+ds_map_add_list(orderMap, 2, ds_list_create());
+ds_map_add_list(orderMap, 3, ds_list_create());
+show_debug_message("AFFICHAGE DE ORDERMAP :");
+show_debug_message(json_encode(orderMap));
+
+//Lancement d'Extract_Order
+Extract_Order(p, cyk, ds_grid_width(cyk)-1,0,orderMap,0);
+show_debug_message(json_encode(orderMap));

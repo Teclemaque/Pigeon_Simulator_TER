@@ -52,7 +52,8 @@
       <script>scripts\Split_Sentence.gml</script>
       <script>scripts\CYK.gml</script>
       <script>scripts\list_to_string.gml</script>
-      <script>scripts\Create_Order.gml</script>
+      <script>scripts\Extract_Order.gml</script>
+      <script>scripts\tree_assemble.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">

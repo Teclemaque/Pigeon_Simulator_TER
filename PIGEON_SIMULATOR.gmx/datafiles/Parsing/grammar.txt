@@ -1,7 +1,7 @@
 S->SUJ;GV
 S->SUJ;VS
 S->GN;GV
-S->GN;VS
+S->GN;VREG
 GN->SUJ;JOIN
 JOIN->VIR;SUJ
 JOIN->VIR;GN
@@ -16,7 +16,7 @@ SUJ->agent1
 VATK->tuer
 VDEP->deplacer
 VDEP->aller
-VS->fusionner
+VREG->fusionner
 SUJ->agent2
 SUJ->agent3
 SUJ->agent4
