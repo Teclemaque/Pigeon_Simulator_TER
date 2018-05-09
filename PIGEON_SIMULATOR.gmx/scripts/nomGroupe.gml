@@ -19,19 +19,19 @@ var groupName = "";
 if(withName){
     var groupSize = ds_list_size(Regiment);
     
-    if (groupSize > 818 && agent.Grade <= 12){
+    if (groupSize > 804 && agent.Grade <= 12){
         groupName = "régiment "
         agent.Grade = 12;
-    }else if (groupSize > 206 && agent.Grade <= 10){
+    }else if (groupSize > 199 && agent.Grade <= 10){
         groupName = "bataillon "
         agent.Grade = 10;
-    }else if (groupSize > 72 && agent.Grade <= 8){
+    }else if (groupSize > 83 && agent.Grade <= 8){
         groupName = "compagnie "
         agent.Grade = 8;
-    }else if(groupSize > 24 && agent.Grade <= 6){
+    }else if(groupSize > 26 && agent.Grade <= 6){
         groupName = "troupe "
         agent.Grade = 6;
-    }else if (groupSize > 12 && agent.Grade <= 4){
+    }else if (groupSize > 10 && agent.Grade <= 4){
         groupName = "patrouille "
         agent.Grade = 4;
     }else if (groupSize > 1 && agent.Grade <= 2) {
@@ -46,9 +46,14 @@ if(withName){
 // Trouver le numero à attribuer au groupe
 var numero = "";
 N1 = 0;
-if(agent != agent.Officier){ // si le père a le numero 12
-    numero  = string(agent.Officier.Numero); // on prend le numero 121
-    N1 = string_length(agent.Officier.Numero)
+if(agent != agent.Commandant_sup){ // si le père a le numero 12
+    numero  = string(agent.Commandant_sup.Numero); // on prend le numero 121
+    N1 = string_length(agent.Commandant_sup.Numero)
+    
+    if (groupName == agent.Commandant_sup.Troupe)
+        {
+        agent.Commandant_sup = agent.Commandant;
+        }
     
 }
 // On affecte un numero par defaut a chaque type de formation

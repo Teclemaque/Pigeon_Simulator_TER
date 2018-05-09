@@ -3,7 +3,11 @@
   <spriteName>spr_arme</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
+<<<<<<< HEAD
   <depth>10</depth>
+=======
+  <depth>0</depth>
+>>>>>>> origin/Analyse_Phrase
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,14 +29,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>MAP_Create2();
 MAP_Draw2();
 instance_create(x,y,obj_FOG_controller);
 instance_create(x,y,Obj_mini_map_controler);
+=======
+            <string>image_alpha = 0.0
+>>>>>>> origin/Analyse_Phrase
 </string>
           </argument>
         </arguments>
       </action>
+<<<<<<< HEAD
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -68,6 +77,8 @@ if mouse_check_button(mb_right){
       </action>
     </event>
     <event eventtype="9" enumb="37">
+=======
+>>>>>>> origin/Analyse_Phrase
       <action>
         <libid>1</libid>
         <id>601</id>
@@ -84,7 +95,11 @@ if mouse_check_button(mb_right){
         <arguments>
           <argument>
             <kind>9</kind>
+<<<<<<< HEAD
             <script>MAP_Create2</script>
+=======
+            <script>MAP_Create</script>
+>>>>>>> origin/Analyse_Phrase
           </argument>
           <argument>
             <kind>0</kind>
@@ -124,7 +139,11 @@ if mouse_check_button(mb_right){
         <arguments>
           <argument>
             <kind>9</kind>
+<<<<<<< HEAD
             <script>MAP_Draw2</script>
+=======
+            <script>MAP_Draw</script>
+>>>>>>> origin/Analyse_Phrase
           </argument>
           <argument>
             <kind>0</kind>
@@ -161,5 +180,12 @@ if mouse_check_button(mb_right){
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
+<<<<<<< HEAD
   <PhysicsShapePoints/>
+=======
+  <PhysicsShapePoints>
+    <point>16,16</point>
+    <point>16,16</point>
+  </PhysicsShapePoints>
+>>>>>>> origin/Analyse_Phrase
 </object>

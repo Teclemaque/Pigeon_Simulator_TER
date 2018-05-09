@@ -3,6 +3,27 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="2" name="datafiles">
+    <datafiles number="2" name="Parsing">
+      <datafile>
+        <name>grammar.txt</name>
+        <exists>-1</exists>
+        <size>0</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>grammar.txt</filename>
+      </datafile>
+    </datafiles>
+  </datafiles>
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
@@ -10,12 +31,17 @@
     <sprite>sprites\spr_obstacle</sprite>
     <sprite>sprites\spr_arme</sprite>
     <sprite>sprites\sprite_obj</sprite>
+<<<<<<< HEAD
     <sprites name="TERRAIN">
       <sprite>sprites\terrain_0</sprite>
     </sprites>
     <sprite>sprites\spr_soldat</sprite>
     <sprite>sprites\spr_soldat_marche</sprite>
     <sprite>sprites\spr_balle</sprite>
+=======
+    <sprite>sprites\terrain_0</sprite>
+    <sprite>sprites\TAL</sprite>
+>>>>>>> origin/Analyse_Phrase
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths">
@@ -38,6 +64,7 @@
         <script>scripts\transfertDonneesOfficier.gml</script>
         <script>scripts\gestionRenseignement.gml</script>
         <script>scripts\nomGroupe.gml</script>
+        <script>scripts\path_finding_A.gml</script>
       </scripts>
     </scripts>
     <scripts name="SCRIPT TERRAIN">
@@ -70,7 +97,21 @@
       <script>scripts\mountain_list.gml</script>
       <script>scripts\PerlinNoise.gml</script>
       <script>scripts\randomSeed.gml</script>
+      <script>scripts\map_get_terrain_cone.gml</script>
+      <script>scripts\map_get_height_cone.gml</script>
       <script>scripts\TERRAIN_Draw.gml</script>
+      <script>scripts\map_get_terrain.gml</script>
+    </scripts>
+    <scripts name="MAP">
+      <script>scripts\MAP_Create.gml</script>
+      <script>scripts\MAP_Draw.gml</script>
+    </scripts>
+    <scripts name="SCRIPT TAL">
+      <script>scripts\Split_Sentence.gml</script>
+      <script>scripts\CYK.gml</script>
+      <script>scripts\list_to_string.gml</script>
+      <script>scripts\Extract_Order.gml</script>
+      <script>scripts\tree_assemble.gml</script>
     </scripts>
     <scripts name="ORDRES">
       <script>scripts\ordre_agent_patrouille.gml</script>
@@ -99,12 +140,16 @@
       <script>scripts\nomGroupe.gml</script>
     </scripts>
   </scripts>
+<<<<<<< HEAD
   <fonts name="fonts">
     <font>fonts\fnt_toolbox</font>
   </fonts>
+=======
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shader0.shader</shader>
+  </shaders>
+>>>>>>> a30983f741afc393dfdd09bcdcfe208b9e9792e0
   <objects name="objects">
-    <object>objects\obj_debuggage</object>
-    <object>objects\obj_globVar</object>
     <object>objects\obj_globVar2</object>
     <objects name="AGENTS">
       <objects name="AGENTS SIMPLES">
@@ -117,6 +162,7 @@
       </objects>
       <objects name="AGENT SUPERIEUR">
         <objects name="Camp 1">
+          <object>objects\obj_messager</object>
           <object>objects\obj_meta_agent_C1</object>
           <object>objects\obj_agent_officier0_C1</object>
           <object>objects\obj_agent_officier1_C1</object>
@@ -136,6 +182,7 @@
     </objects>
     <object>objects\obj_arme_blanche</object>
     <object>objects\obj_arme</object>
+<<<<<<< HEAD
     <objects name="OBJET MAP">
       <object>objects\obj_agent_general</object>
       <object>objects\obj_FOG_controller</object>
@@ -150,11 +197,29 @@
       <object>objects\Obj_Terrain_sol</object>
       <object>objects\obj_VIEW_controller</object>
     </objects>
+    <objects name="GESTION JEU">
+      <object>objects\obj_globVar</object>
+      <object>objects\obj_shaderEnd</object>
+      <object>objects\obj_shaderBegin</object>
+      <object>objects\obj_gestion_affichage</object>
+      <object>objects\obj_debuggage</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
     <room>rooms\room0_new</room>
+=======
+    <object>objects\obj_obstacle</object>
+    <object>objects\obj_MAP_controller</object>
+    <object>objects\Obj_Terrain_0</object>
+    <object>objects\Obj_Terrain_1</object>
+    <object>objects\TAL_Grammaire</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\room1</room>
+>>>>>>> origin/Analyse_Phrase
     <room>rooms\room0</room>
+    <room>rooms\room_darret</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

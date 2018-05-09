@@ -5,7 +5,7 @@ Cible = Argument[1];
 X = Argument[3];
 Y = Argument[4];
 
-Dir = Argument[5];
+Direction = Argument[5];
 Cadence = Argument[7];
 Ordre = Argument[10];
 Alpha = Argument[9];
@@ -27,21 +27,28 @@ Z7 = map_get_height(7);
 
 if Cadence != 0 
      {
-     if Cadence < MSpeed
-         {speed = Cadence;}
-     else
-         {speed = MSpeed;}
+     if Cadence > MSpeed
+         {
+         Cadence= MSpeed;
+         }
+     /*else
+        {
+        if Cadence < MSpeed/100
+            {
+            Cadence = MSpeed/20
+            }
+        }*/
      }
 else
      {
-     speed = MSpeed/10;
+     Cadence = MSpeed/20;
      }  
 
 if (Ordre == 0)//Ce Deplamcement n'est pas le fait d'un ordre mais d'une situation sans danger
     {
-    if Dir != -1
+    if Direction != -1
         {
-        Dir1 = Dir+random(5)-2.5;
+        Dir1 = Direction+random(5)-2.5;
         }
     else
         {
@@ -128,7 +135,7 @@ else
                     {
                     if Dir != -1 // Une direction dans laquelle se diriger.
                         {
-                        Dir1 = Dir;
+                        Dir1 = Direction;
                         
                         //if Argument[6] != -1
                         //    {
@@ -165,7 +172,7 @@ if instance_exists(Officier)
     Cible = Argument[1]
     X = Argument[3];
     Y = Argument[4];
-    Dir = Argument[5];
+    Direction = Argument[5];
     Cadence = Argument[7];
     Ordre = Argument[10];
     Alpha = Argument[9];
@@ -178,14 +185,14 @@ if instance_exists(Officier)
     
     if Cadence != 0 
          {
-         if Cadence < MSpeed
-             {speed = Cadence;}
-         else
-             {speed = MSpeed;}
+         if Cadence > MSpeed
+             {
+             Cadence = MSpeed;
+             }
          }
     else
          {
-         speed = MSpeed/10;
+         Cadence = MSpeed/20;
          }  
     
     if (Ordre == 0)//Ce Deplamcement n'est pas le fait d'un ordre mais d'une situation sans danger
@@ -205,7 +212,7 @@ if instance_exists(Officier)
             {
             if Dir != -1
                 {
-                Dir1 = Dir//+random(5)-2.5;
+                Dir1 = Direction//+random(5)-2.5;
                 }
             else
                 {
@@ -293,7 +300,7 @@ if instance_exists(Officier)
                         {
                         if Dir != -1 // Une direction dans laquelle se diriger.
                             {
-                            Dir1 = Dir;
+                            Dir1 = Direction;
                             
                             if Argument[6] != -1
                                 {
@@ -328,4 +335,4 @@ if instance_exists(Officier)
         }
     }
 exit;
-}
+}
