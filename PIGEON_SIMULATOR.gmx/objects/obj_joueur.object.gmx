@@ -158,33 +158,51 @@ while( !ds_list_empty(Ordres) ){
     {
     Messager = instance_nearest(x,y,obj_messager);
     
-    ds_list_add(Messager.Destinataire,ExecuteOrdre);
-    Messager.ExecuteDestinataire = IA_Grade; 
-    Messager.ArgumentMessager[0] = noone;
-    
-    if (ExecuteOrdre.Officiel == 0){
-            Messager.ArgumentMessager[1] = 1;
-        }
-        else{
-            Messager.ArgumentMessager[1] = 0;
-        }
-    Messager.ArgumentMessager[2] = noone;
-    
-    Messager.Message += 1;
-    
-    with(Messager)
+    if distance_to_object(Messager) &lt;= 25
         {
-        Execute = IA_Deplacement;
-        Argument[0] = noone;
-        Argument[1] = other.ExecuteOrdre//ds_list_find_value(Destinataire,0);
-        Argument[2] = noone;
-        Argument[5] = -1;
-        Argument[6] = -1;
-        Argument[7] = MSpeed;
-        Argument[8] = 0;
-        Argument[9] = Alpha//round(random(8))+2;
-        Argument[10] = 1;
-        //path_finding_A(x, y, mouse_x, mouse_y, 16, 8, true, Obj_Terrain_montagne, true);
+        ds_list_add(Messager.Destinataire,ExecuteOrdre);
+        Messager.ArgumentMessager[0] = IA_Grade;
+        Messager.ArgumentMessager[1] = noone;
+        if (ExecuteOrdre.Officiel == 0){
+                Messager.ArgumentMessager[2] = 1;
+            }
+            else{
+                Messager.ArgumentMessager[3] = 0;
+            }
+        Messager.ArgumentMessager[4] = noone;
+        ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
+        
+        Messager.Message += 1;
+        
+        ds_list_add(Messager.Destinataire,ExecuteOrdre);
+        Messager.ArgumentMessager[0] = IA_Deplacement;
+        Messager.ArgumentMessager[1] = noone;
+        Messager.ArgumentMessager[2] = noone;
+        Messager.ArgumentMessager[3] = noone;
+        Messager.ArgumentMessager[4] = -1;
+        Messager.ArgumentMessager[5] = -1;
+        Messager.ArgumentMessager[6] = random(360);
+        Messager.ArgumentMessager[7] = 60;
+        Messager.ArgumentMessager[8] = random(ExecuteOrdre.MSpeed)+1
+        Messager.ArgumentMessager[9] = -1;
+        Messager.ArgumentMessager[10] = ExecuteOrdre.Alpha;
+        Messager.ArgumentMessager[11] = 1;
+        
+        ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
+        
+        with(Messager)
+            {
+            Execute = IA_Deplacement;
+            Argument[0] = noone;
+            Argument[1] = ds_list_find_value(Destinataire,0);
+            Argument[2] = noone;
+            Argument[5] = -1;
+            Argument[6] = -1;
+            Argument[7] = MSpeed;
+            Argument[8] = 0;
+            Argument[9] = Alpha//round(random(8))+2;
+            Argument[10] = 1;
+            }
         }
     }
 </string>

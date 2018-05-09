@@ -161,27 +161,30 @@ if Execute != noone
 
     
 /////////////////////////////// REFLEXE ////////////////////////////
+/////////////////////////////// REFLEXE ////////////////////////////
 xx = x;
 x = - 5000
 A = instance_nearest(xx+lengthdir_x(1, direction),y+lengthdir_y(1, direction),obj_agent);
 x = xx;
 
-Agent = collision_circle(x+lengthdir_x(Cadence, direction),y+lengthdir_y(Cadence, direction),1,A,0,1)
+//Agent = collision_circle(x+lengthdir_x(Cadence, direction),y+lengthdir_y(Cadence, direction),1,A,0,1)
 
-if instance_exists(Agent)
-&amp;&amp; distance_to_object(Agent) &lt; Cadence///MSpeed
-&amp;&amp; Agent.id != id
+if instance_exists(A)
+&amp;&amp; distance_to_object(A) != Cadence///MSpeed
+&amp;&amp; A.id != id
     {
-    //Agent = collision_circle(x+lengthdir_x(Cadence, direction),y+lengthdir_y(Cadence, direction),1,A,0,1)
-    
-    if Cadence == 0
-        {
-        Cadence = MSpeed/100
-        }
+    Agent = collision_circle(x+lengthdir_x(Cadence, direction),y+lengthdir_y(Cadence, direction),1,A,0,1)
+        
     if instance_exists(Agent)
         {
-        //Agent.Contact = 1
-        
+        if Cadence == 0
+            {
+            Cadence = MSpeed/100
+            }
+        else
+            {
+            Cadence /= 4;
+            }
         if abs((Agent.direction mod 180)- direction mod 180) &gt; 90
             {
             Dir = Dir+20/(distance_to_object(Agent)+1)
@@ -245,15 +248,17 @@ if instance_exists(Agent)
         {
         if Evitement == 0
             {
-            if abs(Dir-Dir1) &gt; 90/(Cadence+1)
+            if abs(Dir-Dir1) &gt; 180/(Cadence/2+1)
                 {
                 if Dir-Dir1 &lt; 0
                     {
-                    Dir += 90/(Cadence+1)
+                    Cadence /= 2;
+                    Dir += 180/(Cadence+1)
                     }
                 else
                     {
-                    Dir -= 90/(Cadence+1)
+                    Cadence /= 2;
+                    Dir -= 180/(Cadence+1)
                     }
                 }
             else
@@ -268,15 +273,17 @@ else
     {
     if Evitement == 0
         {
-        if abs(Dir-Dir1) &gt; 90/(Cadence+1)
+        if abs(Dir-Dir1) &gt; 180/(Cadence/2+1)
             {
             if Dir-Dir1 &lt; 0
                 {
-                Dir += 90/(Cadence+1)
+                Cadence /= 2;
+                Dir += 180/(Cadence+1)
                 }
             else
                 {
-                Dir -= 90/(Cadence+1)
+                Cadence /= 2;
+                Dir -= 180/(Cadence+1)
                 }
             }
         else
@@ -286,7 +293,7 @@ else
         }
     PousseToi = 0;
     }
-    
+PousseToi = 0; 
 /*if Dir &lt; 0
     {
     Dir = 360-Dir;
@@ -302,7 +309,7 @@ if terrain != -4
     {
     if terrain == 0
         {
-        AlphaMax = 20
+        AlphaMax = 30
         }
     else
         {
@@ -546,7 +553,7 @@ direction = Dir mod 360
 image_angle = direction;
 
 VTerrain = Z0*Cadence/100;
-speed = Cadence -VTerrain;//&lt;--Ralentissement du au terrain
+speed = Cadence - VTerrain;//&lt;--Ralentissement du au terrain
 
 </string>
           </argument>

@@ -32,6 +32,7 @@ Officiel = 1;// messager officiel = estafette;
 Message = 0;// 0 n'a pas de message a remettre, 1 il doit en remettre 1
 
 Destinataire = ds_list_create();//A qui remettre le message, doit devenir une liste
+SaccocheMessage = ds_list_create();
 Ordre = 1;// 1 Je reviens a celui qui m'a envoyé, 0 je reste le recepteur, 1 comportement aléatoire
 
 distance_give = 10; // distance max pour remettre le message 0 lettre
@@ -65,6 +66,7 @@ Execute = IA_Repos;
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+ds_list_destroy(SaccocheMessage);
 ds_list_destroy(Destinataire);
 </string>
           </argument>
@@ -114,17 +116,25 @@ if Dest != undefined
     {
     if distance_to_object(Dest) &lt;= distance_give
         {
+        Mess = ds_list_find_value(SaccocheMessage,0)
+        
         with(Dest.id)
             {
             show_debug_message("MESSAGE TRANSMIS 3")
-            Execute = other.ExecuteDestinataire;
-            Argument = other.ArgumentMessager;
+            //Execute = other.ExecuteDestinataire;
+            Execute = other.Mess[0]
+            //Argument = other.ArgumentMessager;
+            for (i = 1; i &lt; array_length_1d(other.Mess); i++)
+                {
+                Argument[i] = other.Mess[i];
+                }
             }
         Message -= 1
         
         if Ordre == 1
             {
             ds_list_delete(Destinataire,0);
+            ds_list_delete(SaccocheMessage,0);
             }
         }
     }
@@ -145,12 +155,12 @@ else
             Argument[9] = Alpha
             Argument[10] = 1;
             }
-        /*else
+        else
             {
             Execute = IA_Repos;
             Argument[0] = 1;
             Argument[1] = -1;
-            }*/
+            }
         }
     }
 event_inherited();
