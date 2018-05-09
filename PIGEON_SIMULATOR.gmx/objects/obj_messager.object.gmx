@@ -117,7 +117,7 @@ if Dest != undefined
         with(Dest.id)
             {
             show_debug_message("MESSAGE TRANSMIS 3")
-            Excute = other.ExecuteDestinataire;
+            Execute = other.ExecuteDestinataire;
             Argument = other.ArgumentMessager;
             }
         Message -= 1
@@ -145,43 +145,15 @@ else
             Argument[9] = Alpha
             Argument[10] = 1;
             }
-        /*else
+        else
             {
             Execute = IA_Repos;
             Argument[0] = 1;
             Argument[1] = -1;
-            }*/
+            }
         }
     }
 event_inherited();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self();
-if instance_exists(Officier_sup)
-    {
-    draw_text(x,y,object_get_name(Officier_sup.object_index))
-    }
-draw_text(x,y-10,Message)
 </string>
           </argument>
         </arguments>

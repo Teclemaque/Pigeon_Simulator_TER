@@ -25,10 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//TERRAIN_Draw();
-//draw_text(x,y,map_get_height(0))
+            <string>TERRAIN_Draw();
 
-if(x &gt; view_xview[0]-16 and x &lt; view_xview[0]+view_wport[0]+16 
+
+/*if(x &gt; view_xview[0]-16 and x &lt; view_xview[0]+view_wport[0]+16 
     and y &gt; view_yview[0]-16 and y &lt; view_yview[0]+view_hport[0]+16){
     if(obj_MAP_controller.toggle_papper == 0){ // si affichage normal  
         if(obj_FOG_controller.toggle_fog == 0 or ds_grid_get(obj_FOG_controller.fog,grid_x,grid_y) == 0){
@@ -73,15 +73,6 @@ if(x &gt; view_xview[0]-16 and x &lt; view_xview[0]+view_wport[0]+16
             
             draw_set_color(c)    
             draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
-            /*
-            draw_set_blend_mode(bm_max)
-            var shade = 200 - (ds_grid_get(obj_MAP_controller.grid,grid_x,grid_y)*2.4)
-            draw_set_color(make_colour_rgb(189-100,186-100,107-100))
-            draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
-            
-            draw_set_color(make_colour_rgb(shade,shade,shade))
-            draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
-            */
             draw_set_blend_mode(bm_normal)
             
         } else{
