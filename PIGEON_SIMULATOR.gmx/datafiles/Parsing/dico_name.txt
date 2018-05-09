@@ -1,0 +1,3 @@
+tuer V
+soldat1 N
+deplacer V
