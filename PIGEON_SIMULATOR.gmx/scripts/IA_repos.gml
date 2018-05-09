@@ -1,6 +1,7 @@
 #define IA_Repos
 ///IA_Repos(Repos)
 {
+<<<<<<< HEAD
 if Officiel == 0
     {
     if Argument[0] != 0
@@ -184,4 +185,8 @@ if speed == 0
         }
     }
 exit;
+=======
+speed = random(1.5)+1
+direction = direction + random(40)-20
+>>>>>>> origin/Analyse_Phrase
 }

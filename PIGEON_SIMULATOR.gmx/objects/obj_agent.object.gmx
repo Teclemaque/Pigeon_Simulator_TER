@@ -25,12 +25,21 @@
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>//image_blend = c_yellow
 image_xscale = 0.1+random(0.05)-0.025;
 image_yscale = 0.1+random(0.05)-0.025;
 
 ds_list_add(obj_globVar.grammaire,id);
 /////////////////////Propriété de l'agent///////////////////////////
+=======
+            <string>/*
+Ordre = 0;//0 pas d'ordre en cours, 1 ordre en cours d'execution, sinon ne respecte pas l'ordre ou vient de prendre une décision par lui même
+Type = 0;// 0 = Unité combattante, 1 messager
+Etat = 1;// 1 Valide, 0 invalide, -1 mort
+Camp = choose(-1,1);//indique dans quel camp on est si du meme signe alors sont alliés.
+Chance = random(100);//Variable qui indique si l'agent va mourir ou non
+>>>>>>> origin/Analyse_Phrase
 
 MSpeed = 5+random(2.5);//Vitesse maximale de deplacmement de l'agent
 for (i = 0; i &lt; 15; i++)
@@ -84,9 +93,13 @@ Contact = 0//Indique que l'agent touche quelqu'un d'autre
 A = noone;//Autre Agent sélectionné pour d'eventuelle action
 xx = x;//Pour eviter que l'agent se prenne en compte, lors des perceptions il sera deplacé loin et les calculs seront fait a partir de ses anciennes coordonnés
 t = 0;//timer
+<<<<<<< HEAD
 
 Argument[0] = 1;
 Execute = IA_Repos//IA_Deplacement(noone,noone,noone,point_direction(x,y,mouse_x,mouse_y),-1,0,0,0,1)//IA_Repos(0);//Le script a executer
+=======
+*/
+>>>>>>> origin/Analyse_Phrase
 </string>
           </argument>
         </arguments>

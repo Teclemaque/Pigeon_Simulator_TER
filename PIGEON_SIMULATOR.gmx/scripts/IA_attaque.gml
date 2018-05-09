@@ -178,6 +178,7 @@ if MODE = "ATTAQUE"
         Execute = IA_Attaque;
         }
     }
+<<<<<<< HEAD
     else
         {
         Argument[0] = 1;
@@ -397,4 +398,6 @@ if instance_exists(Officier)
     }
     Execute = IA_Attaque_Soldat;
     exit;
+=======
+>>>>>>> origin/Analyse_Phrase
 }

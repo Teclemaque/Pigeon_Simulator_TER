@@ -162,6 +162,7 @@ else
         }
     }
 exit;
+<<<<<<< HEAD
 }
 
 #define IA_Deplacement_Soldat
@@ -335,4 +336,6 @@ if instance_exists(Officier)
         }
     }
 exit;
+=======
+>>>>>>> origin/Analyse_Phrase
 }

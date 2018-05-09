@@ -3,7 +3,11 @@
   <spriteName>sprite_obj</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
+<<<<<<< HEAD
   <depth>-1000</depth>
+=======
+  <depth>0</depth>
+>>>>>>> origin/Analyse_Phrase
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>

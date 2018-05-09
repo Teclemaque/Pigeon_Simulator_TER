@@ -25,6 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
+<<<<<<< HEAD
             <string>R_fusil = 60;
 
 //HORLOGE
@@ -82,6 +83,14 @@ with(A)
     }
 
 
+=======
+            <string>globalvar R_fusil;
+R_fusil = 90;
+
+global.MAP_Height = 32
+global.MAP_Width = 32
+
+>>>>>>> origin/Analyse_Phrase
 </string>
           </argument>
         </arguments>
