@@ -76,9 +76,7 @@
       <script>scripts\GenerateWhiteNoise.gml</script>
       <script>scripts\getColorZ.gml</script>
       <script>scripts\interpolate.gml</script>
-      <script>scripts\MAP_Create.gml</script>
       <script>scripts\MAP_Create2.gml</script>
-      <script>scripts\MAP_Draw.gml</script>
       <script>scripts\MAP_Draw2.gml</script>
       <script>scripts\MAP_FOG.gml</script>
       <script>scripts\MAP_FOG_CREATE.gml</script>
@@ -95,10 +93,6 @@
       <script>scripts\map_get_height_cone.gml</script>
       <script>scripts\TERRAIN_Draw.gml</script>
       <script>scripts\map_get_terrain.gml</script>
-    </scripts>
-    <scripts name="MAP">
-      <script>scripts\MAP_Create.gml</script>
-      <script>scripts\MAP_Draw.gml</script>
     </scripts>
     <scripts name="SCRIPT TAL">
       <script>scripts\Split_Sentence.gml</script>

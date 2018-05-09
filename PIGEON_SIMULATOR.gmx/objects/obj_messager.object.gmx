@@ -117,7 +117,7 @@ if Dest != undefined
         with(Dest.id)
             {
             show_debug_message("MESSAGE TRANSMIS 3")
-            Excute = other.ExecuteDestinataire;
+            Execute = other.ExecuteDestinataire;
             Argument = other.ArgumentMessager;
             }
         Message -= 1

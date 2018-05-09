@@ -29,7 +29,7 @@
 image_xscale = 0.1+random(0.05)-0.025;
 image_yscale = 0.1+random(0.05)-0.025;
 
-ds_list_add(obj_globVar.grammaire,id);
+ds_list_add(global.grammaire,id);
 /////////////////////Propriété de l'agent///////////////////////////
 
 MSpeed = 5+random(2.5);//Vitesse maximale de deplacmement de l'agent
@@ -120,7 +120,7 @@ if Classe == 0
         }
     }
 
-ds_list_delete(obj_globVar.Gramaire,ds_list_find_index(obj_globVar.Gramaire,id))
+ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
 </string>
           </argument>
         </arguments>
