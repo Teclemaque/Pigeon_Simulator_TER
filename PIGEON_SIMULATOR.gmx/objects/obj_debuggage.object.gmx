@@ -3,58 +3,11 @@
   <spriteName>sprite_obj</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1000</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Creation obj debug
-/**
- * Lancement manuel des ordres primitifs
- * 1- cliquer sur l'unité (last_clicked = unité)
- * 2- appuyer sur une touche de commande :
- *      1 : patrouille
- *      2 : deplacement
- *      3 : attaquer
- *      4 : todo...
- * 3- relacher la touche : l'ordre pars directement sur l'agent     
- 
- */
-
-Last_clicked_y = 0; // coordonnées du dernier clic gauche
-Last_clicked_x = 0;
-
-Selecting_units = false; // rectangle de selection
-
-Last_clicked = noone; // dernier agent cliqué
-
-Selected_agents = ds_list_create(); // groupe d'agents selectionnés
-
-Current_instruction_key = noone; // touche d'ordre (1, 2, 3, ...)
-
-Path = noone; // Chemin de patrouille en cours de construction
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -72,136 +25,32 @@ Path = noone; // Chemin de patrouille en cours de construction
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Commandes souris et clavier
-
-var touche_ordre_deplacement = ord('1');
-var touche_ordre_patrouille = ord('2');
-
-
-/*if(!ds_exists(Selected_agents, ds_type_list)){
-    Selected_agents = ds_list_create();
-}*/
-
-// Si selection simple : placer le selectionné unique dans la liste des selectionnés
-if( ds_list_size(Selected_agents) == 0 &amp;&amp; Last_clicked != noone ){
-    ds_list_add(Selected_agents, Last_clicked)
-}
-
-// chercher une nouvelle touche d'instruction au clavier
-//if current_instruction_key == noone &amp;&amp; last_clicked != noone {
-if Current_instruction_key == noone &amp;&amp; ds_list_size(Selected_agents &gt; 0) {
-    for (var i = ord('0'); i &lt; ord('9'); i++){
-        if keyboard_check_pressed(i){
-          Current_instruction_key = i;
-          
-          if(Current_instruction_key == touche_ordre_deplacement) { // deplacement simple
-            Path = path_add();
-            path_add_point(Path, Last_clicked.x, Last_clicked.y, 20); // destination, sera changé
-          }
-          
-          if(Current_instruction_key == touche_ordre_patrouille) { // ordre de patrouille
-            Path = path_add();
-          }
-          break; 
-        }   
-    }   
-}
-
-// Touche d'ordre relachée : lancer l'ordre
-if Current_instruction_key != noone &amp;&amp; !keyboard_check(Current_instruction_key){
-    show_debug_message("Envoi d'ordres à  : " + string(Selected_agents));
-//    show_debug_message("et à  : " + string(last_clicked));
-    if(Current_instruction_key ==  ord('1')){ // fin  deplacement
-    
-        Message = ds_map_create();// faire un message avec infos et l'envoyer
-        ds_map_add(Message, "type", "order");
-        ds_map_add(Message, "name", "move");
-        ds_map_add(Message, "path", Path);
-        //ds_list_insert(last_clicked.Messages, 0, Message);
-        send_message_to_agents(Selected_agents, Message);
+            <string>if instance_exists(obj_globVar) == false
+    {
+    instance_create(0,0,obj_globVar)
     }
-    else
-    if(Current_instruction_key ==  ord('2')){ // fin  path de patrouille  
-        
-        Message = ds_map_create(); // demander patrouille classique
-        ds_map_add(Message, "type", "order");
-        ds_map_add(Message, "name", "patrol");
-        ds_map_add(Message, "path", Path);
-        //ds_list_insert(last_clicked.Messages, 0, Message);      
-        send_message_to_agents(Selected_agents, Message);
-        
-        Message = ds_map_create(); // mais avant : demander deplacement en point d'origine
-        ds_map_add(Message, "type", "order");
-        ds_map_add(Message, "name", "move");
-        var pathToStart = path_add();
-        path_add_point(pathToStart, Last_clicked.x, Last_clicked.y, 20);
-        path_add_point(pathToStart, path_get_x(Path, 0), path_get_y(Path, 0), 20);
-        ds_map_add(Message, "path", pathToStart);
-        send_message_to_agents(Selected_agents, Message);
-        //ds_list_insert(last_clicked.Messages, 0, Message);
-    }
-    
-    Current_instruction_key = noone; 
-}
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Drag &amp; Drop agent
-// drag &amp; drop actif : pas de touche enfoncée, clic gauche sur la cible
-if  Last_clicked != noone
-    &amp;&amp; !keyboard_check(vk_anykey) 
-    &amp;&amp; mouse_check_button(mb_left) 
-    &amp;&amp; position_meeting(mouse_x, mouse_y, Last_clicked)
-{
-    Last_clicked.x = mouse_x;
-    Last_clicked.y = mouse_y;
-}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="5" enumb="49">
+    <event eventtype="5" enumb="107">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>223</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_current_room</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string></string>
-          </argument>
-        </arguments>
       </action>
     </event>
-    <event eventtype="5" enumb="18">
+    <event eventtype="6" enumb="54">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -218,58 +67,7 @@ if  Last_clicked != noone
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Racourcis Alt+F4, Alt+F5/F9 (quicksave/quickload)
-
-if(keyboard_check(vk_f4)){
-    game_end();
-}
-
-if(keyboard_check(vk_f5)){
-game_save("savefile");
-}
-
-if(keyboard_check(vk_f9)){
-game_load("savefile");
-}
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Gerer la selection de plusieurs agents
-/*
-var exists = ds_exists(Selected_agents, ds_type_list);
-
-//show_debug_message("Left click release");
-if(Selecting_units &amp;&amp; exists){
-    ds_list_empty(Selected_agents);
-    Selected_agents = collision_rectangle_list( Last_clicked_x, Last_clicked_y , mouse_x, mouse_y, obj_agent, false, true ); // or noone
-    
-}else if (!exists){
-    Selected_agents = ds_list_create()
-}
-
-Selecting_units = false;
-*/
+            <string>instance_create(mouse_x,mouse_y,obj_agent_officier0_C2);
 </string>
           </argument>
         </arguments>
@@ -292,69 +90,19 @@ Selecting_units = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Commandes au clic gauche
+            <string>instance_create(mouse_x+random(100)-50,mouse_y+random(100)-50,obj_agent_officier0_C1);
 
-Last_clicked_y = mouse_y;
-Last_clicked_x = mouse_x;
-
-// Cibler un nouvel agent ssi aucune action en cours
-if (Current_instruction_key == noone) {
-    Last_clicked = get_selectable_agent(mouse_x, mouse_y);
-    
-    // ajout d'agent au clic : touche(s) enfoncée(s) et clic gauche dans une zone vide
-    if keyboard_check(vk_anykey) &amp;&amp; Last_clicked == noone  {        
-    
-        if keyboard_check(ord('S')){ // S : créer un agent
-            show_debug_message("Ajout au clic");
-            instance_create(mouse_x,mouse_y,obj_agent);
-            
-            if keyboard_check(vk_control) // Ctrl + S : Créer 100 agents
-                repeat (99) instance_create(mouse_x,mouse_y,obj_agent);   
+/*with(instance_create(mouse_x,mouse_y,obj_agent_officier1_C1))
+    {
+    repeat(round(random(50))+10)
+        {
+        with(instance_create(x,y,obj_agent_C1))
+            {
+            Officier = other.id;
+            ds_list_add(other.Regiment,id);
+            }
         }
-    }
-    
-    // rectangle de selection pour plusieurs unités
-    if( Last_clicked == noone &amp;&amp; !keyboard_check(vk_anykey) ){ 
-        Selecting_units = true;
-    }
-        
-} else {
-    // Action en cours : current_instruction_key != noone
-    if Current_instruction_key == ord('1'){ // 1 : deplacement
-        path_change_point(Path, 0, mouse_x, mouse_y, 10); // ecrase la destination
-    }
-    if Current_instruction_key == ord('2'){ // 2 : patrouiller
-        path_add_point(Path, mouse_x, mouse_y, 10);
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="51">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Supprime l'agent selectionné
-var hit = get_selectable_agent(mouse_x, mouse_y);
-if hit != noone
-{
-    with (hit) instance_destroy();
-}
+    }*/
 </string>
           </argument>
         </arguments>
@@ -377,20 +125,12 @@ if hit != noone
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Dessine les infos debug et formes de selection
-var nb_selected_agents = ds_list_size(Selected_agents);
-
-draw_text(mouse_x,mouse_y-10,fps_real);
-draw_text(0, 0,  "Current instruction : " + string(Current_instruction_key));
-draw_text(0, 10, "Last agent clicked  : " + string(Last_clicked));
-draw_text(0, 20, "Selected agent(s) : " + string(nb_selected_agents));
-draw_text(0, 30, "Path size : " + string(path_get_number(Path)));
-
-
-if(Selecting_units){ // selection multiple d'agents en cours
-    draw_rectangle(Last_clicked_x, Last_clicked_y, mouse_x, mouse_y, true);
-}
-
+            <string>draw_text(mouse_x,mouse_y-10,fps_real)
+draw_text(mouse_x,mouse_y+10,fps)
+draw_text(mouse_x,mouse_y-20,"Officier 0 C1 : "+string(instance_number(obj_agent_officier0_C1))+" C2 : "+string(instance_number(obj_agent_officier0_C2)))
+draw_text(mouse_x,mouse_y-30,"Officier 1 C1 : "+string(instance_number(obj_agent_officier1_C1))+" C2 : "+string(instance_number(obj_agent_officier1_C2)))
+draw_text(mouse_x,mouse_y-40,"Agent C1 : "+string(instance_number(obj_agent_C1))+" C2 : "+string(instance_number(obj_agent_C2)))
+//draw_text(mouse_x,mouse_y-50,instance_number(obj_agent))
 </string>
           </argument>
         </arguments>
