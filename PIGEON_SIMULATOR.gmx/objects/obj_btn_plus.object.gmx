@@ -3,7 +3,7 @@
   <spriteName>spr_icon_plus</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-500</depth>
+  <depth>-999999</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -73,7 +73,7 @@ if(!ds_list_empty(selection)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_arrow(mouse_x_gui(), mouse_y_gui(), x, y, 1)
+            <string>//draw_arrow(mouse_x_gui(), mouse_y_gui(), x, y, 1)
 </string>
           </argument>
         </arguments>
