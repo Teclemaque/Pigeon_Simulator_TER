@@ -28,7 +28,7 @@
             <string>//Creation de l'instance TAL_Grammaire
 //Construction du réseau Grammaire en tant que liste
 globalvar grammaire;
-grammaire = ds_list_create();
+grammaire=ds_list_create();
 
 //Ouverture du fichier grammar, le systeme de regles grammaticale
 if(file_exists("Parsing/grammar.txt"))
@@ -68,8 +68,6 @@ if(file_exists("Parsing/grammar.txt"))
 }
 else
 {show_debug_message("Erreur:Grammaire introuvable");}
-
-game_end();
 </string>
           </argument>
         </arguments>

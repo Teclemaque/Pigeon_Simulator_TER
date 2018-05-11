@@ -66,6 +66,7 @@ if MODE = "ATTAQUE"
                     Dir1 = point_direction(x,y,CIBLE.x,CIBLE.y);
                     if collision_line(x,y,CIBLE.x,CIBLE.y,Allie,1,1) == noone
                         {
+                        sound_play(sound_fusil_1);
                         with(instance_create(x,y,obj_arme))
                             {
                             direction = other.direction;//On fait partir la balle dans sa direction
@@ -257,6 +258,7 @@ if instance_exists(Officier)
                         {
                         if collision_line(x,y,Cible.x,Cible.y,Allie,1,1) == noone
                             {
+                            sound_play(sound_fusil_1);
                             with(instance_create(x,y,obj_arme))
                                 {
                                 direction = other.Dir1;//On fait partir la balle dans sa direction
@@ -397,4 +399,4 @@ if instance_exists(Officier)
     }
     Execute = IA_Attaque_Soldat;
     exit;
-}
+}

@@ -34,4 +34,3 @@ if(yy + 1 <= room_height and ds_grid_get(done,xx,yy+1) = 0 and ds_grid_get(terra
     }    
 }
 
-

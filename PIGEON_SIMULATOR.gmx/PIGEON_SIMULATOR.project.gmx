@@ -25,7 +25,9 @@
     </datafiles>
   </datafiles>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sound_fusil_1</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_pigeon</sprite>
     <sprite>sprites\spr_obstacle</sprite>
@@ -38,11 +40,12 @@
     <sprite>sprites\spr_soldat_marche</sprite>
     <sprite>sprites\spr_balle</sprite>
     <sprite>sprites\TAL</sprite>
+    <sprite>sprites\spr_icon_minus</sprite>
+    <sprite>sprites\spr_icon_plus</sprite>
+    <sprite>sprites\transparent</sprite>
   </sprites>
   <backgrounds name="background"/>
-  <paths name="paths">
-    <path>paths\path_test</path>
-  </paths>
+  <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="SCRIPT IA">
       <script>scripts\IA_Attaque.gml</script>
@@ -78,9 +81,7 @@
       <script>scripts\GenerateWhiteNoise.gml</script>
       <script>scripts\getColorZ.gml</script>
       <script>scripts\interpolate.gml</script>
-      <script>scripts\MAP_Create.gml</script>
       <script>scripts\MAP_Create2.gml</script>
-      <script>scripts\MAP_Draw.gml</script>
       <script>scripts\MAP_Draw2.gml</script>
       <script>scripts\MAP_FOG.gml</script>
       <script>scripts\MAP_FOG_CREATE.gml</script>
@@ -105,30 +106,27 @@
       <script>scripts\Extract_Order.gml</script>
       <script>scripts\tree_assemble.gml</script>
     </scripts>
-    <scripts name="ORDRES">
-      <script>scripts\ordre_agent_patrouille.gml</script>
-    </scripts>
-    <scripts name="utils">
-      <script>scripts\send_message_to_agents.gml</script>
-      <script>scripts\get_selectable_agent.gml</script>
-    </scripts>
-    <scripts name="GUI">
-      <scripts name="toolbox">
-        <script>scripts\collision_rectangle_list.gml</script>
-        <script>scripts\get_targets_names.gml</script>
-        <script>scripts\add_command_to_historic.gml</script>
-        <script>scripts\find_general.gml</script>
-        <script>scripts\get_action_from_text.gml</script>
-        <script>scripts\send_ordre_to_agent.gml</script>
-      </scripts>
-      <script>scripts\get_ui_dimensions.gml</script>
+    <scripts name="SCRIPT GUI">
+      <script>scripts\add_command_to_historic.gml</script>
+      <script>scripts\add_group_to_leftPanel.gml</script>
+      <script>scripts\collision_rectangle_list.gml</script>
       <script>scripts\draw_agents_selection.gml</script>
+      <script>scripts\draw_agent_rectangle.gml</script>
+      <script>scripts\draw_group_rectangle.gml</script>
+      <script>scripts\find_general.gml</script>
+      <script>scripts\get_action_from_text.gml</script>
+      <script>scripts\get_selectable_agent.gml</script>
+      <script>scripts\get_targets_names.gml</script>
+      <script>scripts\get_targets_names_and_coords.gml</script>
+      <script>scripts\get_ui_dimensions.gml</script>
       <script>scripts\is_clicked.gml</script>
-      <scripts name="leftPanel">
-        <script>scripts\draw_group_rectangle.gml</script>
-        <script>scripts\add_group_to_leftPanel.gml</script>
-        <script>scripts\remove_group_from_leftPanel.gml</script>
-      </scripts>
+      <script>scripts\mouse_x_gui.gml</script>
+      <script>scripts\mouse_y_gui.gml</script>
+      <script>scripts\onBtnPlusClicked.gml</script>
+      <script>scripts\remove_group_from_leftPanel.gml</script>
+      <script>scripts\scr_text.gml</script>
+      <script>scripts\send_message_to_agents.gml</script>
+      <script>scripts\send_ordre_to_agent.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -184,10 +182,6 @@
       <object>objects\Obj_Terrain_sol</object>
       <object>objects\obj_VIEW_controller</object>
     </objects>
-    <object>objects\obj_obstacle</object>
-    <object>objects\Obj_Terrain_0</object>
-    <object>objects\Obj_Terrain_1</object>
-    <object>objects\TAL_Grammaire</object>
     <objects name="GESTION JEU">
       <object>objects\obj_globVar</object>
       <object>objects\obj_shaderEnd</object>
@@ -195,9 +189,26 @@
       <object>objects\obj_gestion_affichage</object>
       <object>objects\obj_debuggage</object>
     </objects>
+    <object>objects\TAL_Grammaire</object>
+    <objects name="GUI">
+      <object>objects\obj_btn_minus</object>
+      <object>objects\obj_btn_plus</object>
+      <object>objects\obj_general</object>
+      <object>objects\obj_group_rectangle</object>
+      <object>objects\obj_gui</object>
+      <object>objects\obj_GUI_controller</object>
+      <object>objects\obj_leftPanel</object>
+      <object>objects\obj_rightPanel</object>
+      <object>objects\obj_settingsPanel</object>
+      <object>objects\obj_text</object>
+      <object>objects\obj_toolbox</object>
+      <object>objects\obj_topPanel</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
+    <room>rooms\room0_new</room>
+    <room>rooms\room0</room>
     <room>rooms\room_darret</room>
   </rooms>
   <help>

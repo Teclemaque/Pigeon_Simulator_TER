@@ -9,8 +9,13 @@ if( ds_map_exists(global.Dimensions, "height" )){
     return global.Dimensions;
 }
 
-var minimap_width = 150
-var minimap_height = 150
+//var minimap_width = 150
+//var minimap_height = 150
+
+var minimap_width = Obj_mini_map_controler.w * 3
+var minimap_height = Obj_mini_map_controler.h * 3
+
+
 
 var margeD = minimap_width; // marge droite, en px
 var margeG = margeD;        // marge gauche, en px

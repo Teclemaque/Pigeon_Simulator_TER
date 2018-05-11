@@ -30,4 +30,3 @@ for(i = 1;i<global.MAP_Height-1;i++)
 */
 var baseNoise = script_execute(GenerateWhiteNoise)
 MAP_Precise = script_execute(generatePerlinNoise,baseNoise,6)
-
