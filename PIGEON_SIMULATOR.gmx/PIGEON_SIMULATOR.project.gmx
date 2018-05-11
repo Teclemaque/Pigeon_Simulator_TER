@@ -25,7 +25,9 @@
     </datafiles>
   </datafiles>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sound_fusil_1</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_pigeon</sprite>
     <sprite>sprites\spr_obstacle</sprite>

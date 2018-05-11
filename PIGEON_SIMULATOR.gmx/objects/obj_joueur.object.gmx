@@ -125,11 +125,11 @@ while( !ds_list_empty(Ordres) ){
             ORDRE = "GROUPE";
             ds_list_clear(Regiment);
             }
-        else
+        /*else
             {
             ORDRE = "SEPARATION"
             ds_list_clear(Regiment);
-            }
+            }*/
         }
     }
 </string>

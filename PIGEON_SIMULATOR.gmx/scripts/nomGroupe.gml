@@ -46,16 +46,20 @@ if(withName){
 // Trouver le numero à attribuer au groupe
 var numero = "";
 N1 = 0;
-if(agent != agent.Commandant_sup){ // si le père a le numero 12
-    numero  = string(agent.Commandant_sup.Numero); // on prend le numero 121
-    N1 = string_length(agent.Commandant_sup.Numero)
+if instance_exists(agent.Commandant)
+    {
+    if (agent != agent.Commandant_sup)
+        { // si le père a le numero 12
+        numero  = string(agent.Commandant_sup.Numero); // on prend le numero 121
+        N1 = string_length(agent.Commandant_sup.Numero)
+        
+        if (groupName == agent.Commandant_sup.Troupe)
+            {
+            agent.Commandant_sup = agent.Commandant;
+            }
+        }  
+    }
     
-    if (groupName == agent.Commandant_sup.Troupe)
-        {
-        agent.Commandant_sup = agent.Commandant;
-        }
-    
-}
 // On affecte un numero par defaut a chaque type de formation
 if (groupName == "bataillon "){
     num = "0";

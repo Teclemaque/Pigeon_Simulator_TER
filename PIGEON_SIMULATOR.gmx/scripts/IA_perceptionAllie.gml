@@ -84,7 +84,7 @@ if Classe == 1
                             A.Officier = other.Officier;
                             }
                         }*/
-                    //nomGroupe(ID);
+                    nomGroupe(ID);
                     instance_destroy();
                     }
                 }

@@ -30,6 +30,16 @@ image_xscale = 5;
 image_yscale = 0.25;
 image_alpha = random(1);
 Precision = random(100)
+
+if sound_exists(sound_fusil_1) == true
+    {
+    if instance_exists(obj_joueur)
+    &amp;&amp; distance_to_object(obj_joueur) &lt;= 400
+        {
+        son = audio_play_sound(sound_fusil_1,1,false);
+        audio_sound_gain(son, 1-distance_to_object(obj_joueur)/400, 0);
+        }
+    }
 </string>
           </argument>
         </arguments>

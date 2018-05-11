@@ -29,15 +29,11 @@
 
 Grade = 0;
 
-//image_xscale = 1.5;
-//image_yscale = 1.5;
-image_blend = c_red;
-//Camp = -1;
+
+image_blend = c_yellow;
 
 Commandant_sup = Commandant //Vers quoi on est gradé
-//Off_inf = obj_agent_officier0_C1//Vers quoi on est dégradé
-Off = obj_agent_officier0_C1
-//Off = obj_agent_officier0_C1;
+Off = obj_agent_officier0_C1;
 </string>
           </argument>
         </arguments>
