@@ -3,8 +3,31 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="2" name="datafiles">
+    <datafiles number="2" name="Parsing">
+      <datafile>
+        <name>grammar.txt</name>
+        <exists>-1</exists>
+        <size>0</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>grammar.txt</filename>
+      </datafile>
+    </datafiles>
+  </datafiles>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sound_fusil_1</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_pigeon</sprite>
     <sprite>sprites\spr_obstacle</sprite>
@@ -16,6 +39,10 @@
     <sprite>sprites\spr_soldat</sprite>
     <sprite>sprites\spr_soldat_marche</sprite>
     <sprite>sprites\spr_balle</sprite>
+    <sprite>sprites\TAL</sprite>
+    <sprite>sprites\spr_icon_minus</sprite>
+    <sprite>sprites\spr_icon_plus</sprite>
+    <sprite>sprites\transparent</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -54,9 +81,7 @@
       <script>scripts\GenerateWhiteNoise.gml</script>
       <script>scripts\getColorZ.gml</script>
       <script>scripts\interpolate.gml</script>
-      <script>scripts\MAP_Create.gml</script>
       <script>scripts\MAP_Create2.gml</script>
-      <script>scripts\MAP_Draw.gml</script>
       <script>scripts\MAP_Draw2.gml</script>
       <script>scripts\MAP_FOG.gml</script>
       <script>scripts\MAP_FOG_CREATE.gml</script>
@@ -74,10 +99,42 @@
       <script>scripts\TERRAIN_Draw.gml</script>
       <script>scripts\map_get_terrain.gml</script>
     </scripts>
+    <scripts name="SCRIPT TAL">
+      <script>scripts\Split_Sentence.gml</script>
+      <script>scripts\CYK.gml</script>
+      <script>scripts\list_to_string.gml</script>
+      <script>scripts\Extract_Order.gml</script>
+      <script>scripts\tree_assemble.gml</script>
+    </scripts>
+    <scripts name="SCRIPT GUI">
+      <script>scripts\add_command_to_historic.gml</script>
+      <script>scripts\add_group_to_leftPanel.gml</script>
+      <script>scripts\collision_rectangle_list.gml</script>
+      <script>scripts\draw_agents_selection.gml</script>
+      <script>scripts\draw_agent_rectangle.gml</script>
+      <script>scripts\draw_group_rectangle.gml</script>
+      <script>scripts\find_general.gml</script>
+      <script>scripts\get_action_from_text.gml</script>
+      <script>scripts\get_selectable_agent.gml</script>
+      <script>scripts\get_targets_names.gml</script>
+      <script>scripts\get_targets_names_and_coords.gml</script>
+      <script>scripts\get_ui_dimensions.gml</script>
+      <script>scripts\is_clicked.gml</script>
+      <script>scripts\mouse_x_gui.gml</script>
+      <script>scripts\mouse_y_gui.gml</script>
+      <script>scripts\onBtnPlusClicked.gml</script>
+      <script>scripts\remove_group_from_leftPanel.gml</script>
+      <script>scripts\scr_text.gml</script>
+      <script>scripts\send_message_to_agents.gml</script>
+      <script>scripts\send_ordre_to_agent.gml</script>
+    </scripts>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shader0.shader</shader>
   </shaders>
+  <fonts name="fonts">
+    <font>fonts\fnt_toolbox</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_globVar2</object>
     <objects name="AGENTS">
@@ -131,6 +188,21 @@
       <object>objects\obj_shaderBegin</object>
       <object>objects\obj_gestion_affichage</object>
       <object>objects\obj_debuggage</object>
+    </objects>
+    <object>objects\TAL_Grammaire</object>
+    <objects name="GUI">
+      <object>objects\obj_btn_minus</object>
+      <object>objects\obj_btn_plus</object>
+      <object>objects\obj_general</object>
+      <object>objects\obj_group_rectangle</object>
+      <object>objects\obj_gui</object>
+      <object>objects\obj_GUI_controller</object>
+      <object>objects\obj_leftPanel</object>
+      <object>objects\obj_rightPanel</object>
+      <object>objects\obj_settingsPanel</object>
+      <object>objects\obj_text</object>
+      <object>objects\obj_toolbox</object>
+      <object>objects\obj_topPanel</object>
     </objects>
   </objects>
   <rooms name="rooms">

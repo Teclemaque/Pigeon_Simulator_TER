@@ -40,7 +40,10 @@ global.MAP_Width = 32
 
 // NOM
 Regiments = ds_map_create();
+//globalvar grammaire;
+
 grammaire = ds_list_create();
+global.grammaire = grammaire;
 //FANTASSIN
 A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
 A.Officiel = 1;

@@ -30,14 +30,7 @@ if instance_exists(Officier.Formation)
         Argument[4] = Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction));
         Argument[5] = Dir1;
         Argument[6] = -1;
-        //if Dist > 20
-            {
-            Argument[7] = abs(MSpeed-MSpeed/(Dist+1))//Dist/MSpeed+1;
-            }
-        /*else
-            {
-            Argument[7] = MSpeed/10//Dist/MSpeed+1;
-            }*/
+        Argument[7] = abs(MSpeed-MSpeed/(Dist+1));
         Argument[8] = 0;
         Argument[9] = Alpha;
         Argument[10] = 1;

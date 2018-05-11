@@ -32,6 +32,7 @@ Officiel = 1;// messager officiel = estafette;
 Message = 0;// 0 n'a pas de message a remettre, 1 il doit en remettre 1
 
 Destinataire = ds_list_create();//A qui remettre le message, doit devenir une liste
+SaccocheMessage = ds_list_create();
 Ordre = 1;// 1 Je reviens a celui qui m'a envoyé, 0 je reste le recepteur, 1 comportement aléatoire
 
 distance_give = 10; // distance max pour remettre le message 0 lettre
@@ -65,6 +66,7 @@ Execute = IA_Repos;
           <argument>
             <kind>1</kind>
             <string>event_inherited()
+ds_list_destroy(SaccocheMessage);
 ds_list_destroy(Destinataire);
 </string>
           </argument>
@@ -114,17 +116,18 @@ if Dest != undefined
     {
     if distance_to_object(Dest) &lt;= distance_give
         {
+        Mess = ds_list_find_value(SaccocheMessage,0)
+        
         with(Dest.id)
             {
-            show_debug_message("MESSAGE TRANSMIS 3")
-            Execute = other.ExecuteDestinataire;
-            Argument = other.ArgumentMessager;
+            ds_list_add(Message,other.Mess);
             }
         Message -= 1
         
         if Ordre == 1
             {
             ds_list_delete(Destinataire,0);
+            ds_list_delete(SaccocheMessage,0);
             }
         }
     }
@@ -154,6 +157,34 @@ else
         }
     }
 event_inherited();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+if instance_exists(Officier_sup)
+    {
+    draw_text(x,y,object_get_name(Officier_sup.object_index))
+    }
+draw_text(x,y-10,Message)
 </string>
           </argument>
         </arguments>
