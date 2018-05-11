@@ -10,10 +10,7 @@ MAP_Precise = ds_grid_create(global.MAP_Width,global.MAP_Height)
 MAP_Equipe1 = MAP_Precise
 //MAP_Equipe2 = MAP_Precise
 
-<<<<<<< HEAD
 /*
-=======
->>>>>>> origin/Analyse_Phrase
 //init de la carte précise
 var i 
 var j 
@@ -29,11 +26,8 @@ for(i = 1;i<global.MAP_Height-1;i++)
         var somme = ds_grid_get_mean(MAP_Precise,j-1,i-1,j+1,i+1)
         if(random(100) < 30) //30% de chance d'uniformisé
             ds_grid_set(MAP_Precise,j,i,somme)
-<<<<<<< HEAD
 }
 */
 var baseNoise = script_execute(GenerateWhiteNoise)
 MAP_Precise = script_execute(generatePerlinNoise,baseNoise,6)
-=======
-}
->>>>>>> origin/Analyse_Phrase
+

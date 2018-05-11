@@ -16,16 +16,7 @@ for(i = 0;i<global.MAP_Height;i++)
          image_index = sprite_color+1;
          image_xscale = size_l
          image_yscale = size_h
-<<<<<<< HEAD
          image_speed = 0;
         } 
     
 }
-=======
-         image_speed = 0
- //grid_x = j
- //grid_y = i
-        } 
-    
-}
->>>>>>> origin/Analyse_Phrase

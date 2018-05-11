@@ -25,7 +25,6 @@
         <arguments>
           <argument>
             <kind>1</kind>
-<<<<<<< HEAD
             <string>R_fusil = 60;
 
 //HORLOGE
@@ -41,56 +40,20 @@ global.MAP_Width = 32
 
 // NOM
 Regiments = ds_map_create();
-grammaire = ds_list_create();
+
 //FANTASSIN
-A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
-A.Officiel = 1;
-for (i = 0; i &lt; 805; i++)
+I1 = round(random(50))
+//I2 = round(random(500))
+
+for (i = 0; i &lt; I1; i++)
     {
-    B = instance_create(random(1024),random(728),obj_agent_C1)
-    B.Commandant = A.id
-    ds_list_add(A.Regiment,B.id);
+    instance_create(random(512)+512,random(768),obj_agent_officier0_C1);
     }
-with(A)
+/*for (i = 0; i &lt; I2; i++)
     {
-    nomGroupe(id,true);
-    List[0] = id;
-    Argument[0] = List;
-    Argument[1] = 4;
-    Argument[2] = 200;
-    Argument[3] = 1;
-    Execute = IA_Groupe;
-    }
-    
-/*A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
-A.Officiel = 1;
-for (i = 0; i &lt; 805; i++)
-    {
-    B = instance_create(random(1024),random(728),obj_agent_C1)
-    B.Commandant = A.id
-    ds_list_add(A.Regiment,B.id);
-    }
-with(A)
-    {
-    nomGroupe(id,true);
-    
-    List[0] = id;
-    Argument[0] = List;
-    Argument[1] = 5;
-    Argument[2] = 200;
-    Argument[3] = 1;
-    Execute = IA_Groupe;
+    instance_create(random(512),random(768),obj_agent_officier0_C2);
     }
 
-
-=======
-            <string>globalvar R_fusil;
-R_fusil = 90;
-
-global.MAP_Height = 32
-global.MAP_Width = 32
-
->>>>>>> origin/Analyse_Phrase
 </string>
           </argument>
         </arguments>
@@ -134,11 +97,6 @@ if H &gt;= 24
     J++;
     H = 0;
     }
-    
-if room == room_darret
-    {
-    game_end();
-    }
 </string>
           </argument>
         </arguments>
@@ -161,8 +119,8 @@ if room == room_darret
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(10,70,Temps);
-draw_text(10,80,"Jour : "+string(J)+" heure : "+string(H)+" min : "+string(M)+" sec : "+string(S));
+            <string>draw_text(view_xview[0]+50,view_yview[0]+50,Temps);
+draw_text(view_xview[0]+50,view_yview[0]+60,"Jour : "+string(J)+" heure : "+string(H)+" min : "+string(M)+" sec : "+string(S));
 </string>
           </argument>
         </arguments>
@@ -171,23 +129,17 @@ draw_text(10,80,"Jour : "+string(J)+" heure : "+string(H)+" min : "+string(M)+" 
     <event eventtype="10" enumb="27">
       <action>
         <libid>1</libid>
-        <id>224</id>
+        <id>332</id>
         <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>0</useapplyto>
         <exetype>1</exetype>
-        <functionname>action_another_room</functionname>
+        <functionname>action_end_game</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>11</kind>
-            <room>room_darret</room>
-          </argument>
-        </arguments>
       </action>
     </event>
   </events>
