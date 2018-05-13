@@ -36,8 +36,9 @@ if sound_exists(sound_fusil_1) == true
     if instance_exists(obj_joueur)
     &amp;&amp; distance_to_object(obj_joueur) &lt;= 400
         {
-        son = audio_play_sound(sound_fusil_1,1,false);
-        audio_sound_gain(son, 1-distance_to_object(obj_joueur)/400, 0);
+        //son = audio_play_sound(choose(sound_fusil_1,sound_fusil_2,sound_fusil_3,sound_fusil_4,sound_fusil_5),distance_to_point(mouse_x,mouse_y),false);
+        //audio_sound_gain(son, 1-distance_to_object(obj_joueur)/400, 0);
+        son = audio_play_sound_at(choose(sound_fusil_1,sound_fusil_2,sound_fusil_3,sound_fusil_4,sound_fusil_5), x, y, 0, 200, 600, 1, false, 1);
         }
     }
 </string>

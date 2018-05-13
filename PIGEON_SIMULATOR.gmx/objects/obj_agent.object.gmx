@@ -143,13 +143,25 @@ ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (x &lt; view_xview[0] || x &gt; view_xview[0]+view_wview[0] || y &lt; view_yview[0] || y &gt; view_yview[0]+view_hview[0])
+            <string>if (x &gt;= view_xview[0] &amp;&amp; x &lt;= view_xview[0]+view_wview[0] &amp;&amp; y &gt;= view_yview[0] &amp;&amp; y &lt;= view_yview[0]+view_hview[0])
+&amp;&amp; obj_MAP_controller.toggle_papper == 0
     {
-    visible = false
+    visible = true;
+    image_alpha = 1;
     }
 else
     {
-    visible = true
+    if (x &gt;= view_xview[0] &amp;&amp; x &lt;= view_xview[0]+view_wview[0] &amp;&amp; y &gt;= view_yview[0] &amp;&amp; y &lt;= view_yview[0]+view_hview[0])
+    &amp;&amp; Classe == 1 &amp;&amp; (Officiel == 1 || ds_list_size(Regiment) &gt; 100)
+        {
+        visible = true;
+        image_alpha = 0;
+        //draw_sprite(spr_jeton,-1,x,y);
+        }
+    else
+        {
+        visible = false;
+        }
     }
 
 Chance = random(100);
@@ -567,6 +579,36 @@ image_angle = direction;
 
 VTerrain = Z0*Cadence/100;
 speed = Cadence - VTerrain;//&lt;--Ralentissement du au terrain
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+
+if obj_MAP_controller.toggle_papper == 1
+&amp;&amp; Classe == 1 &amp;&amp; Officiel == 1
+    {
+    draw_sprite(spr_jeton,-1,x,y);
+    }
 
 </string>
           </argument>

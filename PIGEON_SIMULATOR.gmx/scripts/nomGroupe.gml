@@ -2,7 +2,6 @@
 /// A utiliser pour créer et réserver le nom disponible pour son groupe dans global.Regiments
 /// @param agent : l'id de l'agent dont on veut le nom du bataillon
 /// @param withName :  ajoute le nom du type de groupe, ex : "Escouade123" si true, "123" sinon
-show_debug_message("Grade2 "+string(Grade));
 if(argument_count < 2){
     Arg = true; // withName = true par défaut
 }
@@ -17,7 +16,7 @@ var withName = Arg;
 var groupName = "";
 
 if(withName){
-    var groupSize = ds_list_size(Regiment);
+    var groupSize = ds_list_size(agent.Regiment);
     
     if (groupSize > 804 && agent.Grade <= 12){
         groupName = "régiment "
@@ -43,6 +42,23 @@ if(withName){
     }
 }
 
+if ds_list_size(agent.Regiment) > 2*agent.Grade
+    {
+    for (i = 0; i < (agent.Grade)/2; i++)
+        {
+        A = ds_list_find_value(agent.Regiment,1);
+        Mess = instance_create(A.x,A.y,obj_messager_C1);
+        // Faut faire un transfert de données entre les 2
+        Mess.Officier_sup = agent.id;
+        ds_list_delete(agent.Regiment,1);
+        
+        with(A)
+            {
+            instance_destroy();
+            }
+        
+        }
+    }
 // Trouver le numero à attribuer au groupe
 var numero = "";
 N1 = 0;
@@ -108,6 +124,7 @@ if (agent.Troupe != groupName){
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
+    
     
     return fullName;
 }

@@ -37,8 +37,6 @@ Ordre = 1;// 1 Je reviens a celui qui m'a envoyé, 0 je reste le recepteur, 1 co
 
 distance_give = 10; // distance max pour remettre le message 0 lettre
 
-ArgumentMessager[] = 0;
-ExecuteDestinataire = noone;
 
 Argument[0] = 1;
 Argument[1] = -1;
@@ -116,17 +114,42 @@ if Dest != undefined
     {
     if distance_to_object(Dest) &lt;= distance_give
         {
-        Mess = ds_list_find_value(SaccocheMessage,0)
+        Mess = ds_list_find_value(SaccocheMessage,0);
         
-        with(Dest.id)
+        if Mess[0] != "RAPPORT"
             {
-            show_debug_message("MESSAGE TRANSMIS 3")
-            //Execute = other.ExecuteDestinataire;
-            Execute = other.Mess[0]
-            //Argument = other.ArgumentMessager;
-            for (i = 1; i &lt; array_length_1d(other.Mess); i++)
+            with(Dest.id)
                 {
-                Argument[i] = other.Mess[i];
+                Execute = other.Mess[0];
+                for (i = 1; i &lt; array_length_1d(other.Mess); i++)
+                    {
+                    Argument[i-1] = other.Mess[i];
+                    }
+                }
+            }
+        else
+            {
+            with(Dest.id)
+                {
+                Rap = ""
+                for (i = 0; i &lt; array_length_1d(other.Mess); i++)
+                    {
+                    if i &lt;= 6
+                        {
+                        Rap += " "+string(other.Mess[i])
+                        }
+                    else
+                        {
+                        m = array_length_1d(other.Mess[i])
+                        M = other.Mess[i];
+                        for (j = 0; j &lt; m; j++)
+                            {
+                            Rap += " "+string(M[j]);
+                            } 
+                        }
+                    //ds_list_add(Dest.Renseignement,other.Mess[i]);
+                    }
+                show_debug_message(Rap);
                 }
             }
         Message -= 1
@@ -140,7 +163,7 @@ if Dest != undefined
     }
 else
     {
-    if Message = 0
+    if Message == 0
         {
         if distance_to_object(Officier_sup) &gt; 20
             {

@@ -16,7 +16,7 @@ or instance_exists(Ennemi)
                 {
                 if (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)
                     {
-                    Dist += distance_to_object(A)/2
+                    Dist += distance_to_object(A)
                     }
                 instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
                 }
@@ -70,7 +70,7 @@ or instance_exists(Ennemi)
                 {
                 if (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)
                     {
-                    Dist += distance_to_object(A)/2
+                    Dist += distance_to_object(A)
                     }
                 instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
                 }
