@@ -32,6 +32,7 @@ Targets = ds_list_create(); // cibles pour l'ordre à envoyer
 State = "select_units"; // {select_units, select_order, select_coords}, état courant 
 ActionKey = noone; // touche d'ordre enfoncée
 Text = ""; // contenu de la text bar
+Error = "''It's not a bug, it's a feature''";
 Historic = ds_list_create(); // historique des derniers messages
 historic_index = -1;
 historic_size = 10; // taille de sauvegarde de l'historique
@@ -90,16 +91,27 @@ image_yscale = boxheight / sprite_height;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Changer le curseur texte si focus
-if(alpha == alpha_in){
-    if(Cursor == "|"){
-        Cursor = "";
-    }else {
-        Cursor = "|";
-    }    
+            <string>/// Capter l'entrée clavier
+//Text = string(keyboard_string);
+
+
+// todo : balancer dans le on vk_enter pressed
+// Valider un message du textField
+if (keyboard_check_pressed(vk_enter)){
+    add_command_to_historic(Text, Historic, historic_size);
+    var action = get_action_from_text(Text);
+    ds_list_add(General.Ordres, action); // transmettre l'ordre structuré au général
+    
+    Text = "";
+    historic_index = -1; // retour à la base de l'historique
+
 }
 
-alarm[0] =  room_speed; // reprogrammer l'alarme
+// Afficher les unités selectionnées dans le textField
+//if(ds_list_size(Targets) &gt; 0 ) show_message("Cibles en cours");
+Text += get_targets_names(Targets);
+
+keyboard_string = Text;
 </string>
           </argument>
         </arguments>
@@ -123,25 +135,14 @@ alarm[0] =  room_speed; // reprogrammer l'alarme
           <argument>
             <kind>1</kind>
             <string>/// Capter l'entrée clavier
-Text = string(keyboard_string);
+//Text = string(keyboard_string);
 
-// todo : balancer dans le on vk_enter pressed
-// Valider un message du textField
-if (keyboard_check_pressed(vk_enter)){
-    add_command_to_historic(Text, Historic, historic_size);
-    var action = get_action_from_text(Text);
-    ds_list_add(General.Ordres, action); // transmettre l'ordre structuré au général
-    
-    Text = "";
-    historic_index = -1; // retour à la base de l'historique
-    
-}
+
+
 
 // Afficher les unités selectionnées dans le textField
 //if(ds_list_size(Targets) &gt; 0 ) show_message("Cibles en cours");
 Text += get_targets_names(Targets);
-
-keyboard_string = Text;
 </string>
           </argument>
         </arguments>
@@ -250,6 +251,18 @@ draw_text_ext
     x + 1.5 * padding,
     y + 1.5 * padding,
     Text + Cursor,// + string(sprite_width),
+    row_height, // distance entre chaque ligne de texte
+    maxlength // taille avant retour à la ligne
+);
+
+// Error message
+draw_set_colour(c_red);
+draw_text_ext
+(
+    x + 1.5 * padding,
+    //y + 1.5 * padding + 
+    textfield_y + text_height + 1.5 *  padding,
+    Error,// + string(sprite_width),
     row_height, // distance entre chaque ligne de texte
     maxlength // taille avant retour à la ligne
 );
@@ -377,7 +390,7 @@ if( historic_index &lt; 0 ){
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="1">
+    <event eventtype="9" enumb="13">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -394,28 +407,71 @@ if( historic_index &lt; 0 ){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Actions au clavier
+            <string>// todo : balancer dans le on vk_enter pressed
+// Valider un message du textField
+if (keyboard_check_pressed(vk_enter)){
+    add_command_to_historic(Text, Historic, historic_size);
+    var action = get_action_from_text(Text);
+    show_debug_message("TODO  transmettre au joueur");
+//    ds_list_add(General.Ordres, action); // transmettre l'ordre structuré au général
+    
+    Text = "";
+    historic_index = -1; // retour à la base de l'historique
 
-switch(keyboard_key){
-    case ord('1'):
-        State = "select_order";
-        ActionKey = 1        
-        break;
-    case ord('2'):
-        State = "select_order";
-        ActionKey = 2
-        break;
-    case ord('3'):
-        State = "select_order";
-        ActionKey = 3
-        break;
-    case ord('4'):
-        State = "select_order";
-        ActionKey = 4
-        break;    
-    default:
-        ActionKey = noone;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="10" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Rentrer le texte
+
+var c = keyboard_lastchar;
+
+var alter =     keyboard_check_direct(vk_lalt)
+            ||  keyboard_check_direct(vk_lcontrol)
+            ||  keyboard_check_direct(vk_lshift)
+            
+if alter exit; // ne pas réagir sur un ALT/SHIFT/CTRL + quelque chose
+
+var del = keyboard_check_released(vk_backspace);
+if(del){
+    var l = string_length(Text);
+    
+    if(l &gt; 0){
+        Text = string_copy(Text, 0, l-1);
+    }
+    keyboard_lastkey = -1; // invalider la touche
+}
+
+var valid =    c &gt;= 'a' &amp;&amp; c &lt;= 'z' 
+            || c &gt;= 'A' &amp;&amp; c &lt;= 'Z' 
+            || c &gt;= '0' &amp;&amp; c &lt;= '9'
+            || c &gt;= ' ' &amp;&amp; c &lt;= ';'
+
+if valid
+   {
+   Text += keyboard_lastchar;   
+   }
+   
+keyboard_lastkey = -1;
 </string>
           </argument>
         </arguments>

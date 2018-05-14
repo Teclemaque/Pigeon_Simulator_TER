@@ -63,7 +63,7 @@ or instance_exists(Ennemi)
         { 
         A = instance_nearest(xx+lengthdir_x(Dist,direction),y+lengthdir_y(Dist,direction),Ennemi);//Recherche de l'agent le plus proche
         
-        if A.id != id //Et que ce n'est pas lui
+        if instance_exists(A) &&  A.id != id //Et que ce n'est pas lui
             {
             if map_visible(A.id) == false//collision_line(xx,y,A.xx,A.y,Obj_Terrain_Crete,1,1) != noone //Si presence d'un obstacle entre eux
             or (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)//Si agent n'est pas dans son champ de perception

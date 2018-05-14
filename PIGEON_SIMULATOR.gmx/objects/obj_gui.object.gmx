@@ -81,6 +81,8 @@ if( ds_list_empty(Selection) ){ // si clic simple dans le vide
       coordinates = string(mouse_x) + ":" + string(mouse_y) + " ";
       //keyboard_string += coordinates; // todo : move to toolbox
       toolbox.coordinates = coordinates;
+      toolbox.Text += coordinates 
+      
       var mouse_on_view_x = mouse_x &gt;= global.Dimensions[? "startx"] &amp;&amp; mouse_x &lt;= global.Dimensions[? "endx"]
       var mouse_on_view_y = mouse_y &gt;= global.Dimensions[? "starty"] &amp;&amp; mouse_y &lt;= global.Dimensions[? "endy"]
       if( mouse_on_view_x &amp;&amp; mouse_on_view_y ){ // clic dans la vue principale
@@ -117,6 +119,8 @@ click_origin_y = noone;
 //if( State == "selecting" ){
     click_origin_x = mouse_x;
     click_origin_y = mouse_y;
+    
+    show_debug_message("Click orig : " + string(click_origin_x) + " : " + string(click_origin_y));
 //}
 </string>
           </argument>
