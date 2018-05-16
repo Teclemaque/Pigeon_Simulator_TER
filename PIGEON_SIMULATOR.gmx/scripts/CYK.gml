@@ -1,4 +1,4 @@
-//CYK(phrase:array<string>, rules:ds_list):
+//CYK(phrase:array<string>, rules:ds_list):ds_map
 
 //Construction de la matrice CYK : width=step, heigth=word
 var p = argument[0];
@@ -84,3 +84,5 @@ show_debug_message(json_encode(orderMap));
 //Lancement d'Extract_Order
 Extract_Order(p, cyk, ds_grid_width(cyk)-1,0,orderMap,0);
 show_debug_message(json_encode(orderMap));
+
+return orderMap;
