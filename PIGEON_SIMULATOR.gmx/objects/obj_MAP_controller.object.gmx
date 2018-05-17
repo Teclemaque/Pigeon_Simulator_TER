@@ -51,7 +51,7 @@ instance_create(x,y,Obj_mini_map_controler);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_pressed(ord('M')){
+            <string>if keyboard_check_direct(vk_lcontrol) &amp;&amp; keyboard_check_pressed(ord('M')){
     if(toggle_papper == 0){
         toggle_papper = 1
     } else {

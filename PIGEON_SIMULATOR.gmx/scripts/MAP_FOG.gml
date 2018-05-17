@@ -66,7 +66,7 @@ if(toggle_fog == 1){
     }
 }
 
-if keyboard_check_pressed(ord('F')){
+if keyboard_check_direct(vk_lcontrol) && keyboard_check_pressed(ord('F')){
     if(toggle_fog == 1)
         toggle_fog = 0
     else
