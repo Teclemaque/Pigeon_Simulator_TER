@@ -1,5 +1,5 @@
-if(x > view_xview[0]-16 and x < view_xview[0]+view_wport[0]+16 
-    and y > view_yview[0]-16 and y < view_yview[0]+view_hport[0]+16){
+if(x > view_xview[1]-16 and x < view_xview[1]+view_wport[1]+16 
+    and y > view_yview[1]-16 and y < view_yview[1]+view_hport[1]+16){
     if(obj_MAP_controller.toggle_papper == 0){ // si affichage normal  
         if(obj_FOG_controller.toggle_fog == 0 or ds_grid_get(obj_FOG_controller.fog,grid_x,grid_y) == 0){
             draw_set_color(couleur)
@@ -8,13 +8,9 @@ if(x > view_xview[0]-16 and x < view_xview[0]+view_wport[0]+16
         } else  {
             var l = 50 - (point_distance(x,y,mouse_x,mouse_y)/10)
             if(l>0)
-                {
                 draw_set_color(make_colour_rgb(l,l,l))
-                }
             else
-                {
                 draw_set_color(make_colour_rgb(0,0,0))
-                }
             draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
             draw_set_color(c_black)
         }
@@ -64,5 +60,6 @@ if(x > view_xview[0]-16 and x < view_xview[0]+view_wport[0]+16
 
 /*
 draw_set_colour(c_black)
-var s = string(map_get_height(grid_x,grid_y)) //4 différence
+var s = string(map_get_height(0)) //4 différence
 draw_text_transformed(x,y,s,0.35,0.35,0)
+

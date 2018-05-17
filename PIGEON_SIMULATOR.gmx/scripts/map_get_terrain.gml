@@ -3,6 +3,10 @@
 
 var arg = argument0
 
+var xxx = floor(x / obj_MAP_controller.blockSize)
+var yyy = floor(y / obj_MAP_controller.blockSize)
+
+
 var inst = instance_position(x,y,Obj_Terrain)
 
 if instance_exists(inst)
@@ -32,8 +36,8 @@ if instance_exists(inst)
         deca_y = -1
     }
     
-    var xx = inst.grid_x + deca_x
-    var yy = inst.grid_y + deca_y
+    var xx = xxx + deca_x
+    var yy = yyy + deca_y
     
     
     

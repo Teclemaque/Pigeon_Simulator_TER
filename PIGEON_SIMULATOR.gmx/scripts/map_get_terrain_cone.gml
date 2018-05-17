@@ -1,5 +1,8 @@
 ///map_get_terrain_cone( int 0~8 ) - rencoie la hauteur de la case ou -1 si hors map
 
+var xxx = floor(x / obj_MAP_controller.blockSize)
+var yyy = floor(y / obj_MAP_controller.blockSize)
+
 var inst = instance_position(x,y,Obj_Terrain)
 
 //var res = ds_list_create()
@@ -92,8 +95,8 @@ if instance_exists(inst)
         
         }
         
-        var xx = inst.grid_x + deca_x
-        var yy = inst.grid_y + deca_y
+        var xx = xxx + deca_x
+        var yy = yyy + deca_y
         
         if(xx >= 0 and xx < obj_MAP_controller.width and yy >= 0 and yy < obj_MAP_controller.height)
             {

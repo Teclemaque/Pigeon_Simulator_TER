@@ -18,7 +18,8 @@ with(obj_MAP_controller){
         for(var j=0;j<height;j++){ 
             
             var l = ds_list_create()
-            if(ds_grid_get(other.fog,i,j) == 1){
+            if(false//ds_grid_get(other.fog,i,j) == 1
+            ){
                 ds_list_add(l,0)
                 ds_grid_set(papper_map,i,j,l)
             } else { //si case visible
