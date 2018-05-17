@@ -62,9 +62,9 @@ if(file_exists("Parsing/grammar.txt"))
     //ds_list_write(grammaire);
     
     show_debug_message("TEST");
-    var s="agent1 regrouper avec agent2 , agent3 , agent4";
+    //var s="agent1 regrouper avec agent2 , agent3 , agent4";
     
-    CYK(Split_Sentence(s," "),grammaire);
+    //CYK(Split_Sentence(s," "),grammaire);
 }
 else
 {show_debug_message("Erreur:Grammaire introuvable");}
