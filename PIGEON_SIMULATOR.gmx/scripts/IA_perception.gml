@@ -1,200 +1,121 @@
-///Perception()
+///IA_perception()
 {
-//Attention actuellement ne trie pas dans la liste les alliés des ennemis.
-xx = x;//Pour éviter que l'agent puis se lister lui même, 
-x = -50000;//eloignement de sa coordoné originelle
+A = noone;
 
-//Reinitialisation des percepts des percepts
-PerceptAgent[0] = noone;
-PerceptAgent[1] = noone;
-PerceptAgent[2] = noone;
-PerceptAgent[3] = noone;
-PerceptAgent[4] = noone;
-PerceptAgent[5] = noone;
-PerceptAgent[6] = noone;
-
-for (n = 0; n < 7; n++)//Pour etre sur que la liste sera remplie au maximum
+if instance_exists(Allie)
+or instance_exists(Ennemi)
     {
-    A = instance_nearest(xx,y,obj_agent);//Recherche de l'agent le plus proche
-     
-    if A.id != id//Et que ce n'est pas lui
+    if instance_exists(Allie)//Si il existe des agents alliés
         {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone //Si presence d'un obstacle entre eux
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90 //Si agent n'est pas dans son champ de perception
-            {
-            instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
-            }
-        else
-            {
-            if PerceptAgent[0] == noone//Si pas d'obstcle on s'assure qu'on n'a pas deja listé un agent plus proche
-                {
-                PerceptAgent[0] = A.id;//On place son id dans la liste
-                instance_deactivate_object(A);//et on le desactive pour qu'il ne soit plis pris en compte
-                }
-            }
-        }
-    else
-        {
-        break;
-        }
+        A = instance_nearest(xx+lengthdir_x(Dist,direction),y+lengthdir_y(Dist,direction),Allie);
         
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
+        if instance_exists(A) && A.id != id //Et que ce n'est pas lui
             {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[1] == noone
+            if map_visible(A.id) == false//collision_line(xx,y,A.x,A.y,Obj_Terrain_Crete,1,1) != noone //Si presence d'un obstacle entre eux
+            or (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)  //Si agent n'est pas dans son champ de perception
                 {
-                PerceptAgent[1] = A.id;
-                instance_deactivate_object(A);
+                if (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)
+                    {
+                    Dist += distance_to_object(A)
+                    }
+                instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
+                }
+            else
+                {
+                /*ds_list_add(PerceptAgentAllie,A.Commandant.id)
+                //instance_deactivate_object(A.Commandant)
+                instance_deactivate_object(A)*/
+                
+                if ds_exists(PerceptAgentAllie, ds_type_list)//On vérifie que la liste existe
+                    {
+                    //if A.Classe == 0 // Si A est un simple soldat
+                    if instance_exists(A.Commandant)//On recherche l'officier
+                        {
+                        Agent = A.Commandant;
+                        
+                        // on désactive son régiment
+                        if ds_exists(PerceptAgentAllie,ds_type_list)
+                            {
+                            ds_list_add(PerceptAgentAllie,Agent);//on l'ajoute a la liste
+                            gestionRenseignement(Agent);
+                            
+                            if ds_exists(Agent.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plus pris en compte
+                                {
+                                for (i = 1; i < ds_list_size(Agent.Regiment); i++)
+                                    {
+                                    instance_deactivate_object(ds_list_find_value(Agent.Regiment,i));
+                                    }
+                                }
+                            //Et on desactive l'officier
+                            instance_deactivate_object(Agent);  
+                            //instance_deactivate_object(A);
+                            }
+                        instance_deactivate_object(A);
+                        }
+                    instance_deactivate_object(A);
+                    }
+                
                 }
             }
         }
-    else
-        {
-        break;
-        }
-    
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
-            {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[2] == noone
-                {
-                PerceptAgent[2] = A.id;
-                instance_deactivate_object(A);
-                }
-            }
-        }
-    else
-        {
-        break;
-        }
-    
+           
+    if instance_exists(Ennemi)
+        { 
+        A = instance_nearest(xx+lengthdir_x(Dist,direction),y+lengthdir_y(Dist,direction),Ennemi);//Recherche de l'agent le plus proche
         
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
+        if instance_exists(A) &&  A.id != id //Et que ce n'est pas lui
             {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[3] == noone
+            if map_visible(A.id) == false//collision_line(xx,y,A.xx,A.y,Obj_Terrain_Crete,1,1) != noone //Si presence d'un obstacle entre eux
+            or (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)//Si agent n'est pas dans son champ de perception
                 {
-                PerceptAgent[3] = A.id;
-                instance_deactivate_object(A);
+                if (abs(direction - point_direction(xx,y,A.x,A.y)) > 90 && abs(direction - point_direction(xx,y,A.x,A.y)) < 270)
+                    {
+                    Dist += distance_to_object(A)
+                    }
+                instance_deactivate_object(A); //on le desactive pour ne plus le prendre en compte
+                }
+            else
+                {
+                if instance_exists(A.Commandant)
+                    {
+                    Agent = A.Commandant;
+                    if ds_exists(PerceptAgentEnnemi, ds_type_list)
+                        {
+                        ds_list_add(PerceptAgentEnnemi,Agent);
+                        gestionRenseignement(Agent);
+                                
+                        if ds_exists(Agent.Regiment,ds_type_list)//et on le desactive pour qu'il ne soit plis pris en compte
+                            {
+                            for (i = 1; i < ds_list_size(Agent.Regiment); i++)
+                                {
+                                instance_deactivate_object(ds_list_find_value(Agent.Regiment,i));
+                                }
+                            }
+                        instance_deactivate_object(Agent)
+                        }
+                    instance_deactivate_object(A)
                 }
             }
-        }
-    else
-        {
-        break;
-        }
-        
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
-            {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[4] == noone
-                {
-                PerceptAgent[4] = A.id;
-                instance_deactivate_object(A);
-                }
-            }
-        }
-    else
-        {
-        break;
-        }
-        
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
-            {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[5] == noone
-                {
-                PerceptAgent[5] = A.id;
-                instance_deactivate_object(A);
-                }
-            }
-        }
-    else
-        {
-        break;
-        }
-        
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
-            {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[6] == noone
-                {
-                PerceptAgent[6] = A.id;
-                instance_deactivate_object(A);
-                }
-            }
-        }
-    else
-        {
-        break;
-        }
-        
-    A = instance_nearest(xx,y,obj_agent)
-    if A.id != id
-        {
-        if collision_line(xx,y,A.xx,A.y, obj_obstacle,1,1) != noone
-        or abs(direction - point_direction(xx,y,A.xx,A.y)) > 90
-            {
-            instance_deactivate_object(A);
-            }
-        else
-            {
-            if PerceptAgent[7] == noone
-                {
-                PerceptAgent[7] = A.id;
-                instance_deactivate_object(A);
-                }
-            }
-        }
-    else
-        {
-        break;
         }
     }
-x = xx;//Replacement de l'objet a sa coordonné originelle
-instance_activate_all();//Réactivaction de tous les instances désactivées
+    I++
 
+    if I < 10
+    && instance_exists(A) && A.id != id
+    //&& (ds_exists(PerceptAgentAllie, ds_type_list) && ds_list_size(PerceptAgentAllie) <= 7)
+        {
+        //if A.id != id
+            {
+            //if I <= 10
+                {
+                IA_Perception();
+                }
+            }
+        }
+    else
+        {
+        exit;
+        }
+    }
 exit;
 }

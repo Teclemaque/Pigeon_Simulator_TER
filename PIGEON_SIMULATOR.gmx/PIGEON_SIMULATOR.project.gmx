@@ -3,34 +3,233 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="2" name="datafiles">
+    <datafiles number="2" name="Parsing">
+      <datafile>
+        <name>grammar.txt</name>
+        <exists>-1</exists>
+        <size>0</size>
+        <exportAction>2</exportAction>
+        <exportDir></exportDir>
+        <overwrite>0</overwrite>
+        <freeData>-1</freeData>
+        <removeEnd>0</removeEnd>
+        <store>0</store>
+        <ConfigOptions>
+          <Config name="Default">
+            <CopyToMask>9223372036854775807</CopyToMask>
+          </Config>
+        </ConfigOptions>
+        <filename>grammar.txt</filename>
+      </datafile>
+    </datafiles>
+  </datafiles>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\sound_fusil_1</sound>
+    <sound>sound\sound_fusil_2</sound>
+    <sound>sound\sound_fusil_5</sound>
+    <sound>sound\sound_fusil_4</sound>
+    <sound>sound\sound_fusil_3</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_pigeon</sprite>
     <sprite>sprites\spr_obstacle</sprite>
     <sprite>sprites\spr_arme</sprite>
     <sprite>sprites\sprite_obj</sprite>
+    <sprites name="TERRAIN">
+      <sprite>sprites\terrain_0</sprite>
+    </sprites>
+    <sprite>sprites\spr_soldat</sprite>
+    <sprite>sprites\spr_soldat_marche</sprite>
+    <sprite>sprites\spr_balle</sprite>
+    <sprite>sprites\TAL</sprite>
+    <sprite>sprites\spr_icon_minus</sprite>
+    <sprite>sprites\spr_icon_plus</sprite>
+    <sprite>sprites\transparent</sprite>
+    <sprite>sprites\spr_jeton</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="SCRIPT IA">
-      <script>scripts\IA_repos.gml</script>
-      <script>scripts\IA_attaque.gml</script>
-      <script>scripts\IA_deplacement.gml</script>
-      <script>scripts\IA_perception.gml</script>
-      <script>scripts\IA_PasGrandChose.gml</script>
+      <script>scripts\IA_Attaque.gml</script>
+      <script>scripts\IA_Deplacement.gml</script>
+      <script>scripts\IA_Repos.gml</script>
+      <script>scripts\IA_PerceptionAllie.gml</script>
+      <script>scripts\IA_Perception.gml</script>
+      <script>scripts\IA_Groupe.gml</script>
+      <script>scripts\IA_Formation.gml</script>
+      <script>scripts\IA_Grade.gml</script>
+      <scripts name="FONCTION">
+        <script>scripts\transfertNouvelAgent.gml</script>
+        <script>scripts\transfertNouvelOfficier.gml</script>
+        <script>scripts\transfertDonneesAgent.gml</script>
+        <script>scripts\transfertDonneesOfficier.gml</script>
+        <script>scripts\gestionRenseignement.gml</script>
+        <script>scripts\nomGroupe.gml</script>
+        <script>scripts\path_finding_A.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="SCRIPT TERRAIN">
+      <script>scripts\MAP_Create2.gml</script>
+      <script>scripts\MAP_Draw2.gml</script>
+      <script>scripts\TERRAIN_Draw.gml</script>
+      <script>scripts\MAP_FOG_CREATE.gml</script>
+      <script>scripts\MAP_FOG.gml</script>
+      <scripts name="generation">
+        <scripts name="generation">
+          <script>scripts\generate.gml</script>
+          <script>scripts\PerlinNoise.gml</script>
+          <script>scripts\randomSeed.gml</script>
+          <script>scripts\getColorZ.gml</script>
+          <script>scripts\dillatation_erosion.gml</script>
+          <script>scripts\error_check.gml</script>
+          <scripts name="forest">
+            <script>scripts\create_forest.gml</script>
+            <script>scripts\expend_forest.gml</script>
+            <script>scripts\map_get_terrain_type.gml</script>
+          </scripts>
+          <scripts name="river">
+            <script>scripts\create_river.gml</script>
+            <script>scripts\expand_river.gml</script>
+          </scripts>
+          <scripts name="crete">
+            <script>scripts\crete_finder.gml</script>
+            <script>scripts\mountain_list.gml</script>
+            <script>scripts\crest_level.gml</script>
+          </scripts>
+        </scripts>
+      </scripts>
+      <scripts name="AGENT_MAP">
+        <script>scripts\map_get_xy.gml</script>
+        <script>scripts\map_neighbors_H.gml</script>
+        <script>scripts\map_visible.gml</script>
+        <script>scripts\map_get_papper.gml</script>
+        <script>scripts\map_get_height.gml</script>
+        <script>scripts\map_get_height_cone.gml</script>
+        <script>scripts\map_get_terrain_cone.gml</script>
+        <script>scripts\map_get_terrain.gml</script>
+      </scripts>
+      <script>scripts\generatePerlinNoise.gml</script>
+      <script>scripts\generateSmoothNoise.gml</script>
+      <script>scripts\GenerateWhiteNoise.gml</script>
+      <script>scripts\interpolate.gml</script>
+    </scripts>
+    <scripts name="SCRIPT TAL">
+      <script>scripts\Split_Sentence.gml</script>
+      <script>scripts\CYK.gml</script>
+      <script>scripts\list_to_string.gml</script>
+      <script>scripts\Extract_Order.gml</script>
+      <script>scripts\tree_assemble.gml</script>
+    </scripts>
+    <scripts name="SCRIPT GUI">
+      <script>scripts\add_command_to_historic.gml</script>
+      <script>scripts\add_group_to_leftPanel.gml</script>
+      <script>scripts\collision_rectangle_list.gml</script>
+      <script>scripts\draw_agents_selection.gml</script>
+      <script>scripts\draw_agent_rectangle.gml</script>
+      <script>scripts\draw_group_rectangle.gml</script>
+      <script>scripts\find_general.gml</script>
+      <script>scripts\get_action_from_text.gml</script>
+      <script>scripts\get_selectable_agent.gml</script>
+      <script>scripts\get_targets_names.gml</script>
+      <script>scripts\get_targets_names_and_coords.gml</script>
+      <script>scripts\get_ui_dimensions.gml</script>
+      <script>scripts\is_clicked.gml</script>
+      <script>scripts\mouse_x_gui.gml</script>
+      <script>scripts\mouse_y_gui.gml</script>
+      <script>scripts\onBtnPlusClicked.gml</script>
+      <script>scripts\remove_group_from_leftPanel.gml</script>
+      <script>scripts\scr_text.gml</script>
+      <script>scripts\send_message_to_agents.gml</script>
+      <script>scripts\send_ordre_to_agent.gml</script>
+      <script>scripts\log_toolbox_message.gml</script>
     </scripts>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shader0.shader</shader>
+  </shaders>
+  <fonts name="fonts">
+    <font>fonts\fnt_toolbox</font>
+  </fonts>
   <objects name="objects">
-    <object>objects\obj_debuggage</object>
-    <object>objects\obj_globVar</object>
-    <object>objects\obj_agent</object>
+    <object>objects\obj_globVar2</object>
+    <objects name="GESTION JEU">
+      <object>objects\obj_globVar</object>
+      <object>objects\obj_shaderEnd</object>
+      <object>objects\obj_shaderBegin</object>
+      <object>objects\obj_gestion_affichage</object>
+      <object>objects\obj_debuggage</object>
+    </objects>
+    <objects name="AGENTS">
+      <objects name="AGENTS SIMPLES">
+        <objects name="Camp 1">
+          <object>objects\obj_agent_C1</object>
+        </objects>
+        <objects name="Camp 2">
+          <object>objects\obj_agent_C2</object>
+        </objects>
+      </objects>
+      <objects name="AGENT SUPERIEUR">
+        <objects name="Camp 1">
+          <object>objects\obj_messager_C1</object>
+          <object>objects\obj_meta_agent_C1</object>
+          <object>objects\obj_agent_officier0_C1</object>
+          <object>objects\obj_agent_officier1_C1</object>
+        </objects>
+        <objects name="Camp 2">
+          <object>objects\obj_meta_agent_C2</object>
+          <object>objects\obj_agent_officier0_C2</object>
+          <object>objects\obj_agent_officier1_C2</object>
+        </objects>
+      </objects>
+      <objects name="AGENT TEST">
+        <object>objects\obj_agent</object>
+      </objects>
+      <object>objects\obj_formation</object>
+      <object>objects\obj_souris</object>
+      <object>objects\obj_joueur</object>
+    </objects>
+    <objects name="OBJET MAP">
+      <object>objects\obj_agent_general</object>
+      <object>objects\obj_FOG_controller</object>
+      <object>objects\obj_MAP_controller</object>
+      <object>objects\Obj_mini_map_controler</object>
+      <object>objects\obj_VIEW_controller</object>
+      <objects name="obj_terrain">
+        <object>objects\Obj_Terrain</object>
+        <object>objects\Obj_Terrain_sol</object>
+        <object>objects\Obj_Terrain_Eau</object>
+        <object>objects\Obj_Terrain_Forest</object>
+        <object>objects\Obj_Terrain_Obstacle</object>
+        <object>objects\Obj_Terrain_montagne</object>
+        <object>objects\Obj_Terrain_Crete</object>
+      </objects>
+    </objects>
+    <objects name="GUI">
+      <object>objects\obj_btn_minus</object>
+      <object>objects\obj_btn_plus</object>
+      <object>objects\obj_general</object>
+      <object>objects\obj_group_rectangle</object>
+      <object>objects\obj_gui</object>
+      <object>objects\obj_GUI_controller</object>
+      <object>objects\obj_leftPanel</object>
+      <object>objects\obj_rightPanel</object>
+      <object>objects\obj_settingsPanel</object>
+      <object>objects\obj_text</object>
+      <object>objects\obj_toolbox</object>
+      <object>objects\obj_topPanel</object>
+    </objects>
+    <object>objects\obj_arme_blanche</object>
     <object>objects\obj_arme</object>
-    <object>objects\obj_obstacle</object>
+    <object>objects\TAL_Grammaire</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room1</room>
+    <room>rooms\room0_new</room>
     <room>rooms\room0</room>
+    <room>rooms\room_darret</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
