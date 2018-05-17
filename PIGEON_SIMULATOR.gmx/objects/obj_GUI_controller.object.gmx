@@ -110,8 +110,9 @@ if( ! ds_list_empty(Selection) ){
         }
     }
 }
-    
-if( ds_list_empty(Selection) ){ // si clic simple dans le vide
+
+/*
+if( ds_list_empty(Selection) &amp;&amp; !keyboard_check_direct(vk_lcontrol)){ // si clic simple dans le vide
 
     if(mouse_x == click_origin_x &amp;&amp; mouse_y == click_origin_y){
       coordinates = string(mouse_x) + ":" + string(mouse_y) + " ";
@@ -130,6 +131,7 @@ if( ds_list_empty(Selection) ){ // si clic simple dans le vide
 //    var left_in = mouse_x_gui() &gt; origin_x + global.Dimensions[? "startx"]
 //    show_debug_message("left_in : " + string(left_in));
 }
+/**/
 
 click_origin_x = noone;
 click_origin_y = noone;
@@ -149,6 +151,49 @@ if ( mouse_check_button_pressed( mb_left ) )
         }
     }
     */
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="54">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Ajouter coordonnées à la textBox
+
+if( !keyboard_check_direct(vk_lcontrol)){
+
+    //if(mouse_x == click_origin_x &amp;&amp; mouse_y == click_origin_y){
+      coordinates = string(mouse_x) + ":" + string(mouse_y) + " ";
+      //keyboard_string += coordinates; // todo : move to toolbox
+      toolbox.coordinates = coordinates;
+      toolbox.Text += coordinates;
+      //var mouse_on_view_x = mouse_x &gt;= global.Dimensions[? "startx"] &amp;&amp; mouse_x &lt;= global.Dimensions[? "endx"]
+      //var mouse_on_view_y = mouse_y &gt;= global.Dimensions[? "starty"] &amp;&amp; mouse_y &lt;= global.Dimensions[? "endy"]
+      //if( mouse_on_view_x &amp;&amp; mouse_on_view_y ){ // clic dans la vue principale
+      // todo : transmettre le clic à la main view
+  //    show_debug_message("on view")
+      
+      //}
+   // }
+    
+//    var left_in = mouse_x_gui() &gt; origin_x + global.Dimensions[? "startx"]
+//    show_debug_message("left_in : " + string(left_in));
+}
 </string>
           </argument>
         </arguments>

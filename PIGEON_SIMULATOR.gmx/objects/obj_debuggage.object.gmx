@@ -67,7 +67,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(mouse_x,mouse_y,obj_agent_officier0_C2);
+            <string>if(keyboard_check_direct(vk_lcontrol))
+    instance_create(mouse_x,mouse_y,obj_agent_officier0_C2);
 </string>
           </argument>
         </arguments>
@@ -90,7 +91,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(mouse_x+30,mouse_y,obj_agent_officier0_C1);
+            <string>if(keyboard_check_direct(vk_lcontrol))
+    instance_create(mouse_x+30,mouse_y,obj_agent_officier0_C1);
 
 /*with(instance_create(mouse_x,mouse_y,obj_agent_officier1_C1))
     {

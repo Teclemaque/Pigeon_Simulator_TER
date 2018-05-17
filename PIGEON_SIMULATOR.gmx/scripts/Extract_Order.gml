@@ -40,6 +40,10 @@ else
                 for(r=0;r<ds_list_size(grammaire);r++)
                 {
                     var rule=ds_list_find_value(grammaire,r);
+                    if( !is_array(rule) ){
+                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+                        exit;
+                    }
                     var tmp = rule[1];
                     if(array_length_1d(tmp)==2)
                     {                        
