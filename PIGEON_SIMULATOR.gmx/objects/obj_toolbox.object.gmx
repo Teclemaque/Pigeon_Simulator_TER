@@ -32,14 +32,17 @@ Targets = ds_list_create(); // cibles pour l'ordre à envoyer
 State = "select_units"; // {select_units, select_order, select_coords}, état courant 
 ActionKey = noone; // touche d'ordre enfoncée
 Text = ""; // contenu de la text bar
-Error = "''It's not a bug, it's a feature''";
+//Error = "''It's not a bug, it's a feature''";
 Historic = ds_list_create(); // historique des derniers messages
 historic_index = -1;
 historic_size = 10; // taille de sauvegarde de l'historique
 Cursor = "|";
 click_origin_x = noone;
 click_origin_y = noone;
-coordinates = "";
+coordinates = ""; // todo : remove ? / unused ?
+log = ds_list_create();
+log_colors = ds_list_create();
+log_size = 5;
 
 alarm[0] =  room_speed;
 
@@ -255,17 +258,23 @@ draw_text_ext
     maxlength // taille avant retour à la ligne
 );
 
-// Error message
-draw_set_colour(c_red);
-draw_text_ext
-(
-    x + 1.5 * padding,
-    //y + 1.5 * padding + 
-    textfield_y + text_height + 1.5 *  padding,
-    Error,// + string(sprite_width),
-    row_height, // distance entre chaque ligne de texte
-    maxlength // taille avant retour à la ligne
-);
+// Log messages
+for(var i = 0; i &lt; ds_list_size(log); i++){
+    var index = ds_list_size(log) - i -1;
+    draw_set_colour( ds_list_find_value(log_colors, index) );
+    draw_text_ext
+    (
+        x + 1.5 * padding,
+        //y + 1.5 * padding + 
+        textfield_y + (text_height) + row_height * (1+i),
+        ds_list_find_value(log,  index),// + string(sprite_width),
+        row_height, // distance entre chaque ligne de texte
+        maxlength // taille avant retour à la ligne
+    );
+}
+
+
+
 /**/
 draw_set_alpha(1);
 draw_set_color(savedColor);
@@ -412,9 +421,8 @@ if( historic_index &lt; 0 ){
 if (keyboard_check_pressed(vk_enter)){
     add_command_to_historic(Text, Historic, historic_size);
     var action = get_action_from_text(Text);
-    show_debug_message("TODO  transmettre au joueur");
 //    ds_list_add(General.Ordres, action); // transmettre l'ordre structuré au général
-    
+    log_toolbox_message("" + Text, c_black)
     Text = "";
     historic_index = -1; // retour à la base de l'historique
 
