@@ -48,6 +48,7 @@
     <sprite>sprites\spr_icon_plus</sprite>
     <sprite>sprites\transparent</sprite>
     <sprite>sprites\spr_jeton</sprite>
+    <sprite>sprites\Title_name</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -73,6 +74,7 @@
     </scripts>
     <scripts name="SCRIPT TERRAIN">
       <script>scripts\MAP_Create2.gml</script>
+      <script>scripts\MAP_Create2_seed.gml</script>
       <script>scripts\MAP_Draw2.gml</script>
       <script>scripts\TERRAIN_Draw.gml</script>
       <script>scripts\MAP_FOG_CREATE.gml</script>
@@ -224,9 +226,14 @@
     <object>objects\obj_arme_blanche</object>
     <object>objects\obj_arme</object>
     <object>objects\TAL_Grammaire</object>
+    <objects name="Title_screen">
+      <object>objects\obj_Title_controler</object>
+      <object>objects\obj_title_follow</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room1</room>
+    <room>rooms\Title_screen</room>
     <room>rooms\room0_new</room>
     <room>rooms\room0</room>
     <room>rooms\room_darret</room>

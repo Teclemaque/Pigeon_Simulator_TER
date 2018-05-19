@@ -182,26 +182,39 @@ direction = point_direction(x,y,mouse_x,mouse_y);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_exists(ExecuteOrdre))
+            <string>if (instance_exists(ExecuteOrdre)) // Si on a un soldat a qui remettre l'ordre
     {
-    Messager = instance_nearest(x,y,obj_messager_C1);
-    Messager.ArgumentMessager[] = 0;
+    Messager = instance_nearest(x,y,obj_messager_C1); //Alors on cherche le messager le plus proche
+    Messager.ArgumentMessager[] = 0;//On reinitialise son tableau contenant le parametre du message
     if distance_to_object(Messager) &lt;= 25
+    &amp;&amp; Messager.Mission == 0 // Si le messager est suffisament proche et pas deja en mission
         {
-        /*ds_list_add(Messager.Destinataire,ExecuteOrdre);
-        Messager.ArgumentMessager[0] = IA_Grade;
-        Messager.ArgumentMessager[1] = noone;
+        //ds_list_add(Messager.Destinataire,ExecuteOrdre);
+        Messager.ArgumentMessager[0] = ExecuteOrdre;//On lui donne le destinaire
+        Messager.ArgumentMessager[1] = "ORDRE";//On indique que le message est un ordre
+        Messager.ArgumentMessager[2] = IA_Grade;//L'ordre (le script)a transmettre
+        Messager.ArgumentMessager[3] = noone;//Les parametre de l'odre (du script)
         if (ExecuteOrdre.Officiel == 0){
-                Messager.ArgumentMessager[2] = 1;
+                Messager.ArgumentMessager[4] = 1;
             }
             else{
-                Messager.ArgumentMessager[3] = 0;
+                Messager.ArgumentMessager[4] = 0;
             }
-        Messager.ArgumentMessager[4] = noone;
+        Messager.ArgumentMessager[5] = noone;
+        // Une fois que le tableau est comble (ici sa taille est de 6)
+        // On le place dans la saccoche du messager. La saccoche contient des tableaux
+        // 1 tableau par message
         ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
-        Messager.Message += 1;*/
-
+        Messager.Message += 1;// On indique au messager qu'il a un new message
+        
+        // REMARQUE SI ON RAJOUTE UN NOUVEL ORDRE IL FAUT REINITIALISER ArgumentMessager[]
+        // Sans quoi les valeurs sont fausses
         Messager.ArgumentMessager[] = 0;
+        Mission = 1;
+        
+        
+        
+        /*Messager.ArgumentMessager[] = 0;
         ds_list_add(Messager.Destinataire,ExecuteOrdre);
         Messager.ArgumentMessager[0] = IA_Deplacement;
         Messager.ArgumentMessager[1] = noone;
@@ -217,28 +230,16 @@ direction = point_direction(x,y,mouse_x,mouse_y);
         Messager.ArgumentMessager[11] = 1;
         
         ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
-        Messager.Message += 1;
+        Messager.Message += 1;*/
         
-        /*show_debug_message("TAILLE "+string(array_length_1d(Messager.ArgumentMessager)));
-        for (i = 0; i &lt; array_length_1d(Messager.ArgumentMessager);i++)
-            {
-            show_debug_message(Messager.ArgumentMessager[i])
-            }*/
-        for (i = 0; i &lt; ds_list_size(Messager.SaccocheMessage);i++)
-            {
-            show_debug_message("Je lis le "+string(i)+"ième message")
-            f = ds_list_find_value(Messager.SaccocheMessage,i)
-            for (j = 0; j &lt; array_length_1d(f); j++)
-                {
-                show_debug_message(" Contient : "+string(f[j]))
-                }
-            }
-        
+        // On indique au messager ou il doit se rendre
         with(Messager)
             {
+            D = ds_list_find_value(SaccocheMessage,0)
+            Dest = D[0]
             Execute = IA_Deplacement;
             Argument[0] = noone;
-            Argument[1] = ds_list_find_value(Destinataire,0);
+            Argument[1] = Dest;
             Argument[2] = noone;
             Argument[5] = -1;
             Argument[6] = -1;

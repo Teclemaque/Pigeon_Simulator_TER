@@ -29,7 +29,6 @@
 MAP_Draw2();
 instance_create(x,y,obj_FOG_controller);
 instance_create(x,y,Obj_mini_map_controler);
-
 /*
 with(obj_GUI_controller){
     instance_destroy()
@@ -64,6 +63,7 @@ with(obj_GUI_controller){
     }
 }
 
+/*
 if mouse_check_button(mb_right){
     map_get_papper()
 }

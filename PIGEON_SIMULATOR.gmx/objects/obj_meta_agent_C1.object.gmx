@@ -61,9 +61,10 @@ CibleRegiment = noone;
 Classe = 1;
 ORDRE = "AUCUN";
 
-//nomGroupe(id);
-
-p_path = -1;
+if Classe == 1
+    {
+    nomGroupe(id);
+    }
 
 Argument[0] = 0;
 Argument[1] = random(180)+30;
@@ -205,45 +206,39 @@ x = xx;
         {
         if Grade &gt;= 2 &amp;&amp; Officiel == 1 
         &amp;&amp; ((map_visible(obj_joueur) == false &amp;&amp; obj_globVar.Temps mod 100 == 0)
-        || obj_globVar.Temps mod 200 == 0)
+        || obj_globVar.Temps mod 200 == 0)// Regulierement l'officier va essayer d'envoyer un rapport
             {
             if instance_exists(obj_messager_C1)
             &amp;&amp; distance_to_object(instance_nearest(x,y,obj_messager_C1)) &lt; 25
                 {
                 Messager = instance_nearest(x,y,obj_messager_C1)
+                Messager.ArgumentMessager[] = 0;
+                //1ère partie du rapport l'etat de sa troupe
+                //ds_list_add(Messager.Destinataire,obj_joueur);
+                Messager.ArgumentMessager[0] = obj_joueur
+                Messager.ArgumentMessager[1] = "RAPPORT";
+                Messager.ArgumentMessager[2] = Name;
+                Messager.ArgumentMessager[3] = ds_list_size(Regiment);
+                Messager.ArgumentMessager[4] = x;
+                Messager.ArgumentMessager[5] = y;
+                Messager.ArgumentMessager[6] = obj_globVar.Temps;
                 
-                ds_list_add(Messager.Destinataire,obj_joueur);
-                Messager.ArgumentMessager[0] = "RAPPORT";
-                Messager.ArgumentMessager[1] = Name;
-                Messager.ArgumentMessager[2] = ds_list_size(Regiment);
-                Messager.ArgumentMessager[3] = x;
-                Messager.ArgumentMessager[4] = y;
-                Messager.ArgumentMessager[5] = obj_globVar.Temps;
-                
-                //ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
-                
+                //2ème partie, tous les renseignements qu'il a obtenu
                 for (i = 0; i &lt; ds_list_size(Renseignement);i++)
                     {
-                    Messager.ArgumentMessager[5+i] = ds_list_find_value(Renseignement,i);
-                    //ds_list_add(Messager.SaccocheMessage,ds_list_find_value(Renseignement,i));
+                    Messager.ArgumentMessager[7+i] = ds_list_find_value(Renseignement,i);
                     }
                 ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager);
-                /*Messager.ArgumentMessager[1] = noone;
-                if (ExecuteOrdre.Officiel == 0){
-                        Messager.ArgumentMessager[2] = 1;
-                    }
-                    else{
-                        Messager.ArgumentMessager[3] = 0;
-                    }
-                Messager.ArgumentMessager[4] = noone;*/
 
                 Messager.Message += 1;
                 
                 with(Messager)
                     {
+                    D = ds_list_find_value(SaccocheMessage,0)
+                    Dest = D[0]
                     Execute = IA_Deplacement;
                     Argument[0] = noone;
-                    Argument[1] = ds_list_find_value(Destinataire,0);
+                    Argument[1] = Dest;
                     Argument[2] = noone;
                     Argument[5] = -1;
                     Argument[6] = -1;
@@ -252,7 +247,7 @@ x = xx;
                     Argument[9] = Alpha//round(random(8))+2;
                     Argument[10] = 1;
                     }
-                    
+                Messager.ArgumentMessager[] = 0;
                 }
             }
         }
@@ -410,6 +405,30 @@ x = xx;
 
 event_inherited()
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(x,y,Name)
+event_inherited();
 </string>
           </argument>
         </arguments>
