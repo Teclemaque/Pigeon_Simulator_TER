@@ -57,10 +57,6 @@ var h = obj_MAP_controller.height
 
 //show_debug_message("w : " + string(w))
 //show_debug_message("h : " + string(h))
-
-
-
-
 </string>
           </argument>
         </arguments>

@@ -126,15 +126,9 @@ if (agent.Troupe != groupName){
     agent.Name = fullName;
     
     if ds_list_find_index(global.grammaire,fullName) == -1
-<<<<<<< HEAD
        {
        ds_list_add(global.grammaire,fullName);
        }
-=======
-      {
-      ds_list_add(global.grammaire,fullName);
-      }
->>>>>>> ddeafe79bc5a3e8f35339593d1f410245d2d885c
     
     return fullName;
 }
