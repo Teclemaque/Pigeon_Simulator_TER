@@ -125,6 +125,10 @@ if (agent.Troupe != groupName){
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
     
+    if ds_list_find_index(global.grammaire,fullName) == -1
+       {
+       ds_list_add(global.grammaire,fullName);
+       }
     
     return fullName;
 }
