@@ -40,13 +40,20 @@ global.MAP_Width = 32
 
 // NOM
 Regiments = ds_map_create();
+
+//Information sur tous les regiments officiels
+//EtatRegiment = ds_list_create();
+
 //globalvar grammaire;
 
 grammaire = ds_list_create();
 global.grammaire = grammaire;
 //FANTASSIN
 A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
+
 A.Officiel = 1;
+A.Officier_sup = obj_joueur;
+
 for (i = 0; i &lt; 805; i++)
     {
     B = instance_create(random(1024),random(728),obj_agent_C1)
@@ -112,7 +119,6 @@ Temps ++;
 if (Temps mod 30) == 0{
     S += 1;
 }
-
 if S &gt;= 60
     {
     M++;
@@ -128,7 +134,7 @@ if H &gt;= 24
     J++;
     H = 0;
     }
-    
+  
 if room == room_darret
     {
     game_end();

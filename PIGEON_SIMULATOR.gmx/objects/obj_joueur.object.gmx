@@ -32,9 +32,13 @@ Ordres = ds_list_create();
 
 repeat(20)
     {
-    A = instance_create(x+random(20)-10,y+random(20)-10,obj_messager)
+    A = instance_create(x+random(20)-10,y+random(20)-10,obj_messager_C1)
     A.Officier_sup = id;
     }
+    
+Renseignement = ds_list_create();
+//Info_C2 = ds_list_create();
+
 </string>
           </argument>
         </arguments>
@@ -64,6 +68,30 @@ while( !ds_list_empty(Ordres) ){
     
     send_ordre_to_agent(action, action[? "Target"]);
 }*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>speed = 1;
+direction = point_direction(x,y,mouse_x,mouse_y);
 </string>
           </argument>
         </arguments>
@@ -125,11 +153,11 @@ while( !ds_list_empty(Ordres) ){
             ORDRE = "GROUPE";
             ds_list_clear(Regiment);
             }
-        else
+        /*else
             {
             ORDRE = "SEPARATION"
             ds_list_clear(Regiment);
-            }
+            }*/
         }
     }
 </string>
@@ -156,11 +184,11 @@ while( !ds_list_empty(Ordres) ){
             <kind>1</kind>
             <string>if (instance_exists(ExecuteOrdre))
     {
-    Messager = instance_nearest(x,y,obj_messager);
-    
+    Messager = instance_nearest(x,y,obj_messager_C1);
+    Messager.ArgumentMessager[] = 0;
     if distance_to_object(Messager) &lt;= 25
         {
-        ds_list_add(Messager.Destinataire,ExecuteOrdre);
+        /*ds_list_add(Messager.Destinataire,ExecuteOrdre);
         Messager.ArgumentMessager[0] = IA_Grade;
         Messager.ArgumentMessager[1] = noone;
         if (ExecuteOrdre.Officiel == 0){
@@ -171,24 +199,40 @@ while( !ds_list_empty(Ordres) ){
             }
         Messager.ArgumentMessager[4] = noone;
         ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
-        
-        Messager.Message += 1;
-        
+        Messager.Message += 1;*/
+
+        Messager.ArgumentMessager[] = 0;
         ds_list_add(Messager.Destinataire,ExecuteOrdre);
         Messager.ArgumentMessager[0] = IA_Deplacement;
         Messager.ArgumentMessager[1] = noone;
-        Messager.ArgumentMessager[2] = noone;
+        Messager.ArgumentMessager[2] = obj_joueur;
         Messager.ArgumentMessager[3] = noone;
         Messager.ArgumentMessager[4] = -1;
         Messager.ArgumentMessager[5] = -1;
-        Messager.ArgumentMessager[6] = random(360);
-        Messager.ArgumentMessager[7] = 60;
-        Messager.ArgumentMessager[8] = random(ExecuteOrdre.MSpeed)+1
+        Messager.ArgumentMessager[6] = -1//random(360);
+        Messager.ArgumentMessager[7] = -1;
+        Messager.ArgumentMessager[8] = random(ExecuteOrdre.MSpeed)+1;
         Messager.ArgumentMessager[9] = -1;
         Messager.ArgumentMessager[10] = ExecuteOrdre.Alpha;
         Messager.ArgumentMessager[11] = 1;
         
         ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
+        Messager.Message += 1;
+        
+        /*show_debug_message("TAILLE "+string(array_length_1d(Messager.ArgumentMessager)));
+        for (i = 0; i &lt; array_length_1d(Messager.ArgumentMessager);i++)
+            {
+            show_debug_message(Messager.ArgumentMessager[i])
+            }*/
+        for (i = 0; i &lt; ds_list_size(Messager.SaccocheMessage);i++)
+            {
+            show_debug_message("Je lis le "+string(i)+"ième message")
+            f = ds_list_find_value(Messager.SaccocheMessage,i)
+            for (j = 0; j &lt; array_length_1d(f); j++)
+                {
+                show_debug_message(" Contient : "+string(f[j]))
+                }
+            }
         
         with(Messager)
             {
@@ -379,6 +423,29 @@ while( !ds_list_empty(Ordres) ){
         Argument[0] = 0;
         }
     }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="10" enumb="32">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>speed = 0;
 </string>
           </argument>
         </arguments>

@@ -53,12 +53,15 @@ PerceptAgentEnnemi = ds_list_create();
 PerceptAgentAllie = ds_list_create();
 CibleAttaque = ds_list_create();
 
+Message = ds_list_create();
+Objectif = 0;
+
 CibleRegiment = noone;
 
 Classe = 1;
 ORDRE = "AUCUN";
 
-nomGroupe(id);
+//nomGroupe(id);
 
 p_path = -1;
 
@@ -110,6 +113,7 @@ ds_list_destroy(PerceptAgentEnnemi);
 ds_list_destroy(PerceptAgentAllie);
 ds_list_destroy(CibleAttaque);
 ds_list_destroy(Renseignement);
+ds_list_destroy(Message);
 
 if instance_exists(Formation)
     {
@@ -150,20 +154,24 @@ x = -50000;//eloignement de sa coordoné originelle
 I = 0;
 II = 0;
 
-if t &gt; 90
-&amp;&amp; ORDRE = "GROUPE"
+if t &gt; 20
+&amp;&amp; ORDRE != "OBEISSANCE"
     {
     ds_list_clear(PerceptAgentAllie);
     ds_list_clear(PerceptAgentEnnemi);
     //Avant de faire ses perceptions, l'officier va desactiver son régiment
-    for (i = 1; i &lt; ds_list_size(Regiment); i++)
+    if ds_exists(Regiment,ds_type_list)
         {
-        instance_deactivate_object(ds_list_find_value(Regiment,i));
+        for (i = 1; i &lt; ds_list_size(Regiment); i++)
+            {
+            instance_deactivate_object(ds_list_find_value(Regiment,i));
+            }
         }
-    Dist = 0;              
+    Dist = 10;              
     IA_Perception();
 
     instance_activate_all();
+    
     IA_PerceptionAllie();
     t = 0;
     }
@@ -193,11 +201,68 @@ x = xx;
             <kind>1</kind>
             <string>if Classe &lt;= 1
     {
-    if Commandant_sup.ORDRE == "GROUPE"
+    if Classe == 1
+        {
+        if Grade &gt;= 2 &amp;&amp; Officiel == 1 
+        &amp;&amp; ((map_visible(obj_joueur) == false &amp;&amp; obj_globVar.Temps mod 100 == 0)
+        || obj_globVar.Temps mod 200 == 0)
+            {
+            if instance_exists(obj_messager_C1)
+            &amp;&amp; distance_to_object(instance_nearest(x,y,obj_messager_C1)) &lt; 25
+                {
+                Messager = instance_nearest(x,y,obj_messager_C1)
+                
+                ds_list_add(Messager.Destinataire,obj_joueur);
+                Messager.ArgumentMessager[0] = "RAPPORT";
+                Messager.ArgumentMessager[1] = Name;
+                Messager.ArgumentMessager[2] = ds_list_size(Regiment);
+                Messager.ArgumentMessager[3] = x;
+                Messager.ArgumentMessager[4] = y;
+                Messager.ArgumentMessager[5] = obj_globVar.Temps;
+                
+                //ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
+                
+                for (i = 0; i &lt; ds_list_size(Renseignement);i++)
+                    {
+                    Messager.ArgumentMessager[5+i] = ds_list_find_value(Renseignement,i);
+                    //ds_list_add(Messager.SaccocheMessage,ds_list_find_value(Renseignement,i));
+                    }
+                ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager);
+                /*Messager.ArgumentMessager[1] = noone;
+                if (ExecuteOrdre.Officiel == 0){
+                        Messager.ArgumentMessager[2] = 1;
+                    }
+                    else{
+                        Messager.ArgumentMessager[3] = 0;
+                    }
+                Messager.ArgumentMessager[4] = noone;*/
+
+                Messager.Message += 1;
+                
+                with(Messager)
+                    {
+                    Execute = IA_Deplacement;
+                    Argument[0] = noone;
+                    Argument[1] = ds_list_find_value(Destinataire,0);
+                    Argument[2] = noone;
+                    Argument[5] = -1;
+                    Argument[6] = -1;
+                    Argument[7] = MSpeed;
+                    Argument[8] = 0;
+                    Argument[9] = Alpha//round(random(8))+2;
+                    Argument[10] = 1;
+                    }
+                    
+                }
+            }
+        }
+    if instance_exists(Commandant_sup)
+    &amp;&amp; Commandant_sup.ORDRE == "GROUPE"
     &amp;&amp; Commandant_sup.id != id 
         {
         Officier = Commandant_sup;
         Classe = 0;
+        ORDRE = "OBEISSANCE"
         
         if instance_exists(Formation)
             {
@@ -210,10 +275,12 @@ x = xx;
         }
     else
         {
-        if Commandant_sup.ORDRE == "SEPARATION"
+        if instance_exists(Commandant_sup)
+        &amp;&amp; Commandant_sup.ORDRE == "SEPARATION"
             {
             Officier = Commandant
             Classe = 1;
+            ORDRE = "AUCUN"
             }
         }
     if ORDRE = "SEPARATION"
@@ -316,112 +383,33 @@ x = xx;
                 }
             }
         }
+    /*if abs(Moral) &gt; 25
+        {
+        if Objectif != 1
+            {
+            if ds_list_empty(Message) == false
+                {
+                show_debug_message("Ordre en attente "+string(ds_list_size(Message)));
+                Objectif = 1
+                Ord[] = ds_list_find_value(Message, 0);
+                Execute = Ord[0];
+                for (i = 1; i &lt; array_length_1d(Ord); i++)
+                    {
+                    Argument[i] = Ord[i];
+                    }
+                Objectif = 1;
+                }
+            }
+        }
+    if Objectif == 0
+        {
+        ds_list_delete(Message, 0);
+        }*/
     }
+
+
 event_inherited()
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//draw_self();
-
-draw_text(x,y-20,Officiel);
-draw_text(x,y-30,id);
-draw_text(x,y-40,Grade);
-draw_text(x,y-50,"ENNEMI : "+string(ds_list_size(PerceptAgentEnnemi)));
-draw_text(x,y-60,"ALLIE : "+string(ds_list_size(PerceptAgentAllie)));
-
-/*draw_text(x,y-70,Recharge);
-draw_text(x,y-80,MODE);*/
-draw_text(x,y-100,string(ds_list_size(Regiment)));
-/*draw_text(x,y-100,CIBLE);
-if instance_exists(CIBLE)
-    {
-    draw_text(x,y-110,object_get_name(CIBLE.object_index));
-    }*/
-draw_text(x,y-70,string(Name));
-draw_text(x,y-80,Classe);
-
-if Commandant_sup != Commandant
-    {
-    draw_text(x,y-90,"Superieur : "+string(Commandant_sup.Name))
-    }
-/*draw_text(x,y-50,Argument[3]);
-draw_text(x,y-60,Argument[4]);
-draw_text(x,y-70,Argument[5]);
-draw_text(x,y-80,Argument[6]);
-draw_text(x,y-90,Argument[7]);
-draw_text(x,y-100,Argument[8]);*/
-/*if ds_exists(PerceptAgentAllie,ds_type_list)
-&amp;&amp; ds_list_size(PerceptAgentAllie)&gt;0
-    {
-    for (i = 0; i &lt; ds_list_size(PerceptAgentAllie);i++)
-        {
-        //draw_line(x,y,ds_list_find_value(PerceptAgentAllie,i).x,ds_list_find_value(PerceptAgentAllie,i).y)
-        draw_text(x,y-i*10,ds_list_find_value(PerceptAgentAllie,i));
-        }
-    }
-if ds_exists(PerceptAgentEnnemi,ds_type_list)
-&amp;&amp; ds_list_size(PerceptAgentEnnemi)&gt;0
-    {
-    for (i = 0; i &lt; ds_list_size(PerceptAgentEnnemi);i++)
-        {
-        //draw_line(x,y,ds_list_find_value(PerceptAgentAllie,i).x,ds_list_find_value(PerceptAgentAllie,i).y)
-        draw_text(x-20,y+i*10,ds_list_find_value(PerceptAgentEnnemi,i));
-        }
-    }
-
-/*draw_text(x,y,id)
-draw_text(x,y-10,"TAILLE LISTE : "+string(ds_list_size(Regiment)));
-draw_text(x,y-20,String);
-draw_text(x,y-30,object_get_name(Off_sup));
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//Draw path if I actually have one
-if (p_path &gt; -1){
-    draw_path(p_path, x, y, true);
-}
-
-//Draw self
-draw_self();
 </string>
           </argument>
         </arguments>

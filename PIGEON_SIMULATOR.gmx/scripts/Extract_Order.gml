@@ -23,7 +23,15 @@ if(currentStep==0)
 else
 {
     show_debug_message("Je lance la boucle");
-    switch(ds_grid_get(cyk,currentStep,currentWord))
+    var token = ds_grid_get(cyk,currentStep,currentWord)
+    // todo : repérer et faire remonter les erreurs ici
+    if( !is_string(token) ){
+        //token = "erreur : tenter de caster en string ?"
+        show_debug_message(token); // en général lors d'une erreur : 0 (int)
+        log_toolbox_message("Extract_Order : Impossible de lire " + string(token), c_red);
+        token = ""; // corriger comme on peut pour eviter le plantage
+    }
+    switch(token)
     {
         case "S":
             show_debug_message("Cas S :");

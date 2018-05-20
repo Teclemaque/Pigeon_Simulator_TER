@@ -12,7 +12,7 @@ if instance_exists(Officier.Formation)
     else
         {I = 1;}
     
-    D = sqrt(sqr(5*I)+sqr(7*J));
+    D = sqrt(sqr(3*I)+sqr(8*J));
     
     Angle = point_direction(Officier.Formation.x,Officier.Formation.y,Officier.Formation.x+5*I,Officier.Formation.y+7*J)
     

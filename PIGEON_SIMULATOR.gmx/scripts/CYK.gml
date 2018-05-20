@@ -12,7 +12,7 @@ for(i=0;i<array_length_1d(p);i++)
     {
         tmp=ds_list_find_value(r,j);
         show_debug_message(tmp);
-        if(array_length_1d(tmp[1])==1)
+        if(is_array(tmp) && array_length_1d(tmp[1])==1)
         {
             show_debug_message("    GOOD !");
             t = tmp[1];
@@ -36,7 +36,7 @@ for(i=1;i<array_length_1d(p);i++)
             {
                 tmp=ds_list_find_value(r,m);
                 show_debug_message(tmp);
-                if(array_length_1d(tmp[1])==2)
+                if(is_array(tmp) && array_length_1d(tmp[1])==2)
                 {
                     show_debug_message("    JE MARCHE");
                     t=tmp[1];
