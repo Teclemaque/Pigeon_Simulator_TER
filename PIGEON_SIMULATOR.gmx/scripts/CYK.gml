@@ -82,7 +82,11 @@ show_debug_message("AFFICHAGE DE ORDERMAP :");
 show_debug_message(json_encode(orderMap));
 
 //Lancement d'Extract_Order
-Extract_Order(p, cyk, ds_grid_width(cyk)-1,0,orderMap,0);
-show_debug_message(json_encode(orderMap));
-
-return orderMap;
+if(string(ds_grid_get(cyk,array_length_1d(p),0))=="S")
+{
+    Extract_Order(p, cyk, ds_grid_width(cyk)-1,0,orderMap,0);
+    show_debug_message(json_encode(orderMap));
+    return orderMap;
+}
+else
+    return noone;
