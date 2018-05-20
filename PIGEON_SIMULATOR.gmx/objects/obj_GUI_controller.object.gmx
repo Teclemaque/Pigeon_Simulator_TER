@@ -91,47 +91,9 @@ var my = window_views_mouse_get_y();
 //show_debug_message("orig " + string(click_origin_x) + " : " + string(click_origin_x))
 //show_debug_message("release " + string(mouse_x) + " : " + string(mouse_y))
 
-Selection = collision_rectangle_list(
-    click_origin_x, click_origin_y, 
-    mouse_x, mouse_y, 
-    obj_agent, 
-    false, true);
-    
-if( ! ds_list_empty(Selection) ){
-    for( var i = 0; i &lt; ds_list_size(Selection); i++ ){
-        var agent = ds_list_find_value(Selection, i);
-        var has_regiment = object_is_ancestor(agent.object_index, obj_meta_agent_C1) || object_is_ancestor(agent.object_index, obj_meta_agent_C2);
-        if( instance_exists(agent) &amp;&amp; has_regiment ){
-            var nom = nomGroupe(agent)// arg2 = withName
-            show_debug_message(nom);
-        }else { // Ne pas selectionner les agents simples (pas de Regiment)
-            var agent_pos = ds_list_find_index(Selection, agent);
-            ds_list_delete(Selection, agent_pos);
-        }
-    }
-}
+process_rectangle_selection(); // Remplir laa Selection avec les agents qui sont dans le rectangle de selection
 
-/*
-if( ds_list_empty(Selection) &amp;&amp; !keyboard_check_direct(vk_lcontrol)){ // si clic simple dans le vide
 
-    if(mouse_x == click_origin_x &amp;&amp; mouse_y == click_origin_y){
-      coordinates = string(mouse_x) + ":" + string(mouse_y) + " ";
-      //keyboard_string += coordinates; // todo : move to toolbox
-      toolbox.coordinates = coordinates;
-      toolbox.Text += coordinates;
-      var mouse_on_view_x = mouse_x &gt;= global.Dimensions[? "startx"] &amp;&amp; mouse_x &lt;= global.Dimensions[? "endx"]
-      var mouse_on_view_y = mouse_y &gt;= global.Dimensions[? "starty"] &amp;&amp; mouse_y &lt;= global.Dimensions[? "endy"]
-      if( mouse_on_view_x &amp;&amp; mouse_on_view_y ){ // clic dans la vue principale
-      // todo : transmettre le clic à la main view
-  //    show_debug_message("on view")
-      
-      }
-    }
-    
-//    var left_in = mouse_x_gui() &gt; origin_x + global.Dimensions[? "startx"]
-//    show_debug_message("left_in : " + string(left_in));
-}
-/**/
 
 click_origin_x = noone;
 click_origin_y = noone;
@@ -142,15 +104,6 @@ with ( instance_position( mouse_x_gui(), mouse_y_gui(), obj_btn_plus ) )
             onBtnPlusClicked(id)
         }
 
-/*
-if ( mouse_check_button_pressed( mb_left ) )
-    {
-    with ( instance_position( mouse_x_gui(), mouse_y_gui(), obj_btn_plus ) )
-        {
-            onBtnPlusClicked(id)
-        }
-    }
-    */
 </string>
           </argument>
         </arguments>
