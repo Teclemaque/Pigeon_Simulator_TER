@@ -42,8 +42,10 @@ else
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
                         log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
-                        exit;
+                        //exit;
                     }
+                    else
+                    {
                     var tmp = rule[1];
                     if(array_length_1d(tmp)==2)
                     {                        
@@ -53,6 +55,7 @@ else
                             Extract_Order(p,cyk,currentStep-i-1,currentWord+i+1,orderMap,1);
                             break;
                         }
+                    }
                     }
                 }
             }
