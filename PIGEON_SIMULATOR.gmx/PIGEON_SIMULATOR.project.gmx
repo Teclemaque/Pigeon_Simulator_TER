@@ -235,10 +235,9 @@
       <object>objects\obj_title_follow</object>
     </objects>
   </objects>
-  <timelines name="timelines"/>
   <rooms name="rooms">
-    <room>rooms\room1</room>
     <room>rooms\Title_screen</room>
+    <room>rooms\room1</room>
     <room>rooms\room0_new</room>
     <room>rooms\room0</room>
     <room>rooms\room_darret</room>

@@ -62,8 +62,16 @@ with(obj_GUI_controller){
             <string>if keyboard_check_direct(vk_lcontrol) &amp;&amp; keyboard_check_pressed(ord('M')){
     if(toggle_papper == 0){
         toggle_papper = 1
+        view_wview[0] = room_width 
+        view_hview[0] = room_height
+        view_xview[0] = 0
+        view_yview[0] = 0
     } else {
         toggle_papper = 0
+        view_xview[0] = obj_VIEW_controller.mem_xview 
+        view_yview[0] = obj_VIEW_controller.mem_yview
+        view_wview[0] = obj_VIEW_controller.mem_wview
+        view_hview[0] = obj_VIEW_controller.mem_hview
     }
 }
 

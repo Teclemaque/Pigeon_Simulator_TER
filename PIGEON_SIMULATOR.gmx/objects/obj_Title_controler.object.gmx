@@ -35,31 +35,29 @@ view_vborder[0] = view_wview[0]/2
 pos = 0
 delay = 0
 delay_max = 8
+alph = 0.1
+inStat = 0
+
+//create/load .ini
+if(!file_exists("Save.ini")) {
+    ini_open("Save.ini")
+    ini_write_real("Statistics","Game_Played",0)
+    ini_write_real("Statistics","Game_Won",0)
+    ini_write_real("Statistics","Number_Killed",0)
+    ini_write_real("Statistics","Number_Lost",0)
+    ini_close()
+}
+
+GPlayed = 0
+GWon = 0
+Ulost = 0
+UKilled = 0
+
+//music
+if(!audio_is_playing(Order__Please)){
+    audio_play_sound(Order__Please,1,true)
+}
 </string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>211</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_sound</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>6</kind>
-            <sound>Order__Please</sound>
-          </argument>
-          <argument>
-            <kind>3</kind>
-            <string>1</string>
           </argument>
         </arguments>
       </action>
@@ -89,16 +87,16 @@ if(keyboard_check_released(vk_up) or keyboard_check_released(vk_down)
     delay = 0
 }
 
-if((keyboard_check(vk_up) or gamepad_button_check(0,gp_padu) )and delay &lt; 1){
+if(inStat == 0 and (keyboard_check(vk_up) or gamepad_button_check(0,gp_padu) )and delay &lt; 1){
     delay = delay_max
     if(pos == 0){
-        pos = 3
+        pos = 4
     } else {
         pos--
     }
-} else if((keyboard_check(vk_down) or gamepad_button_check(0,gp_padd)) and delay &lt; 1){
+} else if(inStat == 0 and (keyboard_check(vk_down) or gamepad_button_check(0,gp_padd)) and delay &lt; 1){
     delay = delay_max
-    if(pos == 3){
+    if(pos == 4){
         pos = 0
     } else {
         pos++
@@ -106,7 +104,21 @@ if((keyboard_check(vk_up) or gamepad_button_check(0,gp_padu) )and delay &lt; 1){
 } else if(!keyboard_check(vk_alt) and(keyboard_check_pressed(vk_enter) or keyboard_check_pressed(vk_space))){
     if(pos == 0){
 //      room_goto(Tutorial)
-    } else if(pos == 3){
+    } else if (pos == 1){ 
+        room_goto(room1)
+    } else if(pos == 2){
+        if(inStat == 0){
+            ini_open("Save.ini")
+            GPlayed = ini_read_real("Statistics","Game_Played",0)
+            GWon = ini_read_real("Statistics","Game_Won",0)
+            Ulost = ini_read_real("Statistics","Number_Lost",0)
+            UKilled = ini_read_real("Statistics","Number_Killed",0)
+            ini_close()
+            inStat = 1
+        } else {
+            inStat = 0
+        }
+    }else if(pos == 4){
         game_end()
     }
 }
@@ -143,49 +155,83 @@ if(keyboard_check_pressed(vk_up)){
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>obj_Title_controler</whoName>
+        <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
             <string>draw_set_alpha_test(false);
+draw_set_alpha(1)
 draw_sprite_ext(Title_name,0,view_wport[0]/2,view_hport[0]/4,2,2,0,c_white,1)
 
 draw_set_font(fnt_title)
 
 var sep = 50
 draw_set_alpha(0.5)
+if(inStat == 0){
+    if(pos == 0){
+        draw_rectangle_colour(view_wport[0]/2-120,view_hport[0]/2,
+            view_wport[0]/2+120,view_hport[0]/2+30,c_blue,c_aqua,c_white,c_aqua,0)
+        draw_rectangle(view_wport[0]/2-120-2,view_hport[0]/2-2,
+            view_wport[0]/2+120,view_hport[0]/2+30,1)
+    } else if(pos == 1){
+        draw_rectangle_colour(view_wport[0]/2-120,view_hport[0]/2+sep,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep,c_blue,c_aqua,c_white,c_aqua,0)
+        draw_rectangle(view_wport[0]/2-120-2,view_hport[0]/2-2+sep,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep,1)
+    } else if(pos == 2){
+        draw_rectangle_colour(view_wport[0]/2-120,view_hport[0]/2+sep*2,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep*2,c_blue,c_aqua,c_white,c_aqua,0)
+        draw_rectangle(view_wport[0]/2-120-2,view_hport[0]/2-2+sep*2,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep*2,1)
+    } else if(pos == 3){
+        draw_rectangle_colour(view_wport[0]/2-120,view_hport[0]/2+sep*3,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep*3,c_blue,c_aqua,c_white,c_aqua,0)
+        draw_rectangle(view_wport[0]/2-120-2,view_hport[0]/2-2+sep*3,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep*3,1)
+    } else {
+        draw_rectangle_colour(view_wport[0]/2-120,view_hport[0]/2+sep*4,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep*4,c_blue,c_aqua,c_white,c_aqua,0)
+        draw_rectangle(view_wport[0]/2-120-2,view_hport[0]/2-2+sep*4,
+            view_wport[0]/2+120,view_hport[0]/2+30+sep*4,1)
+    }
+    
+    draw_set_alpha(1)
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_top)
+    draw_text_transformed(view_wport[0]/2,view_hport[0]/2,"Tutorial",2,2,0)
+    draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep,"Mission",2,2,0)
+    draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep*2,"Statistiques",2,2,0)
+    draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep*3,"Option",2,2,0)
+    draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep*4,"Quitter",2,2,0)
 
-if(pos == 0){
-    draw_rectangle_colour(view_wport[0]/2-100,view_hport[0]/2,
-        view_wport[0]/2+100,view_hport[0]/2+30,c_blue,c_aqua,c_white,c_aqua,0)
-    draw_rectangle(view_wport[0]/2-100-2,view_hport[0]/2-2,
-        view_wport[0]/2+100,view_hport[0]/2+30,1)
-} else if(pos == 1){
-    draw_rectangle_colour(view_wport[0]/2-100,view_hport[0]/2+sep,
-        view_wport[0]/2+100,view_hport[0]/2+30+sep,c_blue,c_aqua,c_white,c_aqua,0)
-    draw_rectangle(view_wport[0]/2-100-2,view_hport[0]/2-2+sep,
-        view_wport[0]/2+100,view_hport[0]/2+30+sep,1)
-} else if(pos == 2){
-    draw_rectangle_colour(view_wport[0]/2-100,view_hport[0]/2+sep*2,
-        view_wport[0]/2+100,view_hport[0]/2+30+sep*2,c_blue,c_aqua,c_white,c_aqua,0)
-    draw_rectangle(view_wport[0]/2-100-2,view_hport[0]/2-2+sep*2,
-        view_wport[0]/2+100,view_hport[0]/2+30+sep*2,1)
 } else {
-    draw_rectangle_colour(view_wport[0]/2-100,view_hport[0]/2+sep*3,
-        view_wport[0]/2+100,view_hport[0]/2+30+sep*3,c_blue,c_aqua,c_white,c_aqua,0)
-    draw_rectangle(view_wport[0]/2-100-2,view_hport[0]/2-2+sep*3,
-        view_wport[0]/2+100,view_hport[0]/2+30+sep*3,1)
+    //rectangle
+    draw_set_alpha(0.75)
+    draw_rectangle_colour(view_wport[0]/2-220,view_hport[0]/2,
+            view_wport[0]/2+220,view_hport[0]/2+30+sep*4,c_blue,c_aqua,c_white,c_aqua,0)
+    draw_rectangle(view_wport[0]/2-220,view_hport[0]/2,
+            view_wport[0]/2+220,view_hport[0]/2+30+sep*4,true)
+    //text
+    draw_set_color(c_black)
+     draw_set_valign(fa_top)
+    draw_set_halign(fa_left)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17,"Partie Jouée :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep,"Partie Gagnée :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep*2,"Unité Tuée :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep*3,"Unité Pedue :",2,2,0)
+    draw_set_color(c_red)
+    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19,string(GPlayed),2,2,0)
+    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19+sep,string(GWon),2,2,0)
+    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19+sep*2,string(Ulost),2,2,0)
+    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19+sep*3,string(UKilled),2,2,0)
 }
 
-draw_set_alpha(1)
-draw_set_halign(fa_center);
-draw_set_valign(fa_top)
-draw_text_transformed(view_wport[0]/2,view_hport[0]/2,"Tutorial",2,2,0)
-draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep,"Mission",2,2,0)
-draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep*2,"Option",2,2,0)
-draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep*3,"Quitter",2,2,0)
+if(alph &lt; 1){
+    alph += 0.01
+}
+draw_set_alpha(alph)
 </string>
           </argument>
         </arguments>

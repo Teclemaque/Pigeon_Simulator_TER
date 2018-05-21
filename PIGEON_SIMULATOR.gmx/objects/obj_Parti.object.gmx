@@ -31,6 +31,11 @@ nb_allie_tuer = 0
 text = "Votre armée est vaincu"
 victorieu = 1 // 1 joueur - 0 autre
 
+ini_open("Save.ini")
+var game = ini_read_real("Statistics","Game_Played",0)
+ini_write_real("Statistics","Game_Played",game+1)
+ini_close()
+
 activite = 0
 </string>
           </argument>
@@ -70,6 +75,7 @@ activite = 0
         show_debug_message("Game Over")
     } else if(inst2 &lt; 0){
         activite = 0
+        victorieu = 1
         instance_create(0,0,obj_game_over)
         show_debug_message("Victoire")
         text = "vous avez remportez une grande victoire"

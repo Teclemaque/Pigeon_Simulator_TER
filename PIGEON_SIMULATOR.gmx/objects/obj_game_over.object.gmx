@@ -28,6 +28,19 @@
             <string>image_alpha = 0
 
 delay = 60
+
+//update ini
+ini_open("Save.ini")
+if(obj_Parti.victorieu == 1){
+    var game = ini_read_real("Statistics","Game_Won",0)
+    ini_write_real("Statistics","Game_Won",game+1)
+}
+var stat = ini_read_real("Statistics","Number_Killed",0)
+ini_write_real("Statistics","Number_Killed",stat+obj_Parti.nb_ennemi_tuer)
+stat = ini_read_real("Statistics","Number_Lost",0)
+ini_write_real("Statistics","Number_Lost",stat+obj_Parti.nb_allie_tuer )
+ini_close()
+
 </string>
           </argument>
         </arguments>
