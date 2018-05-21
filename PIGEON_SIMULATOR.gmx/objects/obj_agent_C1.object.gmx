@@ -33,12 +33,14 @@ Execute = IA_Repos_Soldat;
 
 Ennemi = obj_agent_C2;
 Allie = obj_agent_C1;
+Messager = obj_messager_C1;
 Off = obj_agent_officier0_C1;
+Officier_supreme = obj_joueur;
 
 image_alpha = 1;
 
 //image_blend = c_red;
-Camp = -1;
+Camp = 1;
 Classe = 0;
 
 Recharge = obj_globVar.R_fusil;
@@ -69,6 +71,16 @@ Recharge = obj_globVar.R_fusil;
     if instance_exists(Officier)
         {
         Officier.MODE = "ATTAQUE";
+        }
+    if Camp == -1
+        {
+        obj_Partie.nb_ennemi_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
+    else
+        {
+        obj_Partie.nb_allie_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
         }
     }
 </string>

@@ -248,10 +248,13 @@ if( !keyboard_check_direct(vk_lcontrol)){
             <kind>1</kind>
             <string>/// Highlight selected units
 var color = c_red;
-if( !ds_list_empty(Selection) ){
-    for(var i = 0; i &lt; ds_list_size(Selection); i++){
-        var agent = ds_list_find_value(Selection, i);
-        draw_agent_rectangle(agent, color)
+if ds_exists(Selection,ds_type_list)
+    {
+    if( !ds_list_empty(Selection) ){
+        for(var i = 0; i &lt; ds_list_size(Selection); i++){
+            var agent = ds_list_find_value(Selection, i);
+            draw_agent_rectangle(agent, color)
+        }
     }
     
 }

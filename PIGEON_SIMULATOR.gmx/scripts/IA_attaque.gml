@@ -59,7 +59,7 @@ if MODE = "ATTAQUE"
                 if Recharge < obj_globVar.R_fusil // Variable actuellement globale de temps de recharge, on pourrait aussi faire appel à obj_globVar.R_fusil et plus besoin de globalité. Meilleur optimisation?
                     {
                     Recharge++;
-                    speed = 0;
+                    Cadence = 0;
                     } 
                 else
                     {
@@ -108,7 +108,7 @@ if MODE = "ATTAQUE"
                     Argument[4] = -1;
                     Argument[5] = -1;
                     Argument[6] = -1;
-                    Argument[7] = Officier.speed+MSpeed/10;
+                    Argument[7] = Officier.Cadence+MSpeed/10;
                     Argument[8] = 0;
                     Argument[9] = Alpha;
                     Argument[10] = Ordre;
@@ -117,7 +117,7 @@ if MODE = "ATTAQUE"
                     }
                 else
                     {
-                    speed = 0;
+                    Cadence = 0;
                     with(instance_create(x,y,obj_arme_blanche))
                         {
                         direction = other.direction;//On fait partir la balle dans sa direction
@@ -166,7 +166,7 @@ if MODE = "ATTAQUE"
                         }
                     else
                         {
-                        speed = 0;
+                        Cadence = 0;
                         with(instance_create(x,y,obj_arme_blanche))
                             {
                             direction = other.direction;//On fait partir la balle dans sa direction
@@ -252,13 +252,12 @@ if instance_exists(Officier)
                         {
                         Dir1 = point_direction(x,y,Cible.x,Cible.y);
                         Recharge++;
-                        speed = 0;
+                        Cadence = 0;
                         } 
                     else
                         {
                         if collision_line(x,y,Cible.x,Cible.y,Allie,1,1) == noone
                             {
-                            sound_play(sound_fusil_1);
                             with(instance_create(x,y,obj_arme))
                                 {
                                 direction = other.Dir1;//On fait partir la balle dans sa direction
@@ -292,7 +291,7 @@ if instance_exists(Officier)
                         {
                         Dir1 = point_direction(x,y,Cible.x,Cible.y);
                         Recharge++;
-                        speed = 0;
+                        Cadence = 0;
                         } 
                 else
                     {
@@ -330,7 +329,6 @@ if instance_exists(Officier)
                     Argument[8] = 0;
                     Argument[9] = Alpha;
                     Argument[10] = Ordre;
-                    //IA_Deplacement_Soldat();
                     exit;
                         
                     }
@@ -380,7 +378,6 @@ if instance_exists(Officier)
                         Argument[8] = 0;
                         Argument[9] = Alpha;
                         Argument[10] = Ordre;
-                        //IA_Deplacement_Soldat();
                         exit;
                         }
                     else

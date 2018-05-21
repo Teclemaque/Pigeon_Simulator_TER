@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>t = 5;
+            <string>t = 1;
 image_xscale = 0.1;
 image_yscale = 0.1;
 Precision = random(100)
@@ -55,6 +55,84 @@ Precision = random(100)
 Precision = random(100);
 
 if t &lt; 0
+    {
+    instance_destroy();
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_general">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if instance_exists(ID)
+    {
+    if ID != other.id
+    &amp;&amp; sign(ID.Camp) != sign(other.Camp)
+        {
+        with(other)
+            {
+            Etat = -1;
+            instance_destroy()
+            }
+        instance_destroy();
+        }
+    }
+else
+    {
+    instance_destroy();
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_joueur">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if instance_exists(ID)
+    {
+    if ID != other.id
+    &amp;&amp; sign(ID.Camp) != sign(other.Camp)
+        {
+        with(other)
+            {
+            Etat = -1;
+            instance_destroy()
+            }
+        instance_destroy();
+        }
+    }
+else
     {
     instance_destroy();
     }

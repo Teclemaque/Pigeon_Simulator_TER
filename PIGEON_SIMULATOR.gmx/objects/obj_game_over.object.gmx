@@ -31,14 +31,14 @@ delay = 60
 
 //update ini
 ini_open("Save.ini")
-if(obj_Parti.victorieu == 1){
+if(obj_Partie.victorieu == 1){
     var game = ini_read_real("Statistics","Game_Won",0)
     ini_write_real("Statistics","Game_Won",game+1)
 }
 var stat = ini_read_real("Statistics","Number_Killed",0)
-ini_write_real("Statistics","Number_Killed",stat+obj_Parti.nb_ennemi_tuer)
+ini_write_real("Statistics","Number_Killed",stat+obj_Partie.nb_ennemi_tuer)
 stat = ini_read_real("Statistics","Number_Lost",0)
-ini_write_real("Statistics","Number_Lost",stat+obj_Parti.nb_allie_tuer )
+ini_write_real("Statistics","Number_Lost",stat+obj_Partie.nb_allie_tuer )
 ini_close()
 
 </string>
@@ -101,7 +101,7 @@ draw_set_colour(c_red)
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle)
 draw_set_font(fnt_title)
-draw_text_ext_transformed(view_wport[0]/2,view_hport[0]/2,obj_Parti.text,15,300,4,4,0)
+draw_text_ext_transformed(view_wport[0]/2,view_hport[0]/2,obj_Partie.text,15,300,4,4,0)
 draw_set_alpha(1)
 </string>
           </argument>

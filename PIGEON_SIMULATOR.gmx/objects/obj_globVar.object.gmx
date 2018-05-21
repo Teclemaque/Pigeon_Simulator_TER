@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -49,14 +49,42 @@ Regiments = ds_map_create();
 grammaire = ds_list_create();
 global.grammaire = grammaire;
 //FANTASSIN
-A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
+X = random(512)
+Y = random(768)
+instance_create(X,Y,obj_joueur)
+A = instance_create(X,Y,obj_agent_officier0_C1)
 
 A.Officiel = 1;
 A.Officier_sup = obj_joueur;
 
-for (i = 0; i &lt; 805; i++)
+for (i = 0; i &lt; 205; i++)
     {
-    B = instance_create(random(1024),random(728),obj_agent_C1)
+    B = instance_create(X+random(1024)/10,Y+random(728)/10,obj_agent_C1)
+    B.Commandant = A.id
+    ds_list_add(A.Regiment,B.id);
+    }
+with(A)
+    {
+    nomGroupe(id,true);
+    List[0] = id;
+    Argument[0] = List;
+    Argument[1] = 4;
+    Argument[2] = 200;
+    Argument[3] = 1;
+    Execute = IA_Groupe;
+    }
+    
+X = 512+random(512)
+Y = random(768)
+instance_create(X,Y,obj_general)
+A = instance_create(X,Y,obj_agent_officier0_C2)
+
+A.Officiel = 1;
+A.Officier_sup = obj_general;
+
+for (i = 0; i &lt; 205; i++)
+    {
+    B = instance_create(X+random(1024)/10,Y+random(728)/10,obj_agent_C2)
     B.Commandant = A.id
     ds_list_add(A.Regiment,B.id);
     }
@@ -133,7 +161,15 @@ if H &gt;= 24
     J++;
     H = 0;
     }
-  
+
+//music
+audio_stop_sound(Order__Please);
+/*if room == room1{
+    if(audio_is_playing(Order__Please) == true){
+        son = audio_play_sound(Order__Please,0,true)
+        audio_sound_gain(son, 0.5, 0);
+    }
+}*/
 if room == room_darret
     {
     game_end();
@@ -184,7 +220,7 @@ draw_text(10,80,"Jour : "+string(J)+" heure : "+string(H)+" min : "+string(M)+" 
         <arguments>
           <argument>
             <kind>11</kind>
-            <room>room_darret</room>
+            <room>Title_screen</room>
           </argument>
         </arguments>
       </action>

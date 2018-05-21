@@ -169,7 +169,7 @@
       <object>objects\obj_shaderBegin</object>
       <object>objects\obj_gestion_affichage</object>
       <object>objects\obj_debuggage</object>
-      <object>objects\obj_Parti</object>
+      <object>objects\obj_Partie</object>
     </objects>
     <objects name="AGENTS">
       <objects name="AGENTS SIMPLES">
@@ -188,6 +188,7 @@
           <object>objects\obj_agent_officier1_C1</object>
         </objects>
         <objects name="Camp 2">
+          <object>objects\obj_messager_C2</object>
           <object>objects\obj_meta_agent_C2</object>
           <object>objects\obj_agent_officier0_C2</object>
           <object>objects\obj_agent_officier1_C2</object>
@@ -199,6 +200,7 @@
       <object>objects\obj_formation</object>
       <object>objects\obj_jeton</object>
       <object>objects\obj_joueur</object>
+      <object>objects\obj_general</object>
       <object>objects\obj_agent_general</object>
       <object>objects\obj_souris</object>
     </objects>
@@ -223,7 +225,6 @@
       <object>objects\obj_icone_avatar</object>
       <object>objects\obj_btn_minus</object>
       <object>objects\obj_btn_plus</object>
-      <object>objects\obj_general</object>
       <object>objects\obj_group_rectangle</object>
       <object>objects\obj_gui</object>
       <object>objects\obj_GUI_controller</object>

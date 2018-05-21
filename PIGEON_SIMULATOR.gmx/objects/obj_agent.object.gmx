@@ -120,6 +120,20 @@ if Classe == 0
         }
     }
 
+if Etat != 1
+    {
+    if Camp == -1
+        {
+        obj_Partie.nb_ennemi_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
+    else
+        {
+        obj_Partie.nb_allie_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
+    }
+
 ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
 </string>
           </argument>
@@ -149,7 +163,8 @@ ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
     visible = true;
     image_alpha = 1;
 
-    if Classe == 1 
+    if Classe == 1
+    &amp;&amp; ds_exists(Regiment,ds_type_list) 
     &amp;&amp; (Officiel == 1 || ds_list_size(Regiment) &gt; 100)
         {
         if instance_exists(Jeton)
@@ -174,7 +189,7 @@ else
                 }
             else
                 {
-                if map_visible(obj_joueur) == true
+                if map_visible(Officier_supreme) == true
                     {
                     Jeton.visible = true;
                     Jeton.Effectif = ds_list_size(Regiment)
@@ -182,15 +197,15 @@ else
                     Jeton.x = x;
                     Jeton.y = y;
                     
-                    if instance_exists(obj_joueur)
-                    &amp;&amp; ds_list_find_index(obj_joueur.Regiment,Name) == -1
+                    if instance_exists(Officier_supreme)
+                    &amp;&amp; ds_list_find_index(Officier_supreme.Regiment,Name) == -1
                         {
-                        ds_list_add(obj_joueur.Regiment, Name)
+                        ds_list_add(Officier_supreme.Regiment, Name)
                         }
                     }
                 else
                     {
-                    if ds_list_find_index(obj_joueur.Regiment,Name) != -1
+                    if ds_list_find_index(Officier_supreme.Regiment,Name) != -1
                         {
                         Jeton.visible = true;
                         }

@@ -104,10 +104,19 @@ if Etat != 1
     &amp;&amp; ds_list_size(Regiment) &gt; 2)
     or (Etat == 0 &amp;&amp; Officiel == 0)
         {
-        show_debug_message("OUIIIIIIIIIII");
         transfertNouvelOfficier(id);
         }
     }
+if Camp == -1
+        {
+        obj_Partie.nb_ennemi_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
+    else
+        {
+        obj_Partie.nb_allie_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
 //Je supprime toute mes listes d'officier 
 ds_map_delete(obj_globVar.Regiments, Name)   
 ds_list_destroy(Regiment);
@@ -206,34 +215,34 @@ x = xx;
     if Classe == 1
         {
         if Grade &gt;= 2 &amp;&amp; Officiel == 1 
-        &amp;&amp; ((map_visible(obj_joueur) == false &amp;&amp; obj_globVar.Temps mod 100 == 0)
+        &amp;&amp; ((map_visible(Officier_supreme) == false &amp;&amp; obj_globVar.Temps mod 100 == 0)
         || obj_globVar.Temps mod 200 == 0)// Regulierement l'officier va essayer d'envoyer un rapport
             {
             if instance_exists(obj_messager_C1)
-            &amp;&amp; distance_to_object(instance_nearest(x,y,obj_messager_C1)) &lt; 25
+            &amp;&amp; distance_to_object(instance_nearest(x,y,Messager)) &lt; 25
                 {
-                Messager = instance_nearest(x,y,obj_messager_C1)
-                Messager.ArgumentMessager[] = 0;
+                messager = instance_nearest(x,y,Messager)
+                messager.ArgumentMessager[] = 0;
                 //1ère partie du rapport l'etat de sa troupe
-                //ds_list_add(Messager.Destinataire,obj_joueur);
-                Messager.ArgumentMessager[0] = obj_joueur
-                Messager.ArgumentMessager[1] = "RAPPORT";
-                Messager.ArgumentMessager[2] = Name;
-                Messager.ArgumentMessager[3] = ds_list_size(Regiment);
-                Messager.ArgumentMessager[4] = x;
-                Messager.ArgumentMessager[5] = y;
-                Messager.ArgumentMessager[6] = obj_globVar.Temps;
+                //ds_list_add(messager.Destinataire,obj_joueur);
+                messager.ArgumentMessager[0] = Officier_supreme
+                messager.ArgumentMessager[1] = "RAPPORT";
+                messager.ArgumentMessager[2] = Name;
+                messager.ArgumentMessager[3] = ds_list_size(Regiment);
+                messager.ArgumentMessager[4] = x;
+                messager.ArgumentMessager[5] = y;
+                messager.ArgumentMessager[6] = obj_globVar.Temps;
                 
                 //2ème partie, tous les renseignements qu'il a obtenu
                 for (i = 0; i &lt; ds_list_size(Renseignement);i++)
                     {
-                    Messager.ArgumentMessager[7+i] = ds_list_find_value(Renseignement,i);
+                    messager.ArgumentMessager[7+i] = ds_list_find_value(Renseignement,i);
                     }
-                ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager);
+                ds_list_add(messager.SaccocheMessage,messager.ArgumentMessager);
 
-                Messager.Message += 1;
+                messager.Message += 1;
                 
-                with(Messager)
+                with(messager)
                     {
                     D = ds_list_find_value(SaccocheMessage,0)
                     Dest = D[0]
@@ -248,7 +257,7 @@ x = xx;
                     Argument[9] = Alpha//round(random(8))+2;
                     Argument[10] = 1;
                     }
-                Messager.ArgumentMessager[] = 0;
+                messager.ArgumentMessager[] = 0;
                 }
             }
         }

@@ -65,27 +65,31 @@ if(withName){
     }
 }
 
-if ds_list_size(agent.Regiment) > 2*agent.Grade
+if instance_number(Messager) < instance_number(Allie)/10
     {
-    for (i = 0; i < (agent.Grade)/2; i++)
+    if ds_list_size(agent.Regiment) > 2*agent.Grade
         {
-        A = ds_list_find_value(agent.Regiment,1);
-        Mess = instance_create(A.x,A.y,obj_messager_C1);
-        // Faut faire un transfert de données entre les 2
-        Mess.Officier_sup = agent.id;
-        ds_list_delete(agent.Regiment,1);
-        
-        with(A)
+        for (i = 0; i < (agent.Grade)/2; i++)
             {
-            instance_destroy();
+            A = ds_list_find_value(agent.Regiment,1);
+            Mess = instance_create(A.x,A.y,Messager);
+            // Faut faire un transfert de données entre les 2
+            Mess.Officier_sup = agent.id;
+            ds_list_delete(agent.Regiment,1);
+            
+            with(A)
+                {
+                instance_destroy();
+                }
+            
             }
-        
         }
     }
 // Trouver le numero à attribuer au groupe
 var numero = "";
 N1 = 0;
 if instance_exists(agent.Commandant)
+&& instance_exists(agent.Commandant_sup)
     {
     if (agent != agent.Commandant_sup)
         { // si le père a le numero 12
@@ -153,12 +157,16 @@ if (agent.Troupe != groupName){
         ds_list_add(global.grammaire,fullName);
         }
         
-    if map_visible(obj_joueur) == true
+    if map_visible(Officier_supreme) == true
         {
-        if instance_exists(obj_joueur)
-        && ds_list_find_index(obj_joueur.Regiment,Name) == -1
+        if instance_exists(Officier_supreme)
+        && ds_list_find_index(Officier_supreme.Regiment,Name) == -1
             {
-            ds_list_add(obj_joueur.Regiment, Name)
+            ds_list_add(Officier_supreme.Regiment, Name)
+            }
+        if ds_list_find_index(Officier_supreme.RegimentAllie,id) == -1
+            {
+            ds_list_add(Officier_supreme.RegimentAllie, id)
             }
         }
     

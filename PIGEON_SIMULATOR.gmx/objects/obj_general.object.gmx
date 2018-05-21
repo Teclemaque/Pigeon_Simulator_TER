@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>obj_agent_C2</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,12 +25,49 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>Camp = 1;
+            <string>Camp = -1;
+ExecuteOrdre = noone;
+Grade = 14;
+Officiel = 1;
+Name = obj_joueur;
+Commandant = id;
 
 Ordres = ds_list_create();
 
-if Camp &lt; 0
-    sprite_index = spr_general_2;
+repeat(20)
+    {
+    A = instance_create(x+random(20)-10,y+random(20)-10,obj_messager_C2)
+    A.Officier_sup = id;
+    }
+    
+Renseignement = ds_list_create();
+Regiment = ds_list_create();
+RegimentAllie = ds_list_create();
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>////////////////////////////////////
 </string>
           </argument>
         </arguments>
@@ -53,38 +90,63 @@ if Camp &lt; 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var action;
-while( !ds_list_empty(Ordres) ){
-    action = ds_list_find_value(Ordres, 0);
-    ds_list_delete(Ordres, 0);
-    
-    send_ordre_to_agent(action, action[? "Target"]);
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self()
-draw_text(x,y+15, "Ordres : " + string(ds_list_size(Ordres)))
+            <string>Rens = ds_list_find_value(Renseignement,0)//ou 0
 
+//for (j = 0; j &lt; array_length_1d(Rens); j++)
+if is_array(Rens)
+    {
+    if ds_map_find_value(global.Regiments, Rens[1]) != undefined
+        {
+        Agent = ds_map_find_value(global.Regiments, Rens[1]);
+        
+        if instance_exists(Agent)
+            {
+            if ds_list_find_index(Regiment, Agent.Name) == -1
+                {
+                ds_list_add(Regiment, Agent.Name)
+                
+                if Agent.Camp == Camp
+                    {
+                    ds_list_add(RegimentAllie, Agent)
+                    }
+                }
+            }
+        }
+    }
+ds_list_delete(Renseignement,0)
+
+if ds_list_find_index(Regiment,obj_joueur) != -1
+    {
+    for (i = 0; i &lt; ds_list_size(RegimentAllie); i++)
+        {
+        A = ds_list_find_value(RegimmentAllie,i)
+        Messager = instance_nearest(x,y,obj_messager_C2); //Alors on cherche le messager le plus proche
+        Messager.ArgumentMessager[] = 0;//On reinitialise son tableau contenant le parametre du message
+        if distance_to_object(Messager) &lt;= 25
+        &amp;&amp; Messager.Mission == 0 // Si le messager est suffisament proche et pas deja en mission
+            {
+            //ds_list_add(Messager.Destinataire,ExecuteOrdre);
+            Messager.ArgumentMessager[0] = A;//On lui donne le destinaire
+            Messager.ArgumentMessager[1] = "ORDRE";//On indique que le message est un ordre
+            Messager.ArgumentMessager[2] = IA_Attaque;//L'ordre (le script)a transmettre
+            Messager.ArgumentMessager[3] = obj_joueur;//Les parametre de l'odre (du script)
+            Messager.ArgumentMessager[4] = 1;
+            Messager.ArgumentMessager[5] = 1;
+            Messager.ArgumentMessager[6] = A.MSpeed;
+            Messager.ArgumentMessager[7] = 200;
+            // Une fois que le tableau est comble (ici sa taille est de 6)
+            // On le place dans la saccoche du messager. La saccoche contient des tableaux
+            // 1 tableau par message
+            ds_list_add(Messager.SaccocheMessage,Messager.ArgumentMessager)
+            Messager.Message += 1;// On indique au messager qu'il a un new message
+            
+            // REMARQUE SI ON RAJOUTE UN NOUVEL ORDRE IL FAUT REINITIALISER ArgumentMessager[]
+            // Sans quoi les valeurs sont fausses
+            Messager.ArgumentMessager[] = 0;
+            Mission = 1;
+            }
+        }
+    }
 </string>
           </argument>
         </arguments>

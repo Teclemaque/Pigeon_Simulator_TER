@@ -36,6 +36,7 @@ ExecuteRegiment = noone;
 t = random(20);
 
 Formation = noone;
+Jeton = noone;
 Officiel = 0;
 
 Troupe = "";
@@ -53,14 +54,18 @@ PerceptAgentEnnemi = ds_list_create();
 PerceptAgentAllie = ds_list_create();
 CibleAttaque = ds_list_create();
 
+Message = ds_list_create();
+Objectif = 0;
+
 CibleRegiment = noone;
 
 Classe = 1;
 ORDRE = "AUCUN";
 
-nomGroupe(id);
-
-p_path = -1;
+if Classe == 1
+    {
+    nomGroupe(id);
+    }
 
 Argument[0] = 0;
 Argument[1] = random(180)+30;
@@ -103,6 +108,17 @@ if Etat != 1
         transfertNouvelOfficier(id);
         }
     }
+if Camp == -1
+        {
+        obj_Partie.nb_ennemi_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
+    else
+        {
+        obj_Partie.nb_allie_tuer += 1
+        show_debug_message(obj_Partie.nb_ennemi_tuer)
+        }
+
 //Je supprime toute mes listes d'officier 
 ds_map_delete(obj_globVar.Regiments, Name)   
 ds_list_destroy(Regiment);
@@ -110,6 +126,7 @@ ds_list_destroy(PerceptAgentEnnemi);
 ds_list_destroy(PerceptAgentAllie);
 ds_list_destroy(CibleAttaque);
 ds_list_destroy(Renseignement);
+ds_list_destroy(Message);
 
 if instance_exists(Formation)
     {
@@ -156,11 +173,14 @@ if t &gt; 20
     ds_list_clear(PerceptAgentAllie);
     ds_list_clear(PerceptAgentEnnemi);
     //Avant de faire ses perceptions, l'officier va desactiver son régiment
-    for (i = 1; i &lt; ds_list_size(Regiment); i++)
+    if ds_exists(Regiment,ds_type_list)
         {
-        instance_deactivate_object(ds_list_find_value(Regiment,i));
+        for (i = 1; i &lt; ds_list_size(Regiment); i++)
+            {
+            instance_deactivate_object(ds_list_find_value(Regiment,i));
+            }
         }
-    Dist = 0;              
+    Dist = 10;              
     IA_Perception();
 
     instance_activate_all();
@@ -194,7 +214,57 @@ x = xx;
             <kind>1</kind>
             <string>if Classe &lt;= 1
     {
-    if Commandant_sup.ORDRE == "GROUPE"
+    if Classe == 1
+        {
+        if Grade &gt;= 2 &amp;&amp; Officiel == 1 
+        &amp;&amp; ((map_visible(Officier_supreme) == false &amp;&amp; obj_globVar.Temps mod 100 == 0)
+        || obj_globVar.Temps mod 200 == 0)// Regulierement l'officier va essayer d'envoyer un rapport
+            {
+            if instance_exists(obj_messager_C1)
+            &amp;&amp; distance_to_object(instance_nearest(x,y,Messager)) &lt; 25
+                {
+                messager = instance_nearest(x,y,Messager)
+                messager.ArgumenMessager[] = 0;
+                //1ère partie du rapport l'etat de sa troupe
+                //ds_list_add(messager.Destinataire,obj_joueur);
+                messager.ArgumenMessager[0] = Officier_supreme
+                messager.ArgumenMessager[1] = "RAPPORT";
+                messager.ArgumenMessager[2] = Name;
+                messager.ArgumenMessager[3] = ds_list_size(Regiment);
+                messager.ArgumenMessager[4] = x;
+                messager.ArgumenMessager[5] = y;
+                messager.ArgumenMessager[6] = obj_globVar.Temps;
+                
+                //2ème partie, tous les renseignements qu'il a obtenu
+                for (i = 0; i &lt; ds_list_size(Renseignement);i++)
+                    {
+                    messager.ArgumenMessager[7+i] = ds_list_find_value(Renseignement,i);
+                    }
+                ds_list_add(messager.SaccocheMessage,messager.ArgumenMessager);
+
+                messager.Message += 1;
+                
+                with(messager)
+                    {
+                    D = ds_list_find_value(SaccocheMessage,0)
+                    Dest = D[0]
+                    Execute = IA_Deplacement;
+                    Argument[0] = noone;
+                    Argument[1] = Dest;
+                    Argument[2] = noone;
+                    Argument[5] = -1;
+                    Argument[6] = -1;
+                    Argument[7] = MSpeed;
+                    Argument[8] = 0;
+                    Argument[9] = Alpha//round(random(8))+2;
+                    Argument[10] = 1;
+                    }
+                messager.ArgumenMessager[] = 0;
+                }
+            }
+        }
+    if instance_exists(Commandant_sup)
+    &amp;&amp; Commandant_sup.ORDRE == "GROUPE"
     &amp;&amp; Commandant_sup.id != id 
         {
         Officier = Commandant_sup;
@@ -212,7 +282,8 @@ x = xx;
         }
     else
         {
-        if Commandant_sup.ORDRE == "SEPARATION"
+        if instance_exists(Commandant_sup)
+        &amp;&amp; Commandant_sup.ORDRE == "SEPARATION"
             {
             Officier = Commandant
             Classe = 1;
@@ -319,9 +390,57 @@ x = xx;
                 }
             }
         }
+    /*if abs(Moral) &gt; 25
+        {
+        if Objectif != 1
+            {
+            if ds_list_empty(Message) == false
+                {
+                show_debug_message("Ordre en attente "+string(ds_list_size(Message)));
+                Objectif = 1
+                Ord[] = ds_list_find_value(Message, 0);
+                Execute = Ord[0];
+                for (i = 1; i &lt; array_length_1d(Ord); i++)
+                    {
+                    Argument[i] = Ord[i];
+                    }
+                Objectif = 1;
+                }
+            }
+        }
+    if Objectif == 0
+        {
+        ds_list_delete(Message, 0);
+        }*/
     }
+
+
 event_inherited()
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text(x,y,Name)
+event_inherited();
 </string>
           </argument>
         </arguments>

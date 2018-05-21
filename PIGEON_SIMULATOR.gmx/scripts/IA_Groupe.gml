@@ -46,12 +46,13 @@ if Argument[3] == 1
                 }
             }
 ////////////////////////////////////////////////////////////////////////////////////////
+
         for (j = 0; j < NbGroupe-1; j++)
             {
             with(ds_list_find_value(O.Regiment,1))
                 {
                 ID = other.O.id;
-                Groupe = instance_create(x,y,other.O.Off);
+                Groupe = instance_create(other.x+lengthdir_x(other.j*other.Nbr,other.direction),other.y+lengthdir_y(other.j*other.Nbr,other.direction),other.O.Off);
                 ds_list_delete(other.O.Regiment,1);
                 
                 with(Groupe)
