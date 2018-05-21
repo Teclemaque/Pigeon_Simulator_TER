@@ -50,6 +50,7 @@
     <sprite>sprites\transparent</sprite>
     <sprite>sprites\spr_jeton</sprite>
     <sprite>sprites\Title_name</sprite>
+    <sprite>sprites\icone_strategie_avatar</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -101,6 +102,9 @@
             <script>scripts\crete_finder.gml</script>
             <script>scripts\mountain_list.gml</script>
             <script>scripts\crest_level.gml</script>
+          </scripts>
+          <scripts name="balise">
+            <script>scripts\generation_balise.gml</script>
           </scripts>
         </scripts>
       </scripts>
@@ -193,16 +197,18 @@
         <object>objects\obj_agent</object>
       </objects>
       <object>objects\obj_formation</object>
-      <object>objects\obj_souris</object>
+      <object>objects\obj_jeton</object>
       <object>objects\obj_joueur</object>
+      <object>objects\obj_agent_general</object>
+      <object>objects\obj_souris</object>
     </objects>
     <objects name="OBJET MAP">
-      <object>objects\obj_agent_general</object>
       <object>objects\obj_FOG_controller</object>
       <object>objects\obj_MAP_controller</object>
       <object>objects\Obj_mini_map_controler</object>
       <object>objects\obj_VIEW_controller</object>
       <objects name="obj_terrain">
+        <object>objects\Obj_Balise_Obstacle</object>
         <object>objects\Obj_Terrain</object>
         <object>objects\Obj_Terrain_sol</object>
         <object>objects\Obj_Terrain_Eau</object>
@@ -214,6 +220,7 @@
       <object>objects\obj_game_over</object>
     </objects>
     <objects name="GUI">
+      <object>objects\obj_icone_avatar</object>
       <object>objects\obj_btn_minus</object>
       <object>objects\obj_btn_plus</object>
       <object>objects\obj_general</object>

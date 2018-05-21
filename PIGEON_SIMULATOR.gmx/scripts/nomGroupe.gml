@@ -148,6 +148,19 @@ if (agent.Troupe != groupName){
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
     
+    if ds_list_find_index(global.grammaire,fullName) == -1
+        {
+        ds_list_add(global.grammaire,fullName);
+        }
+        
+    if map_visible(obj_joueur) == true
+        {
+        if instance_exists(obj_joueur)
+        && ds_list_find_index(obj_joueur.Regiment,Name) == -1
+            {
+            ds_list_add(obj_joueur.Regiment, Name)
+            }
+        }
     
     return fullName;
 }

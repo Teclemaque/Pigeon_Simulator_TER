@@ -36,6 +36,7 @@ ExecuteRegiment = noone;
 t = random(20);
 
 Formation = noone;
+Jeton = noone;
 Officiel = 0;
 
 Troupe = "";

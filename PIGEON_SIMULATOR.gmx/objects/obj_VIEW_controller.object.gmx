@@ -107,8 +107,8 @@ view_vborder[0] = v_w / 10;
             <string>var s = 1.10
 if(view_hview[0]*s &lt; room_height){
     //offset
-    var offx = abs (view_wview[0]*s - view_wview[0])
-    var offy = abs (view_hview[0]*s - view_hview[0])
+    var offx = abs (view_wview[0]*s - view_wview[0]);
+    var offy = abs (view_hview[0]*s - view_hview[0]);
     //scale
     view_wview[0] *=s
     view_hview[0] *=s
@@ -156,11 +156,11 @@ if(view_hview[0] &lt; room_height-s){
             <string>var s = 0.90
 if(view_hview[0]*s &gt; 50){
     //offset
-    var offx = abs (view_wview[0]*s - view_wview[0])
-    var offy = abs (view_hview[0]*s - view_hview[0])
+    var offx = abs (view_wview[0]*s - view_wview[0]);
+    var offy = abs (view_hview[0]*s - view_hview[0]);
     //scale
-    view_wview[0] *=s
-    view_hview[0] *=s
+    view_wview[0] *= s
+    view_hview[0] *= s
     //adjust position
     view_xview[0] += offx/2
     view_yview[0] += offy/2

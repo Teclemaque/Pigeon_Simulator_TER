@@ -148,6 +148,15 @@ ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
     {
     visible = true;
     image_alpha = 1;
+
+    if Classe == 1 
+    &amp;&amp; (Officiel == 1 || ds_list_size(Regiment) &gt; 100)
+        {
+        if instance_exists(Jeton)
+            {
+            Jeton.visible = false
+            }
+        }
     }
 else
     {
@@ -156,7 +165,47 @@ else
         {
         visible = true;
         image_alpha = 0;
-        //draw_sprite(spr_jeton,-1,x,y);
+        
+        if Jeton != noone
+            {
+            if instance_exists(Jeton) == false
+                {
+                instance_activate_object(Jeton)
+                }
+            else
+                {
+                if map_visible(obj_joueur) == true
+                    {
+                    Jeton.visible = true;
+                    Jeton.Effectif = ds_list_size(Regiment)
+                    Jeton.T = obj_globVar.Temps
+                    Jeton.x = x;
+                    Jeton.y = y;
+                    
+                    if instance_exists(obj_joueur)
+                    &amp;&amp; ds_list_find_index(obj_joueur.Regiment,Name) == -1
+                        {
+                        ds_list_add(obj_joueur.Regiment, Name)
+                        }
+                    }
+                else
+                    {
+                    if ds_list_find_index(obj_joueur.Regiment,Name) != -1
+                        {
+                        Jeton.visible = true;
+                        }
+                    else
+                        {
+                        Jeton.visible = false;
+                        }
+                    }
+                }
+            }
+        else
+            {
+            Jeton = instance_create(x,y,obj_jeton)
+            Jeton.ID = id;
+            }
         }
     else
         {
@@ -603,13 +652,6 @@ speed = Cadence - VTerrain;//&lt;--Ralentissement du au terrain
           <argument>
             <kind>1</kind>
             <string>draw_self();
-
-if obj_MAP_controller.toggle_papper == 1
-&amp;&amp; Classe == 1 &amp;&amp; Officiel == 1
-    {
-    draw_sprite(spr_jeton,-1,x,y);
-    }
-
 </string>
           </argument>
         </arguments>

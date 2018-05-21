@@ -70,7 +70,6 @@ with(A)
     Argument[3] = 1;
     Execute = IA_Groupe;
     }
-    
 /*A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
 A.Officiel = 1;
 for (i = 0; i &lt; 805; i++)

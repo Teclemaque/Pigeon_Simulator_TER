@@ -37,6 +37,8 @@ repeat(20)
     }
     
 Renseignement = ds_list_create();
+Regiment = ds_list_create();
+
 //Info_C2 = ds_list_create();
 
 </string>
@@ -61,19 +63,67 @@ Renseignement = ds_list_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*var action;
-while( !ds_list_empty(Ordres) ){
-    action = ds_list_find_value(Ordres, 0);
-    ds_list_delete(Ordres, 0);
+            <string>if obj_icone_avatar.Avatar == 1
+    {
+    if keyboard_check(vk_space)
+        {
+        direction = point_direction(x,y,mouse_x,mouse_y);
+        image_angle = direction;
+        Z0 = map_get_height(0)
+        VTerrain = Z0*2/100;
+        speed = 2 - VTerrain;
+        }
+    else
+        {
+        speed = 0
+        }
+    }
+else
+    {
+    speed = 0;
+    }
     
-    send_ordre_to_agent(action, action[? "Target"]);
-}*/
+
+
+Rens = ds_list_find_value(Renseignement,0)//ou 0
+
+//for (j = 0; j &lt; array_length_1d(Rens); j++)
+if is_array(Rens)
+    {
+    if ds_map_find_value(global.Regiments, Rens[1]) != undefined
+        {
+        Agent = ds_map_find_value(global.Regiments, Rens[1]);
+        
+        if instance_exists(Agent)
+            {
+            if ds_list_find_index(Regiment, Agent.Name) == -1
+                {
+                ds_list_add(Regiment, Agent.Name)
+                }
+            
+            if instance_exists(Agent.Jeton)
+                {
+                if Agent.Jeton.T &lt; Rens[5]
+                    {
+                    Agent.Jeton.T = Rens[5];
+                    Agent.Jeton.Effectif = Rens[2];
+                    Agent.Jeton.x = Rens[3];
+                    Agent.Jeton.y = Rens[4];
+                    show_debug_message(string(Rens[3])+" "+string(Rens[4]))
+                    }
+                }
+            }
+        }
+    }
+ds_list_delete(Renseignement,0)
+        
+
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="9" enumb="32">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -90,8 +140,11 @@ while( !ds_list_empty(Ordres) ){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 1;
-direction = point_direction(x,y,mouse_x,mouse_y);
+            <string>draw_self();
+draw_text(x+20,y-30,ds_list_size(Renseignement))
+draw_text(x+20,y-40,ds_list_size(Regiment))
+
+
 </string>
           </argument>
         </arguments>
@@ -424,29 +477,6 @@ direction = point_direction(x,y,mouse_x,mouse_y);
         Argument[0] = 0;
         }
     }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="10" enumb="32">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>speed = 0;
 </string>
           </argument>
         </arguments>

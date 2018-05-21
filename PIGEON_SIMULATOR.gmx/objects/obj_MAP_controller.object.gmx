@@ -32,10 +32,124 @@ instance_create(x,y,Obj_mini_map_controler);
 
 flag_debug = 0
 
-/*
-with(obj_GUI_controller){
-    instance_destroy()
-}
+for (j = 1; j &lt; 768/blockSize+1; j++)
+    {
+    for (i = 1; i &lt; 1024/blockSize+1; i++)
+        {
+        P = instance_position((i)*blockSize,(j)*blockSize,Obj_Terrain)
+
+        if P != noone
+            {
+            with(P)
+                {
+                if (map_get_terrain(0) != 1 &amp;&amp; map_get_terrain(0) != 3)
+                &amp;&amp; ((map_get_terrain(1) == 1 || map_get_terrain(1) == 3)
+                || (map_get_terrain(2) == 1 || map_get_terrain(2) == 3)
+                || (map_get_terrain(3) == 1 || map_get_terrain(3) == 3)
+                || (map_get_terrain(4) == 1 || map_get_terrain(4) == 3)
+                || (map_get_terrain(5) == 1 || map_get_terrain(5) == 3)
+                || (map_get_terrain(6) == 1 || map_get_terrain(6) == 3)
+                || (map_get_terrain(7) == 1 || map_get_terrain(7) == 3)
+                || (map_get_terrain(8) == 1 || map_get_terrain(8) == 3))
+                    {
+                    instance_create((other.i-1)*other.blockSize,(other.j-1)*other.blockSize,Obj_Balise_Obstacle)
+                    }
+                }
+            }
+        }
+    }
+ID = 0;
+
+for (j = 0; j &lt; 768/blockSize; j++)
+    {
+    for (i = 0; i &lt; 1024/blockSize; i++)
+        {
+        
+        P = instance_position(i*blockSize,j*blockSize,Obj_Balise_Obstacle)
+        
+        if P != noone
+            {
+            if P.ID == -1
+                {
+                if map_get_terrain(7) == 1
+                || map_get_terrain(7) == 3
+                    {
+                    P.ID = ID;
+                    }
+                else
+                    {
+                    A = instance_position(i*blockSize,(j-1)*blockSize, Obj_Balise_Obstacle)
+                    B = instance_position(i*blockSize,(j+1)*blockSize, Obj_Balise_Obstacle)
+                    C = instance_position((i-1)*blockSize,j*blockSize, Obj_Balise_Obstacle)
+                    D = instance_position((i+1)*blockSize,j*blockSize, Obj_Balise_Obstacle)
+                    E = instance_position((i-1)*blockSize,(j-1)*blockSize, Obj_Balise_Obstacle)
+                    F = instance_position((i+1)*blockSize,(j+1)*blockSize, Obj_Balise_Obstacle)
+                    G = instance_position((i-1)*blockSize,(j+1)*blockSize, Obj_Balise_Obstacle)
+                    H = instance_position((i+1)*blockSize,(j-1)*blockSize, Obj_Balise_Obstacle)
+                    
+                    if (A != noone &amp;&amp; A.ID != -1)
+                    || (B != noone &amp;&amp; B.ID != -1)
+                    || (C != noone &amp;&amp; C.ID != -1)
+                    || (D != noone &amp;&amp; D.ID != -1)
+                    || (E != noone &amp;&amp; E.ID != -1)
+                    || (F != noone &amp;&amp; F.ID != -1)
+                    || (G != noone &amp;&amp; G.ID != -1)
+                    || (H != noone &amp;&amp; H.ID != -1)
+                        {
+                        if (A != noone &amp;&amp; A.ID != -1)
+                            {
+                            P.ID = A.ID
+                            }
+                        else
+                        if (B != noone &amp;&amp; B.ID != -1)
+                            {
+                            P.ID = B.ID
+                            }
+                        else
+                        if (C != noone &amp;&amp; C.ID != -1)
+                            {
+                            P.ID = C.ID
+                            }
+                        else
+                        if (D != noone &amp;&amp; D.ID != -1)
+                            {
+                            P.ID = D.ID
+                            }
+                        if (E != noone &amp;&amp; E.ID != -1)
+                            {
+                            P.ID = E.ID
+                            }
+                        else
+                        if (F != noone &amp;&amp; F.ID != -1)
+                            {
+                            P.ID = F.ID
+                            }
+                        else
+                        if (G != noone &amp;&amp; G.ID != -1)
+                            {
+                            P.ID = G.ID
+                            }
+                        else
+                        if (H != noone &amp;&amp; H.ID != -1)
+                            {
+                            P.ID = H.ID
+                            }
+                        }
+                    else
+                        {
+                        P.ID = ID;
+                        ID ++;
+                        }
+                    }
+                
+                with(P)
+                    {
+                    generation_balise(other.i*other.blockSize,other.j*other.blockSize)
+                    }
+                }
+            }
+        }
+    }
 
 </string>
           </argument>
