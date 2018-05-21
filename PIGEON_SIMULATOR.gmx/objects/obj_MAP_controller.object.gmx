@@ -29,10 +29,14 @@
 MAP_Draw2();
 instance_create(x,y,obj_FOG_controller);
 instance_create(x,y,Obj_mini_map_controler);
+
+flag_debug = 0
+
 /*
 with(obj_GUI_controller){
     instance_destroy()
 }
+
 </string>
           </argument>
         </arguments>
@@ -62,6 +66,14 @@ with(obj_GUI_controller){
         toggle_papper = 0
     }
 }
+
+if(keyboard_check(vk_control) and keyboard_check(ord('S')) and flag_debug == 0){
+    flag_debug = 1
+    show_debug_message("seed : " + string(seed))    
+} else if (keyboard_check_released(vk_control) or keyboard_check_released(ord('S'))){
+    flag_debug = 0
+}
+
 
 /*
 if mouse_check_button(mb_right){

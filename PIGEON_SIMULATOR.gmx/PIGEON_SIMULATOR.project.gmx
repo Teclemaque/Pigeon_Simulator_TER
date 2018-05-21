@@ -31,6 +31,7 @@
     <sound>sound\sound_fusil_5</sound>
     <sound>sound\sound_fusil_4</sound>
     <sound>sound\sound_fusil_3</sound>
+    <sound>sound\Order__Please</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_pigeon</sprite>
@@ -154,6 +155,7 @@
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_toolbox</font>
+    <font>fonts\fnt_title</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_globVar2</object>
@@ -163,6 +165,7 @@
       <object>objects\obj_shaderBegin</object>
       <object>objects\obj_gestion_affichage</object>
       <object>objects\obj_debuggage</object>
+      <object>objects\obj_Parti</object>
     </objects>
     <objects name="AGENTS">
       <objects name="AGENTS SIMPLES">
@@ -208,6 +211,7 @@
         <object>objects\Obj_Terrain_montagne</object>
         <object>objects\Obj_Terrain_Crete</object>
       </objects>
+      <object>objects\obj_game_over</object>
     </objects>
     <objects name="GUI">
       <object>objects\obj_btn_minus</object>
@@ -231,6 +235,7 @@
       <object>objects\obj_title_follow</object>
     </objects>
   </objects>
+  <timelines name="timelines"/>
   <rooms name="rooms">
     <room>rooms\room1</room>
     <room>rooms\Title_screen</room>

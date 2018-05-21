@@ -5,6 +5,7 @@ if(x > view_xview[1]-16 and x < view_xview[1]+view_wport[1]+16
             draw_set_color(couleur)
             draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
             draw_set_color(c_black)
+            depth = 1
         } else  {
             var l = 50 - (point_distance(x,y,mouse_x,mouse_y)/10)
             if(l>0)
@@ -13,6 +14,7 @@ if(x > view_xview[1]-16 and x < view_xview[1]+view_wport[1]+16
                 draw_set_color(make_colour_rgb(0,0,0))
             draw_rectangle(x,y,x+obj_MAP_controller.blockSize,y + obj_MAP_controller.blockSize,false)
             draw_set_color(c_black)
+            depth = -10
         }
     } else { //si en mode carte papier
         var test = ds_list_find_value(ds_grid_get(obj_MAP_controller.papper_map,grid_x,grid_y),0)

@@ -39,6 +39,30 @@ delay_max = 8
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>211</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_sound</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>6</kind>
+            <sound>Order__Please</sound>
+          </argument>
+          <argument>
+            <kind>3</kind>
+            <string>1</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -125,10 +149,14 @@ if(keyboard_check_pressed(vk_up)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(Title_name,0,view_wport[0]/2,view_hport[0]/4,2,2,0,c_white,1)
+            <string>draw_set_alpha_test(false);
+draw_sprite_ext(Title_name,0,view_wport[0]/2,view_hport[0]/4,2,2,0,c_white,1)
+
+draw_set_font(fnt_title)
 
 var sep = 50
 draw_set_alpha(0.5)
+
 if(pos == 0){
     draw_rectangle_colour(view_wport[0]/2-100,view_hport[0]/2,
         view_wport[0]/2+100,view_hport[0]/2+30,c_blue,c_aqua,c_white,c_aqua,0)
@@ -153,6 +181,7 @@ if(pos == 0){
 
 draw_set_alpha(1)
 draw_set_halign(fa_center);
+draw_set_valign(fa_top)
 draw_text_transformed(view_wport[0]/2,view_hport[0]/2,"Tutorial",2,2,0)
 draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep,"Mission",2,2,0)
 draw_text_transformed(view_wport[0]/2,view_hport[0]/2+sep*2,"Option",2,2,0)
