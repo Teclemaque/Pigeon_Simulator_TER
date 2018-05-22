@@ -29,6 +29,11 @@
 instance_destroy()
 }
 
+with(obj_FOG_controller){
+toggle_fog = 0
+}
+
+
 view_hborder[0] = view_hview[0]/2
 view_vborder[0] = view_wview[0]/2
 
@@ -81,7 +86,6 @@ if(!audio_is_playing(Order__Please)){
             <kind>1</kind>
             <string>display_set_gui_size(room_width,room_height );
  
-
 if(keyboard_check_released(vk_up) or keyboard_check_released(vk_down) 
     or gamepad_button_check_pressed(0,gp_padu) or gamepad_button_check_pressed(0,gp_padd)){
     delay = 0

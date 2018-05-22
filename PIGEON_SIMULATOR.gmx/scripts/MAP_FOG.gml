@@ -1,5 +1,13 @@
 //pos est notre patch, inst le patch à tester
 
+
+var inst = instance_nearest(x,y,obj_joueur)
+if(inst > 0){
+    cible_x = inst.x
+    cible_y = inst.y
+}
+
+
 var xx = cible_x
 var yy = cible_y
 

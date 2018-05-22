@@ -4,6 +4,11 @@ timer = 0
 cible_x = room_height / 2
 cible_y = room_width / 2
 
+var inst = instance_nearest(x,y,obj_joueur)
+if(inst > 0){
+    cible_x = inst.x
+    cible_y = inst.y
+}
 
 image_alpha = 0.0
 
@@ -31,4 +36,4 @@ with(obj_MAP_controller){
         }
     }
 }
-toggle_fog = 0
+toggle_fog = 1

@@ -14,8 +14,9 @@ if(type == 2){
 else if(type == 0){
     g = 100 + ((zz - water_level) / (100-water_level)) * 200
   
-} else if(type == 3) { 
+/*} else if(type == 3) { 
       r = 250
+      */
 } else {
     r = 70 + ((zz - mountain_level) / (100-mountain_level) ) * 200
     g = 60 + ((zz - mountain_level) / (100-mountain_level) ) * 200
