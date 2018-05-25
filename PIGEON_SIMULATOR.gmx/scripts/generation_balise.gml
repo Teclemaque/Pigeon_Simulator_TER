@@ -4,7 +4,6 @@ Permet de donner un unique ID auX balises qui entourent un obstacle
 */
 X = argument0;
 Y = argument1;
-show_debug_message("coucucoucoucou")
 
 A = instance_position(X+obj_MAP_controller.blockSize,Y, Obj_Balise_Obstacle)
 

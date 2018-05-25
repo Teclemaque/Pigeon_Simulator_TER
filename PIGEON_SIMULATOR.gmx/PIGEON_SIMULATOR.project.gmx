@@ -51,6 +51,7 @@
     <sprite>sprites\spr_jeton</sprite>
     <sprite>sprites\Title_name</sprite>
     <sprite>sprites\icone_strategie_avatar</sprite>
+    <sprite>sprites\fumee</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>

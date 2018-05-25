@@ -1,5 +1,9 @@
-///IA_Formation(Formation)
+///IA_Formation(Formation,l,L)
 {
+Formation = argument0; //Type de formation a adopter
+l = 5; // escpacement de chaque soldat sur la longueur
+L = 5; //espacement de chaque soldat sur la largeur
+ 
 if instance_exists(Officier.Formation)
     {
     P = ds_list_find_index(Officier.Regiment,id);
@@ -12,9 +16,9 @@ if instance_exists(Officier.Formation)
     else
         {I = 1;}
     
-    D = sqrt(sqr(8*I)+sqr(8*J));
+    D = sqrt(sqr(l*I)+sqr(L*J));
     
-    Angle = point_direction(Officier.Formation.x,Officier.Formation.y,Officier.Formation.x+5*I,Officier.Formation.y+7*J)
+    Angle = point_direction(Officier.Formation.x,Officier.Formation.y,Officier.Formation.x+l*I,Officier.Formation.y+L*J)
     
     Dir1 = point_direction(x,y,Officier.Formation.x+D*cos(degtorad(Angle+Officier.Formation.direction)),Officier.Formation.y-D*sin(degtorad(Angle+Officier.Formation.direction)))
 

@@ -138,7 +138,7 @@ Recharge = obj_globVar.R_fusil;
                     {
                     if instance_exists(Officier.Formation)
                         {
-                        IA_Formation();
+                        IA_Formation(0);
                         Argument[0] = Officier.Argument[0];
                         }
                     }

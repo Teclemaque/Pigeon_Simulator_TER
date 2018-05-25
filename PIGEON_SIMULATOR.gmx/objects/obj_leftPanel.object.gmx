@@ -117,10 +117,57 @@ draw_rectangle(x, y, x + global.Dimensions[? "startx"], room_height, 0)
 
 if instance_exists(obj_joueur)
     {
+    /*for (i = 0; i &lt; ds_list_size(obj_joueur.Regiment);i++)
+        {
+        draw_sprite_ext(spr_jeton,-1,x+30,y+i*40+250,0.7,0.7,0,c_blue,1)
+        }*/
+    I1 = 0;
+    I2 = 0;
     for (i = 0; i &lt; ds_list_size(obj_joueur.Regiment);i++)
         {
-        draw_sprite_ext(spr_jeton,-1,x+30,y+i*40+250,0.7,0.7,0,-1,1)
+        A = ds_list_find_value(obj_joueur.Regiment,i)
+        if A != undefined
+            {
+            if ds_list_find_index(obj_joueur.RegimentAllie,A) != -1
+                {
+                draw_sprite_ext(spr_jeton,-1,x+30,y+I1*40+250,0.7,0.7,0,c_blue,1)
+                I1++;
+                }
+            else
+                {
+                if ds_list_find_index(obj_joueur.RegimentEnnemi,A) != -1
+                    {
+                    draw_sprite_ext(spr_jeton,-1,x+90,y+I2*40+250,0.7,0.7,0,c_blue,1)
+                    I2++
+                    }
+                }
+            }
         }
+    /*for (i = 0; i &lt; ds_list_size(obj_joueur.RegimentAllie);i++)
+        {
+        draw_sprite_ext(spr_jeton,-1,x+30,y+i*40+250,0.7,0.7,0,c_blue,1)
+        }
+    for (i = 0; i &lt; ds_list_size(obj_joueur.RegimentEnnemi);i++)
+        {
+        draw_sprite_ext(spr_jeton,-1,x+90,y+i*40+250,0.7,0.7,0,c_blue,1)
+        }*/
+    /*for (i = 0; i &lt; ds_list_size(obj_joueur.Regiment);i++)
+        {
+        A = ds_list_find_value(obj_joueur.Regiment,i)
+        
+        if A != undefined
+        //&amp;&amp; instance_exists(A)
+            {
+            if A.Camp != obj_joueur.Camp
+                {
+                draw_sprite_ext(spr_jeton,-1,x+30,y+i*40+250,0.7,0.7,0,c_red,1)
+                }
+            else
+                {
+                draw_sprite_ext(spr_jeton,-1,x+30,y+i*40+250,0.7,0.7,0,c_blue,1)
+                }
+           }
+        }*/
     }
 // Bouton "+"
 //draw_sprite(spr_icon_plus, 0, add_btn_x, add_btn_y)

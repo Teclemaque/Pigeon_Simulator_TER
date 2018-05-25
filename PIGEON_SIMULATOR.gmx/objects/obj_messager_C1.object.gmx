@@ -75,6 +75,10 @@ if Camp == -1
         obj_Partie.nb_allie_tuer += 1
         show_debug_message(obj_Partie.nb_ennemi_tuer)
         }
+if instance_exists(Officier_sup)
+    {
+    ds_list_delete(Officier_sup.ListMessager,ds_list_find_index(Officier_sup.ListMessager,id))
+    }
 </string>
           </argument>
         </arguments>
@@ -120,6 +124,7 @@ if Dest != undefined
     {
     if distance_to_object(Dest) &lt;= distance_give
         {
+        Mess[] = 0;
         Mess = ds_list_find_value(SaccocheMessage,0);
         
         if Mess[1] != "RAPPORT"
@@ -139,24 +144,10 @@ if Dest != undefined
                 {
                 with(Dest.id)
                     {
-                    Rap = ""
                     for (i = 1; i &lt; array_length_1d(other.Mess); i++)
                         {
-                        if i &lt;= 7
-                            {
-                            Rap += " "+string(other.Mess[i])
-                            }
-                        else
-                            {
-                            m = array_length_1d(other.Mess[i])
-                            M = other.Mess[i];
-                            for (j = 0; j &lt; m; j++)
-                                {
-                                Rap += " "+string(M[j]);
-                                } 
-                            }
+                        ds_list_add(Renseignement,other.Mess[i])
                         }
-                    show_debug_message(Rap);
                     }
                 }
             }
@@ -195,34 +186,6 @@ else
         }
     }
 event_inherited();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self();
-if instance_exists(Officier_sup)
-    {
-    draw_text(x,y,object_get_name(Officier_sup.object_index))
-    }
-draw_text(x,y-10,Message)
 </string>
           </argument>
         </arguments>

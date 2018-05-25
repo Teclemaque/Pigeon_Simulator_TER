@@ -65,7 +65,7 @@ if(withName){
     }
 }
 
-if instance_number(Messager) < instance_number(Allie)/10
+/*if instance_number(Messager) < instance_number(Allie)/10
     {
     if ds_list_size(agent.Regiment) > 2*agent.Grade
         {
@@ -84,7 +84,7 @@ if instance_number(Messager) < instance_number(Allie)/10
             
             }
         }
-    }
+    }*/
 // Trouver le numero à attribuer au groupe
 var numero = "";
 N1 = 0;
@@ -142,12 +142,12 @@ Num = string(numero);
 if (agent.Troupe != groupName){
     numero = 1; // les attributions de numero commencent a 1
     var fullName = string(groupName)+ string(Num) + string(numero); // ex : escouade121
-    while(ds_map_exists(obj_globVar.Regiments, fullName)){ // chercher tant que le nom est pris
+    while(ds_map_exists(global.Regiments, fullName)){ // chercher tant que le nom est pris
         numero++;
         fullName = string(groupName)+ string(Num) + string(numero); // ex : essayer avec escouade122, escouade123, etc.
     }
     
-    ds_map_add(obj_globVar.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
+    ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;

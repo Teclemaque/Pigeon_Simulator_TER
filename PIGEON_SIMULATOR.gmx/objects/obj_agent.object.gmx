@@ -171,6 +171,13 @@ ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
             {
             Jeton.visible = false
             }
+        if map_visible(obj_joueur) == true
+            {
+            if ds_list_find_index(obj_joueur.Regiment,id) == -1
+                {
+                ds_list_add(obj_joueur.Regiment, id)
+                }
+            }
         }
     }
 else
@@ -189,29 +196,32 @@ else
                 }
             else
                 {
-                if map_visible(Officier_supreme) == true
+                if instance_exists(obj_joueur)
                     {
-                    Jeton.visible = true;
-                    Jeton.Effectif = ds_list_size(Regiment)
-                    Jeton.T = obj_globVar.Temps
-                    Jeton.x = x;
-                    Jeton.y = y;
-                    
-                    if instance_exists(Officier_supreme)
-                    &amp;&amp; ds_list_find_index(Officier_supreme.Regiment,Name) == -1
-                        {
-                        ds_list_add(Officier_supreme.Regiment, Name)
-                        }
-                    }
-                else
-                    {
-                    if ds_list_find_index(Officier_supreme.Regiment,Name) != -1
+                    if map_visible(obj_joueur) == true
                         {
                         Jeton.visible = true;
+                        Jeton.Effectif = ds_list_size(Regiment)
+                        Jeton.T = obj_globVar.Temps
+                        Jeton.x = x;
+                        Jeton.y = y;
+                        
+                        
+                        if ds_list_find_index(obj_joueur.Regiment,id) == -1
+                            {
+                            ds_list_add(obj_joueur.Regiment, id)
+                            }
                         }
                     else
                         {
-                        Jeton.visible = false;
+                        if ds_list_find_index(obj_joueur.Regiment,id) != -1
+                            {
+                            Jeton.visible = true;
+                            }
+                        else
+                            {
+                            Jeton.visible = false;
+                            }
                         }
                     }
                 }

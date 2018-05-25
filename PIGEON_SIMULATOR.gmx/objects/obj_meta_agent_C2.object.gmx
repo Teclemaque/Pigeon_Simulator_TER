@@ -53,7 +53,7 @@ ds_list_add(Regiment,id);
 PerceptAgentEnnemi = ds_list_create();
 PerceptAgentAllie = ds_list_create();
 CibleAttaque = ds_list_create();
-
+ListMessager = ds_list_create();
 Message = ds_list_create();
 Objectif = 0;
 
@@ -120,12 +120,13 @@ if Camp == -1
         }
 
 //Je supprime toute mes listes d'officier 
-ds_map_delete(obj_globVar.Regiments, Name)   
+ds_map_delete(global.Regiments, Name)   
 ds_list_destroy(Regiment);
 ds_list_destroy(PerceptAgentEnnemi);
 ds_list_destroy(PerceptAgentAllie);
 ds_list_destroy(CibleAttaque);
 ds_list_destroy(Renseignement);
+ds_list_destroy(ListMessager)
 ds_list_destroy(Message);
 
 if instance_exists(Formation)
@@ -216,9 +217,24 @@ x = xx;
     {
     if Classe == 1
         {
+        if ds_list_size(ListMessager) &lt; Grade/2
+        &amp;&amp; ds_list_size(Regiment) &gt; 5*Grade
+            {
+            A = ds_list_find_value(Regiment,1);
+            Mess = instance_create(A.x,A.y,Messager);
+            // Faut faire un transfert de données entre les 2
+            Mess.Officier_sup = id;
+            ds_list_add(ListMessager,Mess);
+            ds_list_delete(Regiment,1);
+            with(A)
+                {
+                instance_destroy();
+                }
+            }
+            
         if Grade &gt;= 2 &amp;&amp; Officiel == 1 
-        &amp;&amp; ((map_visible(Officier_supreme) == false &amp;&amp; obj_globVar.Temps mod 100 == 0)
-        || obj_globVar.Temps mod 200 == 0)// Regulierement l'officier va essayer d'envoyer un rapport
+        &amp;&amp; ((map_visible(Officier_supreme) == false &amp;&amp; obj_globVar.Temps mod 300 == 0)
+        || obj_globVar.Temps mod 600 == 0)// Regulierement l'officier va essayer d'envoyer un rapport
             {
             if instance_exists(obj_messager_C1)
             &amp;&amp; distance_to_object(instance_nearest(x,y,Messager)) &lt; 25
@@ -374,8 +390,8 @@ x = xx;
                     image_xscale = round(sqrt(ds_list_size(other.Regiment)));
                     image_yscale = round(sqrt(ds_list_size(other.Regiment)));
                     ID = other.id;
-                    x = other.x+50//*(cos(degtorad(direction)))//+random(10)-5;
-                    y = other.y-50//*(sin(degtorad(direction)))//+random(10)-5;
+                    x = other.x+10//*(cos(degtorad(direction)))//+random(10)-5;
+                    y = other.y-10//*(sin(degtorad(direction)))//+random(10)-5;
                     }
                 }
             if MODE == "ATTAQUE"

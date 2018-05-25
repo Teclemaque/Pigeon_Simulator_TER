@@ -31,6 +31,7 @@ Grade = 14;
 Officiel = 1;
 Name = obj_joueur;
 Commandant = id;
+Classe = 10; //General suprême
 
 Ordres = ds_list_create();
 
@@ -43,6 +44,7 @@ repeat(20)
 Renseignement = ds_list_create();
 Regiment = ds_list_create();
 RegimentAllie = ds_list_create();
+RegimentEnnemi = ds_list_create();
 
 
 </string>
@@ -67,7 +69,10 @@ RegimentAllie = ds_list_create();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>ds_list_destroy(Regiment);
+ds_list_destroy(RegimentAllie);
+ds_list_destroy(RegimentEnnemi);
+</string>
           </argument>
         </arguments>
       </action>
@@ -122,13 +127,23 @@ if is_array(Rens)
         
         if instance_exists(Agent)
             {
-            if ds_list_find_index(Regiment, Agent.Name) == -1
+            if ds_list_find_index(Regiment, Agent.id) == -1
                 {
-                ds_list_add(Regiment, Agent.Name)
+                ds_list_add(Regiment, Agent.id)
+                }
                 
-                if Agent.Camp == Camp
+            if Agent.Camp == Camp
+                {
+                if ds_list_find_index(RegimentAllie, Agent.id) == -1
                     {
-                    ds_list_add(RegimentAllie, Agent)
+                    ds_list_add(RegimentAllie, Agent.id)
+                    }
+                }
+            else
+                {
+                if ds_list_find_index(RegimentEnnemi, Agent.id) == -1
+                    {
+                    ds_list_add(RegimentEnnemi, Agent.id)
                     }
                 }
             

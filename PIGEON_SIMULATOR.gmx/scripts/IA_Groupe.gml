@@ -52,14 +52,31 @@ if Argument[3] == 1
             with(ds_list_find_value(O.Regiment,1))
                 {
                 ID = other.O.id;
-                Groupe = instance_create(other.x+lengthdir_x(other.j*other.Nbr,other.direction),other.y+lengthdir_y(other.j*other.Nbr,other.direction),other.O.Off);
+                Groupe = instance_create(other.x,other.y,other.O.Off);
+                //instance_create(other.x+lengthdir_x(other.j*other.Nbr,other.direction),other.y+lengthdir_y(other.j*other.Nbr,other.direction),other.O.Off);
                 ds_list_delete(other.O.Regiment,1);
-                
+                J = other.j+1;
+                nbr = other.Nbr;
+                direction = direction;
                 with(Groupe)
                     {
                     //nomGroupe(other.id)
                     Officiel = 1;
-                    Execute = IA_Repos;
+                    
+                    Execute = IA_Deplacement;
+                    Argument[0] = noone;
+                    Argument[1] = noone;
+                    Argument[2] = noone;
+        
+                    Argument[3] = x+lengthdir_x(other.J*other.nbr,other.direction);
+                    Argument[4] = y+lengthdir_y(other.J*other.nbr,other.direction);
+                    Argument[5] = -1;
+        
+                    Argument[6] = -1;
+                    Argument[7] = 2;
+                    Argument[8] = 0;
+                    Argument[9] = Alpha//round(random(8))+2;
+                    Argument[10] = 1;
                     
                     for (k = 0; k < other.ID.Nbr; k++)
                         {

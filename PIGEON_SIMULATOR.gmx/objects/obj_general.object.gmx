@@ -29,8 +29,9 @@
 ExecuteOrdre = noone;
 Grade = 14;
 Officiel = 1;
-Name = obj_joueur;
+Name = "GENERAL";
 Commandant = id;
+Classe = 10;//General supreme
 
 Ordres = ds_list_create();
 
