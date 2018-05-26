@@ -19,8 +19,8 @@ for(i=0;i<array_length_1d(p);i++)
         }
         else
         {
-            ds_list_add(coords, spliter[0]);
-            ds_list_add(coords, spliter[1]);
+            ds_list_add(coords, real(spliter[0]));
+            ds_list_add(coords, real(spliter[1]));
             p[i]=":";
         }
     }
