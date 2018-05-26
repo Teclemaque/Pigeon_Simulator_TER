@@ -44,8 +44,7 @@ ds_list_destroy(to_delete);
 // Noms filtrés
 for(var i = 0; i < ds_list_size(noms); i++){
     var nom = ds_list_find_value(noms, i);
-    show_debug_message("Lecture du nom : ");
-    toolbox.Text += string(nom) + "";
+    toolbox.Text += string(nom) + " ";
 }
 
 ds_list_destroy(noms);

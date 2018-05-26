@@ -298,7 +298,8 @@ draw_set_color(savedColor);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// draw debug
+            <string>/// draw debug (désactivé)
+exit;
 //draw_self()
 
 /* //boundings debug

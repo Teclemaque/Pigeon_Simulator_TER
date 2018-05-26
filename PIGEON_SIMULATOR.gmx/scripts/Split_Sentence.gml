@@ -1,5 +1,5 @@
 /// Split_Sentence(:string, delimiter:string):array<string>
-show_debug_message("########DEBUT")
+//show_debug_message("########DEBUT")
 var s = argument[0], d = argument[1];
 var rl = ds_list_create();
 var p = string_pos(d, s);
@@ -7,7 +7,12 @@ var dl = string_length(d);
 //ds_list_clear(rl);
 if (dl) while (p) {
     p -= 1;
-    ds_list_add(rl, string_copy(s, 1, p));
+
+    var substr = string_copy(s, 1, p);
+    if(substr != ""){
+        ds_list_add(rl, substr);
+    }
+    
     s = string_delete(s, 1, p + dl);
     p = string_pos(d, s);
 }
@@ -31,7 +36,7 @@ for(l=0;l<array_length_1d(rw);l++)
 }
 //show_list(sentence);
 */
-show_debug_message("########FIN");
+//show_debug_message("########FIN");
 
 return rw;
 //return sentence;

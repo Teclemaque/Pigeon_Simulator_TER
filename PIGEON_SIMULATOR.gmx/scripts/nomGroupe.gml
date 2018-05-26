@@ -130,24 +130,23 @@ if (agent.Troupe != groupName){
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
     
-    if ds_list_find_index(global.grammaire,fullName) == -1
+    if ds_list_find_index(global.grammaire,agent.Name) == -1
         {
-        ds_list_add(global.grammaire,fullName);
+        ds_list_add(global.grammaire,agent.Name);
         }
         
     if map_visible(Officier_supreme) == true
         {
         if instance_exists(Officier_supreme)
-        && ds_list_find_index(Officier_supreme.Regiment,Name) == -1
+        && ds_list_find_index(Officier_supreme.Regiment,agent.Name) == -1
             {
-            ds_list_add(Officier_supreme.Regiment, Name)
+            ds_list_add(Officier_supreme.Regiment, agent.Name)
             }
         if ds_list_find_index(Officier_supreme.RegimentAllie,id) == -1
             {
             ds_list_add(Officier_supreme.RegimentAllie, id)
             }
-        }
-    
-    return fullName;
+        }   
 }
+return agent.Name;
 exit;

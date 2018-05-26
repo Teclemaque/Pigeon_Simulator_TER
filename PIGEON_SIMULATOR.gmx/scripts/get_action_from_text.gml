@@ -3,6 +3,7 @@
 // todo : câbler sur Marius
 
 var input = Split_Sentence(argument0, " ");
+
 var analyzed = CYK(input, global.grammaire);
 
 if( is_string(analyzed) ){

@@ -9,7 +9,7 @@ if instance_exists(Agent)
         R[] = 0;
         R = ds_list_find_value(Renseignement,i)
         
-        if R[1] == Agent.Name
+        if string(R[1]) == string(Agent.Name)
             {
             ds_list_delete(Renseignement,i)
             break;
