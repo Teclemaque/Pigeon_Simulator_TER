@@ -39,7 +39,8 @@ global.MAP_Height = 32
 global.MAP_Width = 32
 
 // NOM
-global.Regiments = ds_map_create();
+global.Regiments = ds_map_create(); // nom =&gt; id
+global.Regiments_reverse = ds_map_create(); // id =&gt; nom
 
 //Information sur tous les regiments officiels
 //EtatRegiment = ds_list_create();

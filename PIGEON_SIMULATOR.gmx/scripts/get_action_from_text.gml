@@ -1,6 +1,8 @@
 /// get_action_from_text(text:string):Action
 
-// todo : câbler sur Marius
+if(string_length(string(argument0)) < 2){
+    exit;
+}
 
 var input = Split_Sentence(argument0, " ");
 
@@ -14,7 +16,7 @@ if( is_string(analyzed) ){
     log_toolbox_message("Erreur : phrase incorrecte", c_red);
     exit;
 }else if (!ds_exists(analyzed, ds_type_map)){
-    log_toolbox_message("Erreur : le retour de CYK n'est pas un tableau ou une ds_map", c_red);
+    log_toolbox_message("Erreur : le retour de CYK n'est pas une ds_map", c_red);
     
 }
 
@@ -54,17 +56,17 @@ switch(action){
         var dy = ds_list_find_value(targets, 1);
         //show_debug_message("X : " + string(dx));
         //show_debug_message("Y : " + string(dy));
-        ordre[] = noone
-        ordre[] = noone
-        ordre[] = noone
-        ordre[] = dx
-        ordre[] = dy
-        ordre[] = -1;
-        ordre[] = -1;
-        ordre[] = -1;
-        ordre[] = -1;
-        ordre[] = -1;
-        ordre[] = 1;
+        ordre[2] = noone
+        ordre[3] = noone
+        ordre[4] = noone
+        ordre[5] = dx
+        ordre[6] = dy
+        ordre[7] = -1;
+        ordre[8] = -1;
+        ordre[9] = -1;
+        ordre[10] = -1;
+        ordre[11] = -1;
+        ordre[12] = 1;
     break;
     
     default:

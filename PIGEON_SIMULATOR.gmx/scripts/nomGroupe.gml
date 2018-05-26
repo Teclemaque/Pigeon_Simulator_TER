@@ -126,6 +126,8 @@ if (agent.Troupe != groupName){
     }
     
     ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
+    ds_map_add(global.Regiments_reverse, agent, fullName);
+    
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
