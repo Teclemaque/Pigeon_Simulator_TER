@@ -93,6 +93,7 @@ switch(action){
         ordre[12] = 1;
     break;
     
+<<<<<<< HEAD
     case "VREG":
         ordre[1] = IA_Groupe;
         ordre[2] = numRecipient;
@@ -107,6 +108,8 @@ switch(action){
         ordre[3] = abs(numRecipient.Officiel-1);
         ordre[4] = -1;
     break;
+=======
+>>>>>>> 52f99839927c36375bbd31030f0a0229baa827ff
     
     
     default:
