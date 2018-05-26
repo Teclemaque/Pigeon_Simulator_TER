@@ -208,6 +208,7 @@ else
                         
                         
                         if ds_list_find_index(obj_joueur.Regiment,Name) == -1
+                        &amp;&amp; Grade &gt;= 2
                             {
                             ds_list_add(obj_joueur.Regiment, Name)
                             }

@@ -48,6 +48,9 @@ switch(action){
     case "VATK":
         ordre[1] = IA_Attaque;
         ordre[2] = idGroupe(target);
+        ordre[3] = 1;
+        ordre[4] = 1;
+        ordre[5] = 100;
     break;
     
     case "VDEP": // déplacement vers coordonnées

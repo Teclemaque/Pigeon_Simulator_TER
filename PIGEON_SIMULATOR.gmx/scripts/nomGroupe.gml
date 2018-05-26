@@ -48,18 +48,18 @@ if(withName){
         if groupSize > 1
             {
             groupName = "chef"
-            agent.Troupe = string(groupName);
+            //agent.Troupe = string(groupName);
             //agent.Numero = string(Num)+string(numero);
-            agent.Name = groupName;
-            exit;
+            //agent.Name = groupName;
+            //exit;
             }
         else
             {
             groupName = "soldat" // TODO : ou cavalier, messager, ...
-            agent.Troupe = string(groupName);
+            //agent.Troupe = string(groupName);
             //agent.Numero = string(Num)+string(numero);
-            agent.Name = groupName;
-            exit;
+            //agent.Name = groupName;
+            //exit;
             }
         agent.Grade = 0;
     }

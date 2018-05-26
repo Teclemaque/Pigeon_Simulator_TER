@@ -133,10 +133,21 @@ if Dest != undefined
             {
             with(Dest.id)
                 {
+                
                 Execute = other.Mess[2];
-                for (i = 3; i &lt; array_length_1d(other.Mess); i++)
+                if string(Execute) != "IA_Attaque"
                     {
-                    Argument[i-3] = other.Mess[i];
+                    for (i = 3; i &lt; array_length_1d(other.Mess); i++)
+                        {
+                        Argument[i-3] = other.Mess[i];
+                        }
+                    }
+                else
+                    {
+                    for (i = 3; i &lt; array_length_1d(other.Mess); i++)
+                        {
+                        ArgumentAttaque[i-3] = other.Mess[i];
+                        }
                     }
                 }
             }
