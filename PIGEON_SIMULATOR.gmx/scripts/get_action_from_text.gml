@@ -31,8 +31,8 @@ var recipient = recipients[| 0]
 
 //show_debug_message("target : " + target);
 
-show_debug_message("destinataire : " + recipient);
-show_debug_message("action : " + action);
+//show_debug_message("destinataire : " + recipient);
+//show_debug_message("action : " + action);
 //show_debug_message("cible : " + target);
 
 var ordres = ds_list_create(); // message unitaires, avec chacun leur destinataire
@@ -41,7 +41,7 @@ ordre[0] = noone;
 
 var numRecipient = idGroupe(recipient);
 
-show_debug_message("Destinataire : " + recipient + ", id : " + string(numRecipient));
+//show_debug_message("Destinataire : " + recipient + ", id : " + string(numRecipient));
 //show_debug_message("Cible : " + target + ", id : " + string(numTarget));
 
 switch(action){
@@ -50,8 +50,9 @@ switch(action){
         ordre[2] = idGroupe(target);
     break;
     
-    case "VDEP":
+    case "VDEP": // déplacement vers coordonnées
         ordre[1] = IA_Deplacement;
+        
         var dx = ds_list_find_value(targets, 0);
         var dy = ds_list_find_value(targets, 1);
         //show_debug_message("X : " + string(dx));
@@ -69,6 +70,32 @@ switch(action){
         ordre[12] = 1;
     break;
     
+    case "VDEPS": // déplacement vers un sujet
+        ordre[1] = IA_Deplacement;
+        
+        show_debug_message( "target : " );
+        show_debug_message( string(target));
+        show_debug_message( string(idGroupe(target)));
+        
+        var dx = ds_list_find_value(targets, 0);
+        var dy = ds_list_find_value(targets, 1);
+        //show_debug_message("X : " + string(dx));
+        //show_debug_message("Y : " + string(dy));
+        ordre[2] = noone
+        ordre[3] = noone
+        ordre[4] = noone
+        ordre[5] = dx
+        ordre[6] = dy
+        ordre[7] = -1;
+        ordre[8] = -1;
+        ordre[9] = -1;
+        ordre[10] = -1;
+        ordre[11] = -1;
+        ordre[12] = 1;
+    break;
+    
+    
+    
     default:
     log_toolbox_message("Tag non implémenté : " + action, c_orange);
     break;
@@ -78,4 +105,25 @@ for(var i = 0; i < ds_list_size(recipients); i++){
     ordre[0] = idGroupe(recipient);
     ds_list_add(ordres, array_copy(ordre));
 }
+
+///// debug
+
+
+show_debug_message("****************************");
+show_debug_message("Nombre de Messages : " + string(ds_list_size(ordres)));
+for(var i = 0; i < ds_list_size(ordres); i++){
+    var msg = ds_list_find_value(ordres, i);
+    var str = "[ "
+    for(var j = 0; j < array_length_1d(msg); i++){
+        str += string( msg[j] ) + ", ";
+    }
+    str += " ]";
+    show_debug_message(str);
+    show_debug_message("----------");
+    
+    
+}
+show_debug_message("****************************");
+
+
 return ordres;
