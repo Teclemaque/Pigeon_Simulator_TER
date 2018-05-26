@@ -129,10 +129,15 @@ if (agent.Troupe != groupName){
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
+    stringer="SUJ->"+agent.Name;
     
-    if ds_list_find_index(global.grammaire,agent.Name) == -1
+    spliter = Split_Sentence(stringer,"->");
+    spliter[1] = Split_Sentence(spliter[1],";");
+    
+    if ds_list_find_index(global.grammaire,spliter) == -1
         {
-        ds_list_add(global.grammaire,agent.Name);
+            //ds_list_add(global.grammaire,agent.Name);
+            ds_list_add(global.grammaire,spliter);
         }
         
     if map_visible(Officier_supreme) == true
