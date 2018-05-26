@@ -52,6 +52,7 @@
     <sprite>sprites\Title_name</sprite>
     <sprite>sprites\icone_strategie_avatar</sprite>
     <sprite>sprites\fumee</sprite>
+    <sprite>sprites\spr_messager_pigeon</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -192,6 +193,7 @@
       </objects>
       <objects name="AGENT SUPERIEUR">
         <objects name="Camp 1">
+          <object>objects\obj_messager_pigeon_C1</object>
           <object>objects\obj_messager_C1</object>
           <object>objects\obj_meta_agent_C1</object>
           <object>objects\obj_agent_officier0_C1</object>
