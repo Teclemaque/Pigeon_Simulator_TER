@@ -10,6 +10,9 @@ if( is_string(analyzed) ){
     var error = ("Erreur : " + analyzed);
     log_toolbox_message(error, c_red);
     exit;
+}else if (analyzed == noone){
+    log_toolbox_message("Erreur : phrase incorrecte", c_red);
+    exit;
 }else if (!ds_exists(analyzed, ds_type_map)){
     log_toolbox_message("Erreur : le retour de CYK n'est pas un tableau ou une ds_map", c_red);
     
@@ -28,7 +31,7 @@ var recipient = recipients[| 0]
 
 show_debug_message("destinataire : " + recipient);
 show_debug_message("action : " + action);
-show_debug_message("cible : " + target);
+//show_debug_message("cible : " + target);
 
 var ordres = ds_list_create(); // message unitaires, avec chacun leur destinataire
 var ordre; // ordre type qui sera dupliqué
@@ -47,7 +50,21 @@ switch(action){
     
     case "VDEP":
         ordre[1] = IA_Deplacement;
-        log_toolbox_message("En cours : " + action, c_orange);
+        var dx = ds_list_find_value(targets, 0);
+        var dy = ds_list_find_value(targets, 1);
+        //show_debug_message("X : " + string(dx));
+        //show_debug_message("Y : " + string(dy));
+        ordre[] = noone
+        ordre[] = noone
+        ordre[] = noone
+        ordre[] = dx
+        ordre[] = dy
+        ordre[] = -1;
+        ordre[] = -1;
+        ordre[] = -1;
+        ordre[] = -1;
+        ordre[] = -1;
+        ordre[] = 1;
     break;
     
     default:
