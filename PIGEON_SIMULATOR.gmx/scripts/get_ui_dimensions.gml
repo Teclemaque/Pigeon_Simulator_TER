@@ -12,6 +12,10 @@ if( ds_map_exists(global.Dimensions, "height" )){
 //var minimap_width = 150
 //var minimap_height = 150
 
+if(!instance_exists( Obj_mini_map_controler )){ // la génération de la map a planté
+    game_restart();
+}
+
 var minimap_width = Obj_mini_map_controler.w * 3
 var minimap_height = Obj_mini_map_controler.h * 3
 

@@ -35,16 +35,19 @@ Classe = 10; //General suprême
 
 Ordres = ds_list_create();
 
-repeat(20)
-    {
-    A = instance_create(x+random(20)-10,y+random(20)-10,obj_messager_C1)
-    A.Officier_sup = id;
-    }
 Messager = obj_messager_C1;
 Renseignement = ds_list_create();
 Regiment = ds_list_create();
 RegimentAllie = ds_list_create();
 RegimentEnnemi = ds_list_create();
+ListMessager = ds_list_create();
+
+repeat(5)
+    {
+    A = instance_create(x+random(20)-10,y+random(20)-10,Messager)
+    A.Officier_sup = id;
+    ds_list_add(ListMessager,A.id)
+    }
 
 
 </string>
@@ -72,6 +75,7 @@ RegimentEnnemi = ds_list_create();
             <string>ds_list_destroy(Regiment);
 ds_list_destroy(RegimentAllie);
 ds_list_destroy(RegimentEnnemi);
+ds_list_destroy(ListMessager);
 </string>
           </argument>
         </arguments>
@@ -127,6 +131,7 @@ if ds_list_size(Ordres) &gt; 0
     if instance_exists(Mess)
     &amp;&amp; distance_to_object(Mess) &lt;= 25
     &amp;&amp; Mess.Mission == 0 // Si le messager est suffisament proche et pas deja en mission
+    &amp;&amp; is_array(ORDRES)
         {
         Mess.ArgumentMessager[] = 0;//On reinitialise son tableau contenant le parametre du message
         Mess.ArgumentMessager[0] = ORDRES[0];//On lui donne le destinaire

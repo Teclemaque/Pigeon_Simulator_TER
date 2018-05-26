@@ -10,6 +10,7 @@ JOIN->VIR;GN
 GV->VATK;SUJ
 GV->VDEP;COORD
 GV->VDEP;PREPL
+GV->VDEPS;SUJ
 GV->VREG;CONJ
 CONJ->CON;GN
 CONJ->CON;SUJ
@@ -18,6 +19,7 @@ SUJ->agent1
 VATK->tuer
 VDEP->deplacer
 VDEP->aller
+VDEPS->rejoindre
 VREG->fusionner
 SUJ->agent2
 SUJ->agent3

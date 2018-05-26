@@ -123,6 +123,7 @@ if instance_exists(obj_joueur)
         }*/
     I1 = 0;
     I2 = 0;
+    draw_set_colour(c_black)
     for (i = 0; i &lt; ds_list_size(obj_joueur.Regiment);i++)
         {
         A = ds_list_find_value(obj_joueur.Regiment,i)
@@ -130,14 +131,16 @@ if instance_exists(obj_joueur)
             {
             if ds_list_find_index(obj_joueur.RegimentAllie,A) != -1
                 {
-                draw_sprite_ext(spr_jeton,-1,x+30,y+I1*40+250,0.7,0.7,0,c_blue,1)
+                draw_sprite_ext(spr_jeton,-1,x+15,y+I1*40+250,0.7,0.7,0,c_blue,1)
+                draw_text(x+15,y+I1*40+260,string(ds_list_find_value(obj_joueur.Regiment,i)))
                 I1++;
                 }
             else
                 {
                 if ds_list_find_index(obj_joueur.RegimentEnnemi,A) != -1
                     {
-                    draw_sprite_ext(spr_jeton,-1,x+90,y+I2*40+250,0.7,0.7,0,c_blue,1)
+                    draw_sprite_ext(spr_jeton,-1,x+100,y+I2*40+250,0.7,0.7,0,c_blue,1)
+                    draw_text(x+100,y+I2*40+260,string(ds_list_find_value(obj_joueur.Regiment,i)))
                     I2++
                     }
                 }

@@ -40,6 +40,8 @@ distance_give = 10; // distance max pour remettre le message 0 lettre
 Argument[0] = 1;
 Argument[1] = -1;
 Execute = IA_Repos;
+
+
 </string>
           </argument>
         </arguments>

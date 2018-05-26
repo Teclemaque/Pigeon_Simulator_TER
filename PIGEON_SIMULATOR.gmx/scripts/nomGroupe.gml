@@ -19,55 +19,57 @@ if(withName){
     
     var groupSize = ds_list_size(agent.Regiment);
     
-    if (groupSize > 804 && agent.Grade <= 12){
-        groupName = "régiment"
-        agent.Grade = 12;
-    }else if (groupSize > 199 && agent.Grade <= 10){
-        groupName = "bataillon"
-        agent.Grade = 10;
-    }else if (groupSize > 83 && agent.Grade <= 8){
-        groupName = "compagnie"
-        agent.Grade = 8;
-    }else if(groupSize > 26 && agent.Grade <= 6){
-        groupName = "troupe"
-        agent.Grade = 6;
-    }else if (groupSize > 10 && agent.Grade <= 4){
-        groupName = "patrouille"
-        agent.Grade = 4;
-    }else if (groupSize > 1 && agent.Grade <= 2) {
-        groupName = "escouade"
-        agent.Grade = 2;
-    }else {
-        groupName = "soldat" // TODO : ou cavalier, messager, ...
+    if agent.Officiel == 1
+        {
+        if (groupSize > 804 && agent.Grade <= 12){
+            groupName = "regiment"
+            agent.Grade = 12;
+        }else if (groupSize > 199 && agent.Grade <= 10){
+            groupName = "bataillon"
+            agent.Grade = 10;
+        }else if (groupSize > 83 && agent.Grade <= 8){
+            groupName = "compagnie"
+            agent.Grade = 8;
+        }else if(groupSize > 26 && agent.Grade <= 6){
+            groupName = "troupe"
+            agent.Grade = 6;
+        }else if (groupSize > 10 && agent.Grade <= 4){
+            groupName = "patrouille"
+            agent.Grade = 4;
+        }else if (groupSize > 1 && agent.Grade <= 2) {
+            groupName = "escouade"
+            agent.Grade = 2;
+        }else {
+            groupName = "soldat" // TODO : ou cavalier, messager, ...
+            agent.Grade = 0;
+        }
+    }
+    else {
+        if groupSize > 1
+            {
+            groupName = "chef"
+            agent.Troupe = string(groupName);
+            //agent.Numero = string(Num)+string(numero);
+            agent.Name = groupName;
+            exit;
+            }
+        else
+            {
+            groupName = "soldat" // TODO : ou cavalier, messager, ...
+            agent.Troupe = string(groupName);
+            //agent.Numero = string(Num)+string(numero);
+            agent.Name = groupName;
+            exit;
+            }
         agent.Grade = 0;
     }
 }
 
-/*if instance_number(Messager) < instance_number(Allie)/10
-    {
-    if ds_list_size(agent.Regiment) > 2*agent.Grade
-        {
-        for (i = 0; i < (agent.Grade)/2; i++)
-            {
-            A = ds_list_find_value(agent.Regiment,1);
-            Mess = instance_create(A.x,A.y,Messager);
-            // Faut faire un transfert de données entre les 2
-            Mess.Officier_sup = agent.id;
-            ds_list_delete(agent.Regiment,1);
-            
-            with(A)
-                {
-                instance_destroy();
-                }
-            
-            }
-        }
-    }*/
+
 // Trouver le numero à attribuer au groupe
 var numero = "";
 N1 = 0;
 if instance_exists(agent.Commandant)
-&& instance_exists(agent.Commandant_sup)
     {
     if (agent != agent.Commandant_sup)
         { // si le père a le numero 12
@@ -125,35 +127,28 @@ if (agent.Troupe != groupName){
         fullName = string(groupName)+ string(Num) + string(numero); // ex : essayer avec escouade122, escouade123, etc.
     }
     
+    ds_map_delete(global.Regiments, fullName);
     ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
-    ds_map_add(global.Regiments_reverse, agent, fullName);
     
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
-    stringer="SUJ->"+agent.Name;
+    
+    stringer="SUJ->"+string(agent.Name);
     
     spliter = Split_Sentence(stringer,"->");
     spliter[1] = Split_Sentence(spliter[1],";");
     
     if ds_list_find_index(global.grammaire,spliter) == -1
         {
-            //ds_list_add(global.grammaire,agent.Name);
-            ds_list_add(global.grammaire,spliter);
+        ds_list_add(global.grammaire,spliter);
         }
-        
-    if map_visible(agent.Officier_supreme) == true
+    
+    /*if ds_list_find_index(global.grammaire,fullName) == -1
         {
-        if instance_exists(agent.Officier_supreme)
-        && ds_list_find_index(agent.Officier_supreme.Regiment,agent.Name) == -1
-            {
-            ds_list_add(agent.Officier_supreme.Regiment, agent.Name)
-            }
-        if ds_list_find_index(agent.Officier_supreme.RegimentAllie,id) == -1
-            {
-            ds_list_add(agent.Officier_supreme.RegimentAllie, id)
-            }
-        }   
+        ds_list_add(global.grammaire,fullName);
+        }*/
+    
+    return fullName;
 }
-return agent.Name;
 exit;

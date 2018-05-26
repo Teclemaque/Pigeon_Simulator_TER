@@ -163,7 +163,7 @@ ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
     visible = true;
     image_alpha = 1;
 
-    if Classe == 1
+    if Classe == 1 &amp;&amp; Grade &gt;= 2 
     &amp;&amp; ds_exists(Regiment,ds_type_list) 
     &amp;&amp; (Officiel == 1 || ds_list_size(Regiment) &gt; 100)
         {

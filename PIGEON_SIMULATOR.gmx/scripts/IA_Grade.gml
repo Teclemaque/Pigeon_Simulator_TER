@@ -6,7 +6,7 @@ Rang = Argument[2];
 
 if Officialisation == 1 //Le soldat est officialisé.
     {
-    if Rang != noone
+    if Rang != -1
         {
         with(instance_create(x,y,Rang))
             {

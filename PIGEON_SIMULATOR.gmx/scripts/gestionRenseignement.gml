@@ -19,7 +19,14 @@ if instance_exists(Agent)
     
     Rens[0] = "RENSEIGNEMENT";
     Rens[1] = Agent.Name;
-    Rens[2] = ds_list_size(Agent.Regiment);
+    if Agent.Classe == 1
+        {
+        Rens[2] = ds_list_size(Agent.Regiment);
+        }
+    else
+        {
+        Rens[2] = 0;
+        }
     Rens[3] = Agent.x;
     Rens[4] = Agent.y;
     Rens[5] = obj_globVar.Temps;

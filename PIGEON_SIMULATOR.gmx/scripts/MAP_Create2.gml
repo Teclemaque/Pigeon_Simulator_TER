@@ -25,8 +25,8 @@ terrain_map = ds_grid_create(width,height)
 3 : crête
 */
 
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j= 0;j < height-1;j++){
         var type = map_get_terrain_type(i,j)
         if(type == 0 and random(100) < 0.1){
             type = 2
@@ -37,8 +37,8 @@ for(var i = 0; i < width;i++){
 
 // a done map
 done = ds_grid_create(width,height)
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         ds_grid_set(done,i,j,0)
     }
 }

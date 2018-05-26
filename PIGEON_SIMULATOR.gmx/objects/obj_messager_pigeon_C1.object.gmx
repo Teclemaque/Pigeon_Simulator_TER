@@ -32,9 +32,9 @@ image_yscale = image_xscale;
 
 direction = random(360)
 
-Dir = direction mod 360
+/*Dir = direction mod 360
 
-if Dir div 90 &gt;= 1 &amp;&amp; Dir div 90 &gt;= 3
+if Dir  &gt;= 90 &amp;&amp; Dir  &lt;= 270
     {
     image_xscale = -image_xscale
     }
@@ -68,7 +68,7 @@ with(A)
     {
     Dir = direction mod 360
 
-    if Dir div 90 &gt;= 1 &amp;&amp; Dir div 90 &lt;= 3
+    if Dir  &gt;= 90 &amp;&amp; Dir  &lt;= 270
         {
         image_xscale = -image_xscale
         }
