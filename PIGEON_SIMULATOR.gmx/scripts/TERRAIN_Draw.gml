@@ -62,4 +62,3 @@ if(x > view_xview[1]-16 and x < view_xview[1]+view_wport[1]+16
 draw_set_colour(c_black)
 var s = string(map_get_height(0)) //4 différence
 draw_text_transformed(x,y,s,0.35,0.35,0)
-

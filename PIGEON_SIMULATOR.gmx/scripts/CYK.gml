@@ -4,6 +4,29 @@
 var p = argument[0];
 var r = argument[1];
 var cyk = ds_grid_create(array_length_1d(p),array_length_1d(p));
+//pré-traitement de la donnée COORD
+var spliter;
+var coords = ds_list_create();
+for(i=0;i<array_length_1d(p);i++)
+{
+    if(string_pos(":",string(p[i]))!=0)
+    {
+        spliter=Split_Sentence(string(p[i]),":");
+        if(array_length_1d(spliter)!=2)
+        {
+            show_debug_message("Coordonnées invalides");
+            return noone;
+        }
+        else
+        {
+            ds_list_add(coords, spliter[0]);
+            ds_list_add(coords, spliter[1]);
+            p[i]=":";
+        }
+    }
+}
+//Verification de taille des coordonnées entrées
+
 //Cas initial
 for(i=0;i<array_length_1d(p);i++)
 {
@@ -17,7 +40,7 @@ for(i=0;i<array_length_1d(p);i++)
             show_debug_message("    GOOD !");
             t = tmp[1];
             show_debug_message(t[0]);
-            if(t[0]==p[i])
+            if(string(t[0])==string(p[i]))
             {
                 show_debug_message("        JE MARCHE !")
                 ds_grid_add(cyk,0,i,tmp[0]);
@@ -74,10 +97,10 @@ for(l=0;l<ds_grid_width(cyk);l++)
 //Liste Keys : 0=sujet, 1=action, 2=cibles, 3=options
 
 var orderMap=ds_map_create();
-ds_map_add_list(orderMap, 0, ds_list_create());
-ds_map_add_list(orderMap, 1, ds_list_create());
-ds_map_add_list(orderMap, 2, ds_list_create());
-ds_map_add_list(orderMap, 3, ds_list_create());
+ds_map_add_list(orderMap, 0, ds_list_create()); //Les sujets
+ds_map_add_list(orderMap, 1, ds_list_create()); //Les actions
+ds_map_add_list(orderMap, 2, ds_list_create()); //Les cibles
+ds_map_add_list(orderMap, 3, ds_list_create()); //Les stopwords
 show_debug_message("AFFICHAGE DE ORDERMAP :");
 show_debug_message(json_encode(orderMap));
 
@@ -85,7 +108,7 @@ show_debug_message(json_encode(orderMap));
 if(string(ds_grid_get(cyk,array_length_1d(p)-1,0))=="S")
 {
     show_debug_message("Phrase Valide");
-    Extract_Order(p, cyk, ds_grid_width(cyk)-1,0,orderMap,0);
+    Extract_Order(p, cyk, ds_grid_width(cyk)-1,0,orderMap,coords,0);
     show_debug_message(json_encode(orderMap));
     return orderMap;
 }

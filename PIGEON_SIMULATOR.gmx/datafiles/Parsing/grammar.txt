@@ -21,7 +21,7 @@ SUJ->agent2
 SUJ->agent3
 SUJ->agent4
 VIR->,
-COORD->42:56
+COORD->:
 PRPL->a
 PRPL->en
 CON->avec
