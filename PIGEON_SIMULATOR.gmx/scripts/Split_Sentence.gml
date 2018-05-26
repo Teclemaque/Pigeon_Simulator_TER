@@ -15,7 +15,7 @@ if (dl) while (p) {
     p -= 1;
 
     var substr = string_copy(s, 1, p);
-    if(substr != ""){
+    if(substr != " "){
         ds_list_add(rl, substr);
     }
     

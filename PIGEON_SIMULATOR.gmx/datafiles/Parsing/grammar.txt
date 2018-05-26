@@ -1,7 +1,9 @@
 S->SUJ;GV
 S->SUJ;VS
+S->SUJ;VUPG
 S->GN;GV
 S->GN;VREG
+S->GN;VUPG
 GN->SUJ;JOIN
 JOIN->VIR;SUJ
 JOIN->VIR;GN
@@ -28,3 +30,4 @@ PRPL->a
 PRPL->en
 CON->avec
 VREG->regrouper
+VUPG->grader

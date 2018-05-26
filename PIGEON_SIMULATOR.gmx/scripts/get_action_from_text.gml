@@ -64,23 +64,22 @@ switch(action){
         ordre[6] = dy
         ordre[7] = -1;
         ordre[8] = -1;
-        ordre[9] = -1;
-        ordre[10] = -1;
-        ordre[11] = -1;
+        ordre[9] = 5;
+        ordre[10] = 0;
+        ordre[11] = numRecipient.Alpha;
         ordre[12] = 1;
     break;
     
     case "VDEPS": // déplacement vers un sujet
         ordre[1] = IA_Deplacement;
         
-        show_debug_message( "target : " );
-        show_debug_message( string(target));
-        show_debug_message( string(idGroupe(target)));
+        //show_debug_message( "target : " );
+        //show_debug_message( string(target)); 
+        show_debug_message("Name-reverse = ID de l'agent cible : " + string(idGroupe(target)));
+        var destination = idGroupe(target);
         
-        var dx = ds_list_find_value(targets, 0);
-        var dy = ds_list_find_value(targets, 1);
-        //show_debug_message("X : " + string(dx));
-        //show_debug_message("Y : " + string(dy));
+        var dx = destination.x;
+        var dy = destination.y;
         ordre[2] = noone
         ordre[3] = noone
         ordre[4] = noone
