@@ -74,6 +74,7 @@
         <script>scripts\gestionRenseignement.gml</script>
         <script>scripts\nomGroupe.gml</script>
         <script>scripts\path_finding_A.gml</script>
+        <script>scripts\idGroupe.gml</script>
       </scripts>
     </scripts>
     <scripts name="SCRIPT TERRAIN">
@@ -163,6 +164,7 @@
         <script>scripts\add_group_to_leftPanel.gml</script>
         <script>scripts\remove_group_from_leftPanel.gml</script>
       </scripts>
+      <script>scripts\array_copy.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">

@@ -126,6 +126,8 @@ if (agent.Troupe != groupName){
     }
     
     ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
+    ds_map_add(global.Regiments_reverse, agent, fullName);
+    
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
     agent.Name = fullName;
@@ -140,16 +142,16 @@ if (agent.Troupe != groupName){
             ds_list_add(global.grammaire,spliter);
         }
         
-    if map_visible(Officier_supreme) == true
+    if map_visible(agent.Officier_supreme) == true
         {
-        if instance_exists(Officier_supreme)
-        && ds_list_find_index(Officier_supreme.Regiment,agent.Name) == -1
+        if instance_exists(agent.Officier_supreme)
+        && ds_list_find_index(agent.Officier_supreme.Regiment,agent.Name) == -1
             {
-            ds_list_add(Officier_supreme.Regiment, agent.Name)
+            ds_list_add(agent.Officier_supreme.Regiment, agent.Name)
             }
-        if ds_list_find_index(Officier_supreme.RegimentAllie,id) == -1
+        if ds_list_find_index(agent.Officier_supreme.RegimentAllie,id) == -1
             {
-            ds_list_add(Officier_supreme.RegimentAllie, id)
+            ds_list_add(agent.Officier_supreme.RegimentAllie, id)
             }
         }   
 }

@@ -1,47 +1,81 @@
 /// get_action_from_text(text:string):Action
 
-// todo : câbler sur Marius
+if(string_length(string(argument0)) < 2){
+    exit;
+}
 
 var input = Split_Sentence(argument0, " ");
 
 var analyzed = CYK(input, global.grammaire);
 
 if( is_string(analyzed) ){
-    show_debug_message("Erreur : " + analyzed);
-    // todo : mettre l'erreur dans la toolbox
+    var error = ("Erreur : " + analyzed);
+    log_toolbox_message(error, c_red);
     exit;
-}else if (!is_array(analyzed)){
-    log_toolbox_message("Erreur : le retour de CYK n'est pas un tableau", c_red);
+}else if (analyzed == noone){
+    log_toolbox_message("Erreur : phrase incorrecte", c_red);
     exit;
+}else if (!ds_exists(analyzed, ds_type_map)){
+    log_toolbox_message("Erreur : le retour de CYK n'est pas une ds_map", c_red);
+    
 }
 
-var target = analyzed[0];
-var operation = analyzed[1];
-var reste = analyzed[2];
+var recipients = analyzed[? 0];
+var operations = analyzed[? 1];
+var targets = analyzed[? 2];
 
-var len = array_length_1d(analyzed)
-
-show_debug_message("INPUT");
-show_debug_message(input);
-
-show_debug_message("Taille du retour : " + string(len))
-show_debug_message("target : " + string(target));
+var target = targets[| 0];
+var action = operations[| 0];
+var recipient = recipients[| 0]
 
 
+//show_debug_message("target : " + target);
 
+show_debug_message("destinataire : " + recipient);
+show_debug_message("action : " + action);
+//show_debug_message("cible : " + target);
 
-var action = ds_map_create();
+var ordres = ds_list_create(); // message unitaires, avec chacun leur destinataire
+var ordre; // ordre type qui sera dupliqué
+ordre[0] = noone;
 
-var agentX = instance_find(obj_agent, 0).id;
+var numRecipient = idGroupe(recipient);
 
-// en attendant : action bidon
-// action "agentX vas vers 1024:2048 " 
-action[? "Erreur"] = noone;
-action[? "Context"] = argument0;
-action[? "Type"] = "ordre";
-action[? "Action"] = "move";
-action[? "Target"] = agentX;
-action[? "coords_x"] = random(room_width);
-action[? "coords_y"] = random(room_height);
+show_debug_message("Destinataire : " + recipient + ", id : " + string(numRecipient));
+//show_debug_message("Cible : " + target + ", id : " + string(numTarget));
 
-return action;
+switch(action){
+    case "VATK":
+        ordre[1] = IA_Attaque;
+        ordre[2] = idGroupe(target);
+    break;
+    
+    case "VDEP":
+        ordre[1] = IA_Deplacement;
+        var dx = ds_list_find_value(targets, 0);
+        var dy = ds_list_find_value(targets, 1);
+        //show_debug_message("X : " + string(dx));
+        //show_debug_message("Y : " + string(dy));
+        ordre[2] = noone
+        ordre[3] = noone
+        ordre[4] = noone
+        ordre[5] = dx
+        ordre[6] = dy
+        ordre[7] = -1;
+        ordre[8] = -1;
+        ordre[9] = 5;
+        ordre[10] = 0;
+        ordre[11] = numRecipient.Alpha;
+        ordre[12] = 1;
+    break;
+    
+    default:
+    log_toolbox_message("Tag non implémenté : " + action, c_orange);
+    break;
+}
+
+for(var i = 0; i < ds_list_size(recipients); i++){
+    ordre[0] = idGroupe(recipient);
+    ds_list_add(ordres, array_copy(ordre));
+}
+return ordres;

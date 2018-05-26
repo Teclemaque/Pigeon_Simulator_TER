@@ -1,6 +1,12 @@
 /// Split_Sentence(:string, delimiter:string):array<string>
 //show_debug_message("########DEBUT")
 var s = argument[0], d = argument[1];
+
+var len = string_length(s);
+while( string_char_at(s, len) == ' ' ){
+    s = string_copy(s, 0, len -1);
+}
+
 var rl = ds_list_create();
 var p = string_pos(d, s);
 var dl = string_length(d);

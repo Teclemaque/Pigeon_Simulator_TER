@@ -421,8 +421,15 @@ if( historic_index &lt; 0 ){
 // Valider un message du textField
 if (keyboard_check_pressed(vk_enter)){
     add_command_to_historic(Text, Historic, historic_size);
-    var action = get_action_from_text(Text);
-//    ds_list_add(General.Ordres, action); // transmettre l'ordre structuré au général
+    var actions = get_action_from_text(Text);
+    
+    // envoyer les ordres au général
+    
+    for(var i = 0; i &lt; ds_list_size(actions); i++){
+        var action = ds_list_find_value(actions, i);
+        ds_list_add( obj_joueur.Ordres, action );
+    }
+    
     log_toolbox_message("" + Text, c_black)
     Text = "";
     historic_index = -1; // retour à la base de l'historique

@@ -34,7 +34,7 @@ else
     if( !is_string(token) ){
         //token = "erreur : tenter de caster en string ?"
         show_debug_message(token); // en général lors d'une erreur : 0 (int)
-        log_toolbox_message("Extract_Order : Impossible de lire " + string(token), c_red);
+//        log_toolbox_message("Extract_Order : Impossible de lire " + string(token), c_red);
         token = ""; // corriger comme on peut pour eviter le plantage
     }
     switch(token)
@@ -47,7 +47,7 @@ else
                 {
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
-                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+//                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
                     }
                     else
@@ -74,7 +74,7 @@ else
                 {
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
-                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+//                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
                     }
                     else
@@ -101,7 +101,7 @@ else
                 {
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
-                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+//                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
                     }
                     else
@@ -128,7 +128,7 @@ else
                 {
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
-                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+//                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
                     }
                     else
@@ -155,7 +155,7 @@ else
                 {
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
-                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+//                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
                     }
                     else
@@ -182,7 +182,7 @@ else
                 {
                     var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
-                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
+//                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
                     }
                     else
