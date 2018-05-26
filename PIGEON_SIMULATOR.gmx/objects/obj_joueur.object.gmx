@@ -127,23 +127,23 @@ if is_array(Rens)
         
         if instance_exists(Agent)
             {
-            if ds_list_find_index(Regiment, Agent.id) == -1
+            if ds_list_find_index(Regiment, Agent.Name) == -1
                 {
-                ds_list_add(Regiment, Agent.id)
+                ds_list_add(Regiment, Agent.Name)
                 }
                 
             if Agent.Camp == Camp
                 {
-                if ds_list_find_index(RegimentAllie, Agent.id) == -1
+                if ds_list_find_index(RegimentAllie, Agent.Name) == -1
                     {
-                    ds_list_add(RegimentAllie, Agent.id)
+                    ds_list_add(RegimentAllie, Agent.Name)
                     }
                 }
             else
                 {
-                if ds_list_find_index(RegimentEnnemi, Agent.id) == -1
+                if ds_list_find_index(RegimentEnnemi, Agent.Name) == -1
                     {
-                    ds_list_add(RegimentEnnemi, Agent.id)
+                    ds_list_add(RegimentEnnemi, Agent.Name)
                     }
                 }
             
@@ -189,7 +189,8 @@ ds_list_delete(Renseignement,0)
             <string>draw_self();
 draw_text(x+20,y-30,ds_list_size(Renseignement))
 draw_text(x+20,y-40,ds_list_size(Regiment))
-
+draw_text(x+20,y-60,ds_list_size(RegimentAllie))
+draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
 
 </string>
           </argument>
