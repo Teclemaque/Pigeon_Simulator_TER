@@ -40,7 +40,7 @@ repeat(20)
     A = instance_create(x+random(20)-10,y+random(20)-10,obj_messager_C1)
     A.Officier_sup = id;
     }
-    
+Messager = obj_messager_C1;
 Renseignement = ds_list_create();
 Regiment = ds_list_create();
 RegimentAllie = ds_list_create();
@@ -114,6 +114,62 @@ else
     speed = 0;
     }
     
+if ds_list_size(Ordres) &gt; 0
+    {
+    ORDRES = ds_list_find_value(Ordres,0)
+    show_debug_message("LES OOOOOOOOOOOOOOOOOOOOOOOOOOOOORES")
+    for (i = 0; i &lt; array_length_1d(ORDRES);i++)
+        {
+        show_debug_message("OOOOOOOOOOOOOOOORDRES  "+string(ORDRES[i]));
+        }
+    Mess = instance_nearest(x,y,Messager); //Alors on cherche le messager le plus proche
+    
+    if instance_exists(Mess)
+    &amp;&amp; distance_to_object(Mess) &lt;= 25
+    &amp;&amp; Mess.Mission == 0 // Si le messager est suffisament proche et pas deja en mission
+        {
+        Mess.ArgumentMessager[] = 0;//On reinitialise son tableau contenant le parametre du message
+        Mess.ArgumentMessager[0] = ORDRES[0];//On lui donne le destinaire
+        Mess.ArgumentMessager[1] = "ORDRE";//On indique que le message est un ordre
+        Mess.ArgumentMessager[2] = ORDRES[1];//L'ordre (le script)a transmettre
+            
+        for (i = 2; i &lt; array_length_1d(ORDRES);i++)
+            {
+            Mess.ArgumentMessager[i+1] = ORDRES[i];//Les parametre de l'odre (du script)
+            }
+        /* 
+        Une fois que le tableau est comble (ici sa taille est de 6)
+        On le place dans la saccoche du messager. La saccoche contient des tableaux
+        1 tableau par message
+        */
+        ds_list_add(Mess.SaccocheMessage,Mess.ArgumentMessager)
+        Mess.Message += 1;// On indique au messager qu'il a un new message
+        // REMARQUE SI ON RAJOUTE UN NOUVEL ORDRE IL FAUT REINITIALISER ArgumentMessager[]
+        // Sans quoi les valeurs sont fausses
+        Mess.ArgumentMessager[] = 0;
+        Mission = 1;
+        
+        with(Messager)
+            {
+            if ds_list_size(SaccocheMessage) &gt; 0
+                {
+                D = ds_list_find_value(SaccocheMessage,0)
+                Dest = D[0]
+                Execute = IA_Deplacement;
+                Argument[0] = noone;
+                Argument[1] = Dest;
+                Argument[2] = noone;
+                Argument[5] = -1;
+                Argument[6] = -1;
+                Argument[7] = MSpeed;
+                Argument[8] = 0;
+                Argument[9] = Alpha//round(random(8))+2;
+                Argument[10] = 1;
+                }
+            }
+        }
+    ds_list_delete(Ordres, 0);
+    }
 
 
 Rens = ds_list_find_value(Renseignement,0)//ou 0

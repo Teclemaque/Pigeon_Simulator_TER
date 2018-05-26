@@ -63,9 +63,9 @@ switch(action){
         ordre[6] = dy
         ordre[7] = -1;
         ordre[8] = -1;
-        ordre[9] = -1;
-        ordre[10] = -1;
-        ordre[11] = -1;
+        ordre[9] = 5;
+        ordre[10] = 0;
+        ordre[11] = numRecipient.Alpha;
         ordre[12] = 1;
     break;
     
