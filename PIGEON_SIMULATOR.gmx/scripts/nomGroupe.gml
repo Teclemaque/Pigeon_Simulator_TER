@@ -129,10 +129,6 @@ if (agent.Troupe != groupName){
     
     ds_map_delete(global.Regiments, fullName);
     ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
-<<<<<<< HEAD
-=======
-    
->>>>>>> 52f99839927c36375bbd31030f0a0229baa827ff
     
     agent.Troupe = string(groupName);
     agent.Numero = string(Num)+string(numero);
@@ -148,16 +144,8 @@ if (agent.Troupe != groupName){
         ds_list_add(global.grammaire,spliter);
         }
     
-    /*if ds_list_find_index(global.grammaire,fullName) == -1
-        {
-        ds_list_add(global.grammaire,fullName);
-        }*/
-    
-    return fullName;
+    ds_map_add(global.Regiments_reverse, agent, agent.Name);
+    return agent.Name;
 }
-<<<<<<< HEAD
-=======
-ds_map_add(global.Regiments_reverse, agent, agent.Name);
-return agent.Name;
->>>>>>> 52f99839927c36375bbd31030f0a0229baa827ff
+
 exit;
