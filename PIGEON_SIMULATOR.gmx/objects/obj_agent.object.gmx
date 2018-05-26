@@ -173,9 +173,9 @@ ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,id))
             }
         if map_visible(obj_joueur) == true
             {
-            if ds_list_find_index(obj_joueur.Regiment,id) == -1
+            if ds_list_find_index(obj_joueur.Regiment,Name) == -1
                 {
-                ds_list_add(obj_joueur.Regiment, id)
+                ds_list_add(obj_joueur.Regiment, Name)
                 }
             }
         }
@@ -207,14 +207,14 @@ else
                         Jeton.y = y;
                         
                         
-                        if ds_list_find_index(obj_joueur.Regiment,id) == -1
+                        if ds_list_find_index(obj_joueur.Regiment,Name) == -1
                             {
-                            ds_list_add(obj_joueur.Regiment, id)
+                            ds_list_add(obj_joueur.Regiment, Name)
                             }
                         }
                     else
                         {
-                        if ds_list_find_index(obj_joueur.Regiment,id) != -1
+                        if ds_list_find_index(obj_joueur.Regiment,Name) != -1
                             {
                             Jeton.visible = true;
                             }
