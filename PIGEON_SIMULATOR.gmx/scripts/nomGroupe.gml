@@ -19,48 +19,26 @@ if(withName){
     
     var groupSize = ds_list_size(agent.Regiment);
     
-    if agent.Officiel == 1
-        {
-        if (groupSize > 804 && agent.Grade <= 12){
-            groupName = "régiment "
-            agent.Grade = 12;
-        }else if (groupSize > 199 && agent.Grade <= 10){
-            groupName = "bataillon "
-            agent.Grade = 10;
-        }else if (groupSize > 83 && agent.Grade <= 8){
-            groupName = "compagnie "
-            agent.Grade = 8;
-        }else if(groupSize > 26 && agent.Grade <= 6){
-            groupName = "troupe "
-            agent.Grade = 6;
-        }else if (groupSize > 10 && agent.Grade <= 4){
-            groupName = "patrouille "
-            agent.Grade = 4;
-        }else if (groupSize > 1 && agent.Grade <= 2) {
-            groupName = "escouade "
-            agent.Grade = 2;
-        }else {
-            groupName = "soldat " // TODO : ou cavalier, messager, ...
-            agent.Grade = 0;
-        }
-    }
-    else {
-        if groupSize > 1
-            {
-            groupName = "chef "
-            agent.Troupe = string(groupName);
-            //agent.Numero = string(Num)+string(numero);
-            agent.Name = groupName;
-            exit;
-            }
-        else
-            {
-            groupName = "soldat " // TODO : ou cavalier, messager, ...
-            agent.Troupe = string(groupName);
-            //agent.Numero = string(Num)+string(numero);
-            agent.Name = groupName;
-            exit;
-            }
+    if (groupSize > 804 && agent.Grade <= 12){
+        groupName = "régiment"
+        agent.Grade = 12;
+    }else if (groupSize > 199 && agent.Grade <= 10){
+        groupName = "bataillon"
+        agent.Grade = 10;
+    }else if (groupSize > 83 && agent.Grade <= 8){
+        groupName = "compagnie"
+        agent.Grade = 8;
+    }else if(groupSize > 26 && agent.Grade <= 6){
+        groupName = "troupe"
+        agent.Grade = 6;
+    }else if (groupSize > 10 && agent.Grade <= 4){
+        groupName = "patrouille"
+        agent.Grade = 4;
+    }else if (groupSize > 1 && agent.Grade <= 2) {
+        groupName = "escouade"
+        agent.Grade = 2;
+    }else {
+        groupName = "soldat" // TODO : ou cavalier, messager, ...
         agent.Grade = 0;
     }
 }
@@ -104,22 +82,22 @@ if instance_exists(agent.Commandant)
     }
     
 // On affecte un numero par defaut a chaque type de formation
-if (groupName == "bataillon "){
+if (groupName == "bataillon"){
     num = "0";
 }
-else if (groupName == "compagnie "){
+else if (groupName == "compagnie"){
     num = "00";
 }
-else if(groupName == "troupe "){
+else if(groupName == "troupe"){
     num = "000";
 }
-else if(groupName == "patrouille "){
+else if(groupName == "patrouille"){
     num = "0000";
 }
-else if (groupName == "escouade "){
+else if (groupName == "escouade"){
     num = "00000";
 }
-else if (groupName == "soldat "){
+else if (groupName == "soldat"){
     num = "000000";
 }
 else {

@@ -1,4 +1,7 @@
 /// draw_agent_rectangle(agent, color)
+/// @param id : id de l'agent
+/// @param color : c_color (ex: c_blue, c_red ...)
+/// dessine un rectangle autour de l'agent, pour le faire ressortir sur l'UI
 
 var agent = argument0;
 var color = argument1;
