@@ -78,8 +78,8 @@ switch(action){
         show_debug_message("Name-reverse = ID de l'agent cible : " + string(idGroupe(target)));
         var destination = idGroupe(target);
         
-        var dx = destination.x;
-        var dy = destination.y;
+        var dx = round(destination.x);
+        var dy = round(destination.y);
         ordre[2] = noone
         ordre[3] = noone
         ordre[4] = noone
@@ -87,9 +87,9 @@ switch(action){
         ordre[6] = dy
         ordre[7] = -1;
         ordre[8] = -1;
-        ordre[9] = -1;
-        ordre[10] = -1;
-        ordre[11] = -1;
+        ordre[9] = 5;
+        ordre[10] = 0;
+        ordre[11] = numRecipient.Alpha;
         ordre[12] = 1;
     break;
     
