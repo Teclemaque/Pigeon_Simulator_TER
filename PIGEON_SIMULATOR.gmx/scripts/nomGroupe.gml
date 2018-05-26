@@ -145,7 +145,8 @@ if (agent.Troupe != groupName){
         }
     
     ds_map_add(global.Regiments_reverse, agent, agent.Name);
-    return agent.Name;
+ 
 }
+   return agent.Name;
 
 exit;

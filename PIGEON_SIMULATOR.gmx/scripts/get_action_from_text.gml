@@ -126,7 +126,7 @@ show_debug_message("Nombre de Messages : " + string(ds_list_size(ordres)));
 for(var i = 0; i < ds_list_size(ordres); i++){
     var msg = ds_list_find_value(ordres, i);
     var str = "[ "
-    for(var j = 0; j < array_length_1d(msg); i++){
+    for(var j = 0; j < array_length_1d(msg); j++){
         str += string( msg[j] ) + ", ";
     }
     str += " ]";
