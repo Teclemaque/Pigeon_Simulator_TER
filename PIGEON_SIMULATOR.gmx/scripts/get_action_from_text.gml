@@ -122,7 +122,7 @@ switch(action){
         ordre[1] = IA_Groupe;
         ordre[2] = List;
         ordre[3] = 2;
-        ordre[4] = 5;
+        ordre[4] = 12;
         ordre[5] = 1;
     break;
     

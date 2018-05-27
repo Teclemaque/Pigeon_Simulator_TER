@@ -66,87 +66,96 @@ if(withName){
 }
 
 
-// Trouver le numero à attribuer au groupe
-var numero = "";
-N1 = 0;
-if instance_exists(agent.Commandant)
-    {
-    if (agent != agent.Commandant_sup)
-        { // si le père a le numero 12
-        numero  = string(agent.Commandant_sup.Numero); // on prend le numero 121
-        N1 = string_length(agent.Commandant_sup.Numero)
-        
-        if (groupName == agent.Commandant_sup.Troupe)
-            {
-            agent.Commandant_sup = agent.Commandant;
-            }
-        }  
-    }
+/*if (groupName != "")*/{
+    // Trouver le numero à attribuer au groupe
     
-// On affecte un numero par defaut a chaque type de formation
-if (groupName == "bataillon"){
-    num = "0";
-}
-else if (groupName == "compagnie"){
-    num = "00";
-}
-else if(groupName == "troupe"){
-    num = "000";
-}
-else if(groupName == "patrouille"){
-    num = "0000";
-}
-else if (groupName == "escouade"){
-    num = "00000";
-}
-else if (groupName == "soldat"){
-    num = "000000";
-}
-else {
-    num = "";
-}
-// Si l'agent a un officer, on remplace le numero par defaut par celui de l'officier
-Val = "";
-for (i = 0; i < N1; i++){
-    Val += "0";
-}
-
-N2 = string_length(num);
-numero = string_replace(num,Val,numero);
-
-Num = string(numero);
-
-
-// Trouver le premier nom disponible pour notre groupe :
-
-if (agent.Troupe != groupName){
-    numero = 1; // les attributions de numero commencent a 1
-    var fullName = string(groupName)+ string(Num) + string(numero); // ex : escouade121
-    while(ds_map_exists(global.Regiments, fullName)){ // chercher tant que le nom est pris
-        numero++;
-        fullName = string(groupName)+ string(Num) + string(numero); // ex : essayer avec escouade122, escouade123, etc.
-    }
-    
-    ds_map_delete(global.Regiments, fullName);
-    ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
-    
-    agent.Troupe = string(groupName);
-    agent.Numero = string(Num)+string(numero);
-    agent.Name = fullName;
-    
-    stringer="SUJ->"+string(agent.Name);
-    
-    spliter = Split_Sentence(stringer,"->");
-    spliter[1] = Split_Sentence(spliter[1],";");
-    
-    if ds_list_find_index(global.grammaire,spliter) == -1
+    var numero = "";
+    N1 = 0;
+    if instance_exists(agent.Commandant)
         {
-        ds_list_add(global.grammaire,spliter);
+        if (agent != agent.Commandant_sup)
+            { // si le père a le numero 12
+            numero  = string(agent.Commandant_sup.Numero); // on prend le numero 121
+            N1 = string_length(agent.Commandant_sup.Numero)
+            
+            if (groupName == agent.Commandant_sup.Troupe)
+                {
+                agent.Commandant_sup = agent.Commandant;
+                }
+            }  
         }
+
+    // On affecte un numero par defaut a chaque type de formation
+    if (groupName == "bataillon"){
+        num = "0";
+    }
+    else if (groupName == "compagnie"){
+        num = "00";
+    }
+    else if(groupName == "troupe"){
+        num = "000";
+    }
+    else if(groupName == "patrouille"){
+        num = "0000";
+    }
+    else if (groupName == "escouade"){
+        num = "00000";
+    }
+    else if (groupName == "soldat"){
+        num = "000000";
+    }
+    else {
+        num = "";
+    }
+    // Si l'agent a un officer, on remplace le numero par defaut par celui de l'officier
+    Val = "";
+    for (i = 0; i < N1; i++){
+        Val += "0";
+    }
     
-    ds_map_add(global.Regiments_reverse, agent, agent.Name);
- 
+    N2 = string_length(num);
+    numero = string_replace(num,Val,numero);
+    
+    Num = string(numero);
+    
+    
+    // Trouver le premier nom disponible pour notre groupe :
+    
+    if (agent.Troupe != groupName){
+        numero = 1; // les attributions de numero commencent a 1
+        var fullName = string(groupName)+ string(Num) + string(numero); // ex : escouade121
+        while(ds_map_exists(global.Regiments, fullName)){ // chercher tant que le nom est pris
+            numero++;
+            fullName = string(groupName)+ string(Num) + string(numero); // ex : essayer avec escouade122, escouade123, etc.
+        }
+        
+        ds_map_delete(global.Regiments, agent.Name);
+        ds_map_add(global.Regiments, fullName, agent); // on inscrit l'agent comme Officier du nouveau groupe
+        
+        stringer="SUJ->"+string(fullName);
+        
+        spliter = Split_Sentence(stringer,"->");
+        spliter[1] = Split_Sentence(spliter[1],";");
+        
+        ds_list_delete(global.grammaire,ds_list_find_index(global.grammaire,"SUJ->"+string(agent.Name)+";"));
+        if ds_list_find_index(global.grammaire,spliter) == -1
+            {
+            ds_list_add(global.grammaire,spliter);
+            }
+        ds_map_delete(global.Regiments_reverse, agent);
+        ds_map_add(global.Regiments_reverse, agent, fullName);
+        
+        ds_list_delete(obj_joueur.Regiment,ds_list_find_index(obj_joueur.Regiment,agent.Name))
+        ds_list_delete(obj_joueur.RegimentAllie,ds_list_find_index(obj_joueur.RegimentAllie,agent.Name))
+        ds_list_delete(obj_joueur.RegimentEnnemi,ds_list_find_index(obj_joueur.RegimentEnnemi,agent.Name))
+        agent.Troupe = string(groupName);
+        agent.Numero = string(Num)+string(numero);
+        agent.Name = fullName;
+        
+        
+     
+    }
+       return agent.Name;
 }
-   return agent.Name;
 
 exit;

@@ -122,6 +122,7 @@ else
                 }
             }
     }
+nomGroupe(id);
 Execute = IA_Repos;
 Argument[0] = 0;
 }
