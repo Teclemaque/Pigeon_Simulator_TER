@@ -62,10 +62,11 @@ with(obj_Partie){
 step = 0
 delay = 0
 
-/*with(obj_agent_officier0_C1){
-    x = 541+(random(4)-2)
-    y = 420+(random(4)-2)
-}*/
+//////////////////////////////////////
+/*
+Variable avancé objectifs
+*/
+Pat = false;
 
 //FANTASSIN
 instance_create(600,450,obj_joueur)
@@ -143,6 +144,7 @@ for(var i=0;i&lt;10;i++){
 */
 //fleche a tuto
 instance_create(-100,-100,obj_arrow)
+Timer = 0;
 </string>
           </argument>
         </arguments>
@@ -232,28 +234,64 @@ instance_create(-100,-100,obj_arrow)
                 step = 10
             }
             break
-        case 10: //Attaque
+        case 10 : //Troupe adverse
+                if ds_list_find_index(obj_joueur.Regiment,"compagnie002") != -1
+                    {
+                    step = 11;
+                    }
+            break
+        case 11 : //Carte stratégique
+            if obj_MAP_controller.toggle_papper == 1
+                {
+                step = 12;
+                }
+            break
+        case 12 : //La compagnie
+            if ds_list_find_index(obj_joueur.Regiment,"compagnie001") != -1
+            &amp;&amp; obj_MAP_controller.toggle_papper == 0
+                {step = 13;}
+            break
+        case 13 : //Attaque
+            step = 14;
+            break
+        case 14: //Massacre
             if(keyboard_check_pressed(vk_enter)){
-                step = 11
+                step = 15
                 delay = 90
             }
             break
-        case 11: //fin
+        case 15: //fin
             if(mouse_check_button_pressed(mb_left)){
-                instance_create(0,0,obj_game_over)
-                step = 12
+                //instance_create(0,0,obj_game_over)
+                step = 16
             }
             break
         
         
     }
-
-
-
-
-
-
 delay--
+
+/////////////////////////////////////////////////////////////////////////////////
+/*
+Analyse de ce qui se passe dans le reste de la room pour l'avancer tu tuto
+*/
+
+if instance_exists(obj_joueur)
+    {
+    if ds_list_find_index(obj_joueur.Regiment,"compagnie002") != -1
+        {
+        Pat = true;
+        }
+    }
+if Timer &gt;= 1
+    {
+    Timer --;
+    
+    if Timer == 1
+        {
+        room_goto(Title_screen)
+        }
+    }
 </string>
           </argument>
         </arguments>
@@ -285,7 +323,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+100,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Bienvenu dans SIR, YES SIR! Nous allons maintenant apprendre les bases.",
+                "Bienvenue dans SIR, YES SIR! Nous allons maintenant apprendre les bases.",
                 15,300,3,3,0)
             break;
             case 1 :  // ici general
@@ -321,7 +359,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Ne vous inquiétez pas, vos unité vous enveront des informations sur le relief. De plus vous pouvez observer le terrain sur la mini-carte en bas à droite",
+                "Ne vous inquiétez pas, vos unités vous enveront des informations sur le relief. De plus vous pouvez observer le terrain sur la mini-carte en bas à droite",
                 15,300,3,3,0)
                 break;
             case 5 : //annonce
@@ -330,7 +368,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités en reçevent",
+                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités.",
                 15,300,3,3,0)
                 break;
             case 6 : //Nommage
@@ -369,16 +407,52 @@ draw_set_halign(fa_center)
                 "Bien, il faut mainteant attendre que vos unités trouvent quelque chose",
                 15,300,3,3,0)
                 break;
-            case 10 : //Attaque
+            case 10 : //Troupe adverse
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Des ennemis ont été découvert derrière la montagne! Envoyez vos unités à l'assaut avec 'troupe0001 attaquer compagnie001'",
+                "Des ennemis ont été découvert derrière la montagne! Vos troupes ont marqué leur position sur votre carte stratégique. Pressez [contrôle]+[M]",
                 15,300,3,3,0)
                 break;
-            case 11 : //Fin
+            case 11 : //Carte stratégique
+                draw_set_colour(c_blue)
+                draw_rectangle(0,room_height/2,
+                room_width,room_height/2+200,false)
+                draw_set_colour(c_black)
+                draw_text_ext_transformed(room_width/2,room_height/2,
+                "Vous voici sur la carte stratégique, Remarquez la présence de jeton de couleur, les bleus sont vos troupes, les rouges les troupes adverses.",
+                15,300,3,3,0)
+                break;
+            case 12 : //La companie
+                draw_set_colour(c_blue)
+                draw_rectangle(0,room_height/2,
+                room_width,room_height/2+200,false)
+                draw_set_colour(c_black)
+                draw_text_ext_transformed(room_width/2,room_height/2,
+                "Il y a une troupe ami non loin de l'armée adverse! Ordonnez lui d'attaquer. Revenez sur le terrain ([contrôle]+[M]).",
+                15,300,3,3,0)
+                break;
+            case 13 : //Attaque
+                draw_set_colour(c_blue)
+                draw_rectangle(0,room_height/2,
+                room_width,room_height/2+200,false)
+                draw_set_colour(c_black)
+                draw_text_ext_transformed(room_width/2,room_height/2,
+                "Bien! Donnez l'ordre 'compagnie001 attaquer compagnie002'",
+                15,300,3,3,0)
+                break;
+            case 14 : //Massacre
+                draw_set_colour(c_blue)
+                draw_rectangle(0,room_height/2,
+                room_width,room_height/2+200,false)
+                draw_set_colour(c_black)
+                draw_text_ext_transformed(room_width/2,room_height/2,
+                "La compagnie a besoin de renfort, envoyez votre troupe0001",
+                15,300,3,3,0)
+                break;
+            case 15 : //Fin
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
@@ -386,6 +460,7 @@ draw_set_halign(fa_center)
                 draw_text_ext_transformed(room_width/2,room_height/2,
                 "Félicitation! Vous avez gagné!",
                 15,300,3,3,0)
+                Timer = 60;
                 break;
         }
 </string>
