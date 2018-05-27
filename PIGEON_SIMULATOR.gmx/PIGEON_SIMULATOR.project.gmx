@@ -53,6 +53,7 @@
     <sprite>sprites\icone_strategie_avatar</sprite>
     <sprite>sprites\fumee</sprite>
     <sprite>sprites\spr_messager_pigeon</sprite>
+    <sprite>sprites\sprite17</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -187,6 +188,7 @@
       <object>objects\obj_gestion_affichage</object>
       <object>objects\obj_debuggage</object>
       <object>objects\obj_Partie</object>
+      <object>objects\obj_TUTORIAL</object>
     </objects>
     <objects name="AGENTS">
       <objects name="AGENTS SIMPLES">
@@ -238,6 +240,7 @@
         <object>objects\Obj_Terrain_Crete</object>
       </objects>
       <object>objects\obj_game_over</object>
+      <object>objects\obj_arrow</object>
     </objects>
     <objects name="GUI">
       <object>objects\obj_icone_avatar</object>
@@ -258,6 +261,7 @@
     <object>objects\TAL_Grammaire</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_tutorial</room>
     <room>rooms\Title_screen</room>
     <room>rooms\room1</room>
     <room>rooms\room0_new</room>

@@ -28,10 +28,11 @@
             <string>view_wview[0] = 512;
 view_hview[0] = 384;
 
-view_object[0] = obj_VIEW_controller;
-view_vspeed[0] = 10;
-view_hborder[0] = 10;
-view_vborder[0] = 10;
+//view_object[0] = obj_VIEW_controller;
+view_object[0] = obj_joueur;
+view_vspeed[0] = 100000;
+view_hborder[0] = view_hview[0]/2;
+view_vborder[0] = view_wview[0]/2;
 
 mem_xview = view_xview[0]
 mem_yview = view_yview[0]
@@ -59,15 +60,12 @@ mem_hview = view_hview[0]
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-x= mouse_x
+            <string>/*
+x*= mouse_x
 y= mouse_y
-
+*/
 image_alpha = 0;
 
-view_vspeed[0] = 10;
-view_hborder[0] = 10;
-view_vborder[0] = 10;
 
 if(obj_MAP_controller.toggle_papper == 0){
     mem_xview = view_xview[0]
