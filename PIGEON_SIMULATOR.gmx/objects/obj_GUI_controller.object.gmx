@@ -131,6 +131,7 @@ if( !keyboard_check_direct(vk_lcontrol)){
       //keyboard_string += coordinates; // todo : move to toolbox
       toolbox.coordinates = coordinates;
       toolbox.Text += coordinates;
+      keyboard_string += coordinates;
       //var mouse_on_view_x = mouse_x &gt;= global.Dimensions[? "startx"] &amp;&amp; mouse_x &lt;= global.Dimensions[? "endx"]
       //var mouse_on_view_y = mouse_y &gt;= global.Dimensions[? "starty"] &amp;&amp; mouse_y &lt;= global.Dimensions[? "endy"]
       //if( mouse_on_view_x &amp;&amp; mouse_on_view_y ){ // clic dans la vue principale

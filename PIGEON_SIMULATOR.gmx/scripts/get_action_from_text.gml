@@ -48,6 +48,7 @@ switch(action){
     case "VATK":
         ordre[1] = IA_Attaque;
         ordre[2] = idGroupe(target);
+<<<<<<< HEAD
         ordre[3] = 1;
         ordre[4] = 1;
         ordre[5] = 2;
@@ -72,6 +73,8 @@ switch(action){
         ordre[10] = 0;
         ordre[11] = numRecipient.Alpha;
         ordre[12] = 1;*/
+=======
+>>>>>>> aef3f4e5c34ccc1fb19ec8cb17db8f101fae9a7d
     break;
     
     case "VDEP": // déplacement vers coordonnées
@@ -141,7 +144,7 @@ switch(action){
     break;
     
     default:
-    log_toolbox_message("Tag non implémenté : " + action, c_orange);
+    log_toolbox_message("Tag non implémenté : " + string(action), c_orange);
     break;
 }
 

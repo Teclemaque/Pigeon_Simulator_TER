@@ -6,6 +6,8 @@ S->GN;GV
 S->GN;VREG
 S->GN;VUPG
 GN->SUJ;JOIN
+GN->SUJ;GN
+GN->SUJ;SUJ
 JOIN->VIR;SUJ
 JOIN->VIR;GN
 GV->VATK;SUJ
@@ -21,6 +23,7 @@ VATK->tuer
 VATK->attaquer
 VDEP->deplacer
 VDEP->aller
+VDEP->go
 VDEPS->rejoindre
 VREG->fusionner
 SUJ->agent2
