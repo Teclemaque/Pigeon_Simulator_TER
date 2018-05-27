@@ -11,7 +11,7 @@ Les seules perceptions de son environnement sont celles du général : ce qui ne
 Le général doit donc envoyer des troupes pour explorer la carte, déterminer l'emplacement de l'ennemi et livrer bataille. Mais tout cela ne peut se faire que si les messagers parviennent à ramener les messages du front sans se faire intercepter. 
 
 ### Génération de carte et analyse de phrases
-La carte est genérée procéduralement avec du bruit de Perlin ; les ordres en langage naturel sont analysés à l'aide de l'algorithme de [Cocke-Younger-Kasami](https://fr.wikipedia.org/wiki/Algorithme_de_Cocke-Younger-Kasami). 
+La carte est genérée procéduralement avec du bruit de Perlin ; les ordres en langage naturel sont analysés à l'aide de l'algorithme de [Cocke-Younger-Kasami](https://fr.wikipedia.org/wiki/Algorithme_de_Cocke-Younger-Kasami). 
 
 ### Gestion des agents
 Les agents, afin de limiter les ressources consommées, différencie les agents **Officiers**, cognitifs, des simples soldats, agents réactifs.
