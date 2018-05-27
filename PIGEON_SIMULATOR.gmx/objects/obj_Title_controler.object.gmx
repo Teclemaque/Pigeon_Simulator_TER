@@ -221,15 +221,16 @@ if(inStat == 0){
     draw_set_color(c_black)
      draw_set_valign(fa_top)
     draw_set_halign(fa_left)
-    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17,"Partie Jouée :",2,2,0)
-    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep,"Partie Gagnée :",2,2,0)
-    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep*2,"Unité Tuée :",2,2,0)
-    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep*3,"Unité Pedue :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17,"Parties Jouées :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep,"Parties Gagnées :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep*2,"Unités Tuées :",2,2,0)
+    draw_text_transformed(view_wport[0]/2-200,view_hport[0]/2+17+sep*3,"Unités Perdues :",2,2,0)
     draw_set_color(c_red)
-    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19,string(GPlayed),2,2,0)
-    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19+sep,string(GWon),2,2,0)
-    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19+sep*2,string(Ulost),2,2,0)
-    draw_text_transformed(view_wport[0]/2+55,view_hport[0]/2+19+sep*3,string(UKilled),2,2,0)
+    var scores_padding = 115;
+    draw_text_transformed(view_wport[0]/2+scores_padding,view_hport[0]/2+19,string(GPlayed),2,2,0)
+    draw_text_transformed(view_wport[0]/2+scores_padding,view_hport[0]/2+19+sep,string(GWon),2,2,0)
+    draw_text_transformed(view_wport[0]/2+scores_padding,view_hport[0]/2+19+sep*2,string(Ulost),2,2,0)
+    draw_text_transformed(view_wport[0]/2+scores_padding,view_hport[0]/2+19+sep*3,string(UKilled),2,2,0)
 }
 
 if(alph &lt; 1){
