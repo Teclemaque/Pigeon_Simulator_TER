@@ -285,7 +285,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+100,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Bienvenu dans SIR, YES SIR! Nous allons maintenant apprendre les base.",
+                "Bienvenu dans SIR, YES SIR! Nous allons maintenant apprendre les bases.",
                 15,300,3,3,0)
             break;
             case 1 :  // ici general
@@ -303,7 +303,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+400,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2+200,
-                "Voici vos unités. Elles combattrons pour vous jusqu'a à la mort",
+                "Voici vos unités. Elles combattront pour vous jusqu'à la mort",
                 15,300,3,3,0)
                 break;
             case 3 : // visibilite
@@ -312,7 +312,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+400,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2+200,
-                "Votre vision est dépendante de celle de votre général et des obstacles vous empêcherons de voir plus loin",
+                "Votre vision est dépendante de celle de votre général. Ces obstacles vous empêchent de voir plus loin",
                 15,300,3,3,0)
                 break;
             case 4 : //mini-map
@@ -321,7 +321,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Ne vous inquiétez pas, vos unité vous renverons des information sur le relief qui seront en permanence afficher sur la mini-carte",
+                "Ne vous inquiétez pas, vos unité vous enveront des informations sur le relief. De plus vous pouvez observer le terrain sur la mini-carte en bas à droite",
                 15,300,3,3,0)
                 break;
             case 5 : //annonce
@@ -330,7 +330,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommez un officier pour diriger vos unité en reçevent vos ordre",
+                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités en reçevent",
                 15,300,3,3,0)
                 break;
             case 6 : //Nommage
@@ -339,7 +339,7 @@ draw_set_halign(fa_center)
                 room_width,200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,0,
-                "Pour nommer un officier, tappez : 'chef1 grader' dans la barre commande en bas de l'écran",
+                "Pour nommer un officier, tapez : 'chef1 grader' dans la barre commande en bas de l'écran",
                 15,300,3,3,0)
                 break;
             case 7 : // separer
@@ -348,7 +348,7 @@ draw_set_halign(fa_center)
                 room_width,200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,0,
-                "Bien, maintenant que nous avons un officier pour diriger vos troupe, vous pouvez lui demander de division son bataillon en deux avec 'chef1 diviser'. Celà creérat automatiquement un officier qui dirrigera la nouvelle troupe.",
+                "Bien, maintenant que nous avons un officier pour diriger vos troupes, vous pouvez lui demander de diviser sa troupe en deux avec 'troupe0001 diviser'. Cela créera automatiquement un officier qui dirigera la nouvelle troupe.",
                 15,500,2,2,0)
                 break;
             case 8 : // Patrouille
@@ -357,7 +357,7 @@ draw_set_halign(fa_center)
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Vous vous souvenez quand je vous ait dis que vos champ de vision était limiter? Et si des enemis ce dissimuler derriére cette montagne au nord? Envoyant une patrouille vérifier avec 'patrouille10001 déplacer ' et cliquer l'emplacement ou les envoyer",
+                "Vous vous souvenez quand je vous ai dit que votre champ de vision était limité? Et si des ennemis se dissimulaient derrière cette montagne au nord? Envoyez une patrouille vérifier avec 'patrouille00011 deplacer ' et faîtes un clic droit à la postion souhaitée",
                 15,500,2,2,0)
                 break;
             case 9 : //Renseignement
@@ -366,7 +366,7 @@ draw_set_halign(fa_center)
                 room_width,200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,0,
-                "Bien, il faut attendre que vos unité trouve quelque chose",
+                "Bien, il faut mainteant attendre que vos unités trouvent quelque chose",
                 15,300,3,3,0)
                 break;
             case 10 : //Attaque
@@ -375,7 +375,7 @@ draw_set_halign(fa_center)
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Des enemis ont était découvert dérriére la montagne! Envoyer vos unités à l'assaut avec 'troupe0001 attaquer compagnie1'",
+                "Des ennemis ont été découvert derrière la montagne! Envoyez vos unités à l'assaut avec 'troupe0001 attaquer compagnie001'",
                 15,300,3,3,0)
                 break;
             case 11 : //Fin
@@ -384,7 +384,7 @@ draw_set_halign(fa_center)
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Félicitation! Vous avez gagner!",
+                "Félicitation! Vous avez gagné!",
                 15,300,3,3,0)
                 break;
         }

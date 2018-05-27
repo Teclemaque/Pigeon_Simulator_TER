@@ -109,7 +109,7 @@ if(inStat == 0 and (keyboard_check(vk_up) or gamepad_button_check(0,gp_padu) )an
     if(pos == 0){
       room_goto(rm_tutorial)
     } else if (pos == 1){ 
-        room_goto(room1)
+        room_goto(room_mission)
     } else if(pos == 2){
         if(inStat == 0){
             ini_open("Save.ini")

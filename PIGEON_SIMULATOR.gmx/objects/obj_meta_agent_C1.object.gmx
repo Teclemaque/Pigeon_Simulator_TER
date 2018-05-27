@@ -217,8 +217,8 @@ x = xx;
     {
     if Classe == 1
         {
-        if ds_list_size(ListMessager) &lt; Grade/4
-        &amp;&amp; ds_list_size(Regiment) &gt; 5*Grade
+        if ds_list_size(ListMessager) &lt; Grade/2
+        &amp;&amp; ds_list_size(Regiment) &gt; 2*Grade
             {
             A = ds_list_find_value(Regiment,1);
             Mess = instance_create(A.x,A.y,Messager);
