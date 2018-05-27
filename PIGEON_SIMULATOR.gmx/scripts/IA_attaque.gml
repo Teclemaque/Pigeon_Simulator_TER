@@ -1,7 +1,8 @@
 #define IA_Attaque
 ///IA_Attaque(ListCible, Combat, Ordre, Cadence, Distance de tir);
 {
-if MODE = "ATTAQUE"
+show_debug_message("YOUHOU")
+//if MODE = "ATTAQUE"
     {
     if ArgumentAttaque[1] != -1
         {
@@ -11,6 +12,7 @@ if MODE = "ATTAQUE"
         {
         Comb = Combat
         }
+        
     if instance_exists(Ennemi) && distance_to_object(instance_nearest(x,y,Ennemi)) < MSpeed/10
         {
         Comb = 0;
@@ -18,6 +20,7 @@ if MODE = "ATTAQUE"
         
     Ordre = ArgumentAttaque[2];
     Cadence = ArgumentAttaque[3];
+    
     if Cadence = -1
         {
         Cadence = MSpeed/5;
@@ -34,6 +37,7 @@ if MODE = "ATTAQUE"
     if ArgumentAttaque[0] != noone
         {
         Cible = ArgumentAttaque[0];
+        show_debug_message(Cible);
         }
     else
         {
@@ -44,6 +48,7 @@ if MODE = "ATTAQUE"
     
     if instance_exists(CIBLE) == false
         {
+        show_debug_message("BIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIii")
         MODE = "REPOS"
         Argument[0] = 0;
         Argument[1] = random(180)+90;
@@ -54,8 +59,9 @@ if MODE = "ATTAQUE"
         {
         if Comb == 1
             {
+            show_debug_message("YOUHOUUUUUUUUUUUUUUUUUUUUUUUUUUu")
             if distance_to_object(CIBLE) < DFeu
-                {
+                {show_debug_message("YOUHOUUUUUUUUUUUUUUUUUUUUUUUUUUu")
                 if Recharge < obj_globVar.R_fusil // Variable actuellement globale de temps de recharge, on pourrait aussi faire appel à obj_globVar.R_fusil et plus besoin de globalité. Meilleur optimisation?
                     {
                     Recharge++;
@@ -179,19 +185,20 @@ if MODE = "ATTAQUE"
         Execute = IA_Attaque;
         }
     }
-    else
+    /*else
         {
         Argument[0] = 1;
         Argument[1] = random(180)+90;
         Execute = IA_Repos
         exit;
-        }
+        }*/
     exit;
 }
 
 #define IA_Attaque_Soldat
 ///IA_Attaque_Soldat(ListCible, Combat, Ordre)
 {
+show_debug_message("YOUHOU")
 if instance_exists(Officier)
     {
     if ArgumentAttaque[1] != -1

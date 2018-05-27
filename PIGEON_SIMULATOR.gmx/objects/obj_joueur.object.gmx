@@ -121,11 +121,7 @@ else
 if ds_list_size(Ordres) &gt; 0
     {
     ORDRES = ds_list_find_value(Ordres,0)
-    show_debug_message("LES OOOOOOOOOOOOOOOOOOOOOOOOOOOOORES")
-    for (i = 0; i &lt; array_length_1d(ORDRES);i++)
-        {
-        show_debug_message("OOOOOOOOOOOOOOOORDRES  "+string(ORDRES[i]));
-        }
+
     Mess = instance_nearest(x,y,Messager); //Alors on cherche le messager le plus proche
     
     if instance_exists(Mess)
@@ -499,7 +495,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         ArgumentAttaque[4] = -1;
         
         ArgumentRegiment = ArgumentAttaque;
-        IA_Attaque();
+        //IA_Attaque();
         }
     }
 </string>

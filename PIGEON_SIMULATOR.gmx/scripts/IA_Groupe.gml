@@ -1,11 +1,14 @@
 ///IA_Groupe(ListGroup, NbGroupe, NbAgent, Separation)
 {
-ListOfficier = Argument[0];
+ListOfficier[] = Argument[0];
 NbGroupe = Argument[1]
 Nbr = Argument[2];
 
+MODE = "GROUPE"
+show_debug_message("kjb::::::::::::::::vrlp^)")
 if Argument[3] == 1
     {
+    show_debug_message("kjb::::::::::::::::vrlp^)")
     for (i = 0; i < array_length_1d(ListOfficier); i++)
         {
         O = ListOfficier[i];
