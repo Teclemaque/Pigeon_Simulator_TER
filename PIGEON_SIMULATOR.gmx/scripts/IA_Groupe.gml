@@ -4,11 +4,11 @@ ListOfficier[] = Argument[0];
 NbGroupe = Argument[1]
 Nbr = Argument[2];
 
+show_debug_message(array_length_1d(ListOfficier))
+
 MODE = "GROUPE"
-show_debug_message("kjb::::::::::::::::vrlp^)")
 if Argument[3] == 1
     {
-    show_debug_message("kjb::::::::::::::::vrlp^)")
     for (i = 0; i < array_length_1d(ListOfficier); i++)
         {
         O = ListOfficier[i];
@@ -94,7 +94,6 @@ if Argument[3] == 1
                 instance_destroy();
                 }
             }
-        //ds_list_clear(Regiment)
         }
     }
 else
@@ -103,18 +102,24 @@ else
         
         for (i = 1; i < array_length_1d(ListOfficier); i++)
             {
-            for (j = 0; j < ds_list_size(ListOfficier[i].Regiment);j++)
+            for (j = 1; j < ds_list_size(ListOfficier[i].Regiment);j++)
                 {
                 a = ds_list_find_value(ListOfficier[i].Regiment,j);
                 ds_list_add(ListOfficier[0].Regiment, a)
-                a.Commandant = ListOfficier[0]
+                show_debug_message(ListOfficier[0]);
+                a.Commandant = ListOfficier[0].id;
+                //Commandant_sup = ListOfficier[0].id;;
                 }
             with(instance_create(x,y,ListOfficier[i].Allie))
                 {
                 ds_list_add(other.ListOfficier[0].Regiment,id);
                 Commandant = other.ListOfficier[0]
+                //Commandant_sup = ListOfficier[0].id;
                 }
-            instance_destroy();
+            with(ListOfficier[i])
+                {
+                instance_destroy();
+                }
             }
     }
 Execute = IA_Repos;

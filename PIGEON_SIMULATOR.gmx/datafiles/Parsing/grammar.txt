@@ -2,6 +2,7 @@ S->SUJ;GV
 S->SUJ;VS
 S->SUJ;VUPG
 S->SUJ;VSEP
+S->SUJ;VREG
 S->GN;GV
 S->GN;VREG
 S->GN;VUPG
@@ -15,10 +16,10 @@ GV->VDEP;COORD
 GV->VDEP;PREPL
 GV->VDEPS;SUJ
 GV->VREG;CONJ
+GV->VREG;SUJ
 CONJ->CON;GN
 CONJ->CON;SUJ
 PREPL->PRPL;COORD
-SUJ->agent1
 VATK->tuer
 VATK->attaquer
 VDEP->deplacer
@@ -26,9 +27,6 @@ VDEP->aller
 VDEP->go
 VDEPS->rejoindre
 VREG->fusionner
-SUJ->agent2
-SUJ->agent3
-SUJ->agent4
 VIR->,
 COORD->:
 PRPL->a

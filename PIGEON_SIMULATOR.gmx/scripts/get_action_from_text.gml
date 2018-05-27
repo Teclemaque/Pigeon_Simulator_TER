@@ -38,7 +38,7 @@ var recipient = recipients[| 0]
 var ordres = ds_list_create(); // message unitaires, avec chacun leur destinataire
 var ordre; // ordre type qui sera dupliqué
 ordre[0] = noone;
-
+List[] = noone;
 var numRecipient = idGroupe(recipient);
 
 //show_debug_message("Destinataire : " + recipient + ", id : " + string(numRecipient));
@@ -48,7 +48,6 @@ switch(action){
     case "VATK":
         ordre[1] = IA_Attaque;
         ordre[2] = idGroupe(target);
-<<<<<<< HEAD
         ordre[3] = 1;
         ordre[4] = 1;
         ordre[5] = 2;
@@ -73,8 +72,6 @@ switch(action){
         ordre[10] = 0;
         ordre[11] = numRecipient.Alpha;
         ordre[12] = 1;*/
-=======
->>>>>>> aef3f4e5c34ccc1fb19ec8cb17db8f101fae9a7d
     break;
     
     case "VDEP": // déplacement vers coordonnées
@@ -121,19 +118,22 @@ switch(action){
     break;
     
     case "VSEP":
+        List[0]  = numRecipient;
         ordre[1] = IA_Groupe;
-        ordre[2] = numRecipient;
+        ordre[2] = List;
         ordre[3] = 2;
         ordre[4] = 5;
         ordre[5] = 1;
     break;
     
     case "VREG":
+        List[0] = numRecipient;
+        List[1] = idGroupe(target);
         ordre[1] = IA_Groupe;
-        ordre[2] = numRecipient;
-        ordre[3] = 2;
-        ordre[4] = 5;
-        ordre[5] = 1;
+        ordre[2] = List;
+        ordre[3] = -1;
+        ordre[4] = -1;
+        ordre[5] = 0;
     break;
     
     case "VUPG":
