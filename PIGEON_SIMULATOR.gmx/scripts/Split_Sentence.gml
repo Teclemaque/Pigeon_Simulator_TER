@@ -4,7 +4,15 @@ var s = argument[0], d = argument[1];
 
 var len = string_length(s);
 while( string_char_at(s, len) == ' ' ){
+    //show_debug_message("crop at end : " + '"' + s + '"');
     s = string_copy(s, 0, len -1);
+    len = string_length(s);
+}
+
+while( string_char_at(s, 0) == ' ' ){
+    //show_debug_message("crop at start : " + '"' + s + '"');
+    s = string_copy(s, 2, len-1);
+    len = string_length(s);
 }
 
 var rl = ds_list_create();
