@@ -467,6 +467,7 @@ var alter =     keyboard_check_direct(vk_lalt)
             
 if alter exit; // ne pas réagir sur un ALT/SHIFT/CTRL + quelque chose
 
+/*
 var del = keyboard_check_released(vk_backspace);
 if(del){
     var l = string_length(Text);
@@ -476,7 +477,9 @@ if(del){
     }
     keyboard_lastkey = -1; // invalider la touche
 }
+*/
 
+/*
 var valid =    c &gt;= 'a' &amp;&amp; c &lt;= 'z' 
             || c &gt;= 'A' &amp;&amp; c &lt;= 'Z' 
             || c &gt;= '0' &amp;&amp; c &lt;= '9'
@@ -487,6 +490,7 @@ if valid
 //   Text += keyboard_lastchar;   
    }
    
+*/
 keyboard_lastkey = -1;
 keyboard_string = Text
 </string>
