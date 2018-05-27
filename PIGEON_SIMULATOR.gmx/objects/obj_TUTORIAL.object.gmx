@@ -389,7 +389,7 @@ draw_set_halign(fa_center)
                 room_width,200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,0,
-                "Bien, il faut mainteant attendre que vos unités trouvent quelque chose",
+                "Bien, il faut maintenant attendre que vos unités trouvent quelque chose",
                 15,300,3,3,0)
                 break;
             case 11 : //Attaque
