@@ -1,6 +1,6 @@
 crest = ds_grid_create(width,height)
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         ds_grid_set(crest,i,j,0)    
     }
 }
@@ -9,8 +9,8 @@ for(var i = 0; i < width;i++){
 var maxi = -1
 var mini = -1
 
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         if(ds_grid_get(terrain_map,i,j) == 1 or ds_grid_get(terrain_map,i,j) == 3){
             var test = ds_grid_get(grid,i,j)
             if(maxi < test or maxi == -1) maxi = test
@@ -21,8 +21,8 @@ for(var i = 0; i < width;i++){
 var range = (maxi - mini) * 0.10
 var r = maxi - range
 
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         var cre = 0
         if(ds_grid_get(terrain_map,i,j) == 1 or ds_grid_get(terrain_map,i,j) == 3){
             cre = 1

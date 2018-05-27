@@ -1,5 +1,5 @@
-for(var i=0;i < width-1; i++){
-    for(var j=0;j<height-1;j++){ 
+for(var i=0;i < width; i++){
+    for(var j=0;j<height;j++){ 
         /*
         draw_set_color(getColorZ(ds_grid_get(grid,i,j),i,j))
         draw_rectangle(i*blockSize,j*blockSize,(i+1)*blockSize,(j+1)*blockSize,false)

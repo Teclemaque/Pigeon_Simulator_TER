@@ -1,12 +1,12 @@
 //reinitialisation de done
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         ds_grid_set(done,i,j,0)
     }
 }
 
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         var cr = ds_list_create()
         
         if(ds_grid_get(terrain_map,i,j) == 1 and ds_grid_get(done,i,j) == 0){
@@ -17,7 +17,7 @@ for(var i = 0; i < width;i++){
              var continu = true
             while(continu){
                 continu = false
-                for(var k=0; k < ds_list_size(cr);k++){
+                for(var k=0; k < ds_list_size(cr)-1;k++){
                     var test = ds_list_find_value((ds_list_find_value(cr,k)),0)
                     var xx = ds_list_find_value((ds_list_find_value(cr,k)),1)
                     var yy = ds_list_find_value((ds_list_find_value(cr,k)),2)
@@ -25,14 +25,14 @@ for(var i = 0; i < width;i++){
                     if(ds_grid_get(terrain_map,xx,yy) == 1){
                         var seuil = 6
                         //N4
-                        if(yy-1 > -1){
+                        if(yy-1 >= 0){
                           if(ds_grid_get(grid,xx,yy-1) <= test)
                             count++
                         } else {
                             seuil--
                         }
                         
-                        if(xx-1 > -1){
+                        if(xx-1 >= 0){
                         if(ds_grid_get(grid,xx-1,yy) <= test)
                             count++
                         } else {
@@ -54,21 +54,21 @@ for(var i = 0; i < width;i++){
                         }
 
                         //N8
-                        if(yy-1 > -1 and xx-1 > -1){  
+                        if(yy-1 >= 0 and xx-1 >= 0){  
                         if(ds_grid_get(grid,xx-1,yy-1) <= test)
                             count++
                         } else {
                             seuil--
                         }
 
-                        if(xx+1 < width and yy-1 > -1){
+                        if(xx+1 < width and yy-1 >= 0){
                         if(ds_grid_get(grid,xx+1,yy-1) <= test)
                             count++
                         } else {
                             seuil--
                         }
 
-                        if(xx-1 > -1 and yy+1 < height){
+                        if(xx-1 >= 0 and yy+1 < height){
                         if(ds_grid_get(grid,xx-1,yy+1) <= test)
                             count++
                         } else {

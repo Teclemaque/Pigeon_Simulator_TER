@@ -34,7 +34,7 @@ if(!ds_list_empty(tmp)){
 }
 
 //right neighbor
-if(xx < width and ds_grid_get(terrain_map,xx+1,yy) == 1 and ds_grid_get(done,xx+1,yy) == 0 ){
+if(xx < width-1 and ds_grid_get(terrain_map,xx+1,yy) == 1 and ds_grid_get(done,xx+1,yy) == 0 ){
     tmp = mountain_list(xx+1,yy)
 }
 
@@ -46,7 +46,7 @@ if(!ds_list_empty(tmp)){
 }
 
 //bottom neighbor
-if(yy < height and ds_grid_get(terrain_map,xx,yy+1) == 1 and ds_grid_get(done,xx,yy+1) == 0 ){
+if(yy < height-1 and ds_grid_get(terrain_map,xx,yy+1) == 1 and ds_grid_get(done,xx,yy+1) == 0 ){
     tmp = mountain_list(xx,yy+1)
 }
 

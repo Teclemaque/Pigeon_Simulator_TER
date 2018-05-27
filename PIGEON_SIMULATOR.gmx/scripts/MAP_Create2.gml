@@ -25,8 +25,8 @@ terrain_map = ds_grid_create(width,height)
 3 : crête
 */
 
-for(var i = 0; i < width-1;i++){
-    for(var j= 0;j < height-1;j++){
+for(var i = 0; i < width;i++){
+    for(var j=0;j < height;j++){
         var type = map_get_terrain_type(i,j)
         if(type == 0 and random(100) < 0.1){
             type = 2
@@ -37,15 +37,21 @@ for(var i = 0; i < width-1;i++){
 
 // a done map
 done = ds_grid_create(width,height)
-for(var i = 0; i < width-1;i++){
-    for(var j=0;j < height-1;j++){
+for(var i = 0; i < width;i++){
+    for(var j=0;j < height;j++){
         ds_grid_set(done,i,j,0)
     }
 }
+show_debug_message("--begin dilatation--")
 dillatation_erosion();
+show_debug_message("--begin forest--")
 create_forest();
+show_debug_message("--begin error check--")
 error_check();
+show_debug_message("--begin crete--")
 crete_finder();
+show_debug_message("--begin river--")
 create_river();
+show_debug_message("--begin crest level--")
 crest_level();
 ds_grid_destroy(done);

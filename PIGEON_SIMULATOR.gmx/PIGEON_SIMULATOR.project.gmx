@@ -176,6 +176,10 @@
   </fonts>
   <objects name="objects">
     <object>objects\obj_globVar2</object>
+    <objects name="Title_screen">
+      <object>objects\obj_Title_controler</object>
+      <object>objects\obj_title_follow</object>
+    </objects>
     <objects name="GESTION JEU">
       <object>objects\obj_globVar</object>
       <object>objects\obj_shaderEnd</object>
@@ -252,10 +256,6 @@
     <object>objects\obj_arme_blanche</object>
     <object>objects\obj_arme</object>
     <object>objects\TAL_Grammaire</object>
-    <objects name="Title_screen">
-      <object>objects\obj_Title_controler</object>
-      <object>objects\obj_title_follow</object>
-    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\Title_screen</room>

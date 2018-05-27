@@ -4,8 +4,8 @@ for(var i = 0; i < width;i++){
     }
 }
 var chance = 15
-for(var i = 0; i < width;i++){
-    for(var j=0;j < height;j++){
+for(var i = 0; i < width-1;i++){
+    for(var j=0;j < height-1;j++){
         var type = ds_grid_get(terrain_map,i,j)
         if(type == -2 and ds_grid_get(done,i,j)==0){
             ds_grid_set(done,i,j,0)
