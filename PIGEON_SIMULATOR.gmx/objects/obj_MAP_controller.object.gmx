@@ -173,7 +173,7 @@ for (j = 0; j &lt; 768/blockSize; j++)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_direct(vk_lcontrol) &amp;&amp; keyboard_check_pressed(ord('M')){
+            <string>if keyboard_check_pressed(vk_lshift){
     if(toggle_papper == 0){
         toggle_papper = 1
         view_wview[0] = room_width 

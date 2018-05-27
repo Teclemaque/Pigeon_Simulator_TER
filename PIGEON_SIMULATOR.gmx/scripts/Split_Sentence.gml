@@ -3,8 +3,18 @@
 var s = argument[0], d = argument[1];
 
 var len = string_length(s);
+// suppression des espaces en queue
 while( string_char_at(s, len) == ' ' ){
+    //show_debug_message("crop at end : " + '"' + s + '"');
     s = string_copy(s, 0, len -1);
+    len = string_length(s);
+}
+
+// suppression des espaces en tête
+while( string_char_at(s, 0) == ' ' ){
+    //show_debug_message("crop at start : " + '"' + s + '"');
+    s = string_copy(s, 2, len-1);
+    len = string_length(s);
 }
 
 var rl = ds_list_create();
@@ -15,7 +25,7 @@ if (dl) while (p) {
     p -= 1;
 
     var substr = string_copy(s, 1, p);
-    if(substr != " "){
+    if(substr != " " && substr != ""){
         ds_list_add(rl, substr);
     }
     

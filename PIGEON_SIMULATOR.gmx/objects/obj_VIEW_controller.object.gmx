@@ -60,10 +60,9 @@ mem_hview = view_hview[0]
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*
-x*= mouse_x
+            <string>x= mouse_x
 y= mouse_y
-*/
+
 image_alpha = 0;
 
 
