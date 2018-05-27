@@ -107,9 +107,9 @@ if(inStat == 0 and (keyboard_check(vk_up) or gamepad_button_check(0,gp_padu) )an
     }
 } else if(!keyboard_check(vk_alt) and(keyboard_check_pressed(vk_enter) or keyboard_check_pressed(vk_space))){
     if(pos == 0){
-//      room_goto(Tutorial)
+      room_goto(rm_tutorial)
     } else if (pos == 1){ 
-        room_goto(room_mission)
+        room_goto(room1)
     } else if(pos == 2){
         if(inStat == 0){
             ini_open("Save.ini")

@@ -27,8 +27,8 @@
             <kind>1</kind>
             <string>//Creation de l'instance TAL_Grammaire
 //Construction du réseau Grammaire en tant que liste
-/*globalvar grammaire;
-grammaire=ds_list_create();*/
+globalvar grammaire;
+grammaire=ds_list_create();
 
 //Ouverture du fichier grammar, le systeme de regles grammaticale
 if(file_exists("Parsing/grammar.txt"))
@@ -51,20 +51,20 @@ if(file_exists("Parsing/grammar.txt"))
         show_debug_message(spliter[1]);
         show_debug_message(array_length_1d(spliter[1]));
         
-        ds_list_add(global.grammaire,spliter);
+        ds_list_add(grammaire,spliter);
         
         file_text_readln(file);
     }
     
-    //Affichage du Reseau de global.grammaire
-    show_debug_message("Affichage de la global.grammaire :");
-    list_to_string(global.grammaire);
-    //ds_list_write(global.grammaire);
+    //Affichage du Reseau de grammaire
+    show_debug_message("Affichage de la grammaire :");
+    list_to_string(grammaire);
+    //ds_list_write(grammaire);
     
     show_debug_message("TEST");
     //var s="agent1 regrouper avec agent2 , agent3 , agent4";
     
-    //CYK(Split_Sentence(s," "),global.grammaire);
+    //CYK(Split_Sentence(s," "),grammaire);
 }
 else
 {show_debug_message("Erreur:Grammaire introuvable");}

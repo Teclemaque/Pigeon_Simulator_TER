@@ -43,9 +43,9 @@ else
             show_debug_message("Cas S :");
             for(i=currentStep-1;i>=0;i--)
             {
-                for(r=0;r<ds_list_size(global.grammaire);r++)
+                for(r=0;r<ds_list_size(grammaire);r++)
                 {
-                    var rule=ds_list_find_value(global.grammaire,r);
+                    var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
 //                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
@@ -70,9 +70,9 @@ else
             show_debug_message("Cas GN :");
             for(i=currentStep-1;i>=0;i--)
             {
-                for(r=0;r<ds_list_size(global.grammaire);r++)
+                for(r=0;r<ds_list_size(grammaire);r++)
                 {
-                    var rule=ds_list_find_value(global.grammaire,r);
+                    var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
 //                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
@@ -97,9 +97,9 @@ else
             show_debug_message("Cas GV :");
             for(i=currentStep-1;i>=0;i--)
             {
-                for(r=0;r<ds_list_size(global.grammaire);r++)
+                for(r=0;r<ds_list_size(grammaire);r++)
                 {
-                    var rule=ds_list_find_value(global.grammaire,r);
+                    var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
 //                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
@@ -124,9 +124,9 @@ else
             show_debug_message("Cas JOIN :");
             for(i=currentStep-1;i>=0;i--)
             {
-                for(r=0;r<ds_list_size(global.grammaire);r++)
+                for(r=0;r<ds_list_size(grammaire);r++)
                 {
-                    var rule=ds_list_find_value(global.grammaire,r);
+                    var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
 //                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
@@ -151,9 +151,9 @@ else
             show_debug_message("Cas CON :");
             for(i=currentStep-1;i>=0;i--)
             {
-                for(r=0;r<ds_list_size(global.grammaire);r++)
+                for(r=0;r<ds_list_size(grammaire);r++)
                 {
-                    var rule=ds_list_find_value(global.grammaire,r);
+                    var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
 //                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;
@@ -178,9 +178,9 @@ else
             show_debug_message("Cas PREPL :");
             for(i=currentStep-1;i>=0;i--)
             {
-                for(r=0;r<ds_list_size(global.grammaire);r++)
+                for(r=0;r<ds_list_size(grammaire);r++)
                 {
-                    var rule=ds_list_find_value(global.grammaire,r);
+                    var rule=ds_list_find_value(grammaire,r);
                     if( !is_array(rule) ){
 //                        log_toolbox_message("Extract_Order : Erreur, rule n'est pas un array. rule : " + string(rule), c_red);
                         //exit;

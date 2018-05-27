@@ -37,6 +37,7 @@ ini_write_real("Statistics","Game_Played",game+1)
 ini_close()
 
 activite = 1
+
 </string>
           </argument>
         </arguments>

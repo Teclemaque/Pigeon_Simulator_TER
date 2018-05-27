@@ -153,8 +153,7 @@ for(var i=0;i &lt; w; i++){
              draw_point(i,j)
          }
      }
- }
-       
+ }  
 surface_reset_target()
 }
 </string>

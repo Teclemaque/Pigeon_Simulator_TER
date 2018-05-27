@@ -1,6 +1,7 @@
 #define IA_Attaque
 ///IA_Attaque(ListCible, Combat, Ordre, Cadence, Distance de tir);
 {
+show_debug_message("YOUHOU")
 //if MODE = "ATTAQUE"
     {
     if ArgumentAttaque[1] != -1
@@ -47,6 +48,7 @@
     
     if instance_exists(CIBLE) == false
         {
+        show_debug_message("BIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIii")
         MODE = "REPOS"
         Argument[0] = 0;
         Argument[1] = random(180)+90;
@@ -57,8 +59,9 @@
         {
         if Comb == 1
             {
+            show_debug_message("YOUHOUUUUUUUUUUUUUUUUUUUUUUUUUUu")
             if distance_to_object(CIBLE) < DFeu
-                {
+                {show_debug_message("YOUHOUUUUUUUUUUUUUUUUUUUUUUUUUUu")
                 if Recharge < obj_globVar.R_fusil // Variable actuellement globale de temps de recharge, on pourrait aussi faire appel à obj_globVar.R_fusil et plus besoin de globalité. Meilleur optimisation?
                     {
                     Recharge++;
@@ -195,6 +198,7 @@
 #define IA_Attaque_Soldat
 ///IA_Attaque_Soldat(ListCible, Combat, Ordre)
 {
+show_debug_message("YOUHOU")
 if instance_exists(Officier)
     {
     if ArgumentAttaque[1] != -1

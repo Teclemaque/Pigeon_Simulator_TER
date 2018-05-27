@@ -39,4 +39,3 @@ else
             }
         }
     }
-nomGroupe(id);
