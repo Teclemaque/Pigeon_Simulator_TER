@@ -167,6 +167,9 @@ instance_create(-100,-100,obj_arrow)
             <kind>1</kind>
             <string>       switch(step){
         case 0: //bienvenue
+            view_object[0] = obj_joueur
+            view_vborder[0] = room_width / 2
+            view_hborder[0] = room_height / 2
             if(mouse_check_button_pressed(mb_left))
                 step = 1
             break
@@ -190,8 +193,8 @@ instance_create(-100,-100,obj_arrow)
             break
         case 3: // visibilite
             with(obj_arrow){
-                x = view_xview[0]+view_wview[0]/2
-                y = view_yview[0]+50
+                x = obj_joueur.x - 45
+                y = obj_joueur.y - 150
                 image_angle = 90
             }
             if(mouse_check_button_pressed(mb_left)){
@@ -200,48 +203,58 @@ instance_create(-100,-100,obj_arrow)
             break
         case 4: //mini-map
             with(obj_arrow){
-                x = view_xview[0]+view_wview[0]-50
-                y = view_yview[0]+view_hview[0]-(view_hview[0]/5)
+                x = -100
+                y = -100
                 image_angle = 270
             }
             if(mouse_check_button_pressed(mb_left))
                 step = 5
             break
-        case 5: //annonce
-            if(mouse_check_button_pressed(mb_left))
+        case 5: //mini-map
+            if(keyboard_check_pressed(vk_lshift))
                 step = 6
+            break
+
+        case 6: //annonce
+            if(mouse_check_button_pressed(mb_left))
+                step = 7
             with(obj_arrow){
                 x = -100
                 y = -100
             }
             break;
-        case 6 : //nommage
+        case 7: //nommage
             if(keyboard_check_pressed(vk_enter))
-                step = 7      
+                step = 8     
             break
-        case 7: //Separer
-            if(keyboard_check_pressed(vk_enter))
-                step = 8
-            break
-        case 8: //Patrouille
+        case 8: //Separer
             if(keyboard_check_pressed(vk_enter))
                 step = 9
             break
-        case 9: //Renseignement
-            if(keyboard_check_pressed(vk_enter)){
+        case 9: //Patrouille
+            view_object[0] = obj_VIEW_controller
+            view_vborder[0] = room_width / 10
+            view_hborder[0] = room_height / 10
+            view_hspeed[0] = 10
+            view_vspeed[0] = 10
+            if(keyboard_check_pressed(vk_enter))
                 step = 10
-            }
             break
-        case 10: //Attaque
+        case 10: //Renseignement
             if(keyboard_check_pressed(vk_enter)){
                 step = 11
+            }
+            break
+        case 11: //Attaque
+            if(keyboard_check_pressed(vk_enter)){
+                step = 12
                 delay = 90
             }
             break
-        case 11: //fin
+        case 12: //fin
             if(mouse_check_button_pressed(mb_left)){
-                instance_create(0,0,obj_game_over)
-                step = 12
+                room_goto(Title_screen)
+                step = 13
             }
             break
         
@@ -285,7 +298,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+100,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Bienvenu dans SIR, YES SIR! Nous allons maintenant apprendre les bases.",
+                "Bienvenue dans SIR, YES SIR! Nous allons maintenant apprendre les bases.",
                 15,300,3,3,0)
             break;
             case 1 :  // ici general
@@ -323,17 +336,27 @@ draw_set_halign(fa_center)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
                 "Ne vous inquiétez pas, vos unité vous enveront des informations sur le relief. De plus vous pouvez observer le terrain sur la mini-carte en bas à droite",
                 15,300,3,3,0)
+                draw_sprite_ext(sprite17,0,room_width-100,room_height-170,4,4,270,c_white,1)
                 break;
-            case 5 : //annonce
+            case 5 ://affichage mini-map
                 draw_set_colour(c_blue)
                 draw_rectangle(room_width/2-500,room_height/2-200,
                 room_width/2+500,room_height/2,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités en reçevent",
+                "Vous pouvez aussi appuyer sur 'LSHIFT' pour afficher la carte papier en grandeur nature. Allez y, essayer",
                 15,300,3,3,0)
                 break;
-            case 6 : //Nommage
+            case 6 : //annonce
+                draw_set_colour(c_blue)
+                draw_rectangle(room_width/2-500,room_height/2-200,
+                room_width/2+500,room_height/2,false)
+                draw_set_colour(c_black)
+                draw_text_ext_transformed(room_width/2,room_height/2-200,
+                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités",
+                15,300,3,3,0)
+                break;
+            case 7 : //Nommage
                 draw_set_colour(c_blue)
                 draw_rectangle(0,0,
                 room_width,200,false)
@@ -342,7 +365,7 @@ draw_set_halign(fa_center)
                 "Pour nommer un officier, tapez : 'chef1 grader' dans la barre commande en bas de l'écran",
                 15,300,3,3,0)
                 break;
-            case 7 : // separer
+            case 8 : // separer
                 draw_set_colour(c_blue)
                 draw_rectangle(0,0,
                 room_width,200,false)
@@ -351,16 +374,16 @@ draw_set_halign(fa_center)
                 "Bien, maintenant que nous avons un officier pour diriger vos troupes, vous pouvez lui demander de diviser sa troupe en deux avec 'troupe0001 diviser'. Cela créera automatiquement un officier qui dirigera la nouvelle troupe.",
                 15,500,2,2,0)
                 break;
-            case 8 : // Patrouille
+            case 9 : // Patrouille
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Vous vous souvenez quand je vous ai dit que votre champ de vision était limité? Et si des ennemis se dissimulaient derrière cette montagne au nord? Envoyez une patrouille vérifier avec 'patrouille00011 deplacer ' et faîtes un clic droit à la postion souhaitée",
+                "Vous vous souvenez quand je vous ai dit que votre champ de vision était limité? Et si des ennemis se dissimulaient derrière cette montagne au nord? Envoyez une patrouille vérifier avec 'patrouille00011 deplacer ' et faîtes un clic droit à la postion souhaitée. Vous pouvez déplacer la caméra en collant les bordure de l'écran",
                 15,500,2,2,0)
                 break;
-            case 9 : //Renseignement
+            case 10 : //Renseignement
                 draw_set_colour(c_blue)
                 draw_rectangle(0,0,
                 room_width,200,false)
@@ -369,7 +392,7 @@ draw_set_halign(fa_center)
                 "Bien, il faut mainteant attendre que vos unités trouvent quelque chose",
                 15,300,3,3,0)
                 break;
-            case 10 : //Attaque
+            case 11 : //Attaque
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
@@ -378,7 +401,7 @@ draw_set_halign(fa_center)
                 "Des ennemis ont été découvert derrière la montagne! Envoyez vos unités à l'assaut avec 'troupe0001 attaquer compagnie001'",
                 15,300,3,3,0)
                 break;
-            case 11 : //Fin
+            case 12 : //Fin
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
