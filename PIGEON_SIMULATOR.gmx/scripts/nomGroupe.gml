@@ -15,6 +15,7 @@ var withName = Arg;
 // Determiner le type de groupe selon sa taille
 var groupName = "";
 
+if instance_exists(agent){
 if(withName){
     
     var groupSize = ds_list_size(agent.Regiment);
@@ -73,7 +74,7 @@ if(withName){
     N1 = 0;
     if instance_exists(agent.Commandant)
         {
-        if (agent != agent.Commandant_sup)
+        if (agent != agent.Commandant_sup && instance_exists(agent.Commandant_sup))
             { // si le père a le numero 12
             numero  = string(agent.Commandant_sup.Numero); // on prend le numero 121
             N1 = string_length(agent.Commandant_sup.Numero)
@@ -157,5 +158,5 @@ if(withName){
     }
        return agent.Name;
 }
-
+}
 exit;

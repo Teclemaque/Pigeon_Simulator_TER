@@ -25,123 +25,76 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(Obj_Terrain){
-    instance_destroy()
-}
-with(obj_MAP_controller){
-    MAP_Create2_seed(100000)
-    MAP_Draw2()
-}
-with(obj_MAP_controller){
-    papper_map = ds_grid_create(width,height)
-    for(var i=0;i &lt; width; i++){
-        for(var j=0;j&lt;height;j++){ 
-            
-            var l = ds_list_create()
-            if(false//ds_grid_get(other.fog,i,j) == 1
-            ){
-                ds_list_add(l,0)
-                ds_grid_set(papper_map,i,j,l)
-            } else { //si case visible
-                ds_list_add(l,1)
-                ds_list_add(l,ds_grid_get(terrain_map,i,j))
-                ds_grid_set(papper_map,i,j,l)
-            }
-            
-        }
-    }
-}
-with(Obj_mini_map_controler){
-    surface_free(mini_map)
-}
-
-with(obj_Partie){
-    activite = 0
-}
-
-
-
-/*with(obj_agent_officier0_C1){
-    x = 541+(random(4)-2)
-    y = 420+(random(4)-2)
-}*/
-
-//FANTASSIN
-instance_create(300,150,obj_joueur)
-A = instance_create(401+(random(4)-2),180+(random(4)-2),obj_agent_officier0_C1)
-
-//A.Officiel = 1;
-A.Officier_sup = obj_joueur;
-
-for (i = 0; i &lt; 65; i++)
-    {
-    B = instance_create(441+(random(10)-5),180+(random(10)-5),obj_agent_C1)
-    B.Commandant = A.id
-    ds_list_add(A.Regiment,B.id);
-    }
-with(A)
-    {
-    nomGroupe(id);
-    /*List[0] = id;
-    Argument[0] = List;
-    Argument[1] = 4;
-    Argument[2] = 200;
-    Argument[3] = 1;
-    Execute = IA_Groupe;*/
-    }
-    
-A = instance_create(350,650,obj_agent_officier0_C1)
+            <string>//FANTASSIN
+X = random(512)
+Y = random(768)
+instance_create(X,Y,obj_joueur)
+A = instance_create(X,Y,obj_agent_officier0_C1)
 
 A.Officiel = 1;
-//A.Officier_sup = obj_joueur;
+A.Officier_sup = obj_joueur;
 
-for (i = 0; i &lt; 120; i++)
+for (i = 0; i &lt; 205; i++)
     {
-    B = instance_create(360,650,obj_agent_C1)
+    B = instance_create(X+random(1024)/10,Y+random(728)/10,obj_agent_C1)
     B.Commandant = A.id
     ds_list_add(A.Regiment,B.id);
     }
 with(A)
     {
     nomGroupe(id,true);
-    /*List[0] = id;
+    List[0] = id;
     Argument[0] = List;
     Argument[1] = 4;
     Argument[2] = 200;
     Argument[3] = 1;
-    Execute = IA_Groupe;*/
+    Execute = IA_Groupe;
     }
     
-
-instance_create(750,600,obj_general)
-A = instance_create(750,500,obj_agent_officier0_C2)
+X = 512+random(512)
+Y = random(768)
+instance_create(X,Y,obj_general)
+A = instance_create(X,Y,obj_agent_officier0_C2)
 
 A.Officiel = 1;
 A.Officier_sup = obj_general;
 
-for (i = 0; i &lt; 120; i++)
+for (i = 0; i &lt; 205; i++)
     {
-    B = instance_create(750,500,obj_agent_C2)
+    B = instance_create(X+random(1024)/10,Y+random(728)/10,obj_agent_C2)
     B.Commandant = A.id
     ds_list_add(A.Regiment,B.id);
     }
 with(A)
     {
     nomGroupe(id,true);
-    /*List[0] = id;
+    List[0] = id;
     Argument[0] = List;
     Argument[1] = 4;
     Argument[2] = 200;
     Argument[3] = 1;
-    Execute = IA_Groupe;*/
+    Execute = IA_Groupe;
     }
-/*
-for(var i=0;i&lt;10;i++){
-    instance_create(541+(random(10)-20),250+(random(10)-20),obj_agent_C2)
-}
-*/
-//fleche a tuto
-instance_create(-100,-100,obj_arrow)
+/*A = instance_create(random(1024),random(728),obj_agent_officier0_C1)
+A.Officiel = 1;
+for (i = 0; i &lt; 805; i++)
+    {
+    B = instance_create(random(1024),random(728),obj_agent_C1)
+    B.Commandant = A.id
+    ds_list_add(A.Regiment,B.id);
+    }
+with(A)
+    {
+    nomGroupe(id,true);
+    
+    List[0] = id;
+    Argument[0] = List;
+    Argument[1] = 5;
+    Argument[2] = 200;
+    Argument[3] = 1;
+    Execute = IA_Groupe;
+    }
+
 </string>
           </argument>
         </arguments>

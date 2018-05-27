@@ -182,6 +182,7 @@
       <object>objects\obj_title_follow</object>
     </objects>
     <objects name="GESTION JEU">
+      <object>objects\obj_Mission</object>
       <object>objects\obj_globVar</object>
       <object>objects\obj_shaderEnd</object>
       <object>objects\obj_shaderBegin</object>
@@ -263,7 +264,7 @@
   <rooms name="rooms">
     <room>rooms\rm_tutorial</room>
     <room>rooms\Title_screen</room>
-    <room>rooms\room1</room>
+    <room>rooms\room_mission</room>
     <room>rooms\room0_new</room>
     <room>rooms\room0</room>
     <room>rooms\room_darret</room>
