@@ -35,7 +35,7 @@ Classe = 10;//General supreme
 
 Ordres = ds_list_create();
 
-repeat(20)
+repeat(5)
     {
     A = instance_create(x+random(20)-10,y+random(20)-10,obj_messager_C2)
     A.Officier_sup = id;
@@ -147,6 +147,34 @@ if ds_list_find_index(Regiment,obj_joueur) != -1
             Mission = 1;
             }
         }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self()
+
+if obj_MAP_controller.toggle_papper == 1
+    {
+    draw_sprite_ext(spr_pigeon,-1,x,y,1,1,0,c_red,1)
     }
 </string>
           </argument>

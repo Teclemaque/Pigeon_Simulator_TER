@@ -66,18 +66,18 @@ delay = 0
 /*
 Variable avancé objectifs
 */
-Pat = false;
+Valide = 0;
 
 //FANTASSIN
-instance_create(600,450,obj_joueur)
-A = instance_create(541+(random(4)-2),420+(random(4)-2),obj_agent_officier0_C1)
+instance_create(660,450,obj_joueur)
+A = instance_create(670+(random(4)-2),420+(random(4)-2),obj_agent_officier0_C1)
 
 //A.Officiel = 1;
-A.Officier_sup = obj_joueur;
+//A.Officier_sup = obj_joueur;
 
 for (i = 0; i &lt; 65; i++)
     {
-    B = instance_create(541+(random(4)-2),420+(random(4)-2),obj_agent_C1)
+    B = instance_create(680+(random(40)-5),420+(random(80)-10),obj_agent_C1)
     B.Commandant = A.id
     ds_list_add(A.Regiment,B.id);
     }
@@ -92,14 +92,13 @@ with(A)
     Execute = IA_Groupe;*/
     }
     
-A = instance_create(420+(random(4)-2),420+(random(4)-2),obj_agent_officier0_C1)
-
+A = instance_create(480,170,obj_agent_officier0_C1)
 A.Officiel = 1;
-//A.Officier_sup = obj_joueur;
+//A.Commandant_sup = obj_joueur;
 
 for (i = 0; i &lt; 120; i++)
     {
-    B = instance_create(420+(random(4)-2),420+(random(4)-2),obj_agent_C1)
+    B = instance_create(500+(random(20)-10),180+(random(20)-10),obj_agent_C1)
     B.Commandant = A.id
     ds_list_add(A.Regiment,B.id);
     }
@@ -115,15 +114,15 @@ with(A)
     }
     
 //deuxiéme camp
-instance_create(500,100,obj_general)
-A = instance_create(500,110,obj_agent_officier0_C2)
+instance_create(260,100,obj_general)
+A = instance_create(240,110,obj_agent_officier0_C2)
 
 A.Officiel = 1;
 A.Officier_sup = obj_general;
 
 for (i = 0; i &lt; 120; i++)
     {
-    B = instance_create(500,110,obj_agent_C2)
+    B = instance_create(240+random(20)-10,120+random(20)-10,obj_agent_C2)
     B.Commandant = A.id
     ds_list_add(A.Regiment,B.id);
     }
@@ -144,7 +143,9 @@ for(var i=0;i&lt;10;i++){
 */
 //fleche a tuto
 instance_create(-100,-100,obj_arrow)
+
 Timer = 0;
+T = 0;
 </string>
           </argument>
         </arguments>
@@ -213,12 +214,12 @@ Timer = 0;
                 step = 5
             break
         case 5: //mini-map
-            if(keyboard_check_pressed(vk_lshift))
+            if(obj_MAP_controller.toggle_papper == 1)
                 step = 6
             break
 
         case 6: //annonce
-            if(mouse_check_button_pressed(mb_left))
+            if(obj_MAP_controller.toggle_papper == 0)
                 step = 7
             with(obj_arrow){
                 x = -100
@@ -226,12 +227,14 @@ Timer = 0;
             }
             break;
         case 7: //nommage
-            if(keyboard_check_pressed(vk_enter))
-                step = 8     
+            if(Valide == 1)
+                step = 8
+                Valide = 0;     
             break
         case 8: //Separer
-            if(keyboard_check_pressed(vk_enter))
-                step = 9
+            if(Valide == 1)
+                step = 9;
+                Valide = 0; 
             break
         case 9: //Patrouille
             view_object[0] = obj_VIEW_controller
@@ -239,61 +242,60 @@ Timer = 0;
             view_hborder[0] = room_height / 10
             view_hspeed[0] = 10
             view_vspeed[0] = 10
-            if(keyboard_check_pressed(vk_enter))
-                step = 10
+            if instance_exists(obj_croix) == false
+                {
+                instance_create(500,200,obj_croix)
+                }
+            if(Valide == 1)
+                step = 10;
+                Valide = 0;
             break
         case 10: //Renseignement
-            if(keyboard_check_pressed(vk_enter)){
+            if(ds_list_find_index(obj_joueur.Regiment,"compagnie002") != -1){
                 step = 11
             }
-            break
-<<<<<<< HEAD
-        case 10 : //Troupe adverse
-                if ds_list_find_index(obj_joueur.Regiment,"compagnie002") != -1
-                    {
-                    step = 11;
-                    }
-            break
-        case 11 : //Carte stratégique
-            if obj_MAP_controller.toggle_papper == 1
+            if instance_exists(obj_croix)
                 {
-                step = 12;
+                with(obj_croix){
+                    instance_destroy();
+                }
                 }
             break
-        case 12 : //La compagnie
-            if ds_list_find_index(obj_joueur.Regiment,"compagnie001") != -1
-            &amp;&amp; obj_MAP_controller.toggle_papper == 0
-                {step = 13;}
+        case 11 : //Troupe adverse
+                if obj_MAP_controller.toggle_papper == 1
+                    {
+                    step = 12;
+                    T = 150
+                    }
             break
-        case 13 : //Attaque
-            step = 14;
+        case 12 : //Carte stratégique
+            if T == 0
+            &amp;&amp; ds_list_find_index(obj_joueur.Regiment,"compagnie001") != -1
+                {
+                step = 13;
+                }
             break
-        case 14: //Massacre
-            if(keyboard_check_pressed(vk_enter)){
-                step = 15
+        case 13 : //La compagnie
+            if obj_MAP_controller.toggle_papper == 0
+                {step = 14;}
+            break
+        case 14 : //Attaque
+            if Valide == 1
+                {
+                step = 15;
+                Valide = 0;
+                }
+            break
+        case 15: //Massacre
+            if(Valide == 1 || instance_exists(obj_general) == false){
+                step = 16;
+                Valide = 0;
                 delay = 90
             }
             break
-        case 15: //fin
-            if(mouse_check_button_pressed(mb_left)){
-                //instance_create(0,0,obj_game_over)
-                step = 16
-=======
-        case 11: //Attaque
-            if(keyboard_check_pressed(vk_enter)){
-                step = 12
-                delay = 90
-            }
-            break
-        case 12: //fin
-            if(mouse_check_button_pressed(mb_left)){
-                room_goto(Title_screen)
-                step = 13
->>>>>>> e281d52d506d5461e06eb1a29395f5439980ac48
-            }
-            break
-        
-        
+        case 16: //fin
+            step = 17
+            break  
     }
 delay--
 
@@ -309,14 +311,21 @@ if instance_exists(obj_joueur)
         Pat = true;
         }
     }
+if T &gt; 0
+    {
+    T --;
+    }
+else
+    {
+    T = 0;
+    }
 if Timer &gt;= 1
     {
     Timer --;
-    
-    if Timer == 1
-        {
-        room_goto(Title_screen)
-        }
+    }
+if Timer == 1
+    {
+    room_goto(Title_screen)
     }
 </string>
           </argument>
@@ -346,7 +355,7 @@ draw_set_halign(fa_center)
             case 0 : //bienvenue
                 draw_set_colour(c_blue)
                 draw_rectangle(room_width/2-500,room_height/2,
-                room_width/2+500,room_height/2+100,false)
+                room_width/2+500,room_height/2+150,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
                 "Bienvenue dans SIR, YES SIR! Nous allons maintenant apprendre les bases.",
@@ -367,7 +376,7 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+400,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2+200,
-                "Voici vos unités. Elles combattront pour vous jusqu'à la mort",
+                "Voici vos unités. Elles combattront pour vous jusqu'à la mort.",
                 15,300,3,3,0)
                 break;
             case 3 : // visibilite
@@ -376,16 +385,16 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2+400,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2+200,
-                "Votre vision est dépendante de celle de votre général. Ces obstacles vous empêchent de voir plus loin",
+                "Votre vision est dépendante de celle de votre général. Ces obstacles vous empêchent de voir plus loin.",
                 15,300,3,3,0)
                 break;
             case 4 : //mini-map
                 draw_set_colour(c_blue)
                 draw_rectangle(room_width/2-500,room_height/2-200,
-                room_width/2+500,room_height/2,false)
+                room_width/2+500,room_height/2+100,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Ne vous inquiétez pas, vos unités vous enveront des informations sur le relief. De plus vous pouvez observer le terrain sur la mini-carte en bas à droite",
+                "Ne vous inquiétez pas, vos unités vous enveront des informations sur le relief. De plus vous pouvez observer le terrain sur la mini-carte en bas à droite. Utilisez la molette de souris pour prendre un peu de hauteur",
                 15,300,3,3,0)
                 draw_sprite_ext(sprite17,0,room_width-100,room_height-170,4,4,270,c_white,1)
                 break;
@@ -395,35 +404,31 @@ draw_set_halign(fa_center)
                 room_width/2+500,room_height/2,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2-200,
-                "Vous pouvez aussi appuyer sur 'LSHIFT' pour afficher la carte papier en grandeur nature. Allez y, essayer",
+                "Vous pouvez aussi appuyer sur '[SHIFT]' pour afficher la carte stratégique grandeur nature. Allez-y, essayez!",
                 15,300,3,3,0)
                 break;
             case 6 : //annonce
                 draw_set_colour(c_blue)
-                draw_rectangle(room_width/2-500,room_height/2-200,
-                room_width/2+500,room_height/2,false)
+                draw_rectangle(room_width/2-500,0,
+                room_width/2+500,200,false)
                 draw_set_colour(c_black)
-                draw_text_ext_transformed(room_width/2,room_height/2-200,
-<<<<<<< HEAD
-                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités.",
-=======
-                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités",
->>>>>>> e281d52d506d5461e06eb1a29395f5439980ac48
+                draw_text_ext_transformed(room_width/2,0,
+                "Mais avant de pouvoir faire quoi que ce soit, nous devons nommer un officier pour diriger vos unités. Revenez sur le terrain ([SHIFT])",
                 15,300,3,3,0)
                 break;
             case 7 : //Nommage
                 draw_set_colour(c_blue)
                 draw_rectangle(0,0,
-                room_width,200,false)
+                room_width,300,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,0,
-                "Pour nommer un officier, tapez : 'chef1 grader' dans la barre commande en bas de l'écran",
+                "Pour nommer un officier, tapez : 'chef1 grader' dans la barre commande en bas de l'écran. Utilisez [DOWN] pour nettoyer la console, [UP] pour utiliser l'historique",
                 15,300,3,3,0)
                 break;
             case 8 : // separer
                 draw_set_colour(c_blue)
                 draw_rectangle(0,0,
-                room_width,200,false)
+                room_width,150,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,0,
                 "Bien, maintenant que nous avons un officier pour diriger vos troupes, vous pouvez lui demander de diviser sa troupe en deux avec 'troupe0001 diviser'. Cela créera automatiquement un officier qui dirigera la nouvelle troupe.",
@@ -435,7 +440,7 @@ draw_set_halign(fa_center)
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Vous vous souvenez quand je vous ai dit que votre champ de vision était limité? Et si des ennemis se dissimulaient derrière cette montagne au nord? Envoyez une patrouille vérifier avec 'patrouille00011 deplacer ' et faîtes un clic droit à la postion souhaitée. Vous pouvez déplacer la caméra en collant les bordure de l'écran",
+                "Vous vous souvenez quand je vous ai dit que votre champ de vision était limité? Et si des ennemis se dissimulaient derrière cette montagne au nord? Envoyez une patrouille vérifier! Ecrivez 'patrouille00011 deplacer ' et faîtes un clic droit à proximité de la croix. Vous pouvez déplacer la caméra en collant les bordures de l'écran.",
                 15,500,2,2,0)
                 break;
             case 10 : //Renseignement
@@ -447,60 +452,52 @@ draw_set_halign(fa_center)
                 "Bien, il faut maintenant attendre que vos unités trouvent quelque chose",
                 15,300,3,3,0)
                 break;
-<<<<<<< HEAD
-            case 10 : //Troupe adverse
+            case 11 : //Troupe adverse
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Des ennemis ont été découvert derrière la montagne! Vos troupes ont marqué leur position sur votre carte stratégique. Pressez [contrôle]+[M]",
+                "Des ennemis ont été découvert derrière la montagne! Vos troupes ont marqué leur position sur votre carte stratégique. Allez voir! ([SHIFT]).",
                 15,300,3,3,0)
                 break;
-            case 11 : //Carte stratégique
+            case 12 : //Carte stratégique
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Vous voici sur la carte stratégique, Remarquez la présence de jeton de couleur, les bleus sont vos troupes, les rouges les troupes adverses.",
+                "Vous voici sur la carte stratégique. Remarquez la présence de jeton de couleur, les bleus sont vos troupes, les rouges les troupes adverses.",
                 15,300,3,3,0)
                 break;
-            case 12 : //La companie
+            case 13 : //La companie
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Il y a une troupe ami non loin de l'armée adverse! Ordonnez lui d'attaquer. Revenez sur le terrain ([contrôle]+[M]).",
+                "Il y a une troupe ami non loin de l'armée adverse! Ordonnez lui d'attaquer. Revenez sur le terrain ([SHIFT]).",
                 15,300,3,3,0)
                 break;
-            case 13 : //Attaque
+            case 14 : //Attaque
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Bien! Donnez l'ordre 'compagnie001 attaquer compagnie002'",
+                "Bien! Donnez l'ordre 'compagnie001 attaquer compagnie002'.",
                 15,300,3,3,0)
                 break;
-            case 14 : //Massacre
-=======
-            case 11 : //Attaque
->>>>>>> e281d52d506d5461e06eb1a29395f5439980ac48
+            case 15 : //Massacre
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "La compagnie a besoin de renfort, envoyez votre troupe0001",
+                "Votre compagnie risque d'avoir besoin de renfort, envoyez votre troupe0001",
                 15,300,3,3,0)
                 break;
-<<<<<<< HEAD
-            case 15 : //Fin
-=======
-            case 12 : //Fin
->>>>>>> e281d52d506d5461e06eb1a29395f5439980ac48
+            case 16 : //Fin
                 draw_set_colour(c_blue)
                 draw_rectangle(0,room_height/2,
                 room_width,room_height/2+200,false)
@@ -508,7 +505,6 @@ draw_set_halign(fa_center)
                 draw_text_ext_transformed(room_width/2,room_height/2,
                 "Félicitation! Vous avez gagné!",
                 15,300,3,3,0)
-                Timer = 60;
                 break;
         }
 </string>

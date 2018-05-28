@@ -54,6 +54,7 @@
     <sprite>sprites\fumee</sprite>
     <sprite>sprites\spr_messager_pigeon</sprite>
     <sprite>sprites\sprite17</sprite>
+    <sprite>sprites\balise</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -190,6 +191,7 @@
       <object>objects\obj_Partie</object>
       <object>objects\obj_TUTORIAL</object>
       <object>objects\obj_Mission</object>
+      <object>objects\obj_croix</object>
     </objects>
     <objects name="AGENTS">
       <objects name="AGENTS SIMPLES">
@@ -202,7 +204,6 @@
       </objects>
       <objects name="AGENT SUPERIEUR">
         <objects name="Camp 1">
-          <object>objects\obj_messager_pigeon_C1</object>
           <object>objects\obj_messager_C1</object>
           <object>objects\obj_meta_agent_C1</object>
           <object>objects\obj_agent_officier0_C1</object>
@@ -223,6 +224,7 @@
       <object>objects\obj_joueur</object>
       <object>objects\obj_general</object>
       <object>objects\obj_agent_general</object>
+      <object>objects\obj_pigeon</object>
       <object>objects\obj_souris</object>
     </objects>
     <objects name="OBJET MAP">

@@ -32,7 +32,7 @@ Officiel = 1;
 Name = obj_joueur;
 Commandant = id;
 Classe = 10; //General suprême
-
+image_blend = c_aqua;
 Ordres = ds_list_create();
 
 Messager = obj_messager_C1;
@@ -227,34 +227,6 @@ ds_list_delete(Renseignement,0)
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_self();
-draw_text(x+20,y-30,ds_list_size(Renseignement))
-draw_text(x+20,y-40,ds_list_size(Regiment))
-draw_text(x+20,y-60,ds_list_size(RegimentAllie))
-draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="10" enumb="83">
       <action>
         <libid>1</libid>
@@ -272,7 +244,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(ExecuteOrdre)
+            <string>/*if instance_exists(ExecuteOrdre)
     {
     with(ExecuteOrdre)
         {
@@ -302,7 +274,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(ExecuteOrdre)
+            <string>/*if instance_exists(ExecuteOrdre)
     {
     with(ExecuteOrdre)
         {
@@ -311,11 +283,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
             ORDRE = "GROUPE";
             ds_list_clear(Regiment);
             }
-        /*else
-            {
-            ORDRE = "SEPARATION"
-            ds_list_clear(Regiment);
-            }*/
+
         }
     }
 </string>
@@ -340,7 +308,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (instance_exists(ExecuteOrdre)) // Si on a un soldat a qui remettre l'ordre
+            <string>/*if (instance_exists(ExecuteOrdre)) // Si on a un soldat a qui remettre l'ordre
     {
     Messager = instance_nearest(x,y,obj_messager_C1); //Alors on cherche le messager le plus proche
     Messager.ArgumentMessager[] = 0;//On reinitialise son tableau contenant le parametre du message
@@ -391,7 +359,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         Messager.Message += 1;*/
         
         // On indique au messager ou il doit se rendre
-        with(Messager)
+/*        with(Messager)
             {
             D = ds_list_find_value(SaccocheMessage,0)
             Dest = D[0]
@@ -430,7 +398,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(ExecuteOrdre)
+            <string>/*if instance_exists(ExecuteOrdre)
     {
     with(ExecuteOrdre)
         {
@@ -467,7 +435,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(ExecuteOrdre)
+            <string>/*if instance_exists(ExecuteOrdre)
     {
     t = random(9)
     with(ExecuteOrdre)
@@ -520,7 +488,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(ExecuteOrdre)
+            <string>/*if instance_exists(ExecuteOrdre)
     {
     T = round(random(10));
     with(ExecuteOrdre)
@@ -573,7 +541,7 @@ draw_text(x+20,y-80,ds_list_size(RegimentEnnemi))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(ExecuteOrdre)
+            <string>/*if instance_exists(ExecuteOrdre)
     {
     with(ExecuteOrdre)
         {

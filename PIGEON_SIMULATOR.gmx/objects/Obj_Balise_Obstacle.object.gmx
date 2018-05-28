@@ -52,7 +52,7 @@ image_speed = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if obj_MAP_controller.toggle_papper == 0
+            <string>/*if obj_MAP_controller.toggle_papper == 0
     {
     visible = 0
     }

@@ -25,19 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = 5;
+            <string>speed = 5+random(4)-2;
 image_speed = 0.3+random(0.2)-0.1
 image_xscale = random(0.5)+0.2
 image_yscale = image_xscale;
+depth = -round(image_xscale*10)
+direction = random(140)+20+270
+//image_angle = direction
 
-direction = random(360)
 
-/*Dir = direction mod 360
 
-if Dir  &gt;= 90 &amp;&amp; Dir  &lt;= 270
-    {
-    image_xscale = -image_xscale
-    }
 </string>
           </argument>
         </arguments>
@@ -46,37 +43,17 @@ if Dir  &gt;= 90 &amp;&amp; Dir  &lt;= 270
     <event eventtype="7" enumb="0">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>203</id>
+        <kind>0</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <exetype>1</exetype>
+        <functionname>action_kill_object</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>A = instance_create(x,y,obj_messager_pigeon_C1)
-
-A.direction = direction + 180 + random(40)-20
-
-with(A)
-    {
-    Dir = direction mod 360
-
-    if Dir  &gt;= 90 &amp;&amp; Dir  &lt;= 270
-        {
-        image_xscale = -image_xscale
-        }
-    }
-instance_destroy();
-</string>
-          </argument>
-        </arguments>
       </action>
     </event>
   </events>

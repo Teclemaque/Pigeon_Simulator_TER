@@ -87,19 +87,19 @@ var my = window_views_mouse_get_y();
 //show_debug_message("orig " + string(click_origin_x) + " : " + string(click_origin_x))
 //show_debug_message("release " + string(mouse_x) + " : " + string(mouse_y))
 
-process_rectangle_selection(); // Remplir laa Selection avec les agents qui sont dans le rectangle de selection
+//process_rectangle_selection(); // Remplir laa Selection avec les agents qui sont dans le rectangle de selection
 
 
 
 click_origin_x = noone;
 click_origin_y = noone;
 
-with ( instance_position( mouse_x_gui(), mouse_y_gui(), obj_btn_plus ) )
+/*with ( instance_position( mouse_x_gui(), mouse_y_gui(), obj_btn_plus ) )
         {
             //show_debug_message( "GUI : clicked on " + object_get_name(object_index) );
             onBtnPlusClicked(id)
         }
-
+*/
 </string>
           </argument>
         </arguments>

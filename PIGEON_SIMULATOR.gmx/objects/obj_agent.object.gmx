@@ -224,6 +224,14 @@ else
                             Jeton.visible = false;
                             }
                         }
+                    if obj_joueur.Camp != Camp
+                        {
+                        Jeton.image_blend = c_red
+                        }
+                    else
+                        {
+                        Jeton.image_blend = c_blue
+                        }
                     }
                 }
             }
@@ -396,17 +404,24 @@ if terrain != -4
     {
     if terrain == 0
         {
-        AlphaMax = 30
+        AlphaMax = 300
         }
     else
         {
         if terrain == 1
             {
-            AlphaMax = 10
+            if room == rm_tutorial
+                {
+                AlphaMax = 300
+                }
+            else
+                {
+                AlphaMax = 10
+                }
             }
         else
             {
-            AlphaMax = 5
+            AlphaMax = 150
             }
         }
     if Alpha != AlphaMax

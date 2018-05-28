@@ -218,17 +218,20 @@ x = xx;
     if Classe == 1
         {
         if ds_list_size(ListMessager) &lt; Grade/2
-        &amp;&amp; ds_list_size(Regiment) &gt; 5*Grade
+        &amp;&amp; ds_list_size(Regiment) &gt; 2*Grade
             {
             A = ds_list_find_value(Regiment,1);
-            Mess = instance_create(A.x,A.y,Messager);
-            // Faut faire un transfert de données entre les 2
-            Mess.Officier_sup = id;
-            ds_list_add(ListMessager,Mess);
-            ds_list_delete(Regiment,1);
-            with(A)
+            if instance_exists(A)
                 {
-                instance_destroy();
+                Mess = instance_create(A.x,A.y,Messager);
+                // Faut faire un transfert de données entre les 2
+                Mess.Officier_sup = id;
+                ds_list_add(ListMessager,Mess);
+                ds_list_delete(Regiment,1);
+                with(A)
+                    {
+                    instance_destroy();
+                    }
                 }
             }
             
@@ -433,30 +436,6 @@ x = xx;
 
 event_inherited()
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_text(x,y,Name)
-event_inherited();
 </string>
           </argument>
         </arguments>

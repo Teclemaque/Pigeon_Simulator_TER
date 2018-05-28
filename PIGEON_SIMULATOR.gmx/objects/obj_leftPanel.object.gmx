@@ -37,12 +37,12 @@ Groupes = ds_list_create(); // liste des selections enregistrées
 var startx = global.Dimensions[? "startx"]
 // bouton "+"
 add_btn_x1 = x +  (startx - sprite_get_width(spr_icon_plus)) / 1.75; // centrer le bouton
-add_btn_x2 = x +  (startx - sprite_get_width(icone_strategie_avatar)) / 2.25;
+add_btn_x2 = x +  (startx - sprite_get_width(icone_strategie_avatar)) / 2;
 add_btn_y = y + 50;
 
 instance_create(add_btn_x2, add_btn_y, obj_icone_avatar);
 
-instance_create(add_btn_x1, add_btn_y+32, obj_btn_plus);
+//instance_create(add_btn_x1, add_btn_y+32, obj_btn_plus);
 
 // redimensionner le sprite pour gérer le onClick
 image_xscale = startx / sprite_width;
@@ -132,16 +132,16 @@ if instance_exists(obj_joueur)
             {
             if ds_list_find_index(obj_joueur.RegimentAllie,A) != -1
                 {
-                draw_sprite_ext(spr_jeton,-1,x+15,y+I1*40+250,0.7,0.7,0,c_blue,1)
-                draw_text(x+15,y+I1*40+260,string(ds_list_find_value(obj_joueur.Regiment,i)))
+                draw_sprite_ext(spr_jeton,-1,x+5,y+I1*40+250,0.7,0.7,0,c_blue,1)
+                draw_text(x+5,y+I1*40+260,string(ds_list_find_value(obj_joueur.Regiment,i)))
                 I1++;
                 }
             else
                 {
                 if ds_list_find_index(obj_joueur.RegimentEnnemi,A) != -1
                     {
-                    draw_sprite_ext(spr_jeton,-1,x+100,y+I2*40+250,0.7,0.7,0,c_blue,1)
-                    draw_text(x+100,y+I2*40+260,string(ds_list_find_value(obj_joueur.Regiment,i)))
+                    draw_sprite_ext(spr_jeton,-1,x+90,y+I2*40+260,0.7,0.7,0,c_blue,1)
+                    draw_text(x+90,y+I2*40+270,string(ds_list_find_value(obj_joueur.Regiment,i)))
                     I2++
                     }
                 }

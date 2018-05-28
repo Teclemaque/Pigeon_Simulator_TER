@@ -143,6 +143,17 @@ if(keyboard_check_pressed(vk_up)){
     }
 
 }
+*/
+
+if instance_exists(obj_pigeon) == false
+    {
+    A = choose(0,0,0,0,0,1,1,1,1,2,2,2,3,3,4)
+    
+    repeat(A)
+        {
+        instance_create(0,random(room_height),obj_pigeon)
+        }
+    }
 </string>
           </argument>
         </arguments>

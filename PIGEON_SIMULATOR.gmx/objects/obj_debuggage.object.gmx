@@ -127,7 +127,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text(mouse_x,mouse_y-10,fps_real)
+            <string>/*draw_text(mouse_x,mouse_y-10,fps_real)
 draw_text(mouse_x,mouse_y+10,fps)
 draw_text(mouse_x,mouse_y-20,"Officier 0 C1 : "+string(instance_number(obj_agent_officier0_C1))+" C2 : "+string(instance_number(obj_agent_officier0_C2)))
 draw_text(mouse_x,mouse_y-30,"Meesager C1 : "+string(instance_number(obj_messager_C1))+" C2 : "+string(instance_number(obj_messager_C2)))
