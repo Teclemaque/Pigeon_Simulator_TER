@@ -34,7 +34,7 @@ A = instance_create(X,Y,obj_agent_officier0_C1)
 A.Officiel = 1;
 A.Officier_sup = obj_joueur;
 
-for (i = 0; i &lt; 205; i++)
+for (i = 0; i &lt; 305; i++)
     {
     B = instance_create(X+random(1024)/10,Y+random(728)/10,obj_agent_C1)
     B.Commandant = A.id
@@ -59,7 +59,7 @@ A = instance_create(X,Y,obj_agent_officier0_C2)
 A.Officiel = 1;
 A.Officier_sup = obj_general;
 
-for (i = 0; i &lt; 205; i++)
+for (i = 0; i &lt; 305; i++)
     {
     B = instance_create(X+random(1024)/10,Y+random(728)/10,obj_agent_C2)
     B.Commandant = A.id

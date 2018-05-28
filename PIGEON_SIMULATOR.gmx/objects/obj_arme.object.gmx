@@ -150,6 +150,7 @@ Precision = random(100);
           <argument>
             <kind>1</kind>
             <string>if ID != other.id
+&amp;&amp; object_get_name(object_index) != "obj_agent_officier0_C1"
     {
     with(other)
         {

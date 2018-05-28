@@ -71,8 +71,8 @@ if Argument[3] == 1
                     Argument[1] = noone;
                     Argument[2] = noone;
         
-                    Argument[3] = x+lengthdir_x(other.J*other.nbr-25,other.direction);
-                    Argument[4] = y+lengthdir_y(other.J*other.nbr-25,other.direction);
+                    Argument[3] = x+lengthdir_x(other.J*other.nbr,other.direction);
+                    Argument[4] = y+lengthdir_y(other.J*other.nbr,other.direction);
                     Argument[5] = -1;
         
                     Argument[6] = -1;
