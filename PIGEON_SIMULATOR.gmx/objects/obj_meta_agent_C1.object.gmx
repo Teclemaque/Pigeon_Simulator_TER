@@ -392,8 +392,8 @@ x = xx;
                     image_xscale = round(sqrt(ds_list_size(other.Regiment)));
                     image_yscale = round(sqrt(ds_list_size(other.Regiment)));
                     ID = other.id;
-                    x = other.x+10//*(cos(degtorad(direction)))//+random(10)-5;
-                    y = other.y-10//*(sin(degtorad(direction)))//+random(10)-5;
+                    x = other.x+20//*(cos(degtorad(direction)))//+random(10)-5;
+                    y = other.y-20//*(sin(degtorad(direction)))//+random(10)-5;
                     }
                 }
             if MODE == "ATTAQUE"

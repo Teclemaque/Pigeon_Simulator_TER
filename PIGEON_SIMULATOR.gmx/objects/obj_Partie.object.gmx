@@ -28,7 +28,7 @@
             <string>nb_ennemi_tuer = 0
 nb_allie_tuer = 0
 
-text = "Votre armée est vaincu"
+text = "Votre armée est vaincue"
 victorieu = 1 // 1 joueur - 0 autre
 
 ini_open("Save.ini")

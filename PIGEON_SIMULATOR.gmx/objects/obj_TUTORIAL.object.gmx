@@ -242,6 +242,10 @@ T = 0;
             view_hborder[0] = room_height / 10
             view_hspeed[0] = 10
             view_vspeed[0] = 10
+            view_hview[0] = room_height*3.5/4
+            view_wview[0] = room_width*3.5/4
+            view_xview[0] = 100;
+            view_yview[0] = 50;
             if instance_exists(obj_croix) == false
                 {
                 instance_create(500,200,obj_croix)
@@ -251,6 +255,7 @@ T = 0;
                 Valide = 0;
             break
         case 10: //Renseignement
+            //view_object[0] = noone
             if(ds_list_find_index(obj_joueur.Regiment,"compagnie002") != -1){
                 step = 11
             }
@@ -476,7 +481,7 @@ draw_set_halign(fa_center)
                 room_width,room_height/2+200,false)
                 draw_set_colour(c_black)
                 draw_text_ext_transformed(room_width/2,room_height/2,
-                "Il y a une troupe ami non loin de l'armée adverse! Ordonnez lui d'attaquer. Revenez sur le terrain ([SHIFT]).",
+                "Il y a une troupe alliée non loin de l'armée adverse! Ordonnez lui d'attaquer. Revenez sur le terrain ([SHIFT]).",
                 15,300,3,3,0)
                 break;
             case 14 : //Attaque
